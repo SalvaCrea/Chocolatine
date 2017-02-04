@@ -1,5 +1,5 @@
-/* global require */
- 
+ /* global require */
+
 var gulp = require('gulp');
 var webserver = require('gulp-webserver');
 
