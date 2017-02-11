@@ -20,7 +20,7 @@
  <?php
  }
  add_action( 'category_add_form_fields', 'pippin_taxonomy_add_new_meta_field', 10, 2 );
- 
+
 // The awesome global who content this informations not importants
 $sp = array(
   'url' => plugin_dir_url( __FILE__ )
@@ -29,6 +29,10 @@ $sp = array(
 require_once(dirname(__FILE__).'/vendor/autoload.php');
 require_once(dirname(__FILE__).'/lib/lib.php');
 require_once(dirname(__FILE__).'/lib/menu/menu.php');
+
+require 'includes/sp_autoloader.php';
+
+spl_autoload_resgister( array( 'sp_autoloader', 'autoload' ) );
 
 // add ressource js and css in module
 add_action('admin_head', 'sp_ressource');

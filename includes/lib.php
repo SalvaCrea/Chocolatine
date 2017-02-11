@@ -1,6 +1,6 @@
 <?php
 
-function dump( $array=false, $ajax=false ) {
+function sp_dump( $array=false, $ajax=false ) {
 
     if ($array===false) { return false; }
     if (!$ajax) {
