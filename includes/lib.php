@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * The dev function that print pretty result
+ * @param  accpet array, string, int, ....
+ * @param  boolean $ajax  if ajax is true also return in the console js
+ */
 function sp_dump( $array=false, $ajax=false ) {
 
     if ($array===false) { return false; }
@@ -14,13 +19,15 @@ function sp_dump( $array=false, $ajax=false ) {
             </script>
         ";
     }
-    return true;
 
 }
 
+/**
+ * add ressource for sp_powa in the back
+ */
 function sp_ressource()
 {
-    global $sp;
+
     // delete Jquery ressource of Wordpress
     wp_deregister_script( 'jquery' );
     // personnal style sheet
@@ -30,3 +37,13 @@ function sp_ressource()
     wp_enqueue_script( 'boostrapJs',$sp['url'] . '/bower_components/bootstrap/dist/js/bootstrap.js' );
 
 }
+
+/**
+ * Clean chain of string
+ * @param  string no clean
+ * @return string clean
+ */
+function sp_clean_string( $string ) {
+   $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+ }

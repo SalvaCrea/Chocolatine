@@ -11,14 +11,14 @@ $sp['menu'] = [
                       )
                     ];
 
-add_action('admin_menu', 'sp_menu');
+
 
 function sp_menu() {
 
    global $sp;
 
    // add menu in the wp-admin
-   add_menu_page('Salva Powa', 'Salva Powa', 'administrator', 'salva_powa', 'sp_home',   'dashicons-hammer', 1);
+   //add_menu_page('Salva Powa', 'Salva Powa', 'administrator', 'salva_powa', 'sp_home',   'dashicons-hammer', 1);
 
    foreach ($sp['menu'] as $page) {
 
@@ -33,14 +33,14 @@ function sp_menu() {
 
         $args = array_merge( $args, $page );
 
-        add_submenu_page(
-          $args['parent_slug'],
-          $args['page_title'],
-          $args['menu_title'],
-          $args['capability'],
-          $args['menu_slug'],
-          $args['function']
-          );
+        // add_submenu_page(
+        //   $args['parent_slug'],
+        //   $args['page_title'],
+        //   $args['menu_title'],
+        //   $args['capability'],
+        //   $args['menu_slug'],
+        //   $args['function']
+        //   );
 
    }
 
