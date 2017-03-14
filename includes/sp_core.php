@@ -75,8 +75,12 @@ class sp_core
 				wp_enqueue_script( 'Jquery', $this->url_folder . '/bower_components/jquery/dist/jquery.min.js' );
 				wp_enqueue_script( 'Angular', $this->url_folder . '/bower_components/angular/angular.min.js' );
 
+				// for the form
 				wp_enqueue_script( 'Angular-sanitize', $this->url_folder . '/bower_components/angular-sanitize/angular-sanitize.min.js' );
 				wp_enqueue_script( 'tv4', $this->url_folder . '/bower_components/tv4/tv4.js' );
+				wp_enqueue_script( 'objectpath', $this->url_folder . '/bower_components/objectpath/lib/ObjectPath.js' );
+				wp_enqueue_script( 'schema-form', $this->url_folder . '/bower_components/angular-schema-form/dist/schema-form.min.js' );
+				wp_enqueue_script( 'bootstrap-decorator', $this->url_folder . '/bower_components/angular-schema-form/dist/bootstrap-decorator.min.js' );
 
 		    wp_enqueue_style( 'sp_styleCss', $this->url_folder . '/assets/css/style.css' );
 		    wp_enqueue_style( 'sp_boostrapCss', $this->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.css' );

@@ -20,8 +20,10 @@ class sp_home extends sp_module
 			$menu_left['menu_list'] =  $sp_core->module_manager->list_modules;
 			$menu_left['logo_url'] =  $sp_core->url_folder . '/assets/img/logo-salva-powa.png';
 
-			$current_module = $module = $_GET['page'];
+			$current_module = $_GET['page'];
+			$menu_left['menu_list'][$current_module]->selected = true;
 			$current_module = $sp_core->module_manager->list_modules[$current_module];
+
 
 			$view = new sp_template();
 
@@ -39,9 +41,8 @@ class sp_home extends sp_module
 				)]
 			);
 
-
-
 			$args['content'] = array(
+				'container' => 'fluid-container',
 				'main_content' => [array(
 					'id' => 'content_home',
 					'url' => $current_module->view_back(),

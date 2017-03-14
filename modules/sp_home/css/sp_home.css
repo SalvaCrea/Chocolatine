@@ -15,18 +15,46 @@
 #groovy_template #headerpage {
     text-align: left;
 		box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+		height: 85px;
+    max-height: 85px;
 }
 
 
 #groovy_template #logo_menu_left
 {
-	padding: 15px;
+			padding: 15px;
 	    margin: -15px;
 	    background: #565656;
 	    margin-bottom: 0;
 	    border-bottom: 1px solid #000;
+			height: 85px;
+    	max-height: 85px;
+			display: flex;
 }
 
+#groovy_template #logo_menu_left #content_logo
+{
+			padding: 0;
+    	margin: auto;
+}
+#groovy_template #logo_menu_left #content_text_logo
+{
+			display: flex;
+    	margin: auto;
+}
+#groovy_template #logo_menu_left #content_text_logo img
+{
+			width: 100%;
+	    height: auto;
+	    box-shadow: 0 0 5px #3a3a3a;
+}
+#groovy_template #logo_menu_left #content_text_logo span
+{
+			color: white;
+			font-size: 18px;
+    	font-family: roboto;
+			text-shadow: 0 0 1px #191919;
+}
 #groovy_template #headerpage .titles_header h1 {
     font-size: 20px;
     margin-top: 25px;
@@ -39,4 +67,20 @@
 
     background: #313538;
 
+}
+#groovy_template .menu_list li i
+{
+		margin-right: 5px;
+}
+
+#groovy_template .menu_list li.selected
+{
+		background: #00131d;
+		color : white;
+		border-bottom: 1px solid #464444;
+}
+#groovy_template .menu_list li.selected a,
+#groovy_template .menu_list li.selected i
+{
+		color : #e4e4e4;
 }
