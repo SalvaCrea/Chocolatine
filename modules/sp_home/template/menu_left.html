@@ -1,10 +1,17 @@
-<ul>
+
+<div id="logo_menu_left">
+		<img class='img-responsive' src="{{logo_url|raw}}" alt="logo">
+</div>
+
+<ul class='menu_list'>
 
 	{% for menu_item in menu_list %}
 
 		<li>
-			<i class='fa {{menu_item.icon|raw}}' aria-hidden="true"></i>
-			{{menu_item.name|raw}}
+			<a href="?page={{menu_item.slug|raw}}">
+				<i class='fa {{menu_item.icon|raw}}' aria-hidden="true"></i>
+				{{menu_item.name|raw}}
+			</a>
 		</li>
 
 	{% endfor %}

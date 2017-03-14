@@ -1,0 +1,24 @@
+#wpwrap
+{
+	background: #E2E8F7;
+}
+#wpfooter
+{
+	display: none;
+}
+#groovy_template *
+{
+	/*font-family: roboto;*/
+	color : rgb(141,141,141);
+}
+
+#groovy_template #headerpage {
+    text-align: left;
+}
+
+
+#groovy_template #logo_menu_left
+{
+	padding: 15px;
+  margin-top: -15px;
+}

@@ -31,3 +31,26 @@ manager_size_content =
 
 $( window ).resize( manager_size_content.start );
 $( window ).ready( manager_size_content.start() );
+
+sp_template_menu_left = {
+		menu_width : 0,
+		container_width : 0 ,
+		start : function()
+		{
+				this.menu_width = $('#sp_menu_left').outerWidth();
+				this.container_width = $('#groovy_template').width();
+
+				$('#menu_left_exist').css({
+					'width': this.container_width - this.menu_width,
+					'marginLeft' : this.menu_width
+				});
+
+				$('#sp_menu_left').css('min-height', $( window ).height() );
+
+		}
+}
+
+if ( $('#menu_left_exist').length > 0 ) {
+	$( window ).resize( sp_template_menu_left.start );
+	$( window ).ready( sp_template_menu_left.start );
+}

@@ -44,14 +44,29 @@ class sp_core
 			}
 			function create_menu()
 			{
-					 add_menu_page('Salva Powa', 'Salva Powa', 'administrator', 'salva_powa', array( $this,'back_view' ),   'dashicons-hammer', 1);
+
+					 add_menu_page('Salva Powa', 'Salva Powa', 'administrator', __CLASS__, array( $this,'back_view' ),   'dashicons-hammer', 1);
+
+					 foreach ($this->module_manager->list_modules as $key => $module) {
+
+						 add_submenu_page(
+				         __CLASS__,
+				         $module->name,
+				         $module->name,
+				         'administrator',
+				         $module->slug,
+				         array( $this,'back_view' )
+				     );
+
+					 }
 
 			}
 			function back_view()
 			{
 
 					 $view = new \sp_home();
-					 $view->view_back();
+					 $view->view_back_sp();
+
 			}
 			function sp_ressource()
 			{
@@ -64,6 +79,8 @@ class sp_core
 		    wp_enqueue_script( 'sp_boostrapJs', $this->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js' );
 
 				wp_enqueue_style( 'font_awesome', $this->url_folder . '/bower_components/font-awesome/css/font-awesome.css' );
+				wp_enqueue_style( 'font_roboto', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
 
 			}
 }

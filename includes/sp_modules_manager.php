@@ -39,8 +39,8 @@ class sp_module_manager
 
 									// execute the class
 									$current_class = new $folder();
-
-									$this->list_modules[ sp_clean_string( $current_class->name ) ] = $current_class;
+									$current_class->slug = 'sp_' . sp_clean_string( $current_class->name );
+									$this->list_modules[ $current_class->slug ] = $current_class;
 
 						}
 

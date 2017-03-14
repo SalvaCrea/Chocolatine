@@ -28,6 +28,13 @@ class sp_template extends sp_module
 
 		do_action('start_groovy_template');
 
+		if ( isset( $this->args['menu_left'] ) )
+		{
+			$this->menu_left();
+			echo '<div id="menu_left_exist">';
+		}
+
+
 		if ( isset( $this->args['header'] ) )
 				$this->header();
 
@@ -41,6 +48,9 @@ class sp_template extends sp_module
 				$this->footer();
 
 		do_action('end_groovy_template');
+
+		if ( isset( $this->args['menu_left'] ) )
+				echo '</div>';
 
 		echo "</div>";
 
@@ -89,6 +99,25 @@ class sp_template extends sp_module
 				}
 
 			}
+
+	}
+	function menu_left()
+	{
+
+		$args = array(
+			"rules_boostrap" => "",
+			"after" => "",
+			"before" => "",
+			"backgound" => ""
+		);
+
+		$args = array_merge( $args, $this->args['menu_left'] );
+
+		echo '<div id="sp_menu_left">';
+
+				$this->generate_content( $this->args['menu_left']['content'] );
+
+		echo '</div>';
 
 	}
 	// permet de créer un header
@@ -210,7 +239,10 @@ class sp_template extends sp_module
 		echo "</div>";
 
 	}
-
+	function view_back()
+	{
+		return 'dans un futur tu pourras me configurer';
+	}
 	// Data Schema For this Class
 	function schemaComment()
 	{
