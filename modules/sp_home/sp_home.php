@@ -20,11 +20,14 @@ class sp_home extends sp_module
 			$menu_left['menu_list'] =  $sp_core->module_manager->list_modules;
 			$menu_left['logo_url'] =  $sp_core->url_folder . '/assets/img/logo-salva-powa.png';
 
+			$current_module = $module = $_GET['page'];
+			$current_module = $sp_core->module_manager->list_modules[$current_module];
+
 			$view = new sp_template();
 
 			$args['header'] = [
-				'main_title' => 'Home Salva Powal',
-				'second_title' => 'juste pour voir',
+				'main_title' => 'Salva Powa',
+				'second_title' => 'Module : ' . $current_module->name,
 				'img_backgroung' => $sp_core->url_folder . '/assets/img/header.jpg'
 			];
 
@@ -36,12 +39,12 @@ class sp_home extends sp_module
 				)]
 			);
 
-			$module = $_GET['page'];
+
 
 			$args['content'] = array(
 				'main_content' => [array(
 					'id' => 'content_home',
-					'url' => $sp_core->module_manager->list_modules[$module]->view_back(),
+					'url' => $current_module->view_back(),
 					'method' =>'echo',
 				)]
 			);
