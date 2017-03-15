@@ -1,3 +1,18 @@
+#groovy_template h1,
+#groovy_template h2,
+#groovy_template h3,
+#groovy_template h4,
+#groovy_template h5,
+#groovy_template h6,
+#groovy_template span,
+#groovy_template p,
+#groovy_template label,
+#groovy_template .help-block,
+#groovy_template .menu_list li a
+{
+	font-family: roboto;
+	color : rgb(141,141,141);
+}
 #wpwrap
 {
 	background: #E2E8F7;
@@ -6,11 +21,7 @@
 {
 	display: none;
 }
-#groovy_template *
-{
-	/*font-family: roboto;*/
-	color : rgb(141,141,141);
-}
+
 
 #groovy_template #headerpage {
     text-align: left;
@@ -37,6 +48,11 @@
 			padding: 0;
     	margin: auto;
 }
+#groovy_template #logo_menu_left #content_logo img
+{
+			box-shadow: 0 0 19px #171529;
+}
+
 #groovy_template #logo_menu_left #content_text_logo
 {
 			display: flex;
@@ -83,4 +99,27 @@
 #groovy_template .menu_list li.selected i
 {
 		color : #e4e4e4;
+}
+
+#groovy_template .well {
+
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#groovy_template .schema-form-tabarray .ng-scope
+{
+	padding : 0;
+}
+#groovy_template .schema-form-tabarray .ng-scope .nav-tabs
+{
+	    margin-left: -20px;
+}
+#groovy_template .schema-form-tabarray .ng-scope .nav-tabs > li
+{
+	   width: 100%;
+}
+#groovy_template .schema-form-tabarray .tab-content
+{
+	padding: 0 15px;
+	border-left: 1px solid #ccc;
+	margin-left: -15px;
 }

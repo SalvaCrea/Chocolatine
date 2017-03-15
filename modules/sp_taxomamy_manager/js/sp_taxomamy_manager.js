@@ -1,10 +1,11 @@
-angular.module('myModule', ['schemaForm'])
+angular.module('sp_taxomamy_manager', ['schemaForm'])
        .controller('FormController', function($scope) {
+				 
   $scope.schema = {
   "type": "object",
   "title": "Comment",
   "properties": {
-    "comments": {
+    "sp_taxomany": {
       "type": "array",
       "items": {
         "type": "object",
@@ -13,17 +14,13 @@ angular.module('myModule', ['schemaForm'])
             "title": "Name",
             "type": "string"
           },
-          "email": {
-            "title": "Email",
-            "type": "string",
-            "pattern": "^\\S+@\\S+$",
-            "description": "Email will be used for evil."
-          },
-          "comment": {
-            "title": "Comment",
-            "type": "string",
-            "maxLength": 20,
-            "validationMessage": "Don't be greedy!"
+					"hierarchical": {
+						"title": "Hierarchical",
+			      "type": "boolean"
+			    },
+					"rewrite": {
+            "title": "Rewrite",
+            "type": "string"
           }
         },
         "required": [
@@ -37,32 +34,26 @@ angular.module('myModule', ['schemaForm'])
 };
 
   $scope.form = [
+
   {
-    "type": "help",
-    "helpvalue": "<h4>Tabbed Array Example</h4><p>Tab arrays can have tabs to the left, top or right.</p>"
-  },
-  {
-    "key": "comments",
+    "key": "sp_taxomany",
     "type": "tabarray",
-    "add": "New",
-    "remove": "Delete",
+    "add": "New Taxomany",
+    "remove": "Delete Taxomany",
     "style": {
       "remove": "btn-danger"
     },
     "title": "{{ value.name || 'Tab '+$index }}",
     "items": [
-      "comments[].name",
-      "comments[].email",
-      {
-        "key": "comments[].comment",
-        "type": "textarea"
-      }
+      "sp_taxomany[].name",
+      "sp_taxomany[].hierarchical",
+			"sp_taxomany[].rewrite"
     ]
   },
   {
     "type": "submit",
-    "style": "btn-default",
-    "title": "OK"
+    "style": "btn-success",
+    "title": "Save"
   }
 ];
 

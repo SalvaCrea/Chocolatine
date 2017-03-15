@@ -36,11 +36,10 @@ class sp_core
 					 $this->module_manager = new sp_module_manager();
 					 $this->module_manager->search_modules();
 
-					 // add ressource for the plugin
-					 add_action('admin_head', array( $this, 'sp_ressource' ));
-
 					 add_action('admin_menu', array( $this, 'create_menu' ));
 
+					 // add ressource for the plugin
+					 add_action('admin_head', array( $this, 'sp_ressource' ));
 			}
 			function create_menu()
 			{
@@ -64,6 +63,7 @@ class sp_core
 			function back_view()
 			{
 
+
 					 $view = new \sp_home();
 					 $view->view_back_sp();
 
@@ -84,7 +84,10 @@ class sp_core
 
 		    wp_enqueue_style( 'sp_styleCss', $this->url_folder . '/assets/css/style.css' );
 		    wp_enqueue_style( 'sp_boostrapCss', $this->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.css' );
+				wp_enqueue_style( 'sp_material_boostrapCss', $this->url_folder . '/bower_components/bootstrap-material/dist/css/bootstrap-material-design.css' );
+				wp_enqueue_style( 'sp_rip_boostrapCss', $this->url_folder . '/bower_components/bootstrap-material/dist/css/ripples.css' );
 		    wp_enqueue_script( 'sp_boostrapJs', $this->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js' );
+				wp_enqueue_script( 'material_Js', $this->url_folder . '/bower_components/bootstrap-material/dist/js/material.min.js' );
 
 				wp_enqueue_style( 'font_awesome', $this->url_folder . '/bower_components/font-awesome/css/font-awesome.css' );
 				wp_enqueue_style( 'font_roboto', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');

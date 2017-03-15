@@ -1,8 +1,17 @@
 
-<div ng-app="myModule">
+
+
+<div ng-app="sp_taxomamy_manager" class='col-md-12 well'>
+
+	<h4>Taxomany managering</h4>
+
+	<p>Here, you can edit end add taxomany. For more informations, you can see the official documentation for taxomany
+		<a target="_blank"  href='https://codex.wordpress.org/Function_Reference/register_taxonomy'>here...</a>
+		</p>
 
 	<div ng-controller="FormController">
 	    <form sf-schema="schema" sf-form="form" sf-model="model"></form>
+			<pre>{{ '{{model}}' }}</pre>
 	</div>
 
 </div>
