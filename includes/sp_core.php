@@ -17,14 +17,20 @@ class sp_core
 			 * @var string
 			 */
 			var $url_folder;
+			/**
+			 * The value of configuration for sp powa
+			 * @var array
+			 */
+			var $config;
 
 			function __construct()
 			{
+
 				$this->uri_folder = dirname( dirname(__FILE__) );
 				$this->url_folder = plugins_url( 'salva-powa-wordpress' );
 
-				// register twig
-				//Twig_Autoloader::register();
+				$this->config = json_decode ( get_option( 'salva_powa' ), 1 );
+
 			}
 			/**
 			 * Contains the tasks to be executed in the wordpress administration part
@@ -63,7 +69,6 @@ class sp_core
 			function back_view()
 			{
 
-
 					 $view = new \sp_home();
 					 $view->view_back_sp();
 
@@ -90,6 +95,8 @@ class sp_core
 				wp_enqueue_script( 'material_Js', $this->url_folder . '/bower_components/bootstrap-material/dist/js/material.min.js' );
 
 				wp_enqueue_style( 'font_awesome', $this->url_folder . '/bower_components/font-awesome/css/font-awesome.css' );
+				wp_enqueue_style( 'font_material_icon', '//fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
 				wp_enqueue_style( 'font_roboto', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
 

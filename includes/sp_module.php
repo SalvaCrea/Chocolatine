@@ -39,6 +39,12 @@ class sp_module
 	{
 			$this->file_path = dirname(__FILE__);
 	}
+	function __get( $name )
+	{
+		if ( $name == 'slug' ) {
+			 return 'sp-' . sp_clean_string( $this->name );
+		}
+	}
 	/**
 	 * Use the framework twig like template motor
 	 * @param  [string] $template_name the name of file html

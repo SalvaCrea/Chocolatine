@@ -11,7 +11,8 @@
 
 	<div ng-controller="FormController">
 	    <form sf-schema="schema" sf-form="form" sf-model="model"></form>
-			<pre>{{ '{{model}}' }}</pre>
+			<input type='hidden' id='model' value='{{model}}'>
+			<button type="button" class='btn btn-raised btn-success' ng-click="send()">Save</button>
 	</div>
 
 </div>

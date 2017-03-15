@@ -1,18 +1,5 @@
 <?php
 
-// permet que wordpress le comprennent bien
-
-
-
-function word_sp_ajax_controller()
-{
-
-require_once(dirname(__FILE__).'/sp_ajax_controller.php');
-
-wp_die();
-
-}
-
 use \salva_powa\sp_module;
 
 class sp_ajax_controller
@@ -39,12 +26,30 @@ class sp_ajax_controller
 				$this->name = 'Ajax Controller';
 				$this->description = "The class for the awesome ajax";
 
-				add_action( 'wp_ajax_sp_ajax_controller', 'word_sp_ajax_controller' );
-				add_action('wp_ajax_nopriv_sp_ajax_controller', 'word_sp_ajax_controller');
+				add_action( 'wp_ajax_sp_ajax_controller', array( $this ,'test_data') );
+				add_action('wp_ajax_nopriv_sp_ajax_controller', array( $this ,'test_data') );
 
 				wp_enqueue_script( 'sp_ajax_controller', $sp_core->url_folder . '/modules/sp_ajax_controller/js/sp_ajax_controller.js' );
 
     }
+		function test_data()
+		{
+			global $current_user;
+
+			if ( !empty( $_POST['action_ajax'] ) && isset( $_POST['action_ajax'] ) ) {
+
+			    $this->action = $_POST['action_ajax'];
+
+			    // control de l'écriture
+			    if (  is_admin() || $_POST['args']['post_author'] == $current_user->ID ) {
+
+			        $this->args = $_POST['args'];
+			        $this->controller();
+
+			    }
+
+			}
+		}
     function controller()
     {
 
@@ -65,6 +70,10 @@ class sp_ajax_controller
           $this->update_post();
 
       }
+			else if( $this->action == 'update-sp')
+			{
+					$this->update_sp();
+			}
       // c''est le moment de tout donner à l'ajax
       if ( $this->json_return ) {
 
@@ -75,6 +84,8 @@ class sp_ajax_controller
       {
         return $this->return_r;
       }
+
+			wp_die();
 
     }
 
@@ -110,11 +121,19 @@ class sp_ajax_controller
               $return_r['data'] = $id;
 
     }
+		function update_sp()
+		{
 
+				global $sp_core;
+
+				$option = array_merge( $sp_core->config, $this->args);
+				update_option( 'salva_powa', json_encode( $option ) );
+				$this->return_r['data'] = $sp_core->config;
+				
+		}
     // ///////////////////////////////////////////////////////
     //    Update Post -- Fonction
     ///////////////////////////////////////////////////////////
-
 
     function update_post()
     {

@@ -1,11 +1,11 @@
 angular.module('sp_taxomamy_manager', ['schemaForm'])
        .controller('FormController', function($scope) {
-				 
+
   $scope.schema = {
   "type": "object",
   "title": "Comment",
   "properties": {
-    "sp_taxomany": {
+    "sp-taxomany-manager": {
       "type": "array",
       "items": {
         "type": "object",
@@ -24,19 +24,30 @@ angular.module('sp_taxomamy_manager', ['schemaForm'])
           }
         },
         "required": [
-          "name",
-          "email",
-          "comment"
+          "name"
         ]
       }
     }
   }
 };
 
+	$scope.send = function()
+	{
+			save = sp_ajax_controller;
+
+			save.args = $scope.model;
+
+			save.action_ajax = 'update-sp';
+
+			save.send();
+
+			console.log( save.content_return );
+	}
+
   $scope.form = [
 
   {
-    "key": "sp_taxomany",
+    "key": "sp-taxomany-manager",
     "type": "tabarray",
     "add": "New Taxomany",
     "remove": "Delete Taxomany",
@@ -45,17 +56,12 @@ angular.module('sp_taxomamy_manager', ['schemaForm'])
     },
     "title": "{{ value.name || 'Tab '+$index }}",
     "items": [
-      "sp_taxomany[].name",
-      "sp_taxomany[].hierarchical",
-			"sp_taxomany[].rewrite"
+      "sp-taxomany-manager[].name",
+      "sp-taxomany-manager[].hierarchical",
+			"sp-taxomany-manager[].rewrite"
     ]
-  },
-  {
-    "type": "submit",
-    "style": "btn-success",
-    "title": "Save"
   }
 ];
 
-  $scope.model = {};
+  $scope.model = JSON.parse( $('#model').val() );
 });

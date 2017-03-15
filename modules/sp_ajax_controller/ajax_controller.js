@@ -1,17 +1,17 @@
-var sp_ajax_controller  =
+var ajax_controller  =
 {
     // url du controller php
     ajax_url : ajaxurl,
     // les arguments du controller
     args : new Object(),
     // nom de l'action pour wordpress
-    action : 'sp_ajax_controller',
+    action : 'ajax_controller',
     // action pour le controller php
     action_ajax : '',
     // le retour généré par le php
     content_return  : new Array(),
 
-    send : function()
+    send_with_ajax : function()
     {
       func = this;
 
