@@ -19,7 +19,6 @@ class sp_home extends sp_module
 
 			$menu_left['menu_list'] =  $sp_core->module_manager->list_modules;
 			$menu_left['logo_url'] =  $sp_core->url_folder . '/assets/img/logo-salva-powa.png';
-
 			$current_module = $_GET['page'];
 			$menu_left['menu_list'][$current_module]->selected = true;
 			$current_module = $sp_core->module_manager->list_modules[$current_module];

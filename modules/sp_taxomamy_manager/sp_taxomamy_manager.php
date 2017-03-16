@@ -19,7 +19,7 @@ class sp_taxomamy_manager extends sp_module
     {
 
 				global $sp_core;
-				sp_dump( get_post_types() );
+
 				wp_enqueue_script( 'sp_taxomamy_manager_js', $sp_core->url_folder . '/modules/sp_taxomamy_manager/js/sp_taxomamy_manager.js' );
 
 				$model = json_encode ( array( $this->slug => $sp_core->config[ $this->slug ] ) );
@@ -64,6 +64,65 @@ class sp_taxomamy_manager extends sp_module
 
 				register_taxonomy( $taxomany['slug'], array( 'post'), $args );
 				}
+
+		}
+		function schema_data()
+		{
+			$schema = array(
+		  "type" => "object",
+		  "title" => "Comment",
+		  "properties" =>
+				[
+			    "sp-taxomany-manager" => [
+			      "type" => "array",
+			      "items" => [
+			        "type" => "object",
+			        "properties" => [
+			          "name" => [
+			            "title" => "Name",
+			            "type" => "string"
+			          ],
+								"hierarchical" => [
+									"title" => "Hierarchical",
+						      "type" => "boolean"
+						    ],
+								"rewrite" => [
+			            "title" => "Rewrite",
+			            "type" => "string"
+			          ]
+			        ],
+			        "required" => [
+			          "name"
+			        ]
+			      ]
+			    ]
+			  ]
+		);
+
+		return $schema;
+		}
+		function form_data()
+		{
+
+				$form = [
+			  [
+			    "key" => "sp-taxomany-manager",
+			    "type" => "tabarray",
+			    "add" => "New Taxomany",
+			    "remove" => "Delete Taxomany",
+			    "style" => [
+			      "remove" => "btn-danger"
+			    ],
+			    "title" => "{{ value.name || 'Tab '+ $index }}",
+			    "items" => [
+			      "sp-taxomany-manager[].name",
+			      "sp-taxomany-manager[].hierarchical",
+						"sp-taxomany-manager[].rewrite"
+			    ]
+			  ]
+			];
+
+			return $form;
 
 		}
 }

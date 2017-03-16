@@ -50,6 +50,10 @@ class sp_ajax_controller
 
 			}
 		}
+		function view_back()
+		{
+			return 'un jour j\'aurais une vue';
+		}
     function controller()
     {
 
@@ -129,7 +133,7 @@ class sp_ajax_controller
 				$option = array_merge( $sp_core->config, $this->args);
 				update_option( 'salva_powa', json_encode( $option ) );
 				$this->return_r['data'] = $sp_core->config;
-				
+
 		}
     // ///////////////////////////////////////////////////////
     //    Update Post -- Fonction

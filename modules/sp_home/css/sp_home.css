@@ -117,6 +117,13 @@
 {
 	   width: 100%;
 }
+#groovy_template .schema-form-tabarray .ng-scope .nav-tabs > li a
+{
+	margin-right: 0;
+	border-radius: 0;
+	color: rgb(141,141,141);
+	border-right: 0px;
+}
 #groovy_template .schema-form-tabarray .tab-content
 {
 	padding: 0 15px;

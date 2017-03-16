@@ -88,11 +88,10 @@ class sp_core
 				wp_enqueue_script( 'bootstrap-decorator', $this->url_folder . '/bower_components/angular-schema-form/dist/bootstrap-decorator.min.js' );
 
 		    wp_enqueue_style( 'sp_styleCss', $this->url_folder . '/assets/css/style.css' );
-		    wp_enqueue_style( 'sp_boostrapCss', $this->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.css' );
-				wp_enqueue_style( 'sp_material_boostrapCss', $this->url_folder . '/bower_components/bootstrap-material/dist/css/bootstrap-material-design.css' );
-				wp_enqueue_style( 'sp_rip_boostrapCss', $this->url_folder . '/bower_components/bootstrap-material/dist/css/ripples.css' );
+		    wp_enqueue_style( 'sp_boostrapCss', $this->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.min.css' );
+
 		    wp_enqueue_script( 'sp_boostrapJs', $this->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js' );
-				wp_enqueue_script( 'material_Js', $this->url_folder . '/bower_components/bootstrap-material/dist/js/material.min.js' );
+
 
 				wp_enqueue_style( 'font_awesome', $this->url_folder . '/bower_components/font-awesome/css/font-awesome.css' );
 				wp_enqueue_style( 'font_material_icon', '//fonts.googleapis.com/css?family=Roboto:300,400,500,700');

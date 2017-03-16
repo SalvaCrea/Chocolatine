@@ -41,6 +41,7 @@ class sp_module
 	}
 	function __get( $name )
 	{
+
 		if ( $name == 'slug' ) {
 			 return 'sp-' . sp_clean_string( $this->name );
 		}

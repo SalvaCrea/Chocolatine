@@ -1,0 +1,39 @@
+<script>
+
+angular.module('{{slug}}', ['schemaForm'])
+       .controller('{{slug}}_Controller', function($scope) {
+
+
+
+	$scope.send = function()
+	{
+			save = sp_ajax_controller;
+
+			save.args = $scope.model;
+
+			save.action_ajax = 'update-sp';
+
+			save.send();
+
+			console.log( save.content_return );
+	}
+
+  $scope.schema = {{schema}};
+	$scope.form = {{form}};
+  $scope.model = {{model}};
+
+});
+
+
+</script>
+
+
+<div ng-app="{{slug}}">
+
+<div ng-controller="{{slug}}_Controller">
+		<form sf-schema="schema" sf-form="form" sf-model="model"></form>
+		<input type='hidden' id='model' value='{{model}}'>
+		<button type="button" class='btn btn-raised btn-success' ng-click="send()">Save</button>
+</div>
+
+</div>
