@@ -22,9 +22,18 @@ class sp_taxomamy_manager extends sp_module
 
 				wp_enqueue_script( 'sp_taxomamy_manager_js', $sp_core->url_folder . '/modules/sp_taxomamy_manager/js/sp_taxomamy_manager.js' );
 
-				$model = json_encode ( array( $this->slug => $sp_core->config[ $this->slug ] ) );
+				$form =  new sp_form();
 
-				return $this->twig_render( 'home.html', array('model' => $model) );
+				$form = $form->generate_form(
+					array(
+						'name' => $this->slug,
+						'schema' => $this->schema_data(),
+						'form' => $this->form_data(),
+						'model' => array( $this->slug => $sp_core->config[ $this->slug ])
+					)
+				);
+
+				return $this->twig_render( 'home.html', array('form' => $form) );
 
     }
 		function generate_tax()
@@ -34,6 +43,7 @@ class sp_taxomamy_manager extends sp_module
 				foreach ( $sp_core->config[ $this->slug ] as $key => $taxomany) {
 
 					$taxomany['slug'] = sp_clean_string( $taxomany['name'] );
+
 					$taxomany['hierarchical'] =  $taxomany['hierarchical'] === 'true'? true: false;
 
 					$labels = array(
@@ -70,7 +80,7 @@ class sp_taxomamy_manager extends sp_module
 		{
 			$schema = array(
 		  "type" => "object",
-		  "title" => "Comment",
+		  "title" => "Taxomany Manager",
 		  "properties" =>
 				[
 			    "sp-taxomany-manager" => [
@@ -113,7 +123,7 @@ class sp_taxomamy_manager extends sp_module
 			    "style" => [
 			      "remove" => "btn-danger"
 			    ],
-			    "title" => "{{ value.name || 'Tab '+ $index }}",
+			    "title" => '{{ value.name || \'Tab \'+ $index }}',
 			    "items" => [
 			      "sp-taxomany-manager[].name",
 			      "sp-taxomany-manager[].hierarchical",

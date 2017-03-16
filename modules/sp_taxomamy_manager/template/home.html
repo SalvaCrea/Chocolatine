@@ -1,7 +1,7 @@
 
 
 
-<div ng-app="sp_taxomamy_manager" class='col-md-12 well'>
+<div  class='col-md-12 well'>
 
 	<h4>Taxomany managering</h4>
 
@@ -9,10 +9,6 @@
 		<a target="_blank"  href='https://codex.wordpress.org/Function_Reference/register_taxonomy'>here...</a>
 		</p>
 
-	<div ng-controller="FormController">
-	    <form sf-schema="schema" sf-form="form" sf-model="model"></form>
-			<input type='hidden' id='model' value='{{model}}'>
-			<button type="button" class='btn btn-raised btn-success' ng-click="send()">Save</button>
-	</div>
+		{{form | raw}}
 
 </div>

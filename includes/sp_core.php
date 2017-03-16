@@ -31,6 +31,7 @@ class sp_core
 
 				$this->config = json_decode ( get_option( 'salva_powa' ), 1 );
 
+				$this->sp_ressource();
 			}
 			/**
 			 * Contains the tasks to be executed in the wordpress administration part
@@ -45,7 +46,7 @@ class sp_core
 					 add_action('admin_menu', array( $this, 'create_menu' ));
 
 					 // add ressource for the plugin
-					 add_action('admin_head', array( $this, 'sp_ressource' ));
+					//  add_action('admin_head', array( $this, 'sp_ressource' ));
 			}
 			function create_menu()
 			{
@@ -77,7 +78,7 @@ class sp_core
 			{
 
 		    wp_deregister_script( 'jquery' );
-				wp_enqueue_script( 'Jquery', $this->url_folder . '/bower_components/jquery/dist/jquery.min.js' );
+				wp_enqueue_script( 'Jquery', $this->url_folder . '/bower_components/jquery/dist/jquery.min.js');
 				wp_enqueue_script( 'Angular', $this->url_folder . '/bower_components/angular/angular.min.js' );
 
 				// for the form

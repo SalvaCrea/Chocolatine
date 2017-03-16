@@ -1,7 +1,8 @@
+
 <script>
 
-angular.module('{{slug}}', ['schemaForm'])
-       .controller('{{slug}}_Controller', function($scope) {
+angular.module('a{{slug}}', ['schemaForm'])
+       .controller('{{slug}}_controler', function($scope) {
 
 
 
@@ -18,19 +19,20 @@ angular.module('{{slug}}', ['schemaForm'])
 			console.log( save.content_return );
 	}
 
-  $scope.schema = {{schema}};
-	$scope.form = {{form}};
-  $scope.model = {{model}};
+  $scope.schema = {{schema | json_encode | raw }};
+	$scope.form = {{form | json_encode | raw }};
+  $scope.model = {{model | json_encode | raw }};
 
 });
+
 
 
 </script>
 
 
-<div ng-app="{{slug}}">
+<div ng-app="a{{slug}}">
 
-<div ng-controller="{{slug}}_Controller">
+<div ng-controller="{{slug}}_controler">
 		<form sf-schema="schema" sf-form="form" sf-model="model"></form>
 		<input type='hidden' id='model' value='{{model}}'>
 		<button type="button" class='btn btn-raised btn-success' ng-click="send()">Save</button>
