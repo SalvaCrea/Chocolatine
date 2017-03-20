@@ -43,7 +43,7 @@ class sp_module
 	{
 
 		if ( $name == 'slug' ) {
-			 return 'sp-' . sp_clean_string( $this->name );
+			 return sp_clean_string( $this->name );
 		}
 	}
 	/**

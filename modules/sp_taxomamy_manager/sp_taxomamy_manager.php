@@ -40,6 +40,9 @@ class sp_taxomamy_manager extends sp_module
 		{
 				global $sp_core;
 
+				if ( !isset( $sp_core->config[ $this->slug ] ))
+						return false;
+						
 				foreach ( $sp_core->config[ $this->slug ] as $key => $taxomany) {
 
 					$taxomany['slug'] = sp_clean_string( $taxomany['name'] );
@@ -94,7 +97,8 @@ class sp_taxomamy_manager extends sp_module
 			          ],
 								"hierarchical" => [
 									"title" => "Hierarchical",
-						      "type" => "boolean"
+						      "type" => "boolean",
+									"default" => false
 						    ],
 								"rewrite" => [
 			            "title" => "Rewrite",
