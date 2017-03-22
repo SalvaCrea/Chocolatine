@@ -27,7 +27,7 @@ class sp_core
 			 * @var string
 			 */
 			var $current_module = 'home';
-			
+
 			function __construct()
 			{
 
@@ -55,19 +55,6 @@ class sp_core
 					 $this->sp_ressource();
 
 					 add_menu_page('Salva Powa', 'Salva Powa', 'administrator', 'salva_powa', array( $this,'back_view' ),   'dashicons-hammer', 10);
-
-					//  foreach ($this->module_manager->list_modules as $key => $module) {
-					 //
-					// 	 add_submenu_page(
-				  //        'salva_powa',
-				  //        $module->name,
-				  //        $module->name,
-				  //        'administrator',
-				  //        $module->slug,
-				  //        array( $this,'back_view' )
-				  //    );
-					 //
-					//  }
 
 			}
 			function back_view()
