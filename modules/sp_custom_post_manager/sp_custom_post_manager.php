@@ -13,6 +13,7 @@ class sp_custom_post_manager extends sp_module
 				$this->description = "For create and manage custom post";
 				add_action( 'init', array( $this, 'generate_custom_post' ), 0 );
 
+				$this->show_in_menu = true;
     }
     function view_back()
     {
@@ -27,9 +28,10 @@ class sp_custom_post_manager extends sp_module
 						'name' => $this->slug,
 						'schema' => $this->schema_data(),
 						'form' => $this->form_data()
-					)
+					);
 
-				if ( !empty( $sp_core->config[ $this->slug ] ) && isset( $sp_core->config[ $this->slug ] ) ) {
+				if ( !empty( $sp_core->config[ $this->slug ] ) && isset( $sp_core->config[ $this->slug ] ) )
+				{
 						$form_arg['model'] = array( $this->slug => $sp_core->config[ $this->slug ] );
 				}
 

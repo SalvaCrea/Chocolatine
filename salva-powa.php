@@ -15,4 +15,4 @@ require_once( dirname(__FILE__).'/auto_load.php' );
 use \salva_powa\sp_core;
 
 $sp_core = new sp_core();
-$sp_core->wp_admin_do();
+$sp_core->run();

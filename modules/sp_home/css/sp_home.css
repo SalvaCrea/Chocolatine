@@ -22,7 +22,10 @@
 	display: none;
 }
 
-
+.fade
+{
+	display: none;
+}
 #groovy_template #headerpage {
     text-align: left;
 		box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
@@ -82,7 +85,7 @@
 #groovy_template #sp_menu_left {
 
     background: #313538;
-
+		border-left: #000 solid 1px;
 }
 #groovy_template .menu_list li i
 {
@@ -129,4 +132,11 @@
 	padding: 0 15px;
 	border-left: 1px solid #ccc;
 	margin-left: -15px;
+}
+.masonry-brick {
+   width:25%;/*or others percents*/
+
+   /*following properties, fix problem*/
+   margin-left:-1px;
+   transform:translateX(1px);
 }

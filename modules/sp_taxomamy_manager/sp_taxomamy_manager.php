@@ -14,6 +14,8 @@ class sp_taxomamy_manager extends sp_module
 
 				add_action( 'init', array( $this, 'generate_tax' ), 0 );
 
+				$this->show_in_menu = true;
+
     }
     function view_back()
     {
@@ -42,7 +44,7 @@ class sp_taxomamy_manager extends sp_module
 
 				if ( !isset( $sp_core->config[ $this->slug ] ))
 						return false;
-						
+
 				foreach ( $sp_core->config[ $this->slug ] as $key => $taxomany) {
 
 					$taxomany['slug'] = sp_clean_string( $taxomany['name'] );

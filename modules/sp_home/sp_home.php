@@ -11,15 +11,28 @@ class sp_home extends sp_module
         $this->icon = 'fa-home';
 				$this->name = 'Home';
 				$this->description = "the home for the back of the salva_back";
+				$this->show_in_menu = true;
+				$this->menu_position = 0;
 
     }
     function view_back_sp()
     {
 			global $sp_core;
 
+
+
 			$menu_left['menu_list'] =  $sp_core->module_manager->list_modules;
+
 			$menu_left['logo_url'] =  $sp_core->url_folder . '/assets/img/logo-salva-powa.png';
-			$current_module = $_GET['page'];
+
+			if ( isset( $_GET['module'] ) && !empty( $_GET['module'] ) ) {
+					$current_module = $_GET['module'];
+			}
+			else
+			{
+					$current_module = 'home';
+			}
+
 			$menu_left['menu_list'][$current_module]->selected = true;
 			$current_module = $sp_core->module_manager->list_modules[$current_module];
 
@@ -59,6 +72,12 @@ class sp_home extends sp_module
     }
 		function view_back()
 		{
-			return $this->twig_render( 'home.html', array());
+			global $sp_core;
+
+			wp_enqueue_script( 'massonnery', 'https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js');
+
+			return $this->twig_render( 'home.html', array(
+				'list_modules' => $sp_core->module_manager->list_modules
+			));
 		}
 }

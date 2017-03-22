@@ -22,7 +22,12 @@ class sp_core
 			 * @var array
 			 */
 			var $config;
-
+			/**
+			 * The current module actif on the view
+			 * @var string
+			 */
+			var $current_module = 'home';
+			
 			function __construct()
 			{
 
@@ -31,40 +36,38 @@ class sp_core
 
 				$this->config = json_decode ( get_option( 'salva_powa' ), 1 );
 
-				$this->sp_ressource();
+				add_action('admin_menu', array( $this, 'wp_admin_do' ));
+
+			}
+			function run()
+			{
+
+				$this->module_manager = new sp_module_manager();
+				$this->module_manager->search_modules();
+
 			}
 			/**
 			 * Contains the tasks to be executed in the wordpress administration part
 			 */
+
 			function wp_admin_do()
 			{
+					 $this->sp_ressource();
 
+					 add_menu_page('Salva Powa', 'Salva Powa', 'administrator', 'salva_powa', array( $this,'back_view' ),   'dashicons-hammer', 10);
 
-					 $this->module_manager = new sp_module_manager();
-					 $this->module_manager->search_modules();
-
-					 add_action('admin_menu', array( $this, 'create_menu' ));
-
-					 // add ressource for the plugin
-					//  add_action('admin_head', array( $this, 'sp_ressource' ));
-			}
-			function create_menu()
-			{
-
-					 add_menu_page('Salva Powa', 'Salva Powa', 'administrator', __CLASS__, array( $this,'back_view' ),   'dashicons-hammer', 1);
-
-					 foreach ($this->module_manager->list_modules as $key => $module) {
-
-						 add_submenu_page(
-				         __CLASS__,
-				         $module->name,
-				         $module->name,
-				         'administrator',
-				         $module->slug,
-				         array( $this,'back_view' )
-				     );
-
-					 }
+					//  foreach ($this->module_manager->list_modules as $key => $module) {
+					 //
+					// 	 add_submenu_page(
+				  //        'salva_powa',
+				  //        $module->name,
+				  //        $module->name,
+				  //        'administrator',
+				  //        $module->slug,
+				  //        array( $this,'back_view' )
+				  //    );
+					 //
+					//  }
 
 			}
 			function back_view()

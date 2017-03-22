@@ -12,16 +12,20 @@
 
 	{% for menu_item in menu_list %}
 
-		<li class="
-		{% if menu_item.selected == true %}
-    selected
+		{% if menu_item.show_in_menu  %}
+
+			<li class="
+			{% if menu_item.selected == true %}
+	    selected
+			{% endif %}
+			">
+				<a href="?page=salva_powa&module={{menu_item.slug|raw}}">
+					<i class='fa {{menu_item.icon|raw}}' aria-hidden="true"></i>
+					{{menu_item.name|raw}}
+				</a>
+			</li>
+
 		{% endif %}
-		">
-			<a href="?page={{menu_item.slug|raw}}">
-				<i class='fa {{menu_item.icon|raw}}' aria-hidden="true"></i>
-				{{menu_item.name|raw}}
-			</a>
-		</li>
 
 	{% endfor %}
 

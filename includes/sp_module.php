@@ -34,6 +34,16 @@ class sp_module
 	 * @var string
 	 */
 	var $file_path;
+	/**
+	 * the position default in the list menu in the administration
+	 * @var integer
+	 */
+	var $menu_position = 100;
+	/**
+	 * if show in the list menu
+	 * @var boolean
+	 */
+	var $show_in_menu = false;
 
 	function __construct()
 	{

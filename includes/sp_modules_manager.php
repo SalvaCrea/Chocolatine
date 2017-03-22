@@ -22,29 +22,59 @@ class sp_module_manager
 			{
 						global $sp_core;
 
+						$list_folder = $this->create_root_folder( $sp_core->uri_folder.'/modules' );
 
-						$list_folder = scandir( $sp_core->uri_folder.'/modules' );
-						// remove parent folder
-						$list_folder = array_diff( $list_folder, array( '.', '..') );
+						if ( file_exists ( get_template_directory() . '/sp_modules' ) ) {
+							 $list_folder = array_merge(
+								 $list_folder,
+								 $this->create_root_folder( get_template_directory() . '/sp_modules' )
+							 );
+						}
 
-						foreach ( $list_folder as $key => $folder ) {
+						foreach ( $list_folder as $key => $folder_root ) {
 
-									$file_path = $sp_core->uri_folder.'/modules/' . $folder . '/' . $folder . '.php';
+									$folder = $folder_root['root'] . '/' . $folder_root['name'] .'.php';
+
 									// test if file existe
-									if ( !file_exists ( $file_path ) ) {
+									if ( !file_exists ( $folder ) ) {
 											continue;
 									}
 
-									require $file_path;
+									require $folder;
 
 									// execute the class
-									$current_class = new $folder();
+									$current_class = new $folder_root['name']();
 
 									$current_class->slug = $current_class->slug;
-									
+
 									$this->list_modules[ $current_class->slug ] = $current_class;
 
 						}
 
+			}
+			/**
+			 * create a folder with all root clean
+			 * @param  [string] $root_dir   the root folder
+			 * @return [array]  $table with all root
+			 */
+			private function create_root_folder( $root_dir )
+			{
+					$array_root = [];
+
+					$array_root = scandir( $root_dir );
+
+					// delete inutile occurence
+					$array_root = array_diff( $array_root, array( '.', '..') );
+
+					foreach ( $array_root as $key => $value) {
+
+						$array_root[$key] = array(
+							'root' => $root_dir . '/' . $value,
+							'name' => $value
+						);
+
+					}
+
+					return $array_root;
 			}
 }
