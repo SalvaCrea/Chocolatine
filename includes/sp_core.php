@@ -30,9 +30,14 @@ class sp_core
 			var $current_module;
 			/**
 			 * The current sub module actif on the view
-			 * @var object class
+			 * @var string
 			 */
 			var $current_sub_module;
+			/**
+			 * The url current, a fusion beetwen slug, current_module and $current_sub_module
+			 * @var string
+			 */
+			var $current_url;
 			/**
 			 * The slug is very pratice
 			 * @var string
@@ -75,6 +80,7 @@ class sp_core
 			);
 
 			}
+
 			/**
 			 * This function load all modules
 			 */
@@ -99,6 +105,10 @@ class sp_core
 				else
 				{
 						 $this->current_module = $this->get_module( 'home' );
+				}
+
+				if ( isset( $_GET['sub_module'] ) && !empty( $_GET['sub_module'] ) ) {
+						$this->current_sub_module = $_GET['sub_module'];
 				}
 
 
@@ -126,6 +136,9 @@ class sp_core
 					 // find the current module
  					 $this->find_current_module();
 
+					 // find current url
+					 $this->find_current_url();
+
 					 // add a menu compatible Wordpress
 					 add_menu_page(
 						 'Salva Powa',
@@ -148,7 +161,26 @@ class sp_core
 					 $view->view_back_sp();
 
 			}
+			/**
+			 * General a url for the wp-admin
+			 * @return string
+			 */
+			public function find_current_url()
+			{
 
+					$url = "/wp-admin/admin.php?page={$this->slug}";
+
+					if ( !empty( $this->current_module->slug ))
+						$url .= "&module={$this->current_module->slug}";
+
+					if ( !empty( $this->current_sub_module ) )
+						$url .= "&sub_module={$this->current_sub_module}";
+
+					$this->current_url = $url;
+
+					return $url;
+
+			}
 			/**
 			 * List of ressource necessary for the good fonctionnement
 			 */

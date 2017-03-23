@@ -53,7 +53,6 @@ class sp_post extends sp_module
     }
 		function view_back()
 		{
-				$sp_core = sp_core();
 
 				return "je suis un petit moteur de recherche";
 		}
@@ -67,26 +66,28 @@ class sp_post extends sp_module
 
 				$where = array();
 				// verify if the id is null or not
-				if ( !is_null( $id ) )
-				{
+				if ( !is_null( $id ) ):
+
 						$this->id_post = $id;
-				}
+				endif;
 
 				return $this;
 		}
 		function type( $type = '' )
 		{
-				if ( $type != '') {
+				if ( $type != ''):
 						$this->type_post = $type;
 						$this->where['AND'][ 'type_demande' ] = $type;
-				}
+				endif;
 
 				return $this;
 		}
+		/**
+		 *  start the search
+		 * @return return the all result
+		 */
 		function find()
 		{
-
-			$sp_core = sp_core();
 
 			$this->where['LIMIT'] =  [
 
@@ -95,7 +96,7 @@ class sp_post extends sp_module
 
 			];
 
-			$this->results = $sp_core->data->select(
+			$this->results = $this->core->data->select(
 
 				$this->default_table[ 'post' ],
 
@@ -110,14 +111,16 @@ class sp_post extends sp_module
 			return $this->results;
 
 		}
+		/**
+		 * Get the meta link of line
+		 * @return array the result
+		 */
 		function get_meta()
 		{
 
-			$sp_core = sp_core();
-
 			foreach ( $this->results as $key => $result) {
 
-					$metas =	 $sp_core->data->select(
+					$metas =	$this->core->data->select(
 
 									$this->default_table[ 'meta' ],
 
@@ -125,14 +128,20 @@ class sp_post extends sp_module
 
 									[ 'id_demande' => $result['id_demande'] ]
 
-						);
+					);
 
 
-						$this->results[$key] += $this->clean_meta( $metas );
+					$this->results[$key] += $this->clean_meta( $metas );
 
 			}
 
+			return $this->results;
 		}
+		/**
+		 * Get the meta of result and clean the meta
+		 * @param  [type] $metas  the unique meta
+		 * @return [array]        the meta clean
+		 */
 		function clean_meta( $metas )
 		{
 
@@ -143,20 +152,19 @@ class sp_post extends sp_module
 					// convert in array of the data is multi
 					if ( isset( $clean_meta[ $meta['meta_key'] ] ) ):
 
-							if ( is_array( $clean_meta[ $meta['meta_key'] ] ) ):
+						if ( is_array( $clean_meta[ $meta['meta_key'] ] ) ):
 									$clean_meta[ $meta['meta_key'] ] []= $meta['meta_value'];
 
 							// incremente the first array
-							else:
+						else:
 									$clean_meta[ $meta['meta_key'] ] = [ $meta['meta_value'] ];
 
-							endif;
-
+					  endif;
 					else:
+
 					$clean_meta[ $meta['meta_key'] ] = $meta['meta_value'];
 
 					endif;
-
 			}
 
 			return $clean_meta;

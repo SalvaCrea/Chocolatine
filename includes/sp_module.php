@@ -44,6 +44,17 @@ class sp_module
 	 * @var boolean
 	 */
 	var $show_in_menu = false;
+	/**
+	 * This variable contain of the object sp_core
+	 * @var object
+	 */
+	var $core;
+
+	/**
+	 * This array is use for declarate the sub module
+	 * @var array
+	 */
+	var $sub_module = array();
 
 	function __construct()
 	{
@@ -52,9 +63,12 @@ class sp_module
 	function __get( $name )
 	{
 
-		if ( $name == 'slug' ) {
+		if ( $name == 'slug' )
 			 return sp_clean_string( $this->name );
-		}
+
+		if ( $name == 'core' )
+			 return $this->find_core();
+
 	}
 	/**
 	 * Use the framework twig like template motor
@@ -62,7 +76,7 @@ class sp_module
 	 * @param  [array] $array_info  the array content informations for the doc html
 	 * @return [string]   return the file html with information of array
 	 */
-	function twig_render( $template_name, $array_info)
+	public function twig_render( $template_name, $array_info)
 	{
 
     if ( !isset( $this->twig ) )
@@ -72,7 +86,7 @@ class sp_module
 
 	}
 	// construct the motor twig
-	function twig_constructor()
+	public function twig_constructor()
 	{
 		\Twig_Autoloader::register();
 
@@ -87,9 +101,32 @@ class sp_module
 	 * Return le path of extend class
 	 * @return [string] Return le path of extend class
 	 */
-	function dir_file_class()
+	public function dir_file_class()
 	{
 		$a = new \ReflectionClass($this);
 		return dirname( $a->getFileName() );
+	}
+	public function find_core()
+	{
+		global $sp_core;
+		return $sp_core;
+	}
+	/**
+	 * This function add a submodule for module
+	 * @param [array] The arguments for add a submenu
+	 */
+	public function add_sub_module( $args )
+	{
+
+			$args_default = array(
+				'icon' => '',
+				'name' => '',
+				'slug' => ''
+			);
+
+			$args = array_merge( $args_default, $args);
+
+			$this->sub_module []= $args;
+
 	}
 }
