@@ -48,3 +48,10 @@ function sp_clean_string( $string ) {
 
    return strtolower( preg_replace('/[^A-Za-z0-9\-]/', '', $string) ); // Removes special chars.
  }
+
+ function sp_core()
+ {
+	 	global $sp_core;
+
+	 	return $sp_core;
+ }

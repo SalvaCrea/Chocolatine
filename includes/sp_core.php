@@ -4,6 +4,7 @@
  */
 
 namespace salva_powa;
+use \Medoo;
 
 class sp_core
 {
@@ -28,6 +29,11 @@ class sp_core
 			 */
 			var $current_module;
 			/**
+			 * The current sub module actif on the view
+			 * @var object class
+			 */
+			var $current_sub_module;
+			/**
 			 * The slug is very pratice
 			 * @var string
 			 */
@@ -37,12 +43,17 @@ class sp_core
 			 * @var object class
 			 */
 			var $module_manager;
-
+			/**
+			 * The medoo Class for manipule data base
+			 * @var object class
+			 */
+			var $data;
 			/**
 			 * __construct first action
 			 */
 			function __construct()
 			{
+				global $wpdb;
 
 				$this->uri_folder = dirname( dirname(__FILE__) );
 				$this->url_folder = plugins_url( 'salva-powa-wordpress' );
@@ -50,6 +61,18 @@ class sp_core
 				$this->config = json_decode ( get_option( $this->slug ), 1 );
 
 				add_action('admin_menu', array( $this, 'wp_admin_do' ));
+
+				// create un object medoo for manipule data base
+				$this->data = new Medoo(
+						array(
+							'database_type' => 'mysql',
+							'database_name' => $wpdb->dbname,
+							'server' => $wpdb->dbhost,
+							'username' => $wpdb->dbuser,
+							'password' => $wpdb->dbpassword,
+							'charset' => $wpdb->charset
+					)
+			);
 
 			}
 			/**
@@ -97,13 +120,22 @@ class sp_core
 			public function wp_admin_do()
 			{
 					// load the ressources int the wp -admin
-					 $this->sp_ressource();
+					if ( $_GET['page'] == $this->slug )
+							 $this->sp_ressource();
 
 					 // find the current module
  					 $this->find_current_module();
 
 					 // add a menu compatible Wordpress
-					 add_menu_page('Salva Powa', 'Salva Powa', 'administrator', $this->slug, array( $this,'create_view' ),   'dashicons-hammer', 10);
+					 add_menu_page(
+						 'Salva Powa',
+						 'Salva Powa',
+						 'administrator',
+						 $this->slug,
+						 array( $this,'create_view' ),
+						 'dashicons-hammer',
+						 10
+					 );
 
 			}
 			/**
@@ -124,24 +156,77 @@ class sp_core
 			{
 
 		    wp_deregister_script( 'jquery' );
-				wp_enqueue_script( 'Jquery', $this->url_folder . '/bower_components/jquery/dist/jquery.min.js');
-				wp_enqueue_script( 'Angular', $this->url_folder . '/bower_components/angular/angular.min.js' );
+
+				wp_enqueue_script(
+					'Jquery',
+					$this->url_folder . '/bower_components/jquery/dist/jquery.min.js'
+				);
+
+				wp_enqueue_script(
+					'Angular',
+					$this->url_folder . '/bower_components/angular/angular.min.js'
+				);
 
 				// for the form
-				wp_enqueue_script( 'Angular-sanitize', $this->url_folder . '/bower_components/angular-sanitize/angular-sanitize.min.js' );
-				wp_enqueue_script( 'tv4', $this->url_folder . '/bower_components/tv4/tv4.js' );
-				wp_enqueue_script( 'objectpath', $this->url_folder . '/bower_components/objectpath/lib/ObjectPath.js' );
-				wp_enqueue_script( 'schema-form', $this->url_folder . '/bower_components/angular-schema-form/dist/schema-form.min.js' );
-				wp_enqueue_script( 'bootstrap-decorator', $this->url_folder . '/bower_components/angular-schema-form/dist/bootstrap-decorator.min.js' );
+				wp_enqueue_script(
+					'Angular-sanitize',
+					 $this->url_folder . '/bower_components/angular-sanitize/angular-sanitize.min.js'
+				 );
 
-		    wp_enqueue_style( 'sp_styleCss', $this->url_folder . '/assets/css/style.css' );
-		    wp_enqueue_style( 'sp_boostrapCss', $this->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.min.css' );
+				wp_enqueue_script(
+					'tv4',
+					 $this->url_folder . '/bower_components/tv4/tv4.js'
+				 );
 
-		    wp_enqueue_script( 'sp_boostrapJs', $this->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js' );
+				wp_enqueue_script(
+					'objectpath',
+					 $this->url_folder . '/bower_components/objectpath/lib/ObjectPath.js'
+				 );
+
+				wp_enqueue_script(
+					'schema-form',
+					 $this->url_folder . '/bower_components/angular-schema-form/dist/schema-form.min.js'
+				 );
+
+				wp_enqueue_script(
+					'bootstrap-decorator',
+					 $this->url_folder . '/bower_components/angular-schema-form/dist/bootstrap-decorator.min.js'
+				 );
+
+		    wp_enqueue_style(
+					'sp_styleCss',
+					 $this->url_folder . '/assets/css/style.css'
+				 );
+
+		    wp_enqueue_style(
+					'sp_boostrapCss',
+					 $this->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.min.css'
+				 );
+
+		    wp_enqueue_script(
+					'sp_boostrapJs',
+					 $this->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js'
+				 );
+
+				 wp_enqueue_style(
+ 					'sp_dataTable_Css',
+ 					 '//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css'
+ 				 );
+
+ 		    wp_enqueue_script(
+ 					'sp_dataTable_Js',
+ 					 '//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'
+ 				 );
 
 
-				wp_enqueue_style( 'font_awesome', $this->url_folder . '/bower_components/font-awesome/css/font-awesome.css' );
-				wp_enqueue_style( 'font_material_icon', '//fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+				wp_enqueue_style(
+					'font_awesome',
+					 $this->url_folder . '/bower_components/font-awesome/css/font-awesome.css'
+				 );
+				wp_enqueue_style(
+					'font_material_icon',
+					 '//fonts.googleapis.com/css?family=Roboto:300,400,500,700'
+				 );
 
 				wp_enqueue_style( 'font_roboto', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 

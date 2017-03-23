@@ -113,7 +113,7 @@ class sp_template extends sp_module
 
 		$args = array_merge( $args, $this->args['menu_left'] );
 
-		echo '<div id="sp_menu_left">';
+		echo '<div id="sp_menu_left" class="col-md-3">';
 
 				$this->generate_content( $this->args['menu_left']['content'] );
 
