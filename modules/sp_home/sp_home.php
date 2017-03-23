@@ -19,23 +19,12 @@ class sp_home extends sp_module
     {
 			global $sp_core;
 
-
-
 			$menu_left['menu_list'] =  $sp_core->module_manager->list_modules;
-
+			$menu_left['menu_list'][ $sp_core->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $sp_core->url_folder . '/assets/img/logo-salva-powa.png';
 
-			if ( isset( $_GET['module'] ) && !empty( $_GET['module'] ) ) {
-					$current_module = $_GET['module'];
-			}
-			else
-			{
-					$current_module = 'home';
-			}
-
-			$menu_left['menu_list'][$current_module]->selected = true;
-			$current_module = $sp_core->module_manager->list_modules[$current_module];
-
+			// get the current module
+			$current_module = $sp_core->current_module;
 
 			$view = new sp_template();
 
