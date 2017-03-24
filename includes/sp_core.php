@@ -94,6 +94,10 @@ class sp_core
 			{
 
 				$this->ajax = new sp_ajax();
+
+				if ( $_GET['page'] == $this->slug )
+						$this->ajax->add_ressource();
+
 				$this->modules = new sp_module_manager();
 				$this->modules->search_modules();
 

@@ -45,6 +45,8 @@ class sp_module_manager
 									// execute the class
 									$current_class = new $folder_root['name']();
 
+									$current_class->parent_construct();
+
 									$current_class->slug = $current_class->slug;
 
 									$this->list_modules[ $current_class->slug ] = $current_class;

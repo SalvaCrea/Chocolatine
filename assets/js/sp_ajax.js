@@ -5,7 +5,7 @@ var ajax_controller  =
     // les arguments du controller
     args : new Object(),
     // nom de l'action pour wordpress
-    action : 'ajax_controller',
+    wp_action : 'ajax_controller',
     // action pour le controller php
     module : '',
 		// action pour le controller php
@@ -24,7 +24,7 @@ var ajax_controller  =
   	       dataType : 'json',
   	       data : {
 						 "args" : this.args,
-						 "action" : this.action ,
+						 "action" : this.wp_action ,
 						 "module" : this.module,
 					 	 "action_module" : this.action_module
 					 },

@@ -50,10 +50,23 @@ class sp_module
 	 * @var array
 	 */
 	var $module_action = array();
-
-	function __construct()
+	/**
+	 *  this is the root folder
+	 * @var string
+	 */
+	var $uri_folder;
+	/**
+	 * this a web url
+	 * @var string
+	 */
+	var $url_folder;
+	/**
+	 * This function is a fake constructor, in a php automatic father constructor automatically is not exist
+	 * @return boolean
+	 */
+	function parent_construct()
 	{
-			$this->file_path = dirname(__FILE__);
+
 	}
 	function __get( $name )
 	{
@@ -67,6 +80,31 @@ class sp_module
 		if ( $name == 'db' )
 	 			return $this->find_core()->data;
 
+	}
+	function get_url()
+	{
+
+			if ( empty( $this->url_folder ) ) {
+
+				$uri = $this->get_uri();
+
+				$this->url_folder = substr(
+					$uri,
+					strpos( $uri, '/wp-content' ),
+					strlen( $uri )
+				);
+
+			}
+
+			return $this->url_folder;
+	}
+	function get_uri()
+	{
+			if ( empty( $this->uri_folder ) ) {
+				$this->uri_folder = $this->dir_file_class();
+			}
+
+			return $this->uri_folder;
 	}
 	/**
 	 * Use the framework twig like template motor
@@ -88,7 +126,7 @@ class sp_module
 	{
 		\Twig_Autoloader::register();
 
-		$loader = new \Twig_Loader_Filesystem( $this->dir_file_class() . '/template'); // Dossier contenant les templates
+		$loader = new \Twig_Loader_Filesystem( $this->get_uri() . '/template'); // Dossier contenant les templates
 
     $this->twig = new \Twig_Environment($loader, array(
       'cache' => false
@@ -104,6 +142,10 @@ class sp_module
 		$a = new \ReflectionClass($this);
 		return dirname( $a->getFileName() );
 	}
+	/**
+	 * This function return the sp_core
+	 * @return object The class sp_core
+	 */
 	public function find_core()
 	{
 		global $sp_core;
@@ -148,6 +190,54 @@ class sp_module
 			endif;
 
 			$this->module_action []= $args;
+
+	}
+	/**
+	 * This function open route for the ajax
+	 * @param array $args ann array than contain information for open route
+	 */
+	public function add_ajax_action( $args )
+	{
+
+			$args_default = 	array(
+					'name' => '',
+					'call_back' => '',
+					'action' => ''
+			);
+
+			$args = array_merge( $args_default, $args);
+
+			$args['module'] = $this->slug;
+
+			$this->core
+						->ajax
+						->add_ajax_listen( $args );
+
+			return true;
+
+	}
+	/**
+	 * This function add js in the personnal folder of module contain in the folder js
+	 * @param string $name the name of the js
+	 */
+	public function add_module_js( $name )
+	{
+
+			wp_enqueue_script( $name,
+				$this->get_url() . '/js/' . $name
+			);
+
+	}
+	/**
+	 * This function add js in the personnal folder of module contain in the folder js
+	 * @param string $name the name of the css
+	 */
+	public function add_module_css( $name )
+	{
+
+				wp_enqueue_style( $name,
+					$this->get_url() . '/css/' . $name
+				);
 
 	}
 }

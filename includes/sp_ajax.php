@@ -37,24 +37,27 @@ class sp_ajax
     }
 		function add_ressource()
 		{
+				$sp_core = sp_core();
 
 				wp_enqueue_script(
 					'sp_ajax_controller',
-				$this->core->url_folder . '/modules/sp_ajax_controller/js/sp_ajax_controller.js'
-			);
+				$sp_core->url_folder . '/assets/js/sp_ajax.js'
+				);
 
 		}
 		function add_ajax_listen( $args )
 		{
+
 				$args_default = array(
 						'role' => ['administrator'],
 						'module' => '',
 						'call_back' => ''
 				);
 
-			 $args = array_merge($args_default, $args);
+			 $args = array_merge( $args_default, $args );
 
-			 $this->$ajax_listen [] = $args;
+			 $this->ajax_listen []= $args;
+
 		}
 		function view_back()
 		{
