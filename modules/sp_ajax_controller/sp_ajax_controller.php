@@ -38,9 +38,16 @@ class sp_ajax_controller
 				add_action( 'wp_ajax_sp_ajax_controller', array( $this ,'test_data') );
 				add_action('wp_ajax_nopriv_sp_ajax_controller', array( $this ,'test_data') );
 
-				wp_enqueue_script( 'sp_ajax_controller', $sp_core->url_folder . '/modules/sp_ajax_controller/js/sp_ajax_controller.js' );
-
     }
+		function add_ressource()
+		{
+
+				wp_enqueue_script(
+					'sp_ajax_controller',
+				$sp_core->url_folder . '/modules/sp_ajax_controller/js/sp_ajax_controller.js'
+			);
+
+		}
 		function add_ajax_listen( $args )
 		{
 				$args_default = array(

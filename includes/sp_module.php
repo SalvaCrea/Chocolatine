@@ -49,7 +49,7 @@ class sp_module
 	 * This array is use for declarate the sub module
 	 * @var array
 	 */
-	var $sub_module = array();
+	var $module_action = array();
 
 	function __construct()
 	{
@@ -110,7 +110,7 @@ class sp_module
 	 * This function add a submodule for module
 	 * @param [array] The arguments for add a submenu
 	 */
-	public function add_sub_module( $args )
+	public function add_module_action( $args )
 	{
 
 			$args_default = array(
@@ -119,6 +119,17 @@ class sp_module
 				'slug' => '',
 				'url' => '',
 			);
+
+			// add _ first elem hom
+			if ( empty( $this->module_action ) ) :
+
+					$first_elem = array();
+					$first_elem['url'] = $this->core->url;
+					$first_elem['url'] .= "&module={$this->slug}";
+					$first_elem['name'] = 'Home';
+					$this->module_action []= $first_elem;
+
+			endif;
 
 			$args = array_merge( $args_default, $args);
 
@@ -129,11 +140,11 @@ class sp_module
 
 				$args['url'] = $this->core->url;
 				$args['url'] .= "&module={$this->slug}";
-				$args['url'] .= "&sub_module={$args['slug']}";
+				$args['url'] .= "&module_action={$args['slug']}";
 
 			endif;
 
-			$this->sub_module []= $args;
+			$this->module_action []= $args;
 
 	}
 }

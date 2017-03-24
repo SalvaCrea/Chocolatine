@@ -32,9 +32,9 @@ class sp_core
 			 * The current sub module actif on the view
 			 * @var string
 			 */
-			var $current_sub_module;
+			var $module_action;
 			/**
-			 * The url current, a fusion beetwen slug, current_module and $current_sub_module
+			 * The url current, a fusion beetwen slug, current_module and $module_action
 			 * @var string
 			 */
 			var $current_url;
@@ -52,7 +52,7 @@ class sp_core
 			 * Contain the class module manager and list all modules
 			 * @var object class
 			 */
-			var $module_manager;
+			var $modules;
 			/**
 			 * The medoo Class for manipule data base
 			 * @var object class
@@ -93,8 +93,8 @@ class sp_core
 			public function run()
 			{
 
-				$this->module_manager = new sp_module_manager();
-				$this->module_manager->search_modules();
+				$this->modules = new sp_module_manager();
+				$this->modules->search_modules();
 
 			}
 			/**
@@ -113,8 +113,8 @@ class sp_core
 						 $this->current_module = $this->get_module( 'home' );
 				}
 
-				if ( isset( $_GET['sub_module'] ) && !empty( $_GET['sub_module'] ) ) {
-						$this->current_sub_module = $_GET['sub_module'];
+				if ( isset( $_GET['module_action'] ) && !empty( $_GET['module_action'] ) ) {
+						$this->module_action = $_GET['module_action'];
 				}
 
 
@@ -127,7 +127,7 @@ class sp_core
 			public function get_module( $module )
 			{
 					return $this->
-									module_manager->
+									modules->
 									list_modules[ $module ];
 			}
 			/**
@@ -179,8 +179,8 @@ class sp_core
 					if ( !empty( $this->current_module->slug ))
 						$url .= "&module={$this->current_module->slug}";
 
-					if ( !empty( $this->current_sub_module ) )
-						$url .= "&sub_module={$this->current_sub_module}";
+					if ( !empty( $this->module_action ) )
+						$url .= "&module_action={$this->module_action}";
 
 					$this->current_url = $url;
 
