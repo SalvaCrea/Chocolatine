@@ -28,7 +28,7 @@
 	position: fixed;
 	height: 100%;
 }
-#groovy_template .menu_list li
+#groovy_template #sp_menu_left .menu_list li
 {
 		margin : 0;
 		margin-left: -15px;
@@ -45,4 +45,10 @@
 #groovy_template #main_content_groovy
 {
 	padding: 15px;
+}
+
+#groovy_template #top-content-groovy
+{
+	background: #fff;
+	border-bottom: 1px solid #ccc;
 }

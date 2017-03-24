@@ -18,7 +18,7 @@ function sp_dump( $var=false, $ajax=false ) {
 	echo '</ol>';
 	echo '<pre>';
 	print_r($var);
-	echo '<pre>';
+	echo '</pre>';
 
 }
 

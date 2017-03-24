@@ -17,9 +17,17 @@
 {
 	background: #E2E8F7;
 }
+#adminmenumain
+{
+	display: none;
+}
 #wpfooter
 {
 	display: none;
+}
+#wpcontent
+{
+	margin-left: 0 !important;
 }
 
 .fade
@@ -91,22 +99,39 @@
 {
 		margin-right: 5px;
 }
-
-#groovy_template .menu_list li.selected
+#groovy_template #top-content-groovy > div
+{
+	width : 100%;
+}
+#groovy_template #sp_menu_left .menu_list li.selected
 {
 		background: #00131d;
 		color : white;
 		border-bottom: 1px solid #464444;
 }
-#groovy_template .menu_list li.selected a,
-#groovy_template .menu_list li.selected i
+#groovy_template #sp_menu_left .menu_list li.selected a,
+#groovy_template #sp_menu_left .menu_list li.selected i
 {
 		color : #e4e4e4;
 }
 
-#groovy_template .well {
+#groovy_template #sp_menu_top .menu_list li {
+	float: left;
+	    padding: 20px 20px;
+	    font-size: 14px;
+	    margin-bottom: -1px;
+}
+#groovy_template #sp_menu_top .menu_list li.selected {
+			border-bottom: 4px solid #5b9dd9;
+}
+#groovy_template #sp_menu_top .menu_list li.selected a,
+#groovy_template #sp_menu_top .menu_list li.selected i
+{
 
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		color : #5b9dd9;
+}
+#groovy_template .well {
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 }
 #groovy_template .schema-form-tabarray .ng-scope
 {
@@ -132,11 +157,4 @@
 	padding: 0 15px;
 	border-left: 1px solid #ccc;
 	margin-left: -15px;
-}
-.masonry-brick {
-   width:25%;/*or others percents*/
-
-   /*following properties, fix problem*/
-   margin-left:-1px;
-   transform:translateX(1px);
 }

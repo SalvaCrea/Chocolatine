@@ -116,13 +116,22 @@ class sp_module
 			$args_default = array(
 				'icon' => '',
 				'name' => '',
-				'slug' => ''
+				'slug' => '',
+				'url' => '',
 			);
 
 			$args = array_merge( $args_default, $args);
 
 			if ( empty( $args['slug'] ) )
 					$args['slug'] = sp_clean_string( $args['name'] );
+
+			if ( empty( $args['url'] ) ):
+
+				$args['url'] = $this->core->url;
+				$args['url'] .= "&module={$this->slug}";
+				$args['url'] .= "&sub_module={$args['slug']}";
+
+			endif;
 
 			$this->sub_module []= $args;
 

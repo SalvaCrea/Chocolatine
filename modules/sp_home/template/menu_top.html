@@ -1,0 +1,23 @@
+
+<div id="sp_menu_top">
+
+<ul class='menu_list'>
+
+	{% for menu_item in menu_list %}
+
+			<li class="
+			{% if menu_item.selected == true %}
+	    selected
+			{% endif %}
+			">
+				<a href="{{menu_item.url|raw}}">
+					<i class='fa {{menu_item.icon|raw}}' aria-hidden="true"></i>
+					{{menu_item.name|raw}}
+				</a>
+			</li>
+
+	{% endfor %}
+
+</ul>
+
+</div>

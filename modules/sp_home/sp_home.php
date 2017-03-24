@@ -28,16 +28,30 @@ class sp_home extends sp_module
     }
     public function view_back_sp()
     {
+			$view = new sp_template();
+
+			$args = array();
 
 			// get the current module
 			$current_module = $this->core->current_module;
 
 			$this->generate_menu_left();
 
-			if ( !empty( $current_module->sub_module ) )
-					$this->generate_menu_top();
+			if ( !empty( $current_module->sub_module ) ){
+						$this->generate_menu_top();
 
-			$view = new sp_template();
+						$args['top_content'] = array(
+							'content' => [array(
+								'id' => 'top_admin_salva_powa',
+								'url' => $this->twig_render(
+									'menu_top.html',
+									array( 'menu_list' => $this->menu_top)
+								),
+								'method' =>'echo'
+							)]
+						);
+
+			}
 
 			$args['header'] = [
 				'main_title' => 'Salva Powa',
@@ -82,11 +96,18 @@ class sp_home extends sp_module
 		function generate_menu_top()
 		{
 
-			$menu_left['menu_list'] =  $this->core->module_manager->list_modules;
-			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
-			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
+				$current_module = $this->core->current_module;
 
-			$this->menu_left = $menu_left;
+				foreach ( $current_module->sub_module as $key => $value) {
+
+					$args = $value;
+
+					if( $this->core->current_sub_module == $value['slug'] )
+								$args['selected'] = true;
+
+					$this->menu_top []= $args;
+				}
+
 		}
 
 }
