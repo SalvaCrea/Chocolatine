@@ -44,6 +44,11 @@ class sp_core
 			 */
 			var $slug = 'salva_powa';
 			/**
+			 * The url of extension in the wp-admin
+			 * @var string
+			 */
+			var $url;
+			/**
 			 * Contain the class module manager and list all modules
 			 * @var object class
 			 */
@@ -62,6 +67,7 @@ class sp_core
 
 				$this->uri_folder = dirname( dirname(__FILE__) );
 				$this->url_folder = plugins_url( 'salva-powa-wordpress' );
+				$this->url =  "/wp-admin/admin.php?page={$this->slug}";
 
 				$this->config = json_decode ( get_option( $this->slug ), 1 );
 
@@ -95,7 +101,7 @@ class sp_core
 			 * Find the current module by the url
 			 * @return [string] return the current module
 			 */
-			public function find_current_module()
+			public function get_current_module()
 			{
 
 				if ( isset( $_GET['module'] ) && !empty( $_GET['module'] ) )
@@ -134,10 +140,10 @@ class sp_core
 							 $this->sp_ressource();
 
 					 // find the current module
- 					 $this->find_current_module();
+ 					 $this->get_current_module();
 
 					 // find current url
-					 $this->find_current_url();
+					 $this->get_current_url();
 
 					 // add a menu compatible Wordpress
 					 add_menu_page(
@@ -165,10 +171,10 @@ class sp_core
 			 * General a url for the wp-admin
 			 * @return string
 			 */
-			public function find_current_url()
+			public function get_current_url()
 			{
 
-					$url = "/wp-admin/admin.php?page={$this->slug}";
+					$url = $this->url;
 
 					if ( !empty( $this->current_module->slug ))
 						$url .= "&module={$this->current_module->slug}";

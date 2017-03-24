@@ -4,6 +4,17 @@ use \salva_powa\sp_module;
 
 class sp_home extends sp_module
 {
+		/**
+		 * The content of menu left
+		 * @var array
+		 */
+		var $menu_left = array();
+
+		/**
+		 * The content of menu top
+		 * @var array
+		 */
+		var $menu_top = array();
 
     function __construct()
     {
@@ -15,29 +26,29 @@ class sp_home extends sp_module
 				$this->menu_position = 0;
 
     }
-    function view_back_sp()
+    public function view_back_sp()
     {
-			global $sp_core;
-
-			$menu_left['menu_list'] =  $sp_core->module_manager->list_modules;
-			$menu_left['menu_list'][ $sp_core->current_module->slug ]->selected = true;
-			$menu_left['logo_url'] =  $sp_core->url_folder . '/assets/img/logo-salva-powa.png';
 
 			// get the current module
-			$current_module = $sp_core->current_module;
+			$current_module = $this->core->current_module;
+
+			$this->generate_menu_left();
+
+			if ( !empty( $current_module->sub_module ) )
+					$this->generate_menu_top();
 
 			$view = new sp_template();
 
 			$args['header'] = [
 				'main_title' => 'Salva Powa',
 				'second_title' => 'Module : ' . $current_module->name,
-				'img_backgroung' => $sp_core->url_folder . '/assets/img/header.jpg'
+				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg'
 			];
 
 			$args['menu_left'] = array(
 				'content' => [array(
 					'id' => 'col_right',
-					'url' => $this->twig_render( 'menu_left.html', $menu_left),
+					'url' => $this->twig_render( 'menu_left.html', $this->menu_left),
 					'method' =>'echo'
 				)]
 			);
@@ -55,18 +66,27 @@ class sp_home extends sp_module
 
 			$view->generate();
 
-			wp_enqueue_script( 'sp_home_js', $sp_core->url_folder . '/modules/sp_home/js/sp_home.js' );
-			wp_enqueue_style( 'sp_home_css', $sp_core->url_folder . '/modules/sp_home/css/sp_home.css' );
+			wp_enqueue_script( 'sp_home_js', $this->core->url_folder . '/modules/sp_home/js/sp_home.js' );
+			wp_enqueue_style( 'sp_home_css', $this->core->url_folder . '/modules/sp_home/css/sp_home.css' );
 
     }
-		function view_back()
+		function generate_menu_left()
 		{
-			global $sp_core;
 
-			wp_enqueue_script( 'massonnery', 'https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js');
+			$menu_left['menu_list'] =  $this->core->module_manager->list_modules;
+			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
+			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
 
-			return $this->twig_render( 'home.html', array(
-				'list_modules' => $sp_core->module_manager->list_modules
-			));
+			$this->menu_left = $menu_left;
 		}
+		function generate_menu_top()
+		{
+
+			$menu_left['menu_list'] =  $this->core->module_manager->list_modules;
+			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
+			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
+
+			$this->menu_left = $menu_left;
+		}
+
 }

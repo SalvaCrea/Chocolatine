@@ -44,11 +44,6 @@ class sp_module
 	 * @var boolean
 	 */
 	var $show_in_menu = false;
-	/**
-	 * This variable contain of the object sp_core
-	 * @var object
-	 */
-	var $core;
 
 	/**
 	 * This array is use for declarate the sub module
@@ -125,6 +120,9 @@ class sp_module
 			);
 
 			$args = array_merge( $args_default, $args);
+
+			if ( empty( $args['slug'] ) )
+					$args['slug'] = sp_clean_string( $args['name'] );
 
 			$this->sub_module []= $args;
 

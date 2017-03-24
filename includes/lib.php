@@ -5,20 +5,20 @@
  * @param  accpet array, string, int, ....
  * @param  boolean $ajax  if ajax is true also return in the console js
  */
-function sp_dump( $array=false, $ajax=false ) {
+function sp_dump( $var=false, $ajax=false ) {
 
-    if ($array===false) { return false; }
-    if (!$ajax) {
-    echo '<pre>'.print_r($array, true).'</pre>';
-    }
-    if ($ajax) {
-        $a = json_encode($array);
-        echo "
-            <script>
-            console.log(".$a.");
-            </script>
-        ";
-    }
+	$debug = debug_backtrace();
+	echo '<p>&nbsp;</p><p><a href="#" onclick="$(this).parent().next(\'ol\').slideToggle(); return false;"><strong>' . $debug[0]['file'] . ' </strong> l.' . $debug[0]['line'] . '</a></p>';
+	echo '<ol style="display:none;">';
+	foreach ($debug as $k => $v) {
+		if ($k > 0) {
+			echo '<li><strong>' . $v['file'] . '</strong> l.' . $v['line'] . '</li>';
+		}
+	}
+	echo '</ol>';
+	echo '<pre>';
+	print_r($var);
+	echo '<pre>';
 
 }
 
