@@ -15,7 +15,7 @@
 }
 #wpwrap
 {
-	background: #E2E8F7;
+	background: #f5f5f5;
 }
 #adminmenumain
 {
@@ -88,7 +88,7 @@
 }
 #groovy_template #headerpage .titles_header h2 {
 			font-size: 17px;
-	    margin-top: 10px;
+	    margin-top: 33px;
 }
 #groovy_template #sp_menu_left {
 
@@ -132,6 +132,7 @@
 }
 #groovy_template .well {
 	box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+	background: white;
 }
 #groovy_template .schema-form-tabarray .ng-scope
 {

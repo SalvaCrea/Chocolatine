@@ -64,6 +64,9 @@ class sp_module
 		if ( $name == 'core' )
 			 return $this->find_core();
 
+		if ( $name == 'db' )
+	 			return $this->find_core()->data;
+
 	}
 	/**
 	 * Use the framework twig like template motor

@@ -54,7 +54,6 @@ class sp_home extends sp_module
 			}
 
 			$args['header'] = [
-				'main_title' => 'Salva Powa',
 				'second_title' => 'Module : ' . $current_module->name,
 				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg'
 			];
@@ -100,6 +99,12 @@ class sp_home extends sp_module
 			$menu_left['menu_list'] =  $this->core->modules->list_modules;
 			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
+
+			// trie by order $menu_position
+			$menu = array();
+			foreach ( $menu_left['menu_list'] as $key => $value) {
+				# code...
+			}
 
 			$this->menu_left = $menu_left;
 		}

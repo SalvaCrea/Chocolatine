@@ -12,6 +12,7 @@ class sp_module_manager extends sp_module
 				$this->name = 'Managing Module';
 				$this->description = "The view for managing module";
 
+
     }
     function view_back()
     {

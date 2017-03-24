@@ -13,7 +13,8 @@ class sp_custom_post_manager extends sp_module
 				$this->description = "For create and manage custom post";
 				add_action( 'init', array( $this, 'generate_custom_post' ), 0 );
 
-				$this->show_in_menu = true;
+
+				// $this->show_in_menu = true;
     }
     function view_back()
     {

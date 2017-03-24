@@ -93,6 +93,7 @@ class sp_core
 			public function run()
 			{
 
+				$this->ajax = new sp_ajax();
 				$this->modules = new sp_module_manager();
 				$this->modules->search_modules();
 
