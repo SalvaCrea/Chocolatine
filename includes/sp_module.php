@@ -81,6 +81,10 @@ class sp_module
 	 			return $this->find_core()->data;
 
 	}
+	/**
+	 * Function return the web url of the module
+	 * @return String
+	 */
 	function get_url()
 	{
 
@@ -98,6 +102,10 @@ class sp_module
 
 			return $this->url_folder;
 	}
+	/**
+	 * Function return the root folder of the module
+	 * @return String
+	 */
 	function get_uri()
 	{
 			if ( empty( $this->uri_folder ) ) {
@@ -202,7 +210,7 @@ class sp_module
 			$args_default = 	array(
 					'name' => '',
 					'call_back' => '',
-					'action' => ''
+					'action_module' => ''
 			);
 
 			$args = array_merge( $args_default, $args);

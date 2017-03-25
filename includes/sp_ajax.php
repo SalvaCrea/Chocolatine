@@ -19,9 +19,14 @@ class sp_ajax
 		);
 		/**
 		 * An array than contain the callback by ajax
-		 * @var ajax
+		 * @var ajax_actions
 		 */
-		var $ajax_listen = array();
+		var $ajax_actions = array();
+		/**
+		 * The current action selected
+		 * @var ajax_actions
+		 */
+		var $ajax_current_actions = array();
 
 		function __construct()
     {
@@ -56,27 +61,85 @@ class sp_ajax
 
 			 $args = array_merge( $args_default, $args );
 
-			 $this->ajax_listen []= $args;
+			 $this->ajax_actions []= $args;
 
-		}
-		function view_back()
-		{
-			return 'un jour j\'aurais une vue';
 		}
     function controller()
     {
+			$this->args = $_POST;
 
-			wp_die();
+			// test if the requet javascript is good
+			if ( !empty( $this->args['action_module'] )
+					 && !empty( $this->args['module'] )
+			) {
+					$find_module = false;
+					foreach ($this->ajax_actions as $key => $ajax_action) {
+
+							if ( $this->args['module'] == $ajax_action['module']
+						 				&& $this->args['action_module'] == $ajax_action['action_module'] ) {
+
+											$find_module = true;
+											$this->execute_call_back( $ajax_action );
+
+							}
+					}
+					if ( !$find_module ) {
+							wp_die();
+					}
+
+			}
+			else{
+					wp_die();
+			}
 
     }
+		/**
+		 * Execute the call back by the ajax requete
+		 * @param  Arguement of requet
+		 */
+		function execute_call_back( $ajax_current_actions )
+		{
+					global $sp_core;
 
-    // fonction pour dire que avec le ajax on est copain et que c'est bien retourné
-    function valid_return()
-    {
-        $this->return_r['do'] = true;
-    }
+					$this->ajax_current_actions = $ajax_current_actions;
 
+					if ( !$this->security_role() )
+										return false;
 
+					// get the module
+					$module = $sp_core->get_module( $ajax_current_actions['module'] );
+
+					// execute  the callback
+					$reponse = call_user_func(
+						array(
+							$module ,
+							$ajax_current_actions['call_back']
+						),
+						$this->args
+					);
+
+					echo json_encode( $reponse  );
+
+					$this->ajax_current_actions = array();
+
+					wp_die();
+		}
+		function security_role()
+		{
+					global $current_user;
+
+					if ( in_array ( $this->ajax_current_actions['role'][0], (array) $current_user->roles)) {
+
+					    return true;
+
+					}
+					else
+					{
+
+							wp_die();
+
+					}
+		}
 
 }
 

@@ -15,6 +15,11 @@ class sp_home extends sp_module
 		 * @var array
 		 */
 		var $menu_top = array();
+		/**
+		 * This should javascript variable
+		 * @var array
+		 */
+		var $convert_in_js = array();
 
     function __construct()
     {
@@ -34,7 +39,14 @@ class sp_home extends sp_module
 
 			// get the current module
 			$current_module = $this->core->current_module;
+			$this->convert_in_js['current_module'] = $current_module->slug;
 
+			echo "
+				<div class='uil-ring-css' id='animation_loader'>
+					<div>
+					</div>
+				</div>
+			";
 			$this->generate_menu_left();
 
 			if ( !empty( $current_module->module_action ) ){
@@ -50,8 +62,10 @@ class sp_home extends sp_module
 								'method' =>'echo'
 							)]
 						);
-
+						$this->convert_in_js['module_action'] = $this->core->module_action;
 			}
+
+			$this->generate_javascript_var();
 
 			$args['header'] = [
 				'second_title' => 'Module : ' . $current_module->name,
@@ -83,6 +97,10 @@ class sp_home extends sp_module
 			wp_enqueue_style( 'sp_home_css', $this->core->url_folder . '/modules/sp_home/css/sp_home.css' );
 
     }
+		function generate_javascript_var()
+		{
+				echo $this->twig_render( 'convert_in_js.html', array( 'convert_in_js' => $this->convert_in_js ) ) ;
+		}
 		function view_back()
 		{
 			global $sp_core;
@@ -100,12 +118,6 @@ class sp_home extends sp_module
 			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
 
-			// trie by order $menu_position
-			$menu = array();
-			foreach ( $menu_left['menu_list'] as $key => $value) {
-				# code...
-			}
-
 			$this->menu_left = $menu_left;
 		}
 		function generate_menu_top()
@@ -117,7 +129,7 @@ class sp_home extends sp_module
 
 					$args = $value;
 
-					if( $this->core->current_module_action == $value['slug'] )
+					if( $this->core->module_action == $value['slug'] )
 								$args['selected'] = true;
 
 					$this->menu_top []= $args;

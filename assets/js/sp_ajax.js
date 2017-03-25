@@ -1,11 +1,11 @@
-var ajax_controller  =
+var sp_ajax  =
 {
     // url du controller php
     ajax_url : ajaxurl,
     // les arguments du controller
     args : new Object(),
     // nom de l'action pour wordpress
-    wp_action : 'ajax_controller',
+    wp_action : 'sp_ajax_controller',
     // action pour le controller php
     module : '',
 		// action pour le controller php
@@ -16,6 +16,8 @@ var ajax_controller  =
     send : function()
     {
       func = this;
+
+			sp_load_animation.show();
 
       $.ajax({
   	       url : ajaxurl,
@@ -30,21 +32,24 @@ var ajax_controller  =
 					 },
   	       success : function(msg)
   	       {
-             	console.log('reussi');
   	          func.content_return = msg;
 
   	       },
   	       error : function(xhr, ajaxOptions, thrownError)
   	       {
-              console.log('error denvoie');
+              console.log('error');
               console.log(xhr);
               func.content_return = xhr;
   	       }
   	    });
-
+				sp_load_animation.hide();
         return func.content_return;
 
-    }
+    },
+		new : function()
+		{
+			return Object.assign({}, this);
+		}
 
 
 }

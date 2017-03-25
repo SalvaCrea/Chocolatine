@@ -99,6 +99,7 @@ class sp_core
 						$this->ajax->add_ressource();
 
 				$this->modules = new sp_module_manager();
+
 				$this->modules->search_modules();
 
 			}
@@ -240,6 +241,16 @@ class sp_core
 					'sp_styleCss',
 					 $this->url_folder . '/assets/css/style.css'
 				 );
+
+				 wp_enqueue_style(
+ 					'ring_animation_css',
+ 					 $this->url_folder . '/assets/css/ring_animation.css'
+ 				 );
+
+				 wp_enqueue_script(
+				 	'ring_animation_js',
+				 	 $this->url_folder . '/assets/js/sp_animation.js'
+				  );
 
 		    wp_enqueue_style(
 					'sp_boostrapCss',
