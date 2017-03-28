@@ -51,6 +51,11 @@ class sp_module
 	 */
 	var $module_action = array();
 	/**
+	 * This array for the current action
+	 * @var array
+	 */
+	var $current_module_action;
+	/**
 	 *  this is the root folder
 	 * @var string
 	 */
@@ -78,7 +83,7 @@ class sp_module
 			 return $this->find_core();
 
 		if ( $name == 'db' )
-	 			return $this->find_core()->data;
+	 			return $this->find_core()->db;
 
 	}
 	/**
@@ -171,6 +176,7 @@ class sp_module
 				'name' => '',
 				'slug' => '',
 				'url' => '',
+				'call_back' => '',
 			);
 
 			// add _ first elem hom

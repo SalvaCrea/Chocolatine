@@ -33,23 +33,25 @@ class sp_home extends sp_module
     }
     public function view_back_sp()
     {
+
+
+			$this->generate_view_loader();
+
 			$view = new sp_template();
 
 			$args = array();
 
 			// get the current module
 			$current_module = $this->core->current_module;
+
 			$this->convert_in_js['current_module'] = $current_module->slug;
 
-			echo "
-				<div class='uil-ring-css' id='animation_loader'>
-					<div>
-					</div>
-				</div>
-			";
 			$this->generate_menu_left();
 
+			$this->generate_javascript_var();
+
 			if ( !empty( $current_module->module_action ) ){
+
 						$this->generate_menu_top();
 
 						$args['top_content'] = array(
@@ -65,8 +67,6 @@ class sp_home extends sp_module
 						$this->convert_in_js['module_action'] = $this->core->module_action;
 			}
 
-			$this->generate_javascript_var();
-
 			$args['header'] = [
 				'second_title' => 'Module : ' . $current_module->name,
 				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg'
@@ -80,6 +80,23 @@ class sp_home extends sp_module
 				)]
 			);
 
+			if ( isset( $current_module->current_module_action['call_back'] ) ) {
+
+				$call_back = $current_module->current_module_action['call_back'];
+
+				$args['content'] = array(
+					'container' => 'fluid-container',
+					'main_content' => [array(
+						'id' => 'content_home',
+						'url' => $current_module->$call_back(),
+						'method' =>'echo',
+					)]
+				);
+
+			}
+			else
+			{
+
 			$args['content'] = array(
 				'container' => 'fluid-container',
 				'main_content' => [array(
@@ -88,6 +105,8 @@ class sp_home extends sp_module
 					'method' =>'echo',
 				)]
 			);
+
+			}
 
 			$view->args = $args;
 
@@ -135,6 +154,15 @@ class sp_home extends sp_module
 					$this->menu_top []= $args;
 				}
 
+		}
+		public function generate_view_loader()
+		{
+			echo "
+				<div class='uil-ring-css' id='animation_loader'>
+					<div>
+					</div>
+				</div>
+			";
 		}
 
 }

@@ -57,7 +57,7 @@ class sp_core
 			 * The medoo Class for manipule data base
 			 * @var object class
 			 */
-			var $data;
+			var $db;
 			/**
 			 * __construct first action
 			 */
@@ -74,7 +74,7 @@ class sp_core
 				add_action('admin_menu', array( $this, 'wp_admin_do' ));
 
 				// create un object medoo for manipule data base
-				$this->data = new Medoo(
+				$this->db = new Medoo(
 						array(
 							'database_type' => 'mysql',
 							'database_name' => $wpdb->dbname,
@@ -109,6 +109,7 @@ class sp_core
 			 */
 			public function get_current_module()
 			{
+				$current_module_action = false;
 
 				if ( isset( $_GET['module'] ) && !empty( $_GET['module'] ) )
 				{
@@ -120,7 +121,14 @@ class sp_core
 				}
 
 				if ( isset( $_GET['module_action'] ) && !empty( $_GET['module_action'] ) ) {
+
 						$this->module_action = $_GET['module_action'];
+						$current_module_action = array_find( $this->current_module->module_action, 'slug', $this->module_action );
+
+						if ( $current_module_action != false ) {
+								$this->current_module->current_module_action = $this->current_module->module_action[$current_module_action];
+						}
+
 				}
 
 
@@ -153,8 +161,8 @@ class sp_core
 
 					 // add a menu compatible Wordpress
 					 add_menu_page(
-						 'Salva Powa',
-						 'Salva Powa',
+						 'SP Framework',
+						 'SP Framework',
 						 'administrator',
 						 $this->slug,
 						 array( $this,'create_view' ),

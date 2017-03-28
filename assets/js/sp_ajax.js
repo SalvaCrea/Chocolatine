@@ -15,9 +15,9 @@ var sp_ajax  =
 
     send : function()
     {
-      func = this;
-
 			sp_load_animation.show();
+
+      func = this;
 
       $.ajax({
   	       url : ajaxurl,
@@ -39,10 +39,13 @@ var sp_ajax  =
   	       {
               console.log('error');
               console.log(xhr);
+			
               func.content_return = xhr;
   	       }
   	    });
+
 				sp_load_animation.hide();
+
         return func.content_return;
 
     },

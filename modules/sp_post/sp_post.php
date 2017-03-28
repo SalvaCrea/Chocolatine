@@ -10,10 +10,10 @@ class sp_post extends sp_module
 		 */
 		var $id_post = null;
 		/**
-		 * The type post
-		 * @var string
+		 * The types post for the query
+		 * @var array
 		 */
-		var $type_post = '';
+		var $post_type = array();
 		/**
 		 *  The default Table For search
 		 * @var array
@@ -77,17 +77,39 @@ class sp_post extends sp_module
 		}
 		function type( $type = '' )
 		{
-				if ( $type != '') {
-						$this->type_post = $type;
-						$this->where['AND'][ 'type_demande' ] []= $type;
+				if ( !empty( $type ) ) {
+
+						if ( is_string( $type ) ) {
+
+							$this->post_type []= $type;
+
+						}
+						else if( is_array( $type ) ){
+								$this->post_type += $type;
+						}
+
+						$this->where['AND'][ 'type_demande' ] = $this->post_type;
 				}
 
+				return $this;
+		}
+		/**
+		 * The offset for the query
+		 * @param int $offset the numbe of the offet
+		 */
+		function offset( $offset )
+		{
+				if ( !empty( $offset ) ) {
+
+								$this->offset = $offset;
+
+				}
 				return $this;
 		}
 		function find()
 		{
 
-			$sp_core = sp_core();
+			$sp_core = sp_core( $this->where['AND'][ 'type_demande' ] );
 
 			$this->where['LIMIT'] =  [
 
@@ -96,9 +118,9 @@ class sp_post extends sp_module
 
 			];
 
-			$this->where['ORDER'] = array( 'id_demande' => "DESC" );
+				$this->where['ORDER'] = array( 'id_demande' => "DESC" );
 
-				$this->results = $sp_core->data->select(
+				$this->results = $sp_core->db->select(
 
 				$this->default_table[ 'post' ],
 
@@ -120,7 +142,7 @@ class sp_post extends sp_module
 
 			foreach ( $this->results as $key => $result) {
 
-					$metas =	 $sp_core->data->select(
+					$metas =	 $sp_core->db->select(
 
 									$this->default_table[ 'meta' ],
 
@@ -143,7 +165,7 @@ class sp_post extends sp_module
 
 			foreach ( $metas as $key => $meta ) {
 
-					// convert in array of the data is multi
+					// convert in array of the db is multi
 					if ( isset( $clean_meta[ $meta['meta_key'] ] ) ):
 
 							if ( is_array( $clean_meta[ $meta['meta_key'] ] ) ):

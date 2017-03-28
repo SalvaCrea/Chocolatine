@@ -4,13 +4,13 @@
 
 {% for module in list_modules %}
 
-	{% if module.show_in_menu  %}
+	{% if module.show_in_menu and module.slug != 'home'  %}
 
 	<div class="col-md-12">
 		<div class="well">
 
 
-			<a href="?page={{module.slug|raw}}">
+			<a href="?page=salva_powa&module={{module.slug|raw}}">
 				<i class='fa {{module.icon|raw}}' aria-hidden="true"></i>
 				{{module.name|raw}}
 			</a>

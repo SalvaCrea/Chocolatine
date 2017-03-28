@@ -8,7 +8,13 @@
 #groovy_template p,
 #groovy_template label,
 #groovy_template .help-block,
-#groovy_template .menu_list li a
+#groovy_template .menu_list li a,
+.dataTables_wrapper .dataTables_info
+{
+	font-family: roboto;
+	color : rgb(141,141,141);
+}
+body
 {
 	font-family: roboto;
 	color : rgb(141,141,141);
@@ -158,4 +164,58 @@
 	padding: 0 15px;
 	border-left: 1px solid #ccc;
 	margin-left: -15px;
+}
+
+.dataTables_wrapper  .dt-button
+{
+	padding: 8px 15px;
+	margin: 15px;
+	border-radius : 3px;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+}
+.dataTables_wrapper  .dt-button span
+{
+	color : white !important;
+}
+.dataTables_wrapper
+{
+	padding-top: 15px;
+}
+table.dataTable thead,
+table.dataTable tbody,
+table.dataTable thead tr th
+{
+	border-color : rgb(228,228,228);
+}
+table.dataTable .row-border tbody tr:last-child td,
+table.dataTable .row-border thead
+ {
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
+table.dataTable.no-footer {
+    border-bottom: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: #FFF;
+    border: 1px solid rgba(0,0,0,.12);
+    padding: 9px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0 2px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+	background-color: #5bc0de;
+	background: #5bc0de;
+	border-color: #46b8da;
+	color : white !important;
+}
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate
+{
+	margin-top: 20px;
 }

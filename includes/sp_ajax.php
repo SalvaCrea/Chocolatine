@@ -115,7 +115,7 @@ class sp_ajax
 							$module ,
 							$ajax_current_actions['call_back']
 						),
-						$this->args
+						$this->args['args']
 					);
 
 					echo json_encode( $reponse  );

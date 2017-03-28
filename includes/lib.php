@@ -84,3 +84,64 @@ function sp_clean_string( $string ) {
 
      return $result;
  }
+
+/**
+	* This function find in array a key if exist
+ * @param  [type] $array          The subject of reseach
+ * @param  [type] $key_research   the key of research
+ * @param  [type] $value_research the value of research
+ * @return mixed ( int|false )                int with the good key number or boolean false if if key not find
+ */
+ function array_find( $array, $key_research, $value_research )
+ {
+	 	foreach ( $array as $key => $current_value ) {
+		 		if ( isset( $current_value[$key_research] ) && $current_value[$key_research] == $value_research ) {
+		 				return $key;
+		 		}
+	 	}
+		return false;
+ }
+
+ function add_ressource_export_js()
+ {
+	 wp_enqueue_script(
+		 'data_table_button',
+		 'https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js'
+		);
+
+		wp_enqueue_script(
+			 'buttons.flash',
+			 '//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js'
+			);
+
+		wp_enqueue_script(
+			 'jszip',
+			 '//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js'
+			);
+
+		wp_enqueue_script(
+			 'pdfmake',
+			 '//cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js'
+			);
+
+		wp_enqueue_script(
+			 'vfs_fonts',
+			 '//cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js'
+			);
+
+		wp_enqueue_script(
+			 'buttons.html5.min',
+			 '//cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js'
+			);
+
+		wp_enqueue_script(
+			 'buttons.print.min',
+			 '//cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js'
+			);
+ }
+
+ function is_tripco_dev()
+ {
+   if ($_SERVER['HTTP_HOST'] == 'dev.tripconnexion.com' ||$_SERVER['HTTP_HOST'] == 'www.dev.tripconnexion.com' ) { return true; }
+   else{ return false; }
+ }

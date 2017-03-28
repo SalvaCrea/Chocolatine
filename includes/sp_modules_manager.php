@@ -24,12 +24,16 @@ class sp_module_manager
 
 						$list_folder = $this->create_root_folder( $sp_core->uri_folder.'/modules' );
 
-						if ( file_exists ( get_template_directory() . '/sp_modules' ) ) {
-							 $list_folder = array_merge(
-								 $list_folder,
-								 $this->create_root_folder( get_template_directory() . '/sp_modules' )
-							 );
-						}
+
+
+							if ( file_exists ( get_template_directory() . '/sp_modules' ) ) {
+								 $list_folder = array_merge(
+									 $list_folder,
+									 $this->create_root_folder( get_template_directory() . '/sp_modules' )
+								 );
+							}
+
+
 
 						foreach ( $list_folder as $key => $folder_root ) {
 
@@ -61,6 +65,7 @@ class sp_module_manager
 			 */
 			private function create_root_folder( $root_dir )
 			{
+
 					$array_root = [];
 
 					$array_root = scandir( $root_dir );
