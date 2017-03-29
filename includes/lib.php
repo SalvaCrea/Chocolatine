@@ -22,21 +22,6 @@ function sp_dump( $var=false, $ajax=false ) {
 
 }
 
-/**
- * add ressource for sp_powa in the back
- */
-function sp_ressource()
-{
-
-    // delete Jquery ressource of Wordpress
-    wp_deregister_script( 'jquery' );
-    // personnal style sheet
-    wp_enqueue_style( 'styleCss',$sp['url'] . '/css/style.css' );
-
-    wp_enqueue_style( 'boostrapCss',$sp['url'] . '/bower_components/bootstrap/dist/css/bootstrap.css' );
-    wp_enqueue_script( 'boostrapJs',$sp['url'] . '/bower_components/bootstrap/dist/js/bootstrap.js' );
-
-}
 
 /**
  * Clean chain of string

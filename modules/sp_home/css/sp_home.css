@@ -9,7 +9,8 @@
 #groovy_template label,
 #groovy_template .help-block,
 #groovy_template .menu_list li a,
-.dataTables_wrapper .dataTables_info
+#groovy_template .menu_list li ,
+#groovy_template .dataTables_wrapper .dataTables_info
 {
 	font-family: roboto;
 	color : rgb(141,141,141);
@@ -165,7 +166,15 @@ body
 	border-left: 1px solid #ccc;
 	margin-left: -15px;
 }
-
+#groovy_template #sp_return_wordpress
+{
+	color : white;
+	position: absolute;
+	right : 10px;
+	top : 10px;
+	opacity: 0.5;
+	font-size: 10px;
+}
 .dataTables_wrapper  .dt-button
 {
 	padding: 8px 15px;

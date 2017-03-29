@@ -25,7 +25,7 @@ class sp_home extends sp_module
     {
 
         $this->icon = 'fa-home';
-				$this->name = 'Home';
+				$this->name = 'sp_Home';
 				$this->description = "the home for the back of the salva_back";
 				$this->show_in_menu = true;
 				$this->menu_position = 0;
@@ -69,7 +69,8 @@ class sp_home extends sp_module
 
 			$args['header'] = [
 				'second_title' => 'Module : ' . $current_module->name,
-				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg'
+				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg',
+				'before' => '<a id="sp_return_wordpress" href="/wp-admin">  Retourner sur Wordpress <i class="fa fa-home"></i></a>'
 			];
 
 			$args['menu_left'] = array(
@@ -124,11 +125,10 @@ class sp_home extends sp_module
 		{
 			global $sp_core;
 
-			wp_enqueue_script( 'massonnery', 'https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js');
-
 			return $this->twig_render( 'home.html', array(
 				'list_modules' => $sp_core->modules->list_modules
 			));
+			
 		}
 		function generate_menu_left()
 		{
