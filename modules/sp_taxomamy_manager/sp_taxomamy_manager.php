@@ -2,6 +2,9 @@
 
 use \salva_powa\sp_module;
 
+/**
+ * @property bool slug
+ */
 class sp_taxomamy_manager extends sp_module
 {
 
@@ -14,7 +17,8 @@ class sp_taxomamy_manager extends sp_module
 
 				add_action( 'init', array( $this, 'generate_tax' ), 0 );
 
-				// $this->show_in_menu = true;
+				$this->show_in_menu = true;
+
 
     }
     function view_back()

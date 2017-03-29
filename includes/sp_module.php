@@ -69,10 +69,7 @@ class sp_module
 	 * This function is a fake constructor, in a php automatic father constructor automatically is not exist
 	 * @return boolean
 	 */
-	function parent_construct()
-	{
 
-	}
 	function __get( $name )
 	{
 

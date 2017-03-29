@@ -108,7 +108,7 @@ class sp_ajax
 
 					// get the module
 					$module = $sp_core->get_module( $ajax_current_actions['module'] );
-
+					
 					// execute  the callback
 					$reponse = call_user_func(
 						array(

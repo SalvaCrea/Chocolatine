@@ -25,7 +25,7 @@ class sp_home extends sp_module
     {
 
         $this->icon = 'fa-home';
-				$this->name = 'sp_Home';
+				$this->name = 'Home';
 				$this->description = "the home for the back of the salva_back";
 				$this->show_in_menu = true;
 				$this->menu_position = 0;
@@ -80,11 +80,11 @@ class sp_home extends sp_module
 					'method' =>'echo'
 				)]
 			);
-
+            global  sdfsdf
 			if ( isset( $current_module->current_module_action['call_back'] ) ) {
 
-				$call_back = $current_module->current_module_action['call_back'];
-
+				$call_back = $current_modulesq-sq>current_module_action['call_back'];
+,gn,
 				$args['content'] = array(
 					'container' => 'fluid-container',
 					'main_content' => [array(
@@ -128,7 +128,7 @@ class sp_home extends sp_module
 			return $this->twig_render( 'home.html', array(
 				'list_modules' => $sp_core->modules->list_modules
 			));
-			
+
 		}
 		function generate_menu_left()
 		{
@@ -136,6 +136,7 @@ class sp_home extends sp_module
 			$menu_left['menu_list'] =  $this->core->modules->list_modules;
 			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
+		  $menu_left['site_name'] = get_bloginfo( 'name' );
 
 			$this->menu_left = $menu_left;
 		}

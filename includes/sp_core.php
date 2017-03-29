@@ -109,6 +109,7 @@ class sp_core
 			 */
 			public function get_current_module()
 			{
+
 				$current_module_action = false;
 
 				if ( isset( $_GET['module'] ) && !empty( $_GET['module'] ) )
