@@ -44,7 +44,8 @@ class sp_home extends sp_module
 			// get the current module
 			$current_module = $this->core->current_module;
 
-			$this->convert_in_js['current_module'] = $current_module->slug;
+			$this->convert_in_js['current_module'] = $current_module;
+			
 
 			$this->generate_menu_left();
 
@@ -69,8 +70,7 @@ class sp_home extends sp_module
 
 			$args['header'] = [
 				'second_title' => 'Module : ' . $current_module->name,
-				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg',
-				'before' => '<a id="sp_return_wordpress" href="/wp-admin">  Retourner sur Wordpress <i class="fa fa-home"></i></a>'
+				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg'
 			];
 
 			$args['menu_left'] = array(
@@ -80,11 +80,11 @@ class sp_home extends sp_module
 					'method' =>'echo'
 				)]
 			);
-            global  sdfsdf
+
 			if ( isset( $current_module->current_module_action['call_back'] ) ) {
 
-				$call_back = $current_modulesq-sq>current_module_action['call_back'];
-,gn,
+				$call_back = $current_module->current_module_action['call_back'];
+
 				$args['content'] = array(
 					'container' => 'fluid-container',
 					'main_content' => [array(
@@ -125,10 +125,11 @@ class sp_home extends sp_module
 		{
 			global $sp_core;
 
+			wp_enqueue_script( 'massonnery', 'https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js');
+
 			return $this->twig_render( 'home.html', array(
 				'list_modules' => $sp_core->modules->list_modules
 			));
-
 		}
 		function generate_menu_left()
 		{
@@ -136,7 +137,6 @@ class sp_home extends sp_module
 			$menu_left['menu_list'] =  $this->core->modules->list_modules;
 			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
-		  $menu_left['site_name'] = get_bloginfo( 'name' );
 
 			$this->menu_left = $menu_left;
 		}

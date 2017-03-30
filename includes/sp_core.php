@@ -212,12 +212,12 @@ class sp_core
 
 				wp_enqueue_script(
 					'Jquery',
-					$this->url_folder . '/bower_components/jquery/dist/jquery.min.js'
+					'//code.jquery.com/jquery-3.2.1.min.js'
 				);
 
 				wp_enqueue_script(
 					'Angular',
-					$this->url_folder . '/bower_components/angular/angular.min.js'
+					'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js'
 				);
 
 				// for the form
@@ -228,7 +228,7 @@ class sp_core
 
 				wp_enqueue_script(
 					'tv4',
-					 $this->url_folder . '/bower_components/tv4/tv4.js'
+					 'https://cdnjs.cloudflare.com/ajax/libs/tv4/1.3.0/tv4.min.js'
 				 );
 
 				wp_enqueue_script(
