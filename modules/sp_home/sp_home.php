@@ -45,7 +45,7 @@ class sp_home extends sp_module
 			$current_module = $this->core->current_module;
 
 			$this->convert_in_js['current_module'] = $current_module;
-			
+
 
 			$this->generate_menu_left();
 
@@ -137,6 +137,7 @@ class sp_home extends sp_module
 			$menu_left['menu_list'] =  $this->core->modules->list_modules;
 			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
+			$menu_left['site_name'] =  get_bloginfo( 'name');
 
 			$this->menu_left = $menu_left;
 		}
