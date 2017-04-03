@@ -63,7 +63,7 @@ class sp_core
 			 */
 			function __construct()
 			{
-				global $wpdb;
+
 
 				$this->uri_folder = dirname( dirname(__FILE__) );
 				$this->url_folder = plugins_url( 'salva-powa-wordpress' );
@@ -73,17 +73,27 @@ class sp_core
 
 				add_action('admin_menu', array( $this, 'wp_admin_do' ));
 
-				// create un object medoo for manipule data base
-				$this->db = new Medoo(
-						array(
-							'database_type' => 'mysql',
-							'database_name' => $wpdb->dbname,
-							'server' => $wpdb->dbhost,
-							'username' => $wpdb->dbuser,
-							'password' => $wpdb->dbpassword,
-							'charset' => $wpdb->charset
-					)
-			);
+				$this->init_medoo();
+
+			}
+			/**
+			 * Instance the class meedoo
+			 */
+			function init_medoo()
+			{
+					global $wpdb;
+
+					// create un object medoo for manipule data base
+					$this->db = new Medoo(
+							array(
+								'database_type' => 'mysql',
+								'database_name' => $wpdb->dbname,
+								'server' => $wpdb->dbhost,
+								'username' => $wpdb->dbuser,
+								'password' => $wpdb->dbpassword,
+								'charset' => $wpdb->charset
+						)
+				);
 
 			}
 
@@ -98,8 +108,9 @@ class sp_core
 				if ( $_GET['page'] == $this->slug )
 						$this->ajax->add_ressource();
 
-				$this->modules = new sp_module_manager();
+				$this->controller =  new sp_controller();
 
+				$this->modules = new sp_module_manager();
 				$this->modules->search_modules();
 
 			}

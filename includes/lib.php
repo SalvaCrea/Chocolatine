@@ -37,7 +37,6 @@ function sp_clean_string($string)
  function sp_core()
  {
      global $sp_core;
-
      return $sp_core;
  }
 
@@ -83,6 +82,9 @@ function sp_clean_string($string)
      return false;
  }
 
+/**
+ * All ressource js and Css for create a dynamic js table and button for export data
+ */
  function add_ressource_export_js()
  {
      wp_enqueue_script(
@@ -119,13 +121,4 @@ function sp_clean_string($string)
              'buttons.print.min',
              '//cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js'
             );
- }
-
- function is_tripco_dev()
- {
-     if ($_SERVER['HTTP_HOST'] == 'dev.tripconnexion.com' ||$_SERVER['HTTP_HOST'] == 'www.dev.tripconnexion.com') {
-         return true;
-     } else {
-         return false;
-     }
  }
