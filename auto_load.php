@@ -6,6 +6,8 @@ require_once(dirname(__FILE__).'/vendor/autoload.php');
 
 require_once(dirname(__FILE__).'/includes/sp_core.php');
 
+require_once(dirname(__FILE__).'/includes/sp_ressources.php');
+
 require_once(dirname(__FILE__).'/includes/sp_ajax.php');
 
 require_once(dirname(__FILE__).'/includes/sp_controller.php');

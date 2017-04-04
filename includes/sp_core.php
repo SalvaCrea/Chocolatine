@@ -64,6 +64,7 @@ class sp_core
 			function __construct()
 			{
 
+				$this->init_class();
 
 				$this->uri_folder = dirname( dirname(__FILE__) );
 				$this->url_folder = plugins_url( 'salva-powa-wordpress' );
@@ -73,7 +74,24 @@ class sp_core
 
 				add_action('admin_menu', array( $this, 'wp_admin_do' ));
 
+			}
+			/**
+			 * This function load all modules
+			 */
+			public function init_class()
+			{
+
 				$this->init_medoo();
+
+				$this->ajax = new sp_ajax();
+
+				if ( $_GET['page'] == $this->slug )
+						$this->ajax->add_ressource();
+
+				$this->controller =  new sp_controller();
+
+				$this->modules = new sp_module_manager();
+				$this->modules->search_modules();
 
 			}
 			/**
@@ -97,23 +115,6 @@ class sp_core
 
 			}
 
-			/**
-			 * This function load all modules
-			 */
-			public function run()
-			{
-
-				$this->ajax = new sp_ajax();
-
-				if ( $_GET['page'] == $this->slug )
-						$this->ajax->add_ressource();
-
-				$this->controller =  new sp_controller();
-
-				$this->modules = new sp_module_manager();
-				$this->modules->search_modules();
-
-			}
 			/**
 			 * Find the current module by the url
 			 * @return [string] return the current module
@@ -177,7 +178,7 @@ class sp_core
 						 'SP Framework',
 						 'administrator',
 						 $this->slug,
-						 array( $this,'create_view' ),
+						 array( $this,'create_back_view' ),
 						 'dashicons-hammer',
 						 10
 					 );
@@ -186,7 +187,7 @@ class sp_core
 			/**
 			 * Create view for the wp_admin
 			 */
-			public function create_view()
+			public function create_back_view()
 			{
 
 					 $view = new \sp_home();
@@ -218,91 +219,6 @@ class sp_core
 			 */
 			public function sp_ressource()
 			{
-
-		    wp_deregister_script( 'jquery' );
-
-				wp_enqueue_script(
-					'Jquery',
-					'//code.jquery.com/jquery-3.2.1.min.js'
-				);
-
-				wp_enqueue_script(
-					'Angular',
-					'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js'
-				);
-
-				// for the form
-				wp_enqueue_script(
-					'Angular-sanitize',
-					 $this->url_folder . '/bower_components/angular-sanitize/angular-sanitize.min.js'
-				 );
-
-				wp_enqueue_script(
-					'tv4',
-					 'https://cdnjs.cloudflare.com/ajax/libs/tv4/1.3.0/tv4.min.js'
-				 );
-
-				wp_enqueue_script(
-					'objectpath',
-					 $this->url_folder . '/bower_components/objectpath/lib/ObjectPath.js'
-				 );
-
-				wp_enqueue_script(
-					'schema-form',
-					 $this->url_folder . '/bower_components/angular-schema-form/dist/schema-form.min.js'
-				 );
-
-				wp_enqueue_script(
-					'bootstrap-decorator',
-					 $this->url_folder . '/bower_components/angular-schema-form/dist/bootstrap-decorator.min.js'
-				 );
-
-		    wp_enqueue_style(
-					'sp_styleCss',
-					 $this->url_folder . '/assets/css/style.css'
-				 );
-
-				 wp_enqueue_style(
- 					'ring_animation_css',
- 					 $this->url_folder . '/assets/css/ring_animation.css'
- 				 );
-
-				 wp_enqueue_script(
-				 	'ring_animation_js',
-				 	 $this->url_folder . '/assets/js/sp_animation.js'
-				  );
-
-		    wp_enqueue_style(
-					'sp_boostrapCss',
-					 $this->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.min.css'
-				 );
-
-		    wp_enqueue_script(
-					'sp_boostrapJs',
-					 $this->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js'
-				 );
-
-				 wp_enqueue_style(
- 					'sp_dataTable_Css',
- 					 '//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css'
- 				 );
-
- 		    wp_enqueue_script(
- 					'sp_dataTable_Js',
- 					 '//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'
- 				 );
-
-
-				wp_enqueue_style(
-					'font_awesome',
-					 $this->url_folder . '/bower_components/font-awesome/css/font-awesome.css'
-				 );
-				wp_enqueue_style(
-					'font_material_icon',
-					 '//fonts.googleapis.com/css?family=Roboto:300,400,500,700'
-				 );
-
-				wp_enqueue_style( 'font_roboto', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
 
 			}
