@@ -4,19 +4,10 @@ namespace salva_powa;
 
 class sp_ajax
 {
-    //  (string) l'action que doit effectuer le code
-    var $action = '';
-    //  (array) arguments envoyé en ajax
+    /**
+     * The argument in request ajax
+     */
     var $args = array();
-    // (array) id des pots selectionnés
-    var $id_posts = array();
-    // id users id des users selectionné
-    var $id_users = array();
-    // (array) le retour attendu par le, do permet de savoir si l'action à bien été faite
-    var $return_r = array(
-			'do'=>false,
-			'data' => array()
-		);
 		/**
 		 * An array than contain the callback by ajax
 		 * @var ajax_actions
@@ -27,26 +18,29 @@ class sp_ajax
 		 * @var ajax_actions
 		 */
 		var $ajax_current_actions = array();
-
+  /**
+   * [__construct description]
+   */
 		function __construct()
     {
-				global $sp_core;
-
-        $this->icon = 'fa-tasks';
-				$this->name = 'Ajax Controller';
-				$this->description = "The class for the awesome ajax";
 
 				add_action( 'wp_ajax_sp_ajax_controller', array( $this ,'controller') );
 				add_action('wp_ajax_nopriv_sp_ajax_controller', array( $this ,'controller') );
 
     }
+    function __get( $name )
+    {
+
+      if ( $name == 'core' )
+         return sp_core();
+
+    }
 		function add_ressource()
 		{
-				$sp_core = sp_core();
 
 				wp_enqueue_script(
 					'sp_ajax_controller',
-				$sp_core->url_folder . '/assets/js/sp_ajax.js'
+				$this->core->url_folder . '/assets/js/sp_ajax.js'
 				);
 
 		}
@@ -99,7 +93,6 @@ class sp_ajax
 		 */
 		function execute_call_back( $ajax_current_actions )
 		{
-					global $sp_core;
 
 					$this->ajax_current_actions = $ajax_current_actions;
 
@@ -107,8 +100,8 @@ class sp_ajax
 										return false;
 
 					// get the module
-					$module = $sp_core->get_module( $ajax_current_actions['module'] );
-					
+					$module = $this->core->modules->get_module( $ajax_current_actions['module'] );
+
 					// execute  the callback
 					$reponse = call_user_func(
 						array(

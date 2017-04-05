@@ -11,15 +11,13 @@
  */
 
 
-
-
 require_once( dirname(__FILE__).'/auto_load.php' );
 
 use \salva_powa\sp_core;
 
 if (  is_admin() ) {
 
-$sp_core = new sp_core();
-$sp_core->run();
+  $sp_core = new sp_core();
+  $sp_core->init();
 
 }

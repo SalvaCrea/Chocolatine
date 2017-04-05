@@ -194,7 +194,7 @@ class sp_module
 
 			if ( empty( $args['url'] ) ):
 
-				$args['url'] = $this->core->url;
+				$args['url'] = $this->core->controller->url;
 				$args['url'] .= "&module={$this->slug}";
 				$args['url'] .= "&module_action={$args['slug']}";
 

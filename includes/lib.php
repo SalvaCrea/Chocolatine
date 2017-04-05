@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * The dev function that print pretty result
  * @param  accpet array, string, int, ....
@@ -80,4 +82,18 @@ function sp_clean_string($string)
          }
      }
      return false;
+ }
+
+ /**
+  * Return true if the use admin of sp framework
+  * @return Boolean
+  */
+ function is_sp_admin()
+ {
+    $sp_core = sp_core();
+
+    if ( $_GET['page'] == $sp_core->slug &&  is_admin() )
+          return true;
+
+    return false;
  }

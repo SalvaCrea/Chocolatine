@@ -12,12 +12,12 @@ class sp_core
 			 *  this is the root folder
 			 * @var string
 			 */
-			var $uri_folder;
+			var  $uri_folder;
 			/**
 			 * this a web url
 			 * @var string
 			 */
-			var $url_folder;
+			var  $url_folder;
 			/**
 			 * The value of configuration for sp powa
 			 * @var array
@@ -64,34 +64,37 @@ class sp_core
 			function __construct()
 			{
 
-				$this->init_class();
-
 				$this->uri_folder = dirname( dirname(__FILE__) );
 				$this->url_folder = plugins_url( 'salva-powa-wordpress' );
-				$this->url =  "/wp-admin/admin.php?page={$this->slug}";
 
 				$this->config = json_decode ( get_option( $this->slug ), 1 );
 
-				add_action('admin_menu', array( $this, 'wp_admin_do' ));
+				if ( is_admin() )
+						add_action('admin_menu', array( $this, 'wp_admin_action' ));
 
 			}
 			/**
 			 * This function load all modules
 			 */
-			public function init_class()
+			public function init()
 			{
+
+				$this->ressources = new sp_ressources();
 
 				$this->init_medoo();
 
 				$this->ajax = new sp_ajax();
 
-				if ( $_GET['page'] == $this->slug )
+				if ( is_sp_admin() )
 						$this->ajax->add_ressource();
+
+				$this->modules = new sp_module_manager();
 
 				$this->controller =  new sp_controller();
 
-				$this->modules = new sp_module_manager();
 				$this->modules->search_modules();
+
+				$this->controller->init();
 
 			}
 			/**
@@ -115,62 +118,16 @@ class sp_core
 
 			}
 
-			/**
-			 * Find the current module by the url
-			 * @return [string] return the current module
-			 */
-			public function get_current_module()
-			{
 
-				$current_module_action = false;
-
-				if ( isset( $_GET['module'] ) && !empty( $_GET['module'] ) )
-				{
-							$this->current_module = $this->get_module( $_GET['module'] );
-				}
-				else
-				{
-						 $this->current_module = $this->get_module( 'home' );
-				}
-
-				if ( isset( $_GET['module_action'] ) && !empty( $_GET['module_action'] ) ) {
-
-						$this->module_action = $_GET['module_action'];
-						$current_module_action = array_find( $this->current_module->module_action, 'slug', $this->module_action );
-
-						if ( $current_module_action != false ) {
-								$this->current_module->current_module_action = $this->current_module->module_action[$current_module_action];
-						}
-
-				}
-
-
-			}
-			/**
-			 * This function return un module by the name
-			 * @param  [string] $module the name of the module
-			 * @return [object Class]   Return the module
-			 */
-			public function get_module( $module )
-			{
-					return $this->
-									modules->
-									list_modules[ $module ];
-			}
 			/**
 			 * Contains the tasks to be executed in the wordpress administration part
 			 */
-			public function wp_admin_do()
+			public function wp_admin_action()
 			{
 					// load the ressources int the wp -admin
-					if ( $_GET['page'] == $this->slug )
-							 $this->sp_ressource();
+					if ( is_sp_admin() )
+							 $this->ressources->main_ressources();
 
-					 // find the current module
- 					 $this->get_current_module();
-
-					 // find current url
-					 $this->get_current_url();
 
 					 // add a menu compatible Wordpress
 					 add_menu_page(
@@ -194,32 +151,6 @@ class sp_core
 					 $view->view_back_sp();
 
 			}
-			/**
-			 * General a url for the wp-admin
-			 * @return string
-			 */
-			public function get_current_url()
-			{
-
-					$url = $this->url;
-
-					if ( !empty( $this->current_module->slug ))
-						$url .= "&module={$this->current_module->slug}";
-
-					if ( !empty( $this->module_action ) )
-						$url .= "&module_action={$this->module_action}";
-
-					$this->current_url = $url;
-
-					return $url;
-
-			}
-			/**
-			 * List of ressource necessary for the good fonctionnement
-			 */
-			public function sp_ressource()
-			{
 
 
-			}
 }

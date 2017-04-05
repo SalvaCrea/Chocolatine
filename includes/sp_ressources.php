@@ -7,7 +7,7 @@ class sp_ressources
   /**
    * All ressource js and Css for create a dynamic js table and button for export data
    */
-    public static function main_ressources()
+    public static function add_ressource_export_js()
     {
 
           wp_enqueue_script(
@@ -48,8 +48,9 @@ class sp_ressources
     /**
      * All Ressources for SP Framework
      */
-    public static function add_ressource_export_js()
+    public static function main_ressources()
     {
+                $sp_core = sp_core();
 
          		    wp_deregister_script( 'jquery' );
 
@@ -66,7 +67,7 @@ class sp_ressources
          				// for the form
          				wp_enqueue_script(
          					'Angular-sanitize',
-         					 $this->url_folder . '/bower_components/angular-sanitize/angular-sanitize.min.js'
+         					 $sp_core->url_folder . '/bower_components/angular-sanitize/angular-sanitize.min.js'
          				 );
 
          				wp_enqueue_script(
@@ -76,42 +77,42 @@ class sp_ressources
 
          				wp_enqueue_script(
          					'objectpath',
-         					 $this->url_folder . '/bower_components/objectpath/lib/ObjectPath.js'
+         					 $sp_core->url_folder . '/bower_components/objectpath/lib/ObjectPath.js'
          				 );
 
          				wp_enqueue_script(
          					'schema-form',
-         					 $this->url_folder . '/bower_components/angular-schema-form/dist/schema-form.min.js'
+         					 $sp_core->url_folder . '/bower_components/angular-schema-form/dist/schema-form.min.js'
          				 );
 
          				wp_enqueue_script(
          					'bootstrap-decorator',
-         					 $this->url_folder . '/bower_components/angular-schema-form/dist/bootstrap-decorator.min.js'
+         					 $sp_core->url_folder . '/bower_components/angular-schema-form/dist/bootstrap-decorator.min.js'
          				 );
 
          		    wp_enqueue_style(
          					'sp_styleCss',
-         					 $this->url_folder . '/assets/css/style.css'
+         					 $sp_core->url_folder . '/assets/css/style.css'
          				 );
 
          				 wp_enqueue_style(
           					'ring_animation_css',
-          					 $this->url_folder . '/assets/css/ring_animation.css'
+          					 $sp_core->url_folder . '/assets/css/ring_animation.css'
           				 );
 
          				 wp_enqueue_script(
          				 	'ring_animation_js',
-         				 	 $this->url_folder . '/assets/js/sp_animation.js'
+         				 	 $sp_core->url_folder . '/assets/js/sp_animation.js'
          				  );
 
          		    wp_enqueue_style(
          					'sp_boostrapCss',
-         					 $this->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.min.css'
+         					 $sp_core->url_folder . '/bower_components/bootstrap/dist/css/bootstrap.min.css'
          				 );
 
          		    wp_enqueue_script(
          					'sp_boostrapJs',
-         					 $this->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js'
+         					 $sp_core->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js'
          				 );
 
          				 wp_enqueue_style(
@@ -127,7 +128,7 @@ class sp_ressources
 
          				wp_enqueue_style(
          					'font_awesome',
-         					 $this->url_folder . '/bower_components/font-awesome/css/font-awesome.css'
+         					 $sp_core->url_folder . '/bower_components/font-awesome/css/font-awesome.css'
          				 );
          				wp_enqueue_style(
          					'font_material_icon',

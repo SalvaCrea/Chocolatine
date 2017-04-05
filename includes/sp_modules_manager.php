@@ -20,11 +20,9 @@ class sp_module_manager
 			 */
 			public function search_modules()
 			{
-						global $sp_core;
+						$sp_core = sp_core();
 
 						$list_folder = $this->create_root_folder( $sp_core->uri_folder.'/modules' );
-
-
 
 							if ( file_exists ( get_template_directory() . '/sp_modules' ) ) {
 								 $list_folder = array_merge(
@@ -32,8 +30,6 @@ class sp_module_manager
 									 $this->create_root_folder( get_template_directory() . '/sp_modules' )
 								 );
 							}
-
-
 
 						foreach ( $list_folder as $key => $folder_root ) {
 
@@ -81,5 +77,21 @@ class sp_module_manager
 					}
 
 					return $array_root;
+			}
+			/**
+			 * This function return un module by the name
+			 * @param  [string] $module the name of the module
+			 * @return [Mixed]   Return Object if find or false is not find
+			 */
+			public function get_module( $module )
+			{
+					if ( isset( $this->list_modules[ $module ] ) ) {
+							return $this->list_modules[ $module ];
+					}
+					else
+					{
+							return false;
+					}
+
 			}
 }

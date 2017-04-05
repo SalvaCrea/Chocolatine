@@ -34,7 +34,6 @@ class sp_home extends sp_module
     public function view_back_sp()
     {
 
-
 			$this->generate_view_loader();
 
 			$view = new sp_template();
@@ -42,7 +41,7 @@ class sp_home extends sp_module
 			$args = array();
 
 			// get the current module
-			$current_module = $this->core->current_module;
+			$current_module = $this->core->controller->current_module;
 
 			$this->convert_in_js['current_module'] = $current_module;
 
@@ -135,7 +134,7 @@ class sp_home extends sp_module
 		{
 
 			$menu_left['menu_list'] =  $this->core->modules->list_modules;
-			$menu_left['menu_list'][ $this->core->current_module->slug ]->selected = true;
+			$menu_left['menu_list'][ $this->core->controller->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
 			$menu_left['site_name'] =  get_bloginfo( 'name');
 
@@ -144,7 +143,7 @@ class sp_home extends sp_module
 		function generate_menu_top()
 		{
 
-				$current_module = $this->core->current_module;
+				$current_module = $this->core->controller->current_module;
 
 				foreach ( $current_module->module_action as $key => $value) {
 
