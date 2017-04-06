@@ -51,11 +51,6 @@ class sp_module
 	 */
 	var $module_action = array();
 	/**
-	 * This array for the current action
-	 * @var array
-	 */
-	var $current_module_action;
-	/**
 	 *  this is the root folder
 	 * @var string
 	 */
@@ -81,6 +76,18 @@ class sp_module
 
 		if ( $name == 'db' )
 	 			return $this->find_core()->db;
+
+		if ( $name == 'current_module' ){
+				return $this->find_core()->controller->current_module;
+		}
+		/**
+		 * This array for the current action
+		 * @var array
+		 */
+		if ( $name == 'current_module_action' ){
+				return $this->find_core()->controller->current_module_action;
+		}
+
 
 	}
 	/**
@@ -174,15 +181,17 @@ class sp_module
 				'slug' => '',
 				'url' => '',
 				'call_back' => '',
+				'show_in_menu' => true
 			);
 
 			// add _ first elem hom
 			if ( empty( $this->module_action ) ) :
 
-					$first_elem = array();
-					$first_elem['url'] = $this->core->url;
+					$first_elem = $args_default;
+					$first_elem['url'] = $this->core->controller->url;
 					$first_elem['url'] .= "&module={$this->slug}";
 					$first_elem['name'] = 'Home';
+					$first_elem['slug'] = 'home';
 					$this->module_action []= $first_elem;
 
 			endif;

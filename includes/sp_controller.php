@@ -82,8 +82,10 @@ class sp_controller
             );
 
 						if ( $current_module_action != false ) {
+
 								$this->current_module_action = $this->current_module->module_action[$current_module_action];
-						}
+
+            }
 
 				}
 
@@ -109,12 +111,7 @@ class sp_controller
           return $url;
 
       }
-      /**
-       * [test description]
-       * @return [type] [description]
-       */
-      function test()
-      {}
+
 }
 
  ?>

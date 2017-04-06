@@ -9,7 +9,6 @@ class sp_home extends sp_module
 		 * @var array
 		 */
 		var $menu_left = array();
-
 		/**
 		 * The content of menu top
 		 * @var array
@@ -20,7 +19,14 @@ class sp_home extends sp_module
 		 * @var array
 		 */
 		var $convert_in_js = array();
-
+		/**
+		* The arguments for create template
+		* @var array
+		 */
+		var $template_args = array();
+		/**
+		 * [__construct]
+		 */
     function __construct()
     {
 
@@ -33,87 +39,32 @@ class sp_home extends sp_module
     }
     public function view_back_sp()
     {
-
+			//	Generate the loader during the chargement
 			$this->generate_view_loader();
 
+			// the instance of the sp_template
 			$view = new sp_template();
 
-			$args = array();
+			// convertie the current module in js
+			$this->convert_in_js['current_module'] = $this->current_module;
+			$this->convert_in_js['current_module_action'] = $this->current_module_action;
 
-			// get the current module
-			$current_module = $this->core->controller->current_module;
+			$this->generate_header();
 
-			$this->convert_in_js['current_module'] = $current_module;
-
+			$this->generate_menu_top();
 
 			$this->generate_menu_left();
 
+			$this->generate_content();
+
 			$this->generate_javascript_var();
 
-			if ( !empty( $current_module->module_action ) ){
-
-						$this->generate_menu_top();
-
-						$args['top_content'] = array(
-							'content' => [array(
-								'id' => 'top_admin_salva_powa',
-								'url' => $this->twig_render(
-									'menu_top.html',
-									array( 'menu_list' => $this->menu_top)
-								),
-								'method' =>'echo'
-							)]
-						);
-						$this->convert_in_js['module_action'] = $this->core->module_action;
-			}
-
-			$args['header'] = [
-				'second_title' => 'Module : ' . $current_module->name,
-				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg'
-			];
-
-			$args['menu_left'] = array(
-				'content' => [array(
-					'id' => 'col_right',
-					'url' => $this->twig_render( 'menu_left.html', $this->menu_left),
-					'method' =>'echo'
-				)]
-			);
-
-			if ( isset( $current_module->current_module_action['call_back'] ) ) {
-
-				$call_back = $current_module->current_module_action['call_back'];
-
-				$args['content'] = array(
-					'container' => 'fluid-container',
-					'main_content' => [array(
-						'id' => 'content_home',
-						'url' => $current_module->$call_back(),
-						'method' =>'echo',
-					)]
-				);
-
-			}
-			else
-			{
-
-			$args['content'] = array(
-				'container' => 'fluid-container',
-				'main_content' => [array(
-					'id' => 'content_home',
-					'url' => $current_module->view_back(),
-					'method' =>'echo',
-				)]
-			);
-
-			}
-
-			$view->args = $args;
+			$view->args = $this->template_args;
 
 			$view->generate();
 
-			wp_enqueue_script( 'sp_home_js', $this->core->url_folder . '/modules/sp_home/js/sp_home.js' );
-			wp_enqueue_style( 'sp_home_css', $this->core->url_folder . '/modules/sp_home/css/sp_home.css' );
+			$this->add_module_js( 'sp_home.js' );
+			$this->add_module_css( 'sp_home.css' );
 
     }
 		function generate_javascript_var()
@@ -122,38 +73,95 @@ class sp_home extends sp_module
 		}
 		function view_back()
 		{
-			global $sp_core;
-
-			wp_enqueue_script( 'massonnery', 'https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js');
-
 			return $this->twig_render( 'home.html', array(
-				'list_modules' => $sp_core->modules->list_modules
+				'list_modules' => $this->core->modules->list_modules
 			));
+		}
+		function generate_header()
+		{
+
+			$this->template_args['header'] = [
+				'second_title' => 'Module : ' . $this->current_module->name,
+				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg'
+			];
+
+		}
+		function generate_menu_top()
+		{
+
+				if ( empty( $this->current_module->module_action ) )
+								return false;
+
+				foreach ( $this->current_module->module_action as $key => $value) {
+
+					$args = $value;
+
+					if( $args['show_in_menu'] )
+								$this->menu_top []= $args;
+
+				}
+
+				if ( empty( $this->current_module_action['slug'] ) ) {
+					  $this->menu_top[ 0 ]['selected'] = true;
+				}
+				else
+				{
+						$find = array_find( $this->menu_top, 'slug',  $this->current_module_action['slug'] );
+						$this->menu_top[ $find ]['selected'] = true;
+				}
+
+				$this->template_args['top_content'] = array(
+					'content' => [array(
+						'id' => 'top_admin_salva_powa',
+						'url' => $this->twig_render(
+							'menu_top.html',
+							array( 'menu_list' => $this->menu_top)
+						),
+						'method' =>'echo'
+					)]
+				);
+
 		}
 		function generate_menu_left()
 		{
 
 			$menu_left['menu_list'] =  $this->core->modules->list_modules;
-			$menu_left['menu_list'][ $this->core->controller->current_module->slug ]->selected = true;
+			$menu_left['menu_list'][ $this->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
 			$menu_left['site_name'] =  get_bloginfo( 'name');
 
+			$this->template_args['menu_left'] = array(
+				'content' => [array(
+					'id' => 'col_right',
+					'url' => $this->twig_render( 'menu_left.html', $menu_left),
+					'method' =>'echo'
+				)]
+			);
+
 			$this->menu_left = $menu_left;
+
 		}
-		function generate_menu_top()
+		function generate_content()
 		{
 
-				$current_module = $this->core->controller->current_module;
+			if ( !empty( $this->current_module_action['slug'] ) ) {
 
-				foreach ( $current_module->module_action as $key => $value) {
+				$call_back = $this->current_module_action['call_back'];
+				$content = $this->current_module->$call_back();
 
-					$args = $value;
+			}
+			else{
+				$content = $this->current_module->view_back();
+			}
 
-					if( $this->core->module_action == $value['slug'] )
-								$args['selected'] = true;
-
-					$this->menu_top []= $args;
-				}
+			$this->template_args['content'] = array(
+				'container' => 'fluid-container',
+				'main_content' => [array(
+					'id' => 'content_home',
+					'url' => $content,
+					'method' =>'echo',
+				)]
+			);
 
 		}
 		public function generate_view_loader()
