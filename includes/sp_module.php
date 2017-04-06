@@ -184,7 +184,7 @@ class sp_module
 				'show_in_menu' => true
 			);
 
-			// add _ first elem hom
+			// add _ first elem home
 			if ( empty( $this->module_action ) ) :
 
 					$first_elem = $args_default;
@@ -259,5 +259,23 @@ class sp_module
 					$this->get_url() . '/css/' . $name
 				);
 
+	}
+	/**
+	 * Convert variable php in variable js
+	 * @param  string $key the key for array
+	 * @param  array $args the array to convert
+	 * @return boolean True is good action or false is not good
+	 */
+	public function convert_in_js( $key, $args )
+	{
+				if ( is_array( $args ) || is_object( $args ) ) {
+						$args = (array) $args;
+						$this->core->ajax->convert_in_js[ $key ] = $args;
+						return true;
+				}
+				else
+				{
+					 return false;
+				}
 	}
 }

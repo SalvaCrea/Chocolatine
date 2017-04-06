@@ -24,16 +24,6 @@ class sp_core
 			 */
 			var $config;
 			/**
-			 * The current module actif on the view
-			 * @var object class
-			 */
-			var $current_module;
-			/**
-			 * The current sub module actif on the view
-			 * @var string
-			 */
-			var $module_action;
-			/**
 			 * The url current, a fusion beetwen slug, current_module and $module_action
 			 * @var string
 			 */
@@ -44,10 +34,20 @@ class sp_core
 			 */
 			var $slug = 'salva_powa';
 			/**
-			 * The url of extension in the wp-admin
-			 * @var string
+			 * Contain the class module sp_controller for manage url
+			 * @var object class
 			 */
-			var $url;
+			var $controller;
+			/**
+			 * Contain the class module sp_ajax for resquest ajax
+			 * @var object class
+			 */
+			var $ajax;
+			/**
+			 * Contain the class module sp_ressources for add ressource
+			 * @var object class
+			 */
+			var $ressources;
 			/**
 			 * Contain the class module manager and list all modules
 			 * @var object class

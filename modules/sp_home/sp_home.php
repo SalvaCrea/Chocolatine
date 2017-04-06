@@ -14,11 +14,7 @@ class sp_home extends sp_module
 		 * @var array
 		 */
 		var $menu_top = array();
-		/**
-		 * This should javascript variable
-		 * @var array
-		 */
-		var $convert_in_js = array();
+
 		/**
 		* The arguments for create template
 		* @var array
@@ -46,8 +42,8 @@ class sp_home extends sp_module
 			$view = new sp_template();
 
 			// convertie the current module in js
-			$this->convert_in_js['current_module'] = $this->current_module;
-			$this->convert_in_js['current_module_action'] = $this->current_module_action;
+			$this->convert_in_js( 'current_module', $this->current_module );
+			$this->convert_in_js( 'current_module_action', $this->current_module_action );
 
 			$this->generate_header();
 
@@ -69,7 +65,7 @@ class sp_home extends sp_module
     }
 		function generate_javascript_var()
 		{
-				echo $this->twig_render( 'convert_in_js.html', array( 'convert_in_js' => $this->convert_in_js ) ) ;
+				echo $this->twig_render( 'convert_in_js.html', array( 'convert_in_js' => $this->core->ajax->convert_in_js ) ) ;
 		}
 		function view_back()
 		{

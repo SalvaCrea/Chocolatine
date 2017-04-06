@@ -18,6 +18,11 @@ class sp_ajax
 		 * @var ajax_actions
 		 */
 		var $ajax_current_actions = array();
+    /**
+		 * This should javascript variable
+		 * @var array
+		 */
+		var $convert_in_js = array();
   /**
    * [__construct description]
    */
