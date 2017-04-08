@@ -153,7 +153,6 @@ class sp_home extends sp_module
 			$this->template_args['content'] = array(
 				'container' => 'fluid-container',
 				'main_content' => [array(
-					'id' => 'content_home',
 					'url' => $content,
 					'method' =>'echo',
 				)]

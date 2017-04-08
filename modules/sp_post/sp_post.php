@@ -54,7 +54,7 @@ class sp_post extends sp_module
     }
 		function view_back()
 		{
-				$sp_core = sp_core();
+				$this->core = sp_core();
 
 				return "je suis un petit moteur de recherche";
 		}
@@ -63,7 +63,7 @@ class sp_post extends sp_module
 		 * @param  [int] $id The Id current for search
 		 * @return [type]     [description]
 		 */
-		function select( $id = null )
+		function find_one( $id = null )
 		{
 
 				$where = array();
@@ -71,6 +71,7 @@ class sp_post extends sp_module
 				if ( !is_null( $id ) )
 				{
 						$this->id_post = $id;
+						$this->where['AND'][ 'id_demande' ] = $this->id_post;
 				}
 
 				return $this;
@@ -109,8 +110,6 @@ class sp_post extends sp_module
 		function find()
 		{
 
-			$sp_core = sp_core( $this->where['AND'][ 'type_demande' ] );
-
 			$this->where['LIMIT'] =  [
 
 				$this->limit * $this->offset,
@@ -120,7 +119,7 @@ class sp_post extends sp_module
 
 				$this->where['ORDER'] = array( 'id_demande' => "DESC" );
 
-				$this->results = $sp_core->db->select(
+				$this->results = $this->core->db->select(
 
 				$this->default_table[ 'post' ],
 
@@ -138,11 +137,11 @@ class sp_post extends sp_module
 		function get_meta()
 		{
 
-			$sp_core = sp_core();
+			$this->core = sp_core();
 
 			foreach ( $this->results as $key => $result) {
 
-					$metas =	 $sp_core->db->select(
+					$metas =	 $this->core->db->select(
 
 									$this->default_table[ 'meta' ],
 

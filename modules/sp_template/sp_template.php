@@ -23,8 +23,13 @@ class sp_template extends sp_module
 	{
 		$this->dependency();
 
+		$id_css = $this->current_module->slug;
 
-		echo "<div id=\"groovy_template\">";
+		if ( !empty( $this->current_module_action['slug'] ) ) {
+			 $id_css .= $this->current_module_action['slug'];
+		}
+
+		echo "<div id=\"groovy_template\" class=\"{$id_css}\" >";
 
 		do_action('start_groovy_template');
 
@@ -58,11 +63,8 @@ class sp_template extends sp_module
 
 	function dependency(){
 
-		$url = plugins_url( 'salva-powa-wordpress' ) . '/modules/sp_template';
-
-		wp_enqueue_style( "sp_template_css" , $url . '/css/sp_template.css');
-
-		wp_enqueue_script( "sp_template_js" , $url . '/js/sp_template.js' ,array(), null, true);
+		$this->add_module_css( 'sp_template.css' );
+		$this->add_module_js('sp_template.js');
 
 	}
 	function generate_content( $arg ){

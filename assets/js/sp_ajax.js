@@ -39,7 +39,7 @@ var sp_ajax  =
   	       {
               console.log('error');
               console.log(xhr);
-			
+
               func.content_return = xhr;
   	       }
   	    });

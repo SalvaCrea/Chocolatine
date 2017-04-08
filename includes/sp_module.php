@@ -90,10 +90,6 @@ class sp_module
 
 
 	}
-	/**
-	 * Function return the web url of the module
-	 * @return String
-	 */
 	function get_url()
 	{
 
@@ -255,6 +251,7 @@ class sp_module
 	public function add_module_css( $name )
 	{
 
+
 				wp_enqueue_style( $name,
 					$this->get_url() . '/css/' . $name
 				);
@@ -268,8 +265,7 @@ class sp_module
 	 */
 	public function convert_in_js( $key, $args )
 	{
-				if ( is_array( $args ) || is_object( $args ) ) {
-						$args = (array) $args;
+				if ( isset( $args ) ) {
 						$this->core->ajax->convert_in_js[ $key ] = $args;
 						return true;
 				}

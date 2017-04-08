@@ -59,6 +59,11 @@ class sp_core
 			 */
 			var $db;
 			/**
+			* The default is false, if i true than is dev mode
+			* @var boolean
+			 */
+			var $is_dev = false;
+			/**
 			 * __construct first action
 			 */
 			function __construct()
