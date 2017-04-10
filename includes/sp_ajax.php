@@ -71,6 +71,7 @@ class sp_ajax
 			if ( !empty( $this->args['action_module'] )
 					 && !empty( $this->args['module'] )
 			) {
+
 					$find_module = false;
 					foreach ($this->ajax_actions as $key => $ajax_action) {
 
@@ -113,7 +114,7 @@ class sp_ajax
 							$module ,
 							$ajax_current_actions['call_back']
 						),
-						$this->args['args']
+						$this->args
 					);
 
 					echo json_encode( $reponse  );

@@ -13,10 +13,18 @@ class sp_form extends sp_module
 				$this->name = 'SP Form';
 				$this->description = "For generate the form";
 
-				wp_enqueue_script( 'sp_home_js', $sp_core->url_folder . '/modules/sp_form/js/sp_form.js' );
+
+        $this->add_ajax_action(
+						array(
+							'name' => 'Save form  for class',
+							'call_back' => 'save_form',
+							'action_module' => 'save_form'
+						)
+				);
 
     }
-		function generate_form( $schema_form )
+
+		function create_form( $schema_form )
 		{
 
 			$args = array(
@@ -32,6 +40,20 @@ class sp_form extends sp_module
 
 			$form =  $this->twig_render( 'basic_form.html', $args );
 
+      $this->convert_in_js( 'form' , $args );
+
+      $this->add_module_js('sp_form.js');
+
 			return $form;
 		}
+    function save_form( $args )
+    {
+
+        update_option(
+          $args['args']['name_form']
+        , json_encode( $args['args'] )
+        );
+
+        return true;
+    }
 }

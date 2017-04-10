@@ -32,8 +32,8 @@ var sp_ajax  =
 					 },
   	       success : function(msg)
   	       {
+              console.log( msg );
   	          func.content_return = msg;
-
   	       },
   	       error : function(xhr, ajaxOptions, thrownError)
   	       {

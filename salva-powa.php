@@ -9,11 +9,11 @@
  * Author URI: http://salva-crea.fr
  * License: GPL2
  */
-
+ 
 
 require_once( dirname(__FILE__).'/auto_load.php' );
 
-use \salva_powa\sp_core;
+use \salva_powa\sp_core; 
 
 if (  is_admin() ) {
 

@@ -77,7 +77,7 @@ function sp_clean_string($string)
  function array_find($array, $key_research, $value_research)
  {
     $array = (array) $array;
-    
+
      foreach ($array as $key => $current_value) {
          if (isset($current_value[$key_research]) && $current_value[$key_research] == $value_research) {
              return $key;

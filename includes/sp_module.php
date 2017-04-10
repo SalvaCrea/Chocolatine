@@ -238,11 +238,9 @@ class sp_module
 	 */
 	public function add_module_js( $name )
 	{
-
 			wp_enqueue_script( $name,
 				$this->get_url() . '/js/' . $name
 			);
-
 	}
 	/**
 	 * This function add js in the personnal folder of module contain in the folder js
@@ -250,12 +248,9 @@ class sp_module
 	 */
 	public function add_module_css( $name )
 	{
-
-
 				wp_enqueue_style( $name,
 					$this->get_url() . '/css/' . $name
 				);
-
 	}
 	/**
 	 * Convert variable php in variable js
@@ -273,5 +268,45 @@ class sp_module
 				{
 					 return false;
 				}
+	}
+	public function data_schema()
+	{
+		return false;
+	}
+	public function data_form()
+	{
+		return false;
+	}
+	public function  get_name_form()
+	{
+			return $this->current_module->slug . '_' . $this->current_module_action['slug'] . '_form';
+	}
+	function generate_form()
+	{
+		$form =  new \sp_form();
+
+		$name = $this->get_name_form();
+
+		$args = array(
+			'name' => $name
+		);
+
+		if ( $this->data_schema() != false )
+		{
+				$args['schema'] = $this->data_schema();
+				$args['schema']['title'] = $name;
+		}
+
+		if ( $this->data_form() != false )
+				$args['form'] = $this->data_form();
+
+		$model = get_option(  $name );
+
+		if (  $model != false )
+				$args['model'] = json_decode( $model, 1);
+
+		$form = $form->create_form( $args );
+
+		return $form;
 	}
 }
