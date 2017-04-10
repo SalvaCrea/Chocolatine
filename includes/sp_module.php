@@ -281,6 +281,15 @@ class sp_module
 	{
 			return $this->current_module->slug . '_' . $this->current_module_action['slug'] . '_form';
 	}
+	public function get_model()
+	{
+			$model = get_option(  $name );
+
+			if (  $model != false )
+					return  json_decode( $model, 1);
+
+			return false;
+	}
 	function generate_form()
 	{
 		$form =  new \sp_form();
