@@ -6,3 +6,4 @@ bower_components
 vendor
 img
 .remote-sync.json
+*node_modules

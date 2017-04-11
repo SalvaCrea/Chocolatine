@@ -45,6 +45,7 @@ class sp_form extends sp_module
       $this->add_module_js('sp_form.js');
 
 			return $form;
+      
 		}
     function save_form( $args )
     {

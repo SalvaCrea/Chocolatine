@@ -1,10 +1,6 @@
-
-raccourci = 0;
-
 angular.module('sp_form', ['schemaForm'])
        .controller('sp_form_controler', function($scope) {
 
-  raccourci = $scope;
   $scope.schema = sp_powa.form.schema;
   $scope.form = sp_powa.form.form;
   $scope.model = sp_powa.form.model;
@@ -19,7 +15,7 @@ angular.module('sp_form', ['schemaForm'])
 			save_form.action_module = 'save_form';
 
 			response = save_form.send();
-      console.log(response);
+
 	}
 
 

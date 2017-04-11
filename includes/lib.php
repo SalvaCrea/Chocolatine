@@ -105,5 +105,9 @@ function sp_clean_string($string)
  */
 function sp_dev()
 {
-
+    $core = sp_core();
+    if ( $core->is_dev ) {
+        return true;
+    }
+    return false;
 }

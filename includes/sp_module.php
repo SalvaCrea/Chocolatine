@@ -90,6 +90,10 @@ class sp_module
 
 
 	}
+	/**
+	 * Function for get the web URL
+	 * @return string web url
+	 */
 	function get_url()
 	{
 
@@ -128,22 +132,19 @@ class sp_module
 	public function twig_render( $template_name, $array_info)
 	{
 
+
     if ( !isset( $this->twig ) )
-				$this->twig_constructor();
+		{
+			\Twig_Autoloader::register();
+
+			$loader = new \Twig_Loader_Filesystem( $this->get_uri() . '/template'); // Dossier contenant les templates
+
+	    $this->twig = new \Twig_Environment($loader, array(
+	      'cache' => false
+	    ));
+		}
 
 		return  $this->twig->render( $template_name, $array_info );
-
-	}
-	// construct the motor twig
-	public function twig_constructor()
-	{
-		\Twig_Autoloader::register();
-
-		$loader = new \Twig_Loader_Filesystem( $this->get_uri() . '/template'); // Dossier contenant les templates
-
-    $this->twig = new \Twig_Environment($loader, array(
-      'cache' => false
-    ));
 
 	}
 	/**
@@ -269,21 +270,37 @@ class sp_module
 					 return false;
 				}
 	}
+	/**
+	 * Each module can have a schema of data
+	 * @return array the list of data
+	 */
 	public function data_schema()
 	{
 		return false;
 	}
+	/**
+	 * Each module can have a  form
+	 * @return array the list of form
+	 */
 	public function data_form()
 	{
 		return false;
 	}
-	public function  get_name_form()
+	/**
+	 * Return the name of the form
+	 * @return string name of the form
+	 */
+	public function get_name_form()
 	{
-			return $this->current_module->slug . '_' . $this->current_module_action['slug'] . '_form';
+			return $this->current_module->slug . '_' . $this->slug . '_model';
 	}
+	/**
+	 * Get data link of the module
+	 * @return array data of class
+	 */
 	public function get_model()
 	{
-			$model = get_option(  $name );
+			$model = get_option(  $this->get_name_form() );
 
 			if (  $model != false )
 					return  json_decode( $model, 1);
@@ -309,10 +326,8 @@ class sp_module
 		if ( $this->data_form() != false )
 				$args['form'] = $this->data_form();
 
-		$model = get_option(  $name );
-
-		if (  $model != false )
-				$args['model'] = json_decode( $model, 1);
+		if (  $this->get_model() != false )
+				$args['model'] = $this->get_model();
 
 		$form = $form->create_form( $args );
 
