@@ -29,7 +29,7 @@ class sp_controller
       /**
        *  Informations for sub Module executed
        */
-      var $current_module_action = array(
+      var $current_sub_module = array(
         // 'name' => '',
         // 'slug' => '',
         // 'url'  => ''
@@ -60,7 +60,7 @@ class sp_controller
 			public function get_current_module()
 			{
 
-				$current_module_action = false;
+				$current_sub_module = false;
 
 				if ( isset( $_GET['module'] ) && !empty( $_GET['module'] ) )
 				{
@@ -71,19 +71,19 @@ class sp_controller
 						 $this->current_module = $this->core->modules->get_module( $this->module_default );
 				}
 
-				if ( isset( $_GET['module_action'] ) && !empty( $_GET['module_action'] ) ) {
+				if ( isset( $_GET['sub_module'] ) && !empty( $_GET['sub_module'] ) ) {
 
-						$this->module_action = $_GET['module_action'];
+						$this->sub_module = $_GET['sub_module'];
 
-						$current_module_action = array_find(
-              $this->current_module->module_action,
+						$current_sub_module = array_find(
+              $this->current_module->sub_module,
               'slug',
-              $this->module_action
+              $this->sub_module
             );
 
-						if ( $current_module_action != false ) {
+						if ( $current_sub_module != false ) {
 
-								$this->current_module_action = $this->current_module->module_action[$current_module_action];
+								$this->current_sub_module = $this->current_module->sub_module[$current_sub_module];
 
             }
 
@@ -103,8 +103,8 @@ class sp_controller
           if ( !empty( $this->current_module->slug ))
             $url .= "&module={$this->current_module->slug}";
 
-          if ( !empty( $this->module_action ) )
-            $url .= "&module_action={$this->module_action}";
+          if ( !empty( $this->sub_module ) )
+            $url .= "&sub_module={$this->sub_module}";
 
           $this->current_url = $url;
 

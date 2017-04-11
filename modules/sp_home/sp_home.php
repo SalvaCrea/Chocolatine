@@ -43,7 +43,7 @@ class sp_home extends sp_module
 
 			// convertie the current module in js
 			$this->convert_in_js( 'current_module', $this->current_module );
-			$this->convert_in_js( 'current_module_action', $this->current_module_action );
+			$this->convert_in_js( 'current_sub_module', $this->current_sub_module );
 
 			$this->generate_header();
 
@@ -85,10 +85,10 @@ class sp_home extends sp_module
 		function generate_menu_top()
 		{
 
-				if ( empty( $this->current_module->module_action ) )
+				if ( empty( $this->current_module->sub_module ) )
 								return false;
 
-				foreach ( $this->current_module->module_action as $key => $value) {
+				foreach ( $this->current_module->sub_module as $key => $value) {
 
 					$args = $value;
 
@@ -97,12 +97,12 @@ class sp_home extends sp_module
 
 				}
 
-				if ( empty( $this->current_module_action['slug'] ) ) {
+				if ( empty( $this->current_sub_module['slug'] ) ) {
 					  $this->menu_top[ 0 ]['selected'] = true;
 				}
 				else
 				{
-						$find = array_find( $this->menu_top, 'slug',  $this->current_module_action['slug'] );
+						$find = array_find( $this->menu_top, 'slug',  $this->current_sub_module['slug'] );
 						$this->menu_top[ $find ]['selected'] = true;
 				}
 
@@ -140,9 +140,9 @@ class sp_home extends sp_module
 		function generate_content()
 		{
 
-			if ( !empty( $this->current_module_action['slug'] ) ) {
+			if ( !empty( $this->current_sub_module['slug'] ) ) {
 
-				$call_back = $this->current_module_action['call_back'];
+				$call_back = $this->current_sub_module['call_back'];
 				$content = $this->current_module->$call_back();
 
 			}
