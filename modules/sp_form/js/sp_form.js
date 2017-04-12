@@ -11,11 +11,15 @@ angular.module('sp_form', ['schemaForm'])
 
 			save_form.args = Object.assign({}, $scope.model );
       save_form.args.name_form = $scope.schema.title;
+
+      save_form.args.module = $scope.schema.module;
+      save_form.args.sub_module = $scope.schema.sub_module;
+
       save_form.module =  'spform';
-			save_form.action_module = 'save_form';
+			save_form.sub_module = 'save_form';
 
 			response = save_form.send();
-
+      console.log(response);
 	}
 
 

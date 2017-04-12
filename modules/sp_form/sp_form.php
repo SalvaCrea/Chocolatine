@@ -4,6 +4,11 @@ use \salva_powa\sp_module;
 
 class sp_form extends sp_module
 {
+  /**
+   * The data stock the all forms
+   * @var array
+   */
+    var $forms = array();
 
     function __construct()
     {
@@ -18,7 +23,7 @@ class sp_form extends sp_module
 						array(
 							'name' => 'Save form  for class',
 							'call_back' => 'save_form',
-							'action_module' => 'save_form'
+							'sub_module' => 'save_form'
 						)
 				);
 
@@ -45,16 +50,31 @@ class sp_form extends sp_module
       $this->add_module_js('sp_form.js');
 
 			return $form;
-      
+
 		}
     function save_form( $args )
     {
 
-        update_option(
-          $args['args']['name_form']
-        , json_encode( $args['args'] )
-        );
+        $data = $args['args'];
+
+        $module = $this->core->modules->get_module( $data['module'] );
+        $sub_module = $module->{$data['sub_module']};
+
+        $schema = $sub_module->data_schema();
+
+        if ( $schema['save'] == 'simple')
+              $this->save_form_simple( $data );
 
         return true;
+
+    }
+    function save_form_simple( $data )
+    {
+
+      update_option(
+        $data['name_form']
+      , json_encode( $data )
+      );
+
     }
 }

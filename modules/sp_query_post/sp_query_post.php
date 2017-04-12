@@ -23,7 +23,7 @@ class sp_query_post extends sp_module
 						array(
 							'name' => 'Query Find Post',
 							'call_back' => 'find_post',
-							'action_module' => 'find_post_wp_post'
+							'sub_module' => 'find_post_wp_post'
 						)
 				);
 

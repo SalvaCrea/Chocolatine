@@ -49,7 +49,12 @@ class sp_module
 	 * This array is use for declarate the sub module
 	 * @var array
 	 */
-	var $module_action = array();
+	var $sub_module = array();
+	/**
+	 * This array is use for declarate the ajax action
+	 * @var array
+	 */
+	var $ajax_action = array();
 	/**
 	 *  this is the root folder
 	 * @var string
@@ -84,8 +89,8 @@ class sp_module
 		 * This array for the current action
 		 * @var array
 		 */
-		if ( $name == 'current_module_action' ){
-				return $this->find_core()->controller->current_module_action;
+		if ( $name == 'current_sub_module' ){
+				return $this->find_core()->controller->current_sub_module;
 		}
 
 
@@ -129,7 +134,7 @@ class sp_module
 	 * @param  [array] $array_info  the array content informations for the doc html
 	 * @return [string]   return the file html with information of array
 	 */
-	public function twig_render( $template_name, $array_info)
+	public function twig_render( $template_name, $array_info = array() )
 	{
 
 
@@ -169,7 +174,7 @@ class sp_module
 	 * This function add a submodule for module
 	 * @param [array] The arguments for add a submenu
 	 */
-	public function add_module_action( $args )
+	public function add_sub_module( $args )
 	{
 
 			$args_default = array(
@@ -178,18 +183,19 @@ class sp_module
 				'slug' => '',
 				'url' => '',
 				'call_back' => '',
-				'show_in_menu' => true
+				'show_in_menu' => true,
+				'sub_module' => '',
 			);
 
 			// add _ first elem home
-			if ( empty( $this->module_action ) ) :
+			if ( empty( $this->sub_module ) ) :
 
 					$first_elem = $args_default;
 					$first_elem['url'] = $this->core->controller->url;
 					$first_elem['url'] .= "&module={$this->slug}";
 					$first_elem['name'] = 'Home';
 					$first_elem['slug'] = 'home';
-					$this->module_action []= $first_elem;
+					$this->sub_module []= $first_elem;
 
 			endif;
 
@@ -202,11 +208,19 @@ class sp_module
 
 				$args['url'] = $this->core->controller->url;
 				$args['url'] .= "&module={$this->slug}";
-				$args['url'] .= "&module_action={$args['slug']}";
+				$args['url'] .= "&sub_module={$args['slug']}";
 
 			endif;
 
-			$this->module_action []= $args;
+			if ( !empty( $args['sub_module'] ) ):
+
+					require $this->get_uri() . '/sub_module/' . $args['sub_module'] . '.php';
+
+					$this->{$args['slug']} = new $args['sub_module']();
+
+			endif;
+
+			$this->sub_module []= $args;
 
 	}
 	/**
@@ -219,12 +233,14 @@ class sp_module
 			$args_default = 	array(
 					'name' => '',
 					'call_back' => '',
-					'action_module' => ''
+					'sub_module' => ''
 			);
 
 			$args = array_merge( $args_default, $args);
 
 			$args['module'] = $this->slug;
+
+			$this->ajax_action []= $args;
 
 			$this->core
 						->ajax
@@ -287,6 +303,14 @@ class sp_module
 		return false;
 	}
 	/**
+	 * Each module can save a form
+	 * @return mixed
+	 */
+	public function save_form( $args )
+	{
+		return false;
+	}
+	/**
 	 * Return the name of the form
 	 * @return string name of the form
 	 */
@@ -309,7 +333,7 @@ class sp_module
 	}
 	function generate_form()
 	{
-		$form =  new \sp_form();
+		$form =  $this->core->modules->get_module( 'spform' );
 
 		$name = $this->get_name_form();
 
@@ -321,6 +345,8 @@ class sp_module
 		{
 				$args['schema'] = $this->data_schema();
 				$args['schema']['title'] = $name;
+				$args['schema']['module'] = $this->current_module->slug;
+				$args['schema']['sub_module'] = $this->current_sub_module['slug'];
 		}
 
 		if ( $this->data_form() != false )

@@ -68,7 +68,7 @@ class sp_ajax
 			$this->args = $_POST;
 
 			// test if the requet javascript is good
-			if ( !empty( $this->args['action_module'] )
+			if ( !empty( $this->args['sub_module'] )
 					 && !empty( $this->args['module'] )
 			) {
 
@@ -76,7 +76,7 @@ class sp_ajax
 					foreach ($this->ajax_actions as $key => $ajax_action) {
 
 							if ( $this->args['module'] == $ajax_action['module']
-						 				&& $this->args['action_module'] == $ajax_action['action_module'] ) {
+						 				&& $this->args['sub_module'] == $ajax_action['sub_module'] ) {
 
 											$find_module = true;
 											$this->execute_call_back( $ajax_action );
