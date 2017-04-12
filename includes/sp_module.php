@@ -333,7 +333,7 @@ class sp_module
 	}
 	function generate_form()
 	{
-		$form =  $this->core->modules->get_module( 'spform' );
+		$form =  $this->core->modules->get_module( 'sp_form' );
 
 		$name = $this->get_name_form();
 

@@ -33,7 +33,7 @@ function sp_clean_string($string)
 {
     $string = str_replace(' ', '_', $string); // Replaces all spaces with hyphens.
 
-   return strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', $string)); // Removes special chars.
+   return strtolower(preg_replace('/[^A-Za-z0-9\-\_]/', '', $string)); // Removes special chars.
 }
 
  function sp_core()
