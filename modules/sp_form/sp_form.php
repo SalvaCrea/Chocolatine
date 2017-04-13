@@ -16,6 +16,7 @@ class sp_form extends sp_module
 
         $this->icon = 'fa-check-square-o';
 				$this->name = 'SP Form';
+        $this->slug = 'sp_form';
 				$this->description = "For generate the form";
 
 

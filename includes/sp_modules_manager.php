@@ -45,9 +45,7 @@ class sp_module_manager
 									// execute the class
 									$current_class = new $folder_root['name']();
 
-									$current_class->slug = $current_class->slug;
-
-									$this->list_modules[ $current_class->slug ] = $current_class;
+									$this->list_modules[ $current_class->get_slug() ] = $current_class;
 
 						}
 
@@ -80,7 +78,7 @@ class sp_module_manager
 			}
 			/**
 			 * This function return un module by the name
-			 * @param  [string] $module the name of the module
+			 * @param  [string] the slug of the module for find
 			 * @return [Mixed]   Return Object if find or false is not find
 			 */
 			public function get_module( $module )

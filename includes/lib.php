@@ -111,3 +111,13 @@ function sp_dev()
     }
     return false;
 }
+/**
+ * Return the module by slug of not if module not find
+ * @param  string the name of module find
+ * @return mixed return false or obkect of class
+ */
+function sp_get_module( $slug_module )
+{
+    $core = sp_core();
+    return $core->modules->get_module( $data['module'] );
+}

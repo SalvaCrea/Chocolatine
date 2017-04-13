@@ -12,7 +12,7 @@ class sp_controller
       /**
        * The module by default
        */
-      var $module_default = 'home';
+      var $module_default = 'sp_home';
       /**
 			 * the url url current
 			 * @var string

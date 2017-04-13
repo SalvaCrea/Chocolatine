@@ -10,9 +10,14 @@ class sp_module
 	 */
 	var $name;
 	/**
-	 * the version of the module
+	 * The id name
 	 * @var string
 	 */
+	 var $slug;
+ 	/**
+ 	 * the version of the module
+ 	 * @var string
+ 	 */
 	var $version;
 	/**
 	 * the name of author
@@ -66,6 +71,11 @@ class sp_module
 	 */
 	var $url_folder;
 	/**
+	 * if it's a sub module parent module no empty and contain the slug of father
+	 * @var string
+	 */
+	var $parent_module;
+	/**
 	 * This function is a fake constructor, in a php automatic father constructor automatically is not exist
 	 * @return boolean
 	 */
@@ -73,26 +83,45 @@ class sp_module
 	function __get( $name )
 	{
 
-		if ( $name == 'slug' )
-			 return sp_clean_string( $this->name );
-
 		if ( $name == 'core' )
 			 return $this->find_core();
 
 		if ( $name == 'db' )
 	 			return $this->find_core()->db;
 
-		if ( $name == 'current_module' ){
+		if ( $name == 'current_module' )
 				return $this->find_core()->controller->current_module;
-		}
+
+		if ( $name == 'father' )
+				return $this->get_father();
 		/**
 		 * This array for the current action
 		 * @var array
 		 */
-		if ( $name == 'current_sub_module' ){
+		if ( $name == 'current_sub_module' )
 				return $this->find_core()->controller->current_sub_module;
-		}
 
+	}
+	/**
+	 * Return the slug of the class
+	 * @return string the id string of the class
+	 */
+	function get_slug()
+	{
+		/**
+		 * Create slug for function
+		 */
+		if ( empty( $this->slug ) ) {
+
+				if ( empty( $this->name )) {
+					$this->slug = sp_clean_string( $folder_root['name'] );
+				}
+				else
+				{
+					$this->slug = sp_clean_string( $this->name );
+				}
+		}
+		return $this->slug;
 
 	}
 	/**
@@ -125,8 +154,20 @@ class sp_module
 			if ( empty( $this->uri_folder ) ) {
 				$this->uri_folder = $this->dir_file_class();
 			}
-
 			return $this->uri_folder;
+	}
+	/**
+	 * Return the father of module if the module is a sub module
+	 * @return mixed false if not find or object if is find
+	 */
+	function get_father()
+	{
+			if ( !empty( $this->parent_module ) ) {
+					return $this->core->modules->get_module( $this->parent_module );
+			}
+			else{
+					return false;
+			}
 	}
 	/**
 	 * Use the framework twig like template motor
@@ -136,10 +177,7 @@ class sp_module
 	 */
 	public function twig_render( $template_name, $array_info = array() )
 	{
-
-
-    if ( !isset( $this->twig ) )
-		{
+    if ( !isset( $this->twig ) ){
 			\Twig_Autoloader::register();
 
 			$loader = new \Twig_Loader_Filesystem( $this->get_uri() . '/template'); // Dossier contenant les templates
@@ -148,9 +186,7 @@ class sp_module
 	      'cache' => false
 	    ));
 		}
-
 		return  $this->twig->render( $template_name, $array_info );
-
 	}
 	/**
 	 * Return le path of extend class
@@ -167,8 +203,7 @@ class sp_module
 	 */
 	public function find_core()
 	{
-		global $sp_core;
-		return $sp_core;
+		global $sp_core;	return $sp_core;
 	}
 	/**
 	 * This function add a submodule for module
@@ -192,7 +227,7 @@ class sp_module
 
 					$first_elem = $args_default;
 					$first_elem['url'] = $this->core->controller->url;
-					$first_elem['url'] .= "&module={$this->slug}";
+					$first_elem['url'] .= "&module={$this->get_slug()}";
 					$first_elem['name'] = 'Home';
 					$first_elem['slug'] = 'home';
 					$this->sub_module []= $first_elem;
@@ -207,7 +242,7 @@ class sp_module
 			if ( empty( $args['url'] ) ):
 
 				$args['url'] = $this->core->controller->url;
-				$args['url'] .= "&module={$this->slug}";
+				$args['url'] .= "&module={$this->get_slug()}";
 				$args['url'] .= "&sub_module={$args['slug']}";
 
 			endif;
@@ -217,6 +252,8 @@ class sp_module
 					require $this->get_uri() . '/sub_module/' . $args['sub_module'] . '.php';
 
 					$this->{$args['slug']} = new $args['sub_module']();
+					$this->{$args['slug']}->parent_module = $this->slug;
+					$this->{$args['slug']}->slug = $args['slug'];
 
 			endif;
 
@@ -229,7 +266,6 @@ class sp_module
 	 */
 	public function add_ajax_action( $args )
 	{
-
 			$args_default = 	array(
 					'name' => '',
 					'call_back' => '',
@@ -247,7 +283,6 @@ class sp_module
 						->add_ajax_listen( $args );
 
 			return true;
-
 	}
 	/**
 	 * This function add js in the personnal folder of module contain in the folder js
@@ -341,12 +376,11 @@ class sp_module
 			'name' => $name
 		);
 
-		if ( $this->data_schema() != false )
-		{
+		if ( $this->data_schema() != false ){
 				$args['schema'] = $this->data_schema();
 				$args['schema']['title'] = $name;
 				$args['schema']['module'] = $this->current_module->slug;
-				$args['schema']['sub_module'] = $this->current_sub_module['slug'];
+				$args['schema']['sub_module'] = $this->slug;
 		}
 
 		if ( $this->data_form() != false )

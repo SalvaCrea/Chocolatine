@@ -32,7 +32,7 @@ class sp_dev extends sp_module
     function view_back()
     {
       $modules = $this->core->modules->list_modules;
-      $modules['home']->actif = 'active';
+      $modules['sp_home']->actif = 'active';
 
       $view =  $this->twig_render(
         'sp_dev_home.html',

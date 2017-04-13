@@ -28,6 +28,7 @@ class sp_home extends sp_module
 
         $this->icon = 'fa-home';
 				$this->name = 'Home';
+				$this->slug = __CLASS__;
 				$this->description = "the home for the back of the salva_back";
 				$this->show_in_menu = true;
 				$this->menu_position = 0;
@@ -35,8 +36,8 @@ class sp_home extends sp_module
     }
     public function view_back_sp()
     {
-			//	Generate the loader during the chargement
-			$this->generate_view_loader();
+				//	Generate the loader during the chargement
+				$this->generate_view_loader();
 
 			// the instance of the sp_template
 			$view = new sp_template();
