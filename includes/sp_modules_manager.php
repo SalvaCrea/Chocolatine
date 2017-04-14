@@ -44,7 +44,7 @@ class sp_module_manager
 
 									// execute the class
 									$current_class = new $folder_root['name']();
-
+									$current_class->url = "/wp-admin/admin.php?page=salva_powa&module=" . $current_class->get_slug();
 									$this->list_modules[ $current_class->get_slug() ] = $current_class;
 
 						}

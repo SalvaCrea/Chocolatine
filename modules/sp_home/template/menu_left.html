@@ -8,25 +8,21 @@
 		</div>
 </div>
 
-<ul class='menu_list'>
+{% verbatim %}
 
-	{% for menu_item in menu_list %}
+<div class='menu_list' ng-controller="menu_left">
+			<ul  ng-repeat="(key, items_menu) in items_menu_filted">
+				<span class="categorie"> {{key}} </span>
 
-		{% if menu_item.show_in_menu  %}
+				<li ng-repeat="item in items_menu">
 
-			<li class="
-			{% if menu_item.selected == true %}
-	    selected
-			{% endif %}
-			">
-				<a href="?page=salva_powa&module={{menu_item.slug|raw}}">
-					<i class='fa {{menu_item.icon|raw}}' aria-hidden="true"></i>
-					{{menu_item.name|raw}}
-				</a>
-			</li>
+					<a href="{{item.url}}">
+						<i class='fa {{item.icon}}'></i>
+						{{item.name}}
+</a>
+				</li>
 
-		{% endif %}
+			</ul>
+</div>
 
-	{% endfor %}
-
-</ul>
+{% endverbatim %}

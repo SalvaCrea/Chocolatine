@@ -15,12 +15,28 @@ class sp_template extends sp_module
 
 			$this->icon = 'fa-file-text-o';
 			$this->name = 'SP Template';
+			$this->slug = 'sp_template';
 			$this->description = "The motor of template";
-
+			$this->angular_apps = '';
 	}
 
-	function generate()
+	function generate( $args = array() )
 	{
+
+		$args_default = array(
+				'angular_apps' => ''
+		);
+
+		$angular_apps_html = '';
+
+		$args = array_merge($args_default, $args);
+
+
+		if ( !empty( $args['angular_apps'] ) ) {
+				$this->angular_apps = $args['angular_apps'];
+				$angular_apps_html = "ng-app='{$this->angular_apps}'";
+		}
+
 		$this->dependency();
 
 		$id_css = $this->current_module->slug;
@@ -29,7 +45,7 @@ class sp_template extends sp_module
 			 $id_css .= $this->current_sub_module['slug'];
 		}
 
-		echo "<div id=\"groovy_template\" class=\"{$id_css}\" >";
+		echo "<div id=\"groovy_template\" {$angular_apps_html} class=\"{$id_css}\" >";
 
 		do_action('start_groovy_template');
 

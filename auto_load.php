@@ -15,3 +15,5 @@ require_once(dirname(__FILE__).'/includes/sp_controller.php');
 require_once(dirname(__FILE__).'/includes/sp_modules_manager.php');
 
 require_once(dirname(__FILE__).'/includes/sp_module.php');
+
+require_once(dirname(__FILE__).'/includes/sp_sub_module.php');

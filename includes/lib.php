@@ -119,5 +119,5 @@ function sp_dev()
 function sp_get_module( $slug_module )
 {
     $core = sp_core();
-    return $core->modules->get_module( $data['module'] );
+    return $core->modules->get_module( $slug_module );
 }

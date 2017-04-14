@@ -125,7 +125,6 @@ class sp_ressources
           					 '//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'
           				 );
 
-
          				wp_enqueue_style(
          					'font_awesome',
          					 $sp_core->url_folder . '/bower_components/font-awesome/css/font-awesome.css'

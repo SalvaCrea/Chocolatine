@@ -28,7 +28,7 @@ class sp_home extends sp_module
 
         $this->icon = 'fa-home';
 				$this->name = 'Home';
-				$this->slug = __CLASS__;
+				$this->slug = 'sp_home';
 				$this->description = "the home for the back of the salva_back";
 				$this->show_in_menu = true;
 				$this->menu_position = 0;
@@ -40,11 +40,24 @@ class sp_home extends sp_module
 				$this->generate_view_loader();
 
 			// the instance of the sp_template
-			$view = new sp_template();
+			$view = sp_get_module('sp_template');
 
 			// convertie the current module in js
-			$this->convert_in_js( 'current_module', $this->current_module );
-			$this->convert_in_js( 'current_sub_module', $this->current_sub_module );
+			$this->convert_in_js( 'current_module',
+					array(
+						'name' => $this->current_module->name,
+						'slug' => $this->current_module->slug,
+						'categorie' => $this->current_module->categorie
+					)
+			);
+
+			// convertie the current_sub_module module in js
+			$this->convert_in_js( 'current_sub_module',
+					array(
+						'name' => $this->current_sub_module['name'],
+						'slug' => $this->current_sub_module['slug']
+					)
+			);
 
 			$this->generate_header();
 
@@ -58,7 +71,7 @@ class sp_home extends sp_module
 
 			$view->args = $this->template_args;
 
-			$view->generate();
+			$view->generate( array( 'angular_apps' => 'app_sp_powa' ) );
 
 			$this->add_module_js( 'sp_home.js' );
 			$this->add_module_css( 'sp_home.css' );
@@ -122,8 +135,6 @@ class sp_home extends sp_module
 		function generate_menu_left()
 		{
 
-			$menu_left['menu_list'] =  $this->core->modules->list_modules;
-			$menu_left['menu_list'][ $this->current_module->slug ]->selected = true;
 			$menu_left['logo_url'] =  $this->core->url_folder . '/assets/img/logo-salva-powa.png';
 			$menu_left['site_name'] =  get_bloginfo( 'name');
 
@@ -134,6 +145,39 @@ class sp_home extends sp_module
 					'method' =>'echo'
 				)]
 			);
+
+			$menu_left_js = array();
+
+			foreach ( $this->core->modules->list_modules as $current_module ) {
+
+					$current_item = array(
+						'slug' => $current_module->slug,
+						'name' => $current_module->name,
+						'url'  => $current_module->url,
+						'icon' => $current_module->icon,
+						'categorie' => $current_module->categorie,
+						'show_in_menu' => $current_module->show_in_menu
+					);
+
+					if ( !empty( $current_module->sub_module ) ) {
+
+							$current_item['sub_module'] = array();
+
+							foreach ( $current_module->sub_module as $key => $current_sub_module ) {
+
+									$current_sub_item = array(
+										'slug' => $current_sub_module['slug'],
+										'name' => $current_sub_module['name'],
+										'url'  => $current_sub_module['url']
+									);
+
+									$current_item['sub_module'][] = $current_sub_item;
+							}
+					}
+
+					$menu_left_js []= $current_item;
+			}
+			$this->convert_in_js( 'menu_left', $menu_left_js );
 
 			$this->menu_left = $menu_left;
 

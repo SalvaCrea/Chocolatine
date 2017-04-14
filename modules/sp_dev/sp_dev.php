@@ -17,6 +17,7 @@ class sp_dev extends sp_module
         $this->icon = 'fa-laptop';
 				$this->name = 'SP Maintenance';
 				$this->description = "For generate the form";
+        $this->categorie = 'develloper';
 
         $this->show_in_menu = true;
 

@@ -35,6 +35,11 @@ class sp_module
 	 */
 	var $menu_name;
 	/**
+	 * for the good rangement
+	 * @var string
+	 */
+	var $categorie;
+	/**
 	 * the patch of the class
 	 * @var string
 	 */
@@ -71,14 +76,10 @@ class sp_module
 	 */
 	var $url_folder;
 	/**
-	 * if it's a sub module parent module no empty and contain the slug of father
+	 * The url in the admin
 	 * @var string
 	 */
-	var $parent_module;
-	/**
-	 * This function is a fake constructor, in a php automatic father constructor automatically is not exist
-	 * @return boolean
-	 */
+	var $url;
 
 	function __get( $name )
 	{
@@ -155,19 +156,6 @@ class sp_module
 				$this->uri_folder = $this->dir_file_class();
 			}
 			return $this->uri_folder;
-	}
-	/**
-	 * Return the father of module if the module is a sub module
-	 * @return mixed false if not find or object if is find
-	 */
-	function get_father()
-	{
-			if ( !empty( $this->parent_module ) ) {
-					return $this->core->modules->get_module( $this->parent_module );
-			}
-			else{
-					return false;
-			}
 	}
 	/**
 	 * Use the framework twig like template motor
@@ -252,7 +240,7 @@ class sp_module
 					require $this->get_uri() . '/sub_module/' . $args['sub_module'] . '.php';
 
 					$this->{$args['slug']} = new $args['sub_module']();
-					$this->{$args['slug']}->parent_module = $this->slug;
+					$this->{$args['slug']}->parent_module = $this->get_slug();
 					$this->{$args['slug']}->slug = $args['slug'];
 
 			endif;
@@ -274,7 +262,7 @@ class sp_module
 
 			$args = array_merge( $args_default, $args);
 
-			$args['module'] = $this->slug;
+			$args['module'] = $this->get_slug();
 
 			$this->ajax_action []= $args;
 
@@ -320,77 +308,5 @@ class sp_module
 				{
 					 return false;
 				}
-	}
-	/**
-	 * Each module can have a schema of data
-	 * @return array the list of data
-	 */
-	public function data_schema()
-	{
-		return false;
-	}
-	/**
-	 * Each module can have a  form
-	 * @return array the list of form
-	 */
-	public function data_form()
-	{
-		return false;
-	}
-	/**
-	 * Each module can save a form
-	 * @return mixed
-	 */
-	public function save_form( $args )
-	{
-		return false;
-	}
-	/**
-	 * Return the name of the form
-	 * @return string name of the form
-	 */
-	public function get_name_form()
-	{
-			return $this->current_module->slug . '_' . $this->slug . '_model';
-	}
-	/**
-	 * Get data link of the module
-	 * @return array data of class
-	 */
-	public function get_model()
-	{
-			$model = get_option(  $this->get_name_form() );
-
-			if (  $model != false )
-					return  json_decode( $model, 1);
-
-			return false;
-	}
-	function generate_form()
-	{
-		$form =  $this->core->modules->get_module( 'sp_form' );
-
-		$name = $this->get_name_form();
-
-		$args = array(
-			'name' => $name
-		);
-
-		if ( $this->data_schema() != false ){
-				$args['schema'] = $this->data_schema();
-				$args['schema']['title'] = $name;
-				$args['schema']['module'] = $this->current_module->slug;
-				$args['schema']['sub_module'] = $this->slug;
-		}
-
-		if ( $this->data_form() != false )
-				$args['form'] = $this->data_form();
-
-		if (  $this->get_model() != false )
-				$args['model'] = $this->get_model();
-
-		$form = $form->create_form( $args );
-
-		return $form;
 	}
 }
