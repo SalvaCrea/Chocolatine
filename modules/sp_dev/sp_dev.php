@@ -29,6 +29,14 @@ class sp_dev extends sp_module
 						)
 				);
 
+        $this->add_sub_module(
+					array(
+						'name' => 'List views',
+						'call_back' => 'list_views',
+            'slug' => 'tools'
+					)
+				);
+
     }
     function view_back()
     {
@@ -43,8 +51,15 @@ class sp_dev extends sp_module
       );
       return $view;
     }
-    function view_module()
+    function list_views()
     {
+      $this->add_module_js( 'list_view.js' );
 
+      $list_view = $this->core->controller->views;
+      $this->convert_in_js( 'list_view', $list_view );
+
+      $view = $this->twig_render('list_view.html');
+
+      return $view;
     }
 }

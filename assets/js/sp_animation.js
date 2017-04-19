@@ -2,6 +2,8 @@ sp_load_animation = {
 	create : function()
 	{
 
+		$("#adminmenumain").hide(); 
+
 		$animation = $('<div>')
 		.attr(
 				{

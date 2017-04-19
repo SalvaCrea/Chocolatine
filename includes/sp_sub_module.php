@@ -5,10 +5,7 @@ namespace salva_powa;
 class sp_sub_module extends sp_module
 {
   var $parent_module;
-  /**
-   * This function is a fake constructor, in a php automatic father constructor automatically is not exist
-   * @return boolean
-   */
+
    /**
  	 * Return the father of module if the module is a sub module
  	 * @return mixed false if not find or object if is find
@@ -16,7 +13,7 @@ class sp_sub_module extends sp_module
  	function get_father()
  	{
  			if ( !empty( $this->parent_module ) ) {
- 					return $this->core->modules->get_module( $this->parent_module );
+ 					return $this->core->modules->get_module( $this->parent_module, false);
  			}
  			else{
  					return false;

@@ -14,16 +14,6 @@ class sp_module
 	 * @var string
 	 */
 	 var $slug;
- 	/**
- 	 * the version of the module
- 	 * @var string
- 	 */
-	var $version;
-	/**
-	 * the name of author
-	 * @var string
-	 */
-	var $author;
 	/**
 	 * The font awesome icon
 	 * @var string
@@ -40,11 +30,6 @@ class sp_module
 	 */
 	var $categorie;
 	/**
-	 * the patch of the class
-	 * @var string
-	 */
-	var $file_path;
-	/**
 	 * the position default in the list menu in the administration
 	 * @var integer
 	 */
@@ -54,7 +39,6 @@ class sp_module
 	 * @var boolean
 	 */
 	var $show_in_menu = false;
-
 	/**
 	 * This array is use for declarate the sub module
 	 * @var array
@@ -65,6 +49,11 @@ class sp_module
 	 * @var array
 	 */
 	var $ajax_action = array();
+	/**
+	 * This array contain the list of the view link module
+	 * @var array
+	 */
+	var $views = array();
 	/**
 	 *  this is the root folder
 	 * @var string
@@ -103,6 +92,43 @@ class sp_module
 				return $this->find_core()->controller->current_sub_module;
 
 	}
+	/**
+	 * Function call then when call the function get_module in module manager
+	 * @return mixed boolean false if not use;
+	 */
+	function getter()
+	{
+			return false;
+	}
+	/**
+	 * The view loader
+	 * @return boolean or mixed, return false if is empty
+	 */
+	public function loader_view()
+	{
+			return false;
+	}
+	/**
+	 * The sub module loader
+	 * @return boolean or mixed, return false if is empty
+	 */
+	public function loader_sud_mobule()
+	{
+			return false;
+	}
+	/**
+	 * The main view for administration
+	 * @return boolean or string, if definy return a string
+	 */
+	public function view_back()
+	{
+			return false;
+	}
+	/**
+	* Function use only sub_module 
+	* @return boolean return false, only sub_module return the father
+	*/
+ function get_father() { return false; }
 	/**
 	 * Return the slug of the class
 	 * @return string the id string of the class
@@ -197,11 +223,27 @@ class sp_module
 	 * This function add a submodule for module
 	 * @param [array] The arguments for add a submenu
 	 */
+	public function add_view( $args )
+	{
+
+		$args_default = array(
+			'name' => '',
+			'slug' => '',
+			'url' => '',
+			'call_back' => '',
+			'show_in_menu' => true,
+		);
+
+		$args = array_merge( $args_default, $args);
+
+		$this->views []= $args;
+		$this->core->controller->views []= $args;
+
+	}
 	public function add_sub_module( $args )
 	{
 
 			$args_default = array(
-				'icon' => '',
 				'name' => '',
 				'slug' => '',
 				'url' => '',
@@ -246,6 +288,7 @@ class sp_module
 			endif;
 
 			$this->sub_module []= $args;
+			$this->add_view( $args );
 
 	}
 	/**

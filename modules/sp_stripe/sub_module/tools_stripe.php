@@ -3,7 +3,7 @@
 use \salva_powa\sp_sub_module;
 use \Stripe\Stripe;
 
-class subcription_stripe_tools extends sp_sub_module
+class tools_stripe extends sp_sub_module
 {
 
         var $stripe_connected = false;
@@ -18,9 +18,10 @@ class subcription_stripe_tools extends sp_sub_module
          */
         function stripe_authentification()
         {
+
           $model = $this->father->config->get_model();
 
-            if ( !empty( $model  ) ) {
+            if ( !empty(  $model  ) ) {
 
                 if ( sp_dev() ) {
                   $key = $model['test_secret_key'];
@@ -30,32 +31,50 @@ class subcription_stripe_tools extends sp_sub_module
                 }
 
                 $stripe = \Stripe\Stripe::setApiKey( $key );
+
                 $this->stripe_connected = true;
             }
 
-
         }
-        function test_connected()
+        /**
+         * say if stripe is connected or not
+         * @return boolean
+         */
+        function is_connected()
         {
-          if ( !$this->stripe_connected )
-              $this->stripe_authentification();
+            if ( !$this->stripe_connected ) { return false ;}
+            else { return true; }
         }
+        /**
+         * Return the plans of stripe
+         * @return array the plans stripe
+         */
         function get_plans()
         {
-          $this->test_connected();
           return $plan = \Stripe\Plan::all(array('limit'=>100));
         }
         function get_subscriptions()
         {
-          $this->test_connected();
+
           $subscription = \Stripe\Subscription::all(array('limit'=>100));
 
           foreach ($subscription['data'] as $key => $value) {
 
-            $subscription['data'][$key]['email'] = \Stripe\Customer::retrieve( $value['customer'] )['email'];
+            // $subscription['data'][$key]['email'] = $this->get_customer_by_id( $value['customer'] )['email'];
 
           }
           return $subscription;
+        }
+        /**
+         * Return the customer by id stripe
+         * @param  string the id customer of api strip
+         * @return mixed object if find or boolean false is not false
+         */
+        function get_customer_by_id( $id_customer )
+        {
+              $customer = \Stripe\Customer::retrieve( $id_customer );
+
+              return $customer;
         }
 
 }

@@ -17,35 +17,32 @@ class sp_stripe extends sp_module
         $this->show_in_menu = true;
         $this->menu_position = 1;
         $this->categorie = 'api';
-        $this->add_sub_module(
-					array(
-						'name' => 'Configuration',
-						'call_back' => 'stripe_configuration',
-            'sub_module' => 'stripe_configuration',
-            'slug' => 'config'
-					)
-				);
 
-        $this->add_sub_module(
-					array(
-						'name' => 'Création d\'un abonné',
-						'call_back' => 'create_request_subcription',
-            'sub_module' => 'create_request_subcription',
-            'slug' => 'rq_subcription'
-					)
-				);
+    }
+    function loader_sud_mobule()
+    {
+      
+      $this->add_sub_module(
+        array(
+          'name' => 'Configuration',
+          'call_back' => 'stripe_configuration',
+          'sub_module' => 'stripe_configuration',
+          'slug' => 'config'
+        )
+      );
 
-        $this->add_sub_module(
-					array(
-						'name' => 'Création d\'un abonnement',
-						'call_back' => 'create_subscription_stripe',
-            'sub_module' => 'subcription_stripe_tools',
-            'slug' => 'tools'
-					)
-				);
+      $this->add_sub_module(
+        array(
+          'name' => 'tools stripe',
+          'sub_module' => 'tools_stripe',
+          'slug' => 'tools'
+        )
+      );
 
-
-
+    }
+    function getter()
+    {
+        $this->tools->stripe_authentification();
     }
 		function view_back()
 		{
@@ -85,19 +82,6 @@ class sp_stripe extends sp_module
 				return $view;
 
 		}
-		function create_request_subcription()
-		{
-      $form = $this->rq_subcription->generate_form();
 
-      $view =  $this->twig_render( 'create_request_subcription.html',
-          array( 'form' => $form )
-      );
-
-      return $view;
-		}
-    function create_subscription_stripe()
-    {
-      return $this->get_url();
-    }
 
 }

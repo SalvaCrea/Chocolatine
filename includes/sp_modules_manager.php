@@ -45,6 +45,15 @@ class sp_module_manager
 									// execute the class
 									$current_class = new $folder_root['name']();
 									$current_class->url = "/wp-admin/admin.php?page=salva_powa&module=" . $current_class->get_slug();
+									/**
+									 * Load the view of the module
+									 */
+									$current_class->loader_view();
+									/**
+									 * Load the sub module of the module
+									 */
+									$current_class->loader_sud_mobule();
+
 									$this->list_modules[ $current_class->get_slug() ] = $current_class;
 
 						}
@@ -79,12 +88,22 @@ class sp_module_manager
 			/**
 			 * This function return un module by the name
 			 * @param  [string] the slug of the module for find
+			 * @param  [boolean] execute true or false getter
 			 * @return [Mixed]   Return Object if find or false is not find
 			 */
-			public function get_module( $module )
+			public function get_module( $module, $getter = true )
 			{
 					if ( isset( $this->list_modules[ $module ] ) ) {
-							return $this->list_modules[ $module ];
+
+							$module =  $this->list_modules[ $module ];
+							/**
+							 * Execute the getter of the module
+							 */
+							if ( $getter ) 
+									$module->getter();
+
+							return $module;
+
 					}
 					else
 					{

@@ -121,3 +121,23 @@ function sp_get_module( $slug_module )
     $core = sp_core();
     return $core->modules->get_module( $slug_module );
 }
+/**
+ *  create a loader in js
+ * @return boolean true if the action is good
+ */
+function sp_create_loader_js()
+{
+  echo "
+    <div class='uil-ring-css' id='animation_loader'>
+      <div>
+      </div>
+    </div>
+    <style>
+    #adminmenumain
+    {
+      display: none;
+    }
+    </style>
+  ";
+  return true;
+}

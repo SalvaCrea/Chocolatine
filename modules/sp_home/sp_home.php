@@ -36,8 +36,6 @@ class sp_home extends sp_module
     }
     public function view_back_sp()
     {
-				//	Generate the loader during the chargement
-				$this->generate_view_loader();
 
 			// the instance of the sp_template
 			$view = sp_get_module('sp_template');
@@ -208,15 +206,6 @@ class sp_home extends sp_module
 				)]
 			);
 
-		}
-		public function generate_view_loader()
-		{
-			echo "
-				<div class='uil-ring-css' id='animation_loader'>
-					<div>
-					</div>
-				</div>
-			";
 		}
 
 }

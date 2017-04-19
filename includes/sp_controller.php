@@ -34,7 +34,11 @@ class sp_controller
         // 'slug' => '',
         // 'url'  => ''
       );
-
+      /**
+      * the list of views
+      * @var array
+       */
+      var $views = array();
 
       function __construct()
       {

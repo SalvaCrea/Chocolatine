@@ -90,9 +90,6 @@ class sp_core
 
 				$this->ajax = new sp_ajax();
 
-				if ( is_sp_admin() )
-						$this->ajax->add_ressource();
-
 				$this->modules = new sp_module_manager();
 
 				$this->controller =  new sp_controller();
@@ -100,6 +97,11 @@ class sp_core
 				$this->modules->search_modules();
 
 				$this->controller->init();
+
+				if ( is_sp_admin() )
+				{
+					$this->ajax->add_ressource();
+				}
 
 			}
 			/**
@@ -151,7 +153,7 @@ class sp_core
 			 */
 			public function create_back_view()
 			{
-
+					 sp_create_loader_js();
 					 $view = $this->modules->get_module( 'sp_home' );
 					 $view->view_back_sp();
 
