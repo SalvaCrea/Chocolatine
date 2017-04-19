@@ -51,13 +51,21 @@ class sp_home extends sp_module
 					)
 			);
 
+			if ( !empty( $this->current_sub_module )) {
+				$current_sub_module = array(
+					'name' => $this->current_sub_module['name'],
+					'slug' => $this->current_sub_module['slug']
+				);
+			}
+			else
+			{
+				$current_sub_module = false;
+			}
 			// convertie the current_sub_module module in js
-			$this->convert_in_js( 'current_sub_module',
-					array(
-						'name' => $this->current_sub_module['name'],
-						'slug' => $this->current_sub_module['slug']
-					)
-			);
+			$this->convert_in_js( 'current_sub_module', $current_sub_module );
+
+			$this->add_module_js( 'sp_home.js' );
+			$this->add_module_css( 'sp_home.css' );
 
 			$this->generate_header();
 
@@ -72,9 +80,6 @@ class sp_home extends sp_module
 			$view->args = $this->template_args;
 
 			$view->generate( array( 'angular_apps' => 'app_sp_powa' ) );
-
-			$this->add_module_js( 'sp_home.js' );
-			$this->add_module_css( 'sp_home.css' );
 
     }
 		function generate_javascript_var()

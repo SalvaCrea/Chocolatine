@@ -14,12 +14,13 @@
 			<ul  ng-repeat="(key, items_menu) in items_menu_filted">
 				<span class="categorie"> {{key}} </span>
 
-				<li ng-repeat="item in items_menu">
+				<li ng-click="change_page(item)"
+				ng-class="{selected: current_module.slug==item.slug}"
+				ng-repeat="item in items_menu">
 
-					<a href="{{item.url}}">
 						<i class='fa {{item.icon}}'></i>
 						{{item.name}}
-</a>
+
 				</li>
 
 			</ul>

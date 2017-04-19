@@ -14,7 +14,7 @@ class sp_taxomamy_manager extends sp_module
         $this->icon = 'fa-tags';
 				$this->name = 'Taxomany manager';
 				$this->description = "For create and manage taxomany";
-
+        $this->categorie = "develloper";
 				add_action( 'init', array( $this, 'generate_tax' ), 0 );
 
 				$this->show_in_menu = true;

@@ -11,6 +11,7 @@ class sp_query_post extends sp_module
         $this->icon = 'fa-spinner';
 				$this->name = 'Sp Query Post';
 				$this->description = "With me, you search personnal post and meta";
+        $this->categorie = "develloper";
 
 				if ( is_admin() ) {
 
@@ -40,7 +41,7 @@ class sp_query_post extends sp_module
 		}
 		function view_back()
 		{
-					return 'mange';
+					return 'Uniquement pour les dev';
 		}
 
 

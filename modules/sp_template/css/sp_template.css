@@ -67,11 +67,20 @@
 		margin-left: -15px;
 		margin-right: -15px;
 		padding: 9px 15px;
+		cursor: pointer;
+		transition: all 0.4s ease-in-out 0s;
+}
+#groovy_template #sp_menu_left .menu_list li:hover
+{
+		background : #f8fdff;
+		transition: all 0.4s ease-in-out 0s;
 }
 #groovy_template #sp_menu_left .menu_list .categorie
 {
 		text-transform: uppercase;
 		font-weight: 700;
+		display: block;
+		padding: 10px 0px;
 }
 #groovy_template #menu_left_exist
 {

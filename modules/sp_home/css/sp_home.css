@@ -53,12 +53,15 @@ body
 {
 			padding: 15px;
 	    margin: -15px;
-	    background: #565656;
 	    margin-bottom: 0;
-	    border-bottom: 1px solid #000;
+	    border-bottom: 1px solid #b1c3c4;
 			height: 85px;
     	max-height: 85px;
 			display: flex;
+			background-image: url(http://dev.tripconnexion.com/wp-content/plugins/salva-powa-wordpress/assets/img/header.jpg);
+    background-size: cover;
+		box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px, rgba(0, 0, 0, 0.137255) 0px 1px 1px 0px, rgba(0, 0, 0, 0.117647) 0px 2px 1px -1px;
+
 }
 
 #groovy_template #logo_menu_left #content_logo
@@ -87,7 +90,7 @@ body
 			color: white;
 			font-size: 18px;
     	font-family: roboto;
-			text-shadow: 0 0 1px #191919;
+			text-shadow: 0 0 7px #076489;
 }
 #groovy_template #headerpage .titles_header h1 {
     font-size: 20px;
@@ -95,6 +98,7 @@ body
 }
 #groovy_template #headerpage .titles_header h2 {
 			font-size: 17px;
+			    text-align: left;
 	    margin-top: 33px;
 }
 #groovy_template #sp_menu_left {
@@ -112,9 +116,8 @@ body
 }
 #groovy_template #sp_menu_left .menu_list li.selected
 {
-		background: #00131d;
+		background: #33a5bc;
 		color : white;
-		border-bottom: 1px solid #464444;
 }
 #groovy_template #sp_menu_left .menu_list li.selected a,
 #groovy_template #sp_menu_left .menu_list li.selected i

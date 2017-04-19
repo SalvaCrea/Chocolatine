@@ -1,5 +1,5 @@
-angular.module('sp_form', ['schemaForm'])
-       .controller('sp_form_controler', function($scope) {
+
+app_sp_powa.controller('sp_form_controler', function($scope) {
 
   $scope.schema = sp_powa.form.schema;
   $scope.form = sp_powa.form.form;
