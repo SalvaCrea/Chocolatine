@@ -19,9 +19,9 @@ class sp_stripe extends sp_module
         $this->categorie = 'api';
 
     }
-    function loader_sud_mobule()
+    function loader_sub_module()
     {
-      
+
       $this->add_sub_module(
         array(
           'name' => 'Configuration',
@@ -35,29 +35,27 @@ class sp_stripe extends sp_module
         array(
           'name' => 'tools stripe',
           'sub_module' => 'tools_stripe',
-          'slug' => 'tools'
+          'slug' => 'tool',
+          'show_in_menu' => false
         )
       );
 
     }
     function getter()
     {
-        $this->tools->stripe_authentification();
+        $this->tool->stripe_authentification();
     }
 		function view_back()
 		{
+      $this->tool->stripe_authentification();
 
-      if ( !empty( $this->config->get_model()  ) ) {
+      if (  $this->tool->is_connected() ) {
 
-      $plans = $this->tools->get_plans();
+      $this->add_module_js('subcription_stripe.js');
 
-      $this->convert_in_js( 'stripe_plans', $plans['data'] );
+      $plans = $this->tool->get_plans();
 
-      $subscriptions = $this->tools->get_subscriptions();
-
-      $this->convert_in_js( 'stripe_subscription', $subscriptions['data'] );
-
-			$this->add_module_js( 'subcription_stripe.js' );
+      $this->convert_in_js('stripe_plans', $plans['data'] );
 
 			$view =  $this->twig_render( 'subcription_stripe_home.html',
 					array()

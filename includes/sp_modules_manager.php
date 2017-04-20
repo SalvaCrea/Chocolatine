@@ -52,7 +52,7 @@ class sp_module_manager
 									/**
 									 * Load the sub module of the module
 									 */
-									$current_class->loader_sud_mobule();
+									$current_class->loader_sub_module();
 
 									$this->list_modules[ $current_class->get_slug() ] = $current_class;
 
@@ -99,7 +99,7 @@ class sp_module_manager
 							/**
 							 * Execute the getter of the module
 							 */
-							if ( $getter ) 
+							if ( $getter )
 									$module->getter();
 
 							return $module;

@@ -44,8 +44,8 @@ body
 #groovy_template #headerpage {
     text-align: left;
 		box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-		height: 85px;
-    max-height: 85px;
+		height: 69px;
+    max-height: 69px;
 }
 
 
@@ -55,8 +55,8 @@ body
 	    margin: -15px;
 	    margin-bottom: 0;
 	    border-bottom: 1px solid #b1c3c4;
-			height: 85px;
-    	max-height: 85px;
+			height: 69px;
+	    max-height: 69px;
 			display: flex;
 			background-image: url(http://dev.tripconnexion.com/wp-content/plugins/salva-powa-wordpress/assets/img/header.jpg);
     background-size: cover;
@@ -95,10 +95,12 @@ body
 #groovy_template #headerpage .titles_header h1 {
     font-size: 20px;
     margin-top: 25px;
+		text-align: left;
 }
 #groovy_template #headerpage .titles_header h2 {
 			font-size: 17px;
 	    margin-top: 33px;
+			text-align: left;
 }
 #groovy_template #sp_menu_left {
 
@@ -211,6 +213,12 @@ table.dataTable .row-border thead
 }
 table.dataTable.no-footer {
     border-bottom: none;
+}
+table.dataTable tbody td:first-child {
+    padding-left: 24px;
+}
+table.dataTable tbody td:last-child {
+    padding-right: 24px;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     background: #FFF;

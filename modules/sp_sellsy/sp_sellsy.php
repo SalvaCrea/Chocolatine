@@ -18,31 +18,41 @@ class sp_sellsy extends sp_module
 				$this->menu_position = 1;
         $this->categorie = 'api';
 
-        $this->add_sub_module(
-					array(
-						'name' => 'Configuration de Sellsy',
-						'call_back' => 'config_sellsy',
-            'sub_module' => 'config_sellsy',
-            'slug' => 'config'
-					)
-				);
 
-        $this->add_sub_module(
-					array(
-						'name' => 'Functions MailJet',
-            'sub_module' => 'tools_sellsy',
-            'slug' => 'tool',
-            'show_in_menu' => false
-					)
-				);
 
     }
+    function loader_sub_module()
+    {
+      $this->add_sub_module(
+        array(
+          'name' => 'Configuration de Sellsy',
+          'call_back' => 'config_sellsy',
+          'sub_module' => 'config_sellsy',
+          'slug' => 'config'
+        )
+      );
+
+      $this->add_sub_module(
+        array(
+          'name' => 'Functions MailJet',
+          'sub_module' => 'tools_sellsy',
+          'slug' => 'tool',
+          'show_in_menu' => false
+        )
+      );
+    }
+    function getter()
+    {
+        $this->tool->sellsyConnect();
+    }
     /**
-     * The interface of configuration for api mail jet
+     * The interface of configuration for api sellsy
      * @return string contain the form of configuration
      */
     function view_back()
     {
+
+      $this->tool->sellsyConnect();
 
       $client = $this->tool->find_client();
 

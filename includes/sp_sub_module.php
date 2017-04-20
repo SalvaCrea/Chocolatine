@@ -49,7 +49,7 @@ class sp_sub_module extends sp_module
     */
    public function get_name_form()
    {
-       return $this->current_module->slug . '_' . $this->get_slug() . '_model';
+       return $this->father->get_slug() . '_' . $this->get_slug() . '_model';
    }
    /**
     * Get data link of the module

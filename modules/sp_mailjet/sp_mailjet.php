@@ -16,24 +16,28 @@ class sp_mailjet extends sp_module
 				$this->menu_position = 1;
         $this->categorie = 'api';
 
-        $this->add_sub_module(
-					array(
-						'name' => 'Configuration de MailJet',
-						'call_back' => 'config_mailjet',
-            'sub_module' => 'config_mailjet',
-            'slug' => 'config',
-            'show_in_menu' => false
-					)
-				);
+    }
+    function loader_sub_module()
+    {
 
-        $this->add_sub_module(
-					array(
-						'name' => 'Functions MailJet',
-            'sub_module' => 'tools_mailjet',
-            'slug' => 'tool',
-            'show_in_menu' => false
-					)
-				);
+      $this->add_sub_module(
+        array(
+          'name' => 'Configuration de MailJet',
+          'call_back' => 'config_mailjet',
+          'sub_module' => 'config_mailjet',
+          'slug' => 'config',
+          'show_in_menu' => false
+        )
+      );
+
+      $this->add_sub_module(
+        array(
+          'name' => 'Functions MailJet',
+          'sub_module' => 'tools_mailjet',
+          'slug' => 'tool',
+          'show_in_menu' => false
+        )
+      );
 
     }
     /**

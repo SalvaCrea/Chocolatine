@@ -10,14 +10,13 @@ class tools_sellsy extends sp_sub_module
   	 */
       var $sellesyconnected = false;
 
-      public function __call($method,$args)
-      {
-          sp_dump($method);
-          sp_dump($args);
-      }
-
+      /**
+       * Function for connected Sellsy and the module
+       * @return [type] [description]
+       */
       function sellsyConnect()
       {
+
           $model = $this->father->config->get_model();
           if ( !empty( $model ) && !$this->sellesyconnected ) {
 
@@ -26,18 +25,38 @@ class tools_sellsy extends sp_sub_module
             sellsyConnect_curl::$oauth_consumer_key = $model['consumer_token'];
             sellsyConnect_curl::$oauth_consumer_secret = $model['consumer_secret'];
 
-            $this->sellesyconnected = true;
-          }
-          else
-          {
-            $this->sellesyconnected = false;
+            if ( $this->test_connect_sellsy() ) 
+               $this->sellesyconnected = true;
+
           }
 
           return $this->sellesyconnected;
       }
+      /**
+       * Test the connexion under the module and stripe
+       * @return boolean return true if the connection is good
+       */
+      function test_connect_sellsy()
+      {
+
+        $client = $this->find_client();
+
+        if ( !empty( $client->response->result ) ) {
+            return true;
+        }
+        else
+        {
+          return false;
+        }
+
+      }
+      /**
+       * This function the motor search of selldy
+       * @param  array  $args the argument of research
+       * @return [type]       the result
+       */
       function find_client( $args = array() )
       {
-        $this->sellsyConnect();
 
         $args_default = array(
             'email'         => '',

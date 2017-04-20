@@ -21,7 +21,7 @@ class tools_stripe extends sp_sub_module
 
           $model = $this->father->config->get_model();
 
-            if ( !empty(  $model  ) ) {
+            if ( !empty(  $model  ) && !$this->stripe_connected ) {
 
                 if ( sp_dev() ) {
                   $key = $model['test_secret_key'];
@@ -29,11 +29,35 @@ class tools_stripe extends sp_sub_module
                 else {
                   $key = $model['live_secret_key'];
                 }
+                /**
+                 * identification for api stripe
+                 */
+                \Stripe\Stripe::setApiKey( $key );
+                /**
+                 *  test the connection
+                 */
+                if ( $this->test_connect_stripe() ) {
+                    $this->stripe_connected = true;
+                }
 
-                $stripe = \Stripe\Stripe::setApiKey( $key );
-
-                $this->stripe_connected = true;
             }
+
+            return $this->stripe_connected;
+        }
+        /**
+         * Test the connexion under the module and stripe
+         * @return boolean return true if the connection is good
+         */
+        function test_connect_stripe()
+        {
+
+          try {
+              $this->get_plans( array( 'limit' => '1' ) );
+              return true;
+          } catch (Exception $e) {
+              sp_dump( $e->getMessage() );
+              return false;
+          }
 
         }
         /**
@@ -49,21 +73,35 @@ class tools_stripe extends sp_sub_module
          * Return the plans of stripe
          * @return array the plans stripe
          */
-        function get_plans()
+        function get_plans( $args = array() )
         {
-          return $plan = \Stripe\Plan::all(array('limit'=>100));
+
+          $args_default = array(
+            'limit' => 50
+          );
+
+          $args = array_merge( $args_default, $args );
+
+          return $plan = \Stripe\Plan::all( $args );
         }
-        function get_subscriptions()
+        /**
+         * The list of subcription stripe
+         * @param  array  $args the arguments of search
+         * @return array contain the subscription
+         */
+        function get_subscriptions( $args = array() )
         {
 
-          $subscription = \Stripe\Subscription::all(array('limit'=>100));
+          $args_default = array(
+            'limit' => 50
+          );
 
-          foreach ($subscription['data'] as $key => $value) {
+          $args = array_merge( $args_default, $args );
 
-            // $subscription['data'][$key]['email'] = $this->get_customer_by_id( $value['customer'] )['email'];
+          $subscription = \Stripe\Subscription::all( $args );
 
-          }
           return $subscription;
+
         }
         /**
          * Return the customer by id stripe
@@ -76,5 +114,36 @@ class tools_stripe extends sp_sub_module
 
               return $customer;
         }
+        /**
+         * Create a plan for subscription user
+         * @param  array  $args the argument for create plan
+         * @param  int  $ammount the somme for create plan
+         * @return object return the object create by stripe
+         */
+        function create_plan(  float $ammount ,  $args = array() )
+        {
+
+          $args_default = array(
+
+            'name' => 'Subcription of ' . $ammount . '€',
+            'currency' => 'eur',
+            "interval" => "month",
+
+          );
+
+          $args = array_merge( $args_default, $args );
+
+          $plan = \Stripe\Plan::create(array(
+            "amount" => $ammount * 100,
+            "interval" => $args['interval'],
+            "name" => $args['name'],
+            "currency" => $args['currency'],
+            "id" => "abo".$ammount )
+          );
+
+          return $plan;
+        }
+
+
 
 }

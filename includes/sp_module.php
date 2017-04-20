@@ -112,7 +112,7 @@ class sp_module
 	 * The sub module loader
 	 * @return boolean or mixed, return false if is empty
 	 */
-	public function loader_sud_mobule()
+	public function loader_sub_module()
 	{
 			return false;
 	}
@@ -125,7 +125,7 @@ class sp_module
 			return false;
 	}
 	/**
-	* Function use only sub_module 
+	* Function use only sub_module
 	* @return boolean return false, only sub_module return the father
 	*/
  function get_father() { return false; }

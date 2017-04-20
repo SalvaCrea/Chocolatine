@@ -30,17 +30,3 @@ $(function(){
     } );
 
 });
-
-
-$(function(){
-
-    $('#list_plans_subscription').DataTable( {
-        data: sp_powa.stripe_subscription,
-        columns: [
-            { "data": "customer" },
-            { "data": "plan.name" },
-            { "data": "email" }
-        ] 
-    } );
-
-});
