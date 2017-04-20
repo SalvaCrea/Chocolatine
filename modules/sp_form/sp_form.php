@@ -64,9 +64,10 @@ class sp_form extends sp_module
         $schema = $sub_module->data_schema();
 
         if ( $schema['save'] == 'simple')
-              $this->save_form_simple( $data );
+              return $this->save_form_simple( $data );
 
-        return true;
+        if ( $schema['save'] == 'self' )
+              return $sub_module->save_form( $data );
 
     }
     function save_form_simple( $data )
@@ -76,6 +77,8 @@ class sp_form extends sp_module
         $data['name_form']
       , json_encode( $data )
       );
+
+      return true;
 
     }
 }

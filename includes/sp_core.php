@@ -89,7 +89,9 @@ class sp_core
 				$this->init_medoo();
 
 				$this->ajax = new sp_ajax();
-
+				if ( is_sp_admin() )
+					$this->ajax->add_ressource();
+					
 				$this->modules = new sp_module_manager();
 
 				$this->controller =  new sp_controller();
@@ -98,10 +100,7 @@ class sp_core
 
 				$this->controller->init();
 
-				if ( is_sp_admin() )
-				{
-					$this->ajax->add_ressource();
-				}
+
 
 			}
 			/**

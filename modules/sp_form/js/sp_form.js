@@ -1,4 +1,3 @@
-
 app_sp_powa.controller('sp_form_controler', function($scope) {
 
   $scope.schema = sp_powa.form.schema;
@@ -19,7 +18,10 @@ app_sp_powa.controller('sp_form_controler', function($scope) {
 			save_form.sub_module = 'save_form';
 
 			response = save_form.send();
-      console.log(response);
+
+      if ( response ) {
+        toastr.info('Votre action à bien été effectuée');
+      }
 	}
 
 

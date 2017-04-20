@@ -120,6 +120,16 @@ class sp_ressources
           					 '//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css'
           				 );
 
+                   wp_enqueue_script(
+                     'toastr.min.js',
+                      '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'
+                    );
+
+                    wp_enqueue_style(
+                     'toastr.min.css',
+                      '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'
+                    );
+
           		    wp_enqueue_script(
           					'sp_dataTable_Js',
           					 '//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'
