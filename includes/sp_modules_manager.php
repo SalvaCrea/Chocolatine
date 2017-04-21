@@ -53,7 +53,14 @@ class sp_module_manager
 									 * Load the sub module of the module
 									 */
 									$current_class->loader_sub_module();
+									/**
+									 * Load the sub module of the module
+									 */
+									$current_class->loader_ajax_action();
 
+									/**
+									 * Add the module in the list
+									 */
 									$this->list_modules[ $current_class->get_slug() ] = $current_class;
 
 						}

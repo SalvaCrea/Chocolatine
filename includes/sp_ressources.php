@@ -56,8 +56,14 @@ class sp_ressources
 
          				wp_enqueue_script(
          					'Jquery',
-         					'//code.jquery.com/jquery-3.2.1.min.js'
+         					'https://code.jquery.com/jquery-2.2.4.min.js'
          				);
+
+                wp_enqueue_script(
+         					'JqueryUi',
+         					'https://code.jquery.com/ui/1.11.3/jquery-ui.min.js'
+         				);
+
 
          				wp_enqueue_script(
          					'Angular',

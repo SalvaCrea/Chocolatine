@@ -104,7 +104,7 @@ class sp_ajax
 
 					if ( !$this->security_role() )
 										return false;
-
+          
 					// get the module
 					$module = $this->core->modules->get_module( $ajax_current_actions['module'] );
 

@@ -117,6 +117,14 @@ class sp_module
 			return false;
 	}
 	/**
+	 * The ajax loader ajax action
+	 * @return boolean or mixed, return false if is empty
+	 */
+	public function loader_ajax_action()
+	{
+			return false;
+	}
+	/**
 	 * The main view for administration
 	 * @return boolean or string, if definy return a string
 	 */
