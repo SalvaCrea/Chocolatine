@@ -141,3 +141,23 @@ function sp_create_loader_js()
   ";
   return true;
 }
+/**
+ * [sp_get_current_name_folder description]
+ * @param  [type] $file [description]
+ * @return [type]       [description]
+ */
+function sp_get_current_name_folder( $file )
+{
+
+  if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+      $separator = '\\';
+  } else {
+      $separator = '/';
+  }
+
+  $position = strrpos( $file ,$separator );
+
+  $name_folder =  substr( $file ,$position + 1 );
+
+  return $name_folder;
+}

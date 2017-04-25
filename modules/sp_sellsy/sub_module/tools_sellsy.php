@@ -18,6 +18,7 @@ class tools_sellsy extends sp_sub_module
       {
 
           $model = $this->father->config->get_model();
+        
           if ( !empty( $model ) && !$this->sellesyconnected ) {
 
             sellsyConnect_curl::$oauth_access_token = $model['utilisateur_token'];
@@ -25,7 +26,7 @@ class tools_sellsy extends sp_sub_module
             sellsyConnect_curl::$oauth_consumer_key = $model['consumer_token'];
             sellsyConnect_curl::$oauth_consumer_secret = $model['consumer_secret'];
 
-            if ( $this->test_connect_sellsy() ) 
+            if ( $this->test_connect_sellsy() )
                $this->sellesyconnected = true;
 
           }

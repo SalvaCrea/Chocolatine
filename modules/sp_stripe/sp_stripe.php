@@ -18,6 +18,7 @@ class sp_stripe extends sp_module
         $this->menu_position = 1;
         $this->categorie = 'api';
 
+        require "vendor/autoload.php";
     }
     function loader_sub_module()
     {

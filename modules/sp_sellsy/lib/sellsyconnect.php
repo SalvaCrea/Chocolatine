@@ -1,4 +1,4 @@
-<?
+<?php 
 
 class sellsyConnect_curl {
 

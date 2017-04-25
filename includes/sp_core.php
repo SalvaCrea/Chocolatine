@@ -4,7 +4,7 @@
  */
 
 namespace salva_powa;
-use \Medoo;
+use Medoo\Medoo;
 
 class sp_core
 {
@@ -70,7 +70,8 @@ class sp_core
 			{
 
 				$this->uri_folder = dirname( dirname(__FILE__) );
-				$this->url_folder = plugins_url( 'salva-powa-wordpress' );
+
+				$this->url_folder = '/wp-content/plugins/' . sp_get_current_name_folder( $this->uri_folder );
 
 				$this->config = json_decode ( get_option( $this->slug ), 1 );
 
@@ -91,7 +92,7 @@ class sp_core
 				$this->ajax = new sp_ajax();
 				if ( is_sp_admin() )
 					$this->ajax->add_ressource();
-					
+
 				$this->modules = new sp_module_manager();
 
 				$this->controller =  new sp_controller();

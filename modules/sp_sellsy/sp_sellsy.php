@@ -18,8 +18,6 @@ class sp_sellsy extends sp_module
 				$this->menu_position = 1;
         $this->categorie = 'api';
 
-
-
     }
     function loader_sub_module()
     {

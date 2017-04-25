@@ -9,11 +9,18 @@
  * Author URI: http://salva-crea.fr
  * License: GPL2
  */
- 
 
-require_once( dirname(__FILE__).'/auto_load.php' );
+use \salva_powa\sp_core;
 
-use \salva_powa\sp_core; 
+/**
+ * Load the auto loader
+ */
+require "/auto_load.php";
+
+/**
+ * Load the config for Sp Framework
+ */
+require "/sp_config.php";
 
 if (  is_admin() ) {
 
