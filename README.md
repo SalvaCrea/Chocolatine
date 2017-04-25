@@ -1,4 +1,1 @@
-salva-powa-wordpress
-
-Plugin for customize Wordpress
- 
+The little Framework oriented Object for Wordpress

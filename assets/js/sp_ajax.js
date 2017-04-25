@@ -15,6 +15,7 @@ var sp_ajax  =
 
     send : function()
     {
+
 			sp_load_animation.show();
 
       func = this;
@@ -32,14 +33,17 @@ var sp_ajax  =
 					 },
   	       success : function(msg)
   	       {
+
   	          func.content_return = msg;
+              func.success();
+
   	       },
   	       error : function(xhr, ajaxOptions, thrownError)
   	       {
               console.log('error');
               console.log(xhr);
-
               func.content_return = xhr;
+              func.error();
   	       }
   	    });
 
@@ -47,6 +51,14 @@ var sp_ajax  =
 
         return func.content_return;
 
+    },
+    success : function()
+    {
+        return true;
+    },
+    error : function()
+    {
+        return true;
     },
 		new : function()
 		{

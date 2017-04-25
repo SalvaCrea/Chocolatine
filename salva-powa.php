@@ -15,16 +15,17 @@ use \salva_powa\sp_core;
 /**
  * Load the auto loader
  */
-require "/auto_load.php";
+require "auto_load.php";
 
 /**
  * Load the config for Sp Framework
  */
-require "/sp_config.php";
+require "sp_config.php";
 
 if (  is_admin() ) {
 
   $sp_core = new sp_core();
+  $sp_core->config = $sp_config;
   $sp_core->init();
 
 }

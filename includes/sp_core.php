@@ -12,14 +12,14 @@ class sp_core
 			 *  this is the root folder
 			 * @var string
 			 */
-			var  $uri_folder;
+			var $uri_folder;
 			/**
 			 * this a web url
 			 * @var string
 			 */
-			var  $url_folder;
+			var $url_folder;
 			/**
-			 * The value of configuration for sp powa
+			 * The value of configuration for Sp Framework
 			 * @var array
 			 */
 			var $config;
@@ -73,8 +73,6 @@ class sp_core
 
 				$this->url_folder = '/wp-content/plugins/' . sp_get_current_name_folder( $this->uri_folder );
 
-				$this->config = json_decode ( get_option( $this->slug ), 1 );
-
 				if ( is_admin() )
 						add_action('admin_menu', array( $this, 'wp_admin_action' ));
 
@@ -100,8 +98,6 @@ class sp_core
 				$this->modules->search_modules();
 
 				$this->controller->init();
-
-
 
 			}
 			/**
