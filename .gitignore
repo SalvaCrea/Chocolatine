@@ -1,11 +1,4 @@
-node_modules
-dist
-.tmp
-.sass-cache
 bower_components
 vendor
-img
-.remote-sync.json
-*node_modules
+node_modules
 
-assets/sp_bootstrap/

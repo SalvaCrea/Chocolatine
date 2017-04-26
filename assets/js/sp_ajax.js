@@ -33,9 +33,9 @@ var sp_ajax  =
 					 },
   	       success : function(msg)
   	       {
-
+              console.log( msg );
   	          func.content_return = msg;
-              func.success();
+              func.success( msg );
 
   	       },
   	       error : function(xhr, ajaxOptions, thrownError)
@@ -43,7 +43,7 @@ var sp_ajax  =
               console.log('error');
               console.log(xhr);
               func.content_return = xhr;
-              func.error();
+              func.error( xhr );
   	       }
   	    });
 

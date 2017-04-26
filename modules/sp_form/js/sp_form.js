@@ -1,3 +1,5 @@
+save_form = sp_ajax.new();
+
 app_sp_powa.controller('sp_form_controler', function($scope) {
 
   $scope.schema = sp_powa.form.schema;
@@ -6,7 +8,6 @@ app_sp_powa.controller('sp_form_controler', function($scope) {
 
 	$scope.send = function()
 	{
-			save_form = sp_ajax.new();
 
 			save_form.args = Object.assign({}, $scope.model );
       save_form.args.name_form = $scope.schema.title;

@@ -12,8 +12,15 @@ class tools_stripe extends sp_sub_module
         {
               $this->name = 'stripeTools';
         }
+
+        /********************************************************************
+        *
+        *  Method Around the connection 
+        *
+        **********************************************************************/
+
         /**
-         * Connection MailJet
+         * Connection stripe
          * @return [type] [description]
          */
         function stripe_authentification()
@@ -69,21 +76,15 @@ class tools_stripe extends sp_sub_module
             if ( !$this->stripe_connected ) { return false ;}
             else { return true; }
         }
-        /**
-         * Return the plans of stripe
-         * @return array the plans stripe
-         */
-        function get_plans( $args = array() )
-        {
 
-          $args_default = array(
-            'limit' => 50
-          );
 
-          $args = array_merge( $args_default, $args );
+        /********************************************************************
+        *
+        *  Method Around the subscription
+        *
+        **********************************************************************/
 
-          return $plan = \Stripe\Plan::all( $args );
-        }
+
         /**
          * The list of subcription stripe
          * @param  array  $args the arguments of search
@@ -103,6 +104,13 @@ class tools_stripe extends sp_sub_module
           return $subscription;
 
         }
+
+        /********************************************************************
+        *
+        *  Method Around the customer
+        *
+        **********************************************************************/
+
         /**
          * Return the customer by id stripe
          * @param  string the id customer of api strip
@@ -113,6 +121,28 @@ class tools_stripe extends sp_sub_module
               $customer = \Stripe\Customer::retrieve( $id_customer );
 
               return $customer;
+        }
+
+        /********************************************************************
+        *
+        *  Method Around the plans
+        *
+        **********************************************************************/
+
+        /**
+         * Return the plans of stripe
+         * @return array the plans stripe
+         */
+        function get_plans( $args = array() )
+        {
+
+          $args_default = array(
+            'limit' => 50
+          );
+
+          $args = array_merge( $args_default, $args );
+
+          return $plan = \Stripe\Plan::all( $args );
         }
         /**
          * Create a plan for subscription user
@@ -143,7 +173,5 @@ class tools_stripe extends sp_sub_module
 
           return $plan;
         }
-
-
 
 }
