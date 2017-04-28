@@ -15,7 +15,7 @@ class tools_stripe extends sp_sub_module
 
         /********************************************************************
         *
-        *  Method Around the connection 
+        *  Method Around the connection
         *
         **********************************************************************/
 
@@ -137,7 +137,7 @@ class tools_stripe extends sp_sub_module
         {
 
           $args_default = array(
-            'limit' => 50
+            'limit' => 100
           );
 
           $args = array_merge( $args_default, $args );

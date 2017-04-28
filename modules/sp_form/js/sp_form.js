@@ -2,6 +2,8 @@ save_form = sp_ajax.new();
 
 app_sp_powa.controller('sp_form_controler', function($scope) {
 
+  save_form.scope = $scope;
+
   $scope.schema = sp_powa.form.schema;
   $scope.form = sp_powa.form.form;
   $scope.model = sp_powa.form.model;
@@ -23,7 +25,11 @@ app_sp_powa.controller('sp_form_controler', function($scope) {
       if ( response ) {
         toastr.info('Votre action à bien été effectuée');
       }
-	}
 
+	}
+  $scope.submitForm = function(ngform,modelData)
+  {
+      $scope.send();
+  }
 
 });

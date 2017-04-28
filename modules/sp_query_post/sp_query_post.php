@@ -68,10 +68,62 @@ class sp_query_post extends sp_module
 
 		function find_post( $args )
 		{
-       $result = $this->tool->find_post( $args );
-			 return $result;
+       $posts = (array) $this->tool->find_post( $args );
+			 return $posts;
 		}
+    function find_post_full( $args, $clean = false )
+    {
+       $posts = (array) $this->tool->find_post( $args );
 
+       foreach ( $posts['posts'] as $key => $value) {
+         $value = (array) $value;
+         $posts['posts'][$key] = (array) $posts['posts'][$key];
+         $meta_post =  get_post_meta( $value['ID'] );
+
+         if ( !$clean ) {
+             $posts['posts'][$key]['meta'] = $meta_post;
+         }
+         else if( $clean )
+         {
+             $meta_post = $this->tool->clean_meta( $meta_post );
+             $posts['posts'][$key] = array_merge( $posts['posts'][$key], $meta_post );
+         }
+
+       }
+       return $posts;
+    }
+    /**
+     * [get_post_full return a complete post wp with the meta]
+     * @param  [type]  $id_post [the id of post]
+     * @param  boolean $clean   [if true clean the result, ideal for table ]
+     * @return [array]           [the post]
+     */
+    function get_post_full( $id_post, $clean = false )
+    {
+
+        $post =  (array) get_post( $id_post );
+        $meta_post =   get_post_meta( $id_post );
+
+        if ( !$clean ) {
+            $post['meta'] = $meta_post;
+            return $post;
+        }
+        else if( $clean )
+        {
+
+            $meta_post = $this->tool->clean_meta( $meta_post );
+            $post = array_merge( $post, $meta_post );
+
+            return $post;
+        }
+
+
+    }
+    /***************************************************************************
+    *
+    *   The views
+    *
+    ***************************************************************************/
 		function view_back()
 		{
 					return 'Uniquement pour les dev';

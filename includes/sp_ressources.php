@@ -67,13 +67,13 @@ class sp_ressources
 
          				wp_enqueue_script(
          					'Angular',
-         					'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js'
+         					'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js'
          				);
 
          				// for the form
          				wp_enqueue_script(
          					'Angular-sanitize',
-         					 $sp_core->url_folder . '/bower_components/angular-sanitize/angular-sanitize.min.js'
+         					 'https://code.angularjs.org/1.6.0/angular-sanitize.min.js'
          				 );
 
          				wp_enqueue_script(

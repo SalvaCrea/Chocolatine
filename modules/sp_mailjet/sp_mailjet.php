@@ -64,7 +64,7 @@ class sp_mailjet extends sp_module
      * @param  array the variable for the html templatage
      * @return array  the response of api Mail jet
      */
-    function send_mail( $args, $template = false, $var_template = array() )
+    function send( $args, $template = false, $var_template = array() )
     {
         $model = $this->config->get_model();
         $mj = $this->tool->get_mj();

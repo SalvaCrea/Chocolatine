@@ -45,11 +45,12 @@ class sp_home extends sp_module
 					array(
 						'name' => $this->current_module->name,
 						'slug' => $this->current_module->slug,
-						'categorie' => $this->current_module->categorie
+						'categorie' => $this->current_module->categorie,
+						'url' => $this->current_module->url
 					)
 			);
 
-			if ( !empty( $this->current_sub_module )) {
+			if ( !empty( $this->current_sub_module ) ) {
 				$current_sub_module = array(
 					'name' => $this->current_sub_module['name'],
 					'slug' => $this->current_sub_module['slug']

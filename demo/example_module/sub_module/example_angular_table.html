@@ -1,0 +1,75 @@
+<script>
+	
+	 search_ajax = sp_ajax.new();
+
+app_sp_powa.controller('table_travel', function($scope, $http) {
+
+		$scope.offset = 0;
+
+		$scope.url_show_request = sp_powa.url_show_request;
+
+		search_ajax.module = sp_powa.current_module.slug;
+		search_ajax.sub_module = "ajax_query_travel";
+		search_ajax.args.offset = $scope.offset;
+
+		$scope.names = search_ajax.send();
+
+		$scope.pageNext = function()
+		{
+				$scope.offset++;
+				$scope.changePage();
+				$scope.names = search_ajax.send();
+		}
+
+		$scope.PageBack = function()
+		{
+				$scope.offset--;
+				$scope.changePage();
+				$scope.names = search_ajax.send();
+		}
+
+		$scope.changePage = function()
+		{
+					search_ajax.args.offset = $scope.offset;
+		}
+
+		$scope.redirection_show_request = function(id)
+		{
+					document.location.href= $scope.url_show_request + '&id_request=' + id;
+		}
+
+});
+
+
+
+</script>
+
+ {% verbatim %}
+<div class="well mg-t-15 pd-0">
+    <div  ng-controller="table_travel">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Type de demande</th>
+                    <th>Date</th>
+                    <th>Destination(s)</th>
+                    <th>Email</th>
+                    <th>Demande Finit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-click="redirection_show_request(x.id_demande)" ng-repeat="x in names">
+                    <td>{{ x.id_demande }}</td>
+                    <td>{{ x.type_demande }}</td>
+                    <td>{{ x.date_demande }}</td>
+                    <td>{{ x.destinationDMD }}</td>
+                    <td>{{ x.email_utilisateur }}</td>
+                    <td>{{ x.demandeFinit }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endverbatim %}
+

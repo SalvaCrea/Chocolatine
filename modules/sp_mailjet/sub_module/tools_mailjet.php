@@ -23,7 +23,15 @@ class tools_mailjet extends sp_sub_module
             $response = array();
 
             foreach ( $emails as  $value) {
-              $response []= array( 'Email' => $value );
+              // test if email is for mail jet
+              if ( key_exists( 'Email' , $value) ) {
+                 $response []= $value;
+              }
+              else
+              {
+                  $response []= array( 'Email' => $value );
+              }
+
             }
 
             return $response;

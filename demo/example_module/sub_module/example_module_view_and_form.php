@@ -8,6 +8,11 @@ class example_module_view_and_form extends sp_sub_module
         {
               $this->name = 'example_module_view_and_form';
         }
+        /**********************************************************************
+        *
+        *  The model link of the sub module
+        *
+        ***********************************************************************/
         function data_schema()
         {
 
@@ -29,6 +34,31 @@ class example_module_view_and_form extends sp_sub_module
           ];
 
           return $schema;
+        }
+        /**********************************************************************
+        *
+        *  The form link of the sub module
+        *
+        ***********************************************************************/
+        function data_form()
+        {
+
+          return [
+            "email_user", "name",
+            [
+              "key" => "amount",
+              "type" => "select",
+              "titleMap" => [
+                ['name' => "val1", 'value' => "1",]
+              ]
+            ],
+            [
+              "type" => "submit",
+              "title" => "Envoyer une demande",
+              "style" => "btn-info"
+            ]
+          ];
+
         }
 
 }

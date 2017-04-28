@@ -104,20 +104,20 @@ class sp_ajax
 
 					if ( !$this->security_role() )
 										return false;
-          
+
 					// get the module
 					$module = $this->core->modules->get_module( $ajax_current_actions['module'] );
 
 					// execute  the callback
 					$reponse = call_user_func(
 						array(
-							$module ,
+							$module,
 							$ajax_current_actions['call_back']
 						),
 						$this->args
 					);
 
-					echo json_encode( $reponse  );
+					echo json_encode( $reponse );
 
 					$this->ajax_current_actions = array();
 
