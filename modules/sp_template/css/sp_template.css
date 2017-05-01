@@ -70,7 +70,7 @@
 		cursor: pointer;
 		transition: all 0.4s ease-in-out 0s;
 }
-#groovy_template #sp_menu_left .menu_list li:hover
+#groovy_template #sp_menu_left .menu_list li:hover:not(.selected)
 {
 		background : #f8fdff;
 		transition: all 0.4s ease-in-out 0s;
@@ -96,4 +96,28 @@
 {
 	background: #fff;
 	border-bottom: 1px solid #ccc;
+}
+
+#groovy_template .table_dynamic tr td:first-child,
+#groovy_template .table_dynamic tr th:first-child
+{
+	padding-left: 20px;
+}
+#groovy_template .table_dynamic tr td:last-child,
+#groovy_template .table_dynamic tr th:last-child
+{
+	padding-right: 20px;
+}
+
+#groovy_template .table_dynamic tr
+{
+	background: #fff;
+	transition: all 0.4s ease-in-out 0s;
+}
+
+#groovy_template .table_dynamic tr:hover
+{
+	cursor: pointer;
+	background: rgba(41, 138, 215, 0.03);
+	transition: all 0.4s ease-in-out 0s;
 }

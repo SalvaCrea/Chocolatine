@@ -44,7 +44,7 @@ class sp_wp_post extends sp_sub_module
             $post_data_clean[ 'meta_input' ] = $meta_data;
 
             $post_data_clean = array_merge( $args_default, $post_data_clean );
-            
+
             // native function of wordpress for add post
             $id_post = wp_insert_post(  $post_data_clean );
 
@@ -59,9 +59,9 @@ class sp_wp_post extends sp_sub_module
 
             return $r;
         }
-        function update_meta( $id_post, $meta_key, $meta_value, $prev_value = '' )
+        function update_meta( $post_id, $meta_key, $meta_value, $prev_value = '' )
         {
-            update_post_meta( $post_id, $meta_key, $meta_value, $prev_value );
+            return update_post_meta( $post_id, $meta_key, $meta_value, $prev_value );
         }
         /**
          * [is_meta_data say is meta of no-footer]
