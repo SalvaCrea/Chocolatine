@@ -1,0 +1,17 @@
+{
+  "transport": "ftp",
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "s440647110.onlinehome.fr",
+  "target": "/prod/wp-content/plugins/salva-powa-wordpress_dev",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**",
+    "bower_components",
+    "composer_lib"
+  ],
+  "username": "u71049674",
+  "password": "L4t5PsfuMjF9K57n2gHJ7",
+  "watch": ["/modules"]
+}

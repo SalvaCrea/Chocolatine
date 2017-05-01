@@ -70,7 +70,6 @@ class sp_core
 			{
 
 				$this->uri_folder = dirname( dirname(__FILE__) );
-
 				$this->url_folder = '/wp-content/plugins/' . sp_get_current_name_folder( $this->uri_folder );
 
 				if ( is_admin() )
