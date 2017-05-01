@@ -126,7 +126,7 @@ class sp_query_post extends sp_module
     ***************************************************************************/
 		function view_back()
 		{
-					return 'Uniquement pour les dev';
+					return 'Only for Dev';
 		}
     function view_post_model()
     {

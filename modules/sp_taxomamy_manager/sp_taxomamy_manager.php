@@ -17,8 +17,7 @@ class sp_taxomamy_manager extends sp_module
         $this->categorie = "develloper";
 				add_action( 'init', array( $this, 'generate_tax' ), 0 );
 
-				$this->show_in_menu = true;
-
+				$this->show_in_menu = false;
 
     }
     function view_back()
