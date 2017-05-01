@@ -76,8 +76,78 @@ class tools_stripe extends sp_sub_module
             if ( !$this->stripe_connected ) { return false ;}
             else { return true; }
         }
+      /**
+       * [Return the key of stripe]
+       * @return [array] [return the key of stripe]
+       */
+        function get_keys()
+        {
+            $response = array(
+              'key_public' => '',
+              'key_private' => '',
+            );
 
+            $model = $this->father->config->get_model();
 
+            if ( is_dev() ) {
+                $response = array(
+                  'key_public' => $model['test_public_key'],
+                  'key_private' => $model['test_secret_key'],
+                );
+            }
+            else
+            {
+              $response = array(
+                'key_public' => $model['live_public_key'],
+                'key_private' => $model['live_secret_key'],
+              );
+            }
+
+            return $response;
+        }
+        /**
+         * [add_stripe_js add js the lib js in view]
+         */
+        function add_stripe_js()
+        {
+          wp_enqueue_script( 'stripe_lib',
+            'https://js.stripe.com/v2/'
+          );
+        }
+        function create_form_stripe( $args )
+        {
+
+          $args_default = array(
+              'server_url' => '',
+              'public_key' => $this->get_keys()['key_public'],
+              'amount' => 0,
+              'name' => get_bloginfo( 'name' ),
+              'url_logo' => '/images/logo.jpg',
+              'locale' => 'auto',
+              'currency' => 'eur',
+              'label' => 'Pay with card'
+          );
+
+          $args = array_merge($args_default, $args);
+
+          $form = "
+              <form action=\"{$args['server_url']}\" method=\"POST\">
+                <script
+                  src=\"https://checkout.stripe.com/checkout.js\" class=\"stripe-button\"
+                  data-key=\"{$args['public_key']}\"
+                  data-amount=\"{$args['amount']}\"
+                  data-name=\"{$args['name']}\"
+                  data-description=\"Widget\"
+                  data-image=\"{$args['url_logo']}\"
+                  data-locale=\"{$args['locale']}\"
+                  data-currency=\"{$args['currency']}\"
+                  data-label=\"{$args['label']}\">
+                </script>
+              </form>
+              ";
+
+          return $form;
+        }
         /********************************************************************
         *
         *  Method Around the subscription
@@ -119,8 +189,21 @@ class tools_stripe extends sp_sub_module
         function get_customer_by_id( $id_customer )
         {
               $customer = \Stripe\Customer::retrieve( $id_customer );
-
               return $customer;
+        }
+        function customer_create( $token, $id_plan, $customer_mail)
+        {
+
+            $customer = \Stripe\Customer::create(
+                array(
+                "source" => $token,
+                "plan" => $id_plan,
+                "email" => $customer_mail
+                )
+            );
+
+          return $customer;
+
         }
 
         /********************************************************************
@@ -142,20 +225,29 @@ class tools_stripe extends sp_sub_module
 
           $args = array_merge( $args_default, $args );
 
-          return $plan = \Stripe\Plan::all( $args );
+          return $plans = \Stripe\Plan::all( $args );
+        }
+        /**
+         * [get_plan_by_id Get the plan stripe by the id ]
+         * @param  [int] $id_plan [the id plan]
+         * @return [object]          [return object than contain info plan]
+         */
+        function get_plan_by_id( $id_plan )
+        {
+            return $plan = \Stripe\Plan::retrieve( $id_plan );
         }
         /**
          * Create a plan for subscription user
          * @param  array  $args the argument for create plan
-         * @param  int  $ammount the somme for create plan
+         * @param  int  $amount the somme for create plan
          * @return object return the object create by stripe
          */
-        function create_plan(  float $ammount ,  $args = array() )
+        function create_plan(  float $amount ,  $args = array() )
         {
 
           $args_default = array(
 
-            'name' => 'Subcription of ' . $ammount . '€',
+            'name' => 'Subscription of ' . $amount / 100 . '€',
             'currency' => 'eur',
             "interval" => "month",
 
@@ -163,12 +255,14 @@ class tools_stripe extends sp_sub_module
 
           $args = array_merge( $args_default, $args );
 
-          $plan = \Stripe\Plan::create(array(
-            "amount" => $ammount * 100,
-            "interval" => $args['interval'],
-            "name" => $args['name'],
-            "currency" => $args['currency'],
-            "id" => "abo".$ammount )
+          $plan = \Stripe\Plan::create(
+            array(
+              "amount" => $amount,
+              "interval" => $args['interval'],
+              "name" => $args['name'],
+              "currency" => $args['currency'],
+              "id" => "subs". $amount / 100 . 'by' . $args['interval']
+            )
           );
 
           return $plan;

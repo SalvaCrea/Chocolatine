@@ -1,35 +1,52 @@
-save_form = sp_ajax.new();
-
-app_sp_powa.controller('sp_form_controler', function($scope) {
-
-  save_form.scope = $scope;
-
-  $scope.schema = sp_powa.form.schema;
-  $scope.form = sp_powa.form.form;
-  $scope.model = sp_powa.form.model;
-
-	$scope.send = function()
-	{
-
-			save_form.args = Object.assign({}, $scope.model );
-      save_form.args.name_form = $scope.schema.title;
-
-      save_form.args.module = $scope.schema.module;
-      save_form.args.sub_module = $scope.schema.sub_module;
-
-      save_form.module =  'sp_form';
-			save_form.sub_module = 'save_form';
-
-			response = save_form.send();
-
-      if ( response ) {
-        toastr.info('Votre action à bien été effectuée');
-      }
-
-	}
-  $scope.submitForm = function(ngform,modelData)
+sp_form =  Object.assign(
+  {},
+  sp_ajax.new(
+    'sp_form',
+    'save_form'
+  ),
   {
-      $scope.send();
+
+      schema : sp_powa.form.schema,
+      model : sp_powa.form.model,
+      form : sp_powa.form.form,
+      $scope : new Object(),
+      success : function()
+      {
+          toastr.info('Votre action à bien été effectuée');
+      },
+      error : function( xhr )
+      {
+          console.log( xhr );
+          toastr.error('Il y a eu une error');
+      },
+      ang_controller : function( $scope )
+      {
+
+          sp_form.scope = $scope;
+          $scope.schema = sp_form.schema;
+          $scope.form = sp_form.form;
+          $scope.model = sp_form.model;
+
+          $scope.submitForm = function( ngform,modelData )
+          {
+              sp_form.before_send();
+          }
+
+      },
+      before_send : function()
+      {
+
+        this.args = Object.assign({}, this.scope.model );
+        this.args.name_form = this.scope.schema.title;
+
+        this.args.module = this.scope.schema.module;
+        this.args.sub_module = this.scope.schema.sub_module;
+
+        response = this.send();
+
+      }
   }
 
-});
+);
+
+app_sp_powa.controller('sp_form_controler', sp_form.ang_controller );

@@ -36,7 +36,14 @@ class sp_form extends sp_module
 			$args = array(
 				'name' => '',
 				'schema' => array(),
-				'form' => ['*'],
+				'form' => [
+          '*',
+          [
+            "type" => "submit",
+            "title" => "Send this form",
+            "style" => "btn-info"
+          ]
+          ],
 				'model' => array()
 			);
 

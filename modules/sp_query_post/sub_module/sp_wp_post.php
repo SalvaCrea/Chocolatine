@@ -15,13 +15,14 @@ class sp_wp_post extends sp_sub_module
             $schema = $this->data_schema()["properties"];
 
             $args_default = array(
+              'ID' => '',
               'post_author' => '',
               'post_date' => '',
               'post_content' => '',
               'post_title' => '',
               'post_statut' => '',
               'post_parent' => '',
-              'post_category' => 'sp_framework',
+              'post_type' => '',
               'meta_input' => array(
                 // exemple
                 // 'my_meta_key' => 'value_meta_key'
@@ -32,25 +33,51 @@ class sp_wp_post extends sp_sub_module
             $meta_data = array();
             // the loop search meta data
             foreach ( $args as $key => $value ) {
-                // is data in table wp_post
-                if ( array_key_exists( $key, $schema) ) {
+                if ( $this->is_meta_data( $key ) ) {
+                    $meta_data[ $key ] = $value;
+                }
+                else{
                     $post_data_clean[ $key ] = $value;
                 }
-                // if a meta data
-                else
-                {
-                   $meta_data[ $key ] = $value;
-                }
-
             }
 
             $post_data_clean[ 'meta_input' ] = $meta_data;
 
             $post_data_clean = array_merge( $args_default, $post_data_clean );
+            
             // native function of wordpress for add post
-            $id_post = wp_insert_post(  $post_data_clean  );
+            $id_post = wp_insert_post(  $post_data_clean );
 
             return $id_post;
+
+        }
+        function update( $id_post, $args )
+        {
+            $args['ID'] = $id_post;
+
+            $r = $this->add( $args );
+
+            return $r;
+        }
+        function update_meta( $id_post, $meta_key, $meta_value, $prev_value = '' )
+        {
+            update_post_meta( $post_id, $meta_key, $meta_value, $prev_value );
+        }
+        /**
+         * [is_meta_data say is meta of no-footer]
+         * @param  [type]  $key [The key name for insert]
+         * @return boolean      [true if a meta of false is onot meta]
+         */
+        function is_meta_data( $key )
+        {
+            $schema = $this->data_schema()["properties"];
+
+            if ( array_key_exists( $key, $schema) ) {
+                return false;
+            }
+            else {
+                return true;
+            }
 
         }
         function data_schema()

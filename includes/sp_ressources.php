@@ -121,36 +121,44 @@ class sp_ressources
          					 $sp_core->url_folder . '/bower_components/bootstrap/dist/js/bootstrap.js'
          				 );
 
+        		    wp_enqueue_script(
+        					'nice_scroll',
+        					'https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js'
+        				 );
+
          				 wp_enqueue_style(
           					'sp_dataTable_Css',
           					 '//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css'
-          				 );
+          				);
 
-                   wp_enqueue_script(
-                     'toastr.min.js',
-                      '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'
-                    );
+                 wp_enqueue_script(
+                   'toastr.min.js',
+                    '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'
+                  );
 
-                    wp_enqueue_style(
-                     'toastr.min.css',
-                      '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'
-                    );
+                  wp_enqueue_style(
+                   'toastr.min.css',
+                    '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css'
+                  );
 
-          		    wp_enqueue_script(
-          					'sp_dataTable_Js',
-          					 '//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'
-          				 );
+        		    wp_enqueue_script(
+        					'sp_dataTable_Js',
+        					 '//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js'
+        				 );
 
          				wp_enqueue_style(
          					'font_awesome',
          					 $sp_core->url_folder . '/bower_components/font-awesome/css/font-awesome.css'
          				 );
+
          				wp_enqueue_style(
          					'font_material_icon',
          					 '//fonts.googleapis.com/css?family=Roboto:300,400,500,700'
          				 );
 
-         				wp_enqueue_style( 'font_roboto', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+         				wp_enqueue_style( 'font_roboto',
+                'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900'
+              );
 
     }
 }

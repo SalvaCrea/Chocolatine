@@ -23,6 +23,16 @@ class sp_ajax
 		 * @var array
 		 */
 		var $convert_in_js = array();
+    /**
+		 * This response for the javascript ajax
+		 * @var array
+		 */
+		var $response = array(
+      'data'  => array(),
+      'info'  => array(),
+      'error' => array(),
+      'message' => 'This action is done'
+    );
   /**
    * [__construct description]
    */
@@ -40,6 +50,9 @@ class sp_ajax
          return sp_core();
 
     }
+    /**
+     * [add_ressource Add the main ressource for the transaction ajax]
+     */
 		function add_ressource()
 		{
 
@@ -49,6 +62,10 @@ class sp_ajax
 				);
 
 		}
+    /**
+     * [add_ajax_listen add one action for the ajax control]
+     * @param [type] $args [description]
+     */
 		function add_ajax_listen( $args )
 		{
 
@@ -109,7 +126,7 @@ class sp_ajax
 					$module = $this->core->modules->get_module( $ajax_current_actions['module'] );
 
 					// execute  the callback
-					$reponse = call_user_func(
+					$this->response['data'] = call_user_func(
 						array(
 							$module,
 							$ajax_current_actions['call_back']
@@ -117,9 +134,9 @@ class sp_ajax
 						$this->args
 					);
 
-					echo json_encode( $reponse );
+					echo json_encode( $this->response );
 
-					$this->ajax_current_actions = array();
+					unset( $this->ajax_current_actions );
 
 					wp_die();
 		}

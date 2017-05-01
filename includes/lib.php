@@ -1,7 +1,48 @@
 <?php
+use \salva_powa\sp_core;
+/**
+ * [sp_core return the core of sp framework]
+ * @return [type] [description]
+ */
+function sp_core()
+{
+    global $sp_core;
 
+    if ( !sp_core_exist() ) {
+      $sp_core = sp_core_start();
+    }
 
+    return $sp_core;
+}
 
+/**
+ * [ sp_core_start Create the main module for sp framework ]
+ * @return [object] [return the core of sp framework]
+ */
+function sp_core_start()
+{
+
+    global $sp_config;
+    global $sp_core;
+
+    $sp_core = new sp_core();
+    $sp_core->config = $sp_config;
+    $sp_core->init();
+
+    return $sp_core;
+}
+/**
+ * [sp_core_exist Check if the function sp_core_start has runned]
+ * @return [boolean] [false if a core is not present or true]
+ */
+function sp_core_exist()
+{
+    global $sp_core;
+    if ( empty( (array) $sp_core ) ) {
+      return false;
+    }
+    return true;
+}
 /**
  * The dev function that print pretty result
  * @param  accpet array, string, int, ....
@@ -35,12 +76,6 @@ function sp_clean_string($string)
 
    return strtolower(preg_replace('/[^A-Za-z0-9\-\_]/', '', $string)); // Removes special chars.
 }
-
- function sp_core()
- {
-     global $sp_core;
-     return $sp_core;
- }
 
 /**
  * FUnction for utile pagination
@@ -160,4 +195,16 @@ function sp_get_current_name_folder( $file )
   $name_folder =  substr( $file ,$position + 1 );
 
   return $name_folder;
+}
+/**
+ * [Create redirection in js]
+ * @param  [type] $url [description]
+ */
+function sp_redirection_js( $url )
+{
+  echo "
+  <SCRIPT LANGUAGE=\"JavaScript\">
+      document.location.href=\"{$url}\"
+  </SCRIPT>
+  ";
 }

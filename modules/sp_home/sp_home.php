@@ -96,7 +96,7 @@ class sp_home extends sp_module
 
 			$this->template_args['header'] = [
 				'second_title' => 'Module : ' . $this->current_module->name,
-				'img_backgroung' => $this->core->url_folder . '/assets/img/header.jpg'
+				'img_backgroung' => ''
 			];
 
 		}

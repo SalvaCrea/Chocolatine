@@ -149,6 +149,7 @@ class sp_core
 			 */
 			public function create_back_view()
 			{
+
 					 sp_create_loader_js();
 					 $view = $this->modules->get_module( 'sp_home' );
 					 $view->view_back_sp();

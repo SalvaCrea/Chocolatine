@@ -327,11 +327,24 @@ class sp_module
 	 * This function add js in the personnal folder of module contain in the folder js
 	 * @param string $name the name of the js
 	 */
-	public function add_module_js( $name )
+	public function add_module_js( $module_url, $name = '', $data = array() )
 	{
+
+			if ( empty( $name ) ) {
+				$name = $module_url;
+			}
+
 			wp_enqueue_script( $name,
-				$this->get_url() . '/js/' . $name
+				$this->get_url() . '/js/' . $module_url
 			);
+
+			if ( !empty( $data ) ) {
+			wp_localize_script( 
+				$name, 
+				'data_' . $name, 
+				$data
+				);
+			}
 	}
 	/**
 	 * This function add js in the personnal folder of module contain in the folder js

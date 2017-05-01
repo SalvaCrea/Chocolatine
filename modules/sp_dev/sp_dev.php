@@ -15,7 +15,7 @@ class sp_dev extends sp_module
 				global $sp_core;
 
         $this->icon = 'fa-laptop';
-				$this->name = 'SP Maintenance';
+				$this->name = 'SP Developper';
 				$this->description = "For generate the form";
         $this->categorie = 'develloper';
 
@@ -34,6 +34,14 @@ class sp_dev extends sp_module
 						'name' => 'List views',
 						'call_back' => 'list_views',
             'slug' => 'tools'
+					)
+				);
+
+        $this->add_sub_module(
+					array(
+						'name' => 'List Ajax actions',
+						'call_back' => 'ajax_views',
+            'slug' => 'ajax_views'
 					)
 				);
 
@@ -61,5 +69,17 @@ class sp_dev extends sp_module
       $view = $this->twig_render('list_view.html');
 
       return $view;
+    }
+    function ajax_views()
+    {
+
+      $ajax_actions = $this->core->ajax->ajax_actions;
+
+      $this->add_module_js( 'ajax_views.js', 'ajax_views',  $ajax_actions );
+
+      $view = $this->twig_render('ajax_views.html');
+
+      return $view;
+
     }
 }

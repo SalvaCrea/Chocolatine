@@ -22,7 +22,7 @@ body
 }
 #wpwrap
 {
-	background: #f5f5f5;
+	background: #eef2f5;
 }
 #adminmenumain
 {
@@ -43,9 +43,9 @@ body
 }
 #groovy_template #headerpage {
     text-align: left;
-		box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 		height: 69px;
     max-height: 69px;
+		background: linear-gradient(192deg, #33a5bc 0%,#2989d8 99%);
 }
 
 
@@ -54,16 +54,13 @@ body
 			padding: 15px;
 	    margin: -15px;
 	    margin-bottom: 0;
-	    border-bottom: 1px solid #b1c3c4;
 			height: 69px;
 	    max-height: 69px;
 			display: flex;
-			background-image: url(http://dev.tripconnexion.com/wp-content/plugins/salva-powa-wordpress/assets/img/header.jpg);
-    background-size: cover;
-		box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px, rgba(0, 0, 0, 0.137255) 0px 1px 1px 0px, rgba(0, 0, 0, 0.117647) 0px 2px 1px -1px;
+    	background-size: cover;
 
-}
-
+      background: linear-gradient(119deg, #33a5bc 0%,#2989d8 99%);
+			}
 #groovy_template #logo_menu_left #content_logo
 {
 			padding: 0;
@@ -71,7 +68,8 @@ body
 }
 #groovy_template #logo_menu_left #content_logo img
 {
-			box-shadow: 0 0 19px #171529;
+	box-shadow: 0 0 4px #0d6691;
+	    border-radius: 3px;
 }
 
 #groovy_template #logo_menu_left #content_text_logo
@@ -90,7 +88,6 @@ body
 			color: white;
 			font-size: 18px;
     	font-family: roboto;
-			text-shadow: 0 0 1px #191919;
 }
 #groovy_template #headerpage .titles_header h1 {
     font-size: 20px;
@@ -99,13 +96,16 @@ body
 }
 #groovy_template #headerpage .titles_header h2 {
 			font-size: 17px;
-	    margin-top: 33px;
+	    margin-top: 25px;
 			text-align: left;
+			text-shadow: none !important;
 }
 #groovy_template #sp_menu_left {
 
     background: #313538;
 		border-left: #000 solid 1px;
+		overflow: scroll;
+		padding-bottom: 60px !important;
 }
 #groovy_template .menu_list li i
 {
@@ -117,7 +117,7 @@ body
 }
 #groovy_template #sp_menu_left .menu_list li.selected
 {
-		background: #33a5bc;
+		background: linear-gradient(192deg, #33a5bc 0%,#2989d8 99%);
 		color : white;
 }
 #groovy_template #sp_menu_left .menu_list li.selected a,
@@ -219,6 +219,10 @@ table.dataTable tbody td:first-child {
 }
 table.dataTable tbody td:last-child {
     padding-right: 24px;
+}
+table.angular_table tr
+{
+	cursor : pointer;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     background: #FFF;

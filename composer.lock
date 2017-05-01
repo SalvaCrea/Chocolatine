@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0c3d3523e2d289e43aab580cf0728129",
-    "content-hash": "e1222c5a364695a7d9cc521d1551f45b",
+    "hash": "69c4559d7d642a44385f603641c3f82f",
+    "content-hash": "a86e8a4f935054bec3f4cd371f0822c8",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -61,6 +61,51 @@
                 "sqlite"
             ],
             "time": "2017-02-17 16:05:35"
+        },
+        {
+            "name": "rilwis/meta-box",
+            "version": "4.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rilwis/meta-box.git",
+                "reference": "f28c8972d630fec289c1578ba1db271a85c503e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rilwis/meta-box/zipball/f28c8972d630fec289c1578ba1db271a85c503e3",
+                "reference": "f28c8972d630fec289c1578ba1db271a85c503e3",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "meta-box.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Tran Ngoc Tuan Anh",
+                    "email": "rilwis@gmail.com",
+                    "homepage": "http://www.deluxeblogtips.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A powerful, professional developer toolkit to create custom meta boxes and custom fields for WordPress websites.",
+            "homepage": "https://metabox.io",
+            "keywords": [
+                "custom-field",
+                "meta-box",
+                "select2",
+                "ui",
+                "wordpress",
+                "wordpress-plugin",
+                "wp-admin"
+            ],
+            "time": "2017-04-03 09:45:59"
         },
         {
             "name": "twig/twig",

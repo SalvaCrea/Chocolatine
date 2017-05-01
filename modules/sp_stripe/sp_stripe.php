@@ -46,6 +46,7 @@ class sp_stripe extends sp_module
     {
         $this->tool->stripe_authentification();
     }
+
 		function view_back()
 		{
       $this->tool->stripe_authentification();

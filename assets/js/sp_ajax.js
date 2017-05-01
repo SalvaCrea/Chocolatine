@@ -31,7 +31,7 @@ var sp_ajax  =
 						 "module" : this.module,
 					 	 "sub_module" : this.sub_module
 					 },
-  	       success : function(msg)
+  	       success : function( msg )
   	       {
               console.log( msg );
   	          func.content_return = msg;
@@ -54,15 +54,22 @@ var sp_ajax  =
     },
     success : function()
     {
-        return true;
+        return false;
     },
     error : function()
     {
-        return true;
+        return false;
     },
-		new : function()
+		new : function( module = '', action = '')
 		{
-			return Object.assign({}, this);
+      new_ajax_tools = Object.assign({}, this);
+
+      if ( module != '' && action != '') {
+          new_ajax_tools.module = module;
+          new_ajax_tools.sub_module = action;
+      }
+
+			return new_ajax_tools;
 		}
 
 

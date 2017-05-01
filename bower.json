@@ -21,6 +21,7 @@
     "bootstrap": "^3.3.7",
     "angular-underscore": "^0.5.0",
     "bower": "*",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "jquery.nicescroll" : "*"
   }
 }

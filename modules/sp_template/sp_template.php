@@ -141,6 +141,7 @@ class sp_template extends sp_module
 	// permet de créer un header
 	function header()
 	{
+
 			$args = array(
 				 "main_title" => "",
 				 "second_title" => "",
@@ -148,11 +149,19 @@ class sp_template extends sp_module
 				 "after" => "",
 				 "content" => "main",
 				 "img_backgroung" => $this->header_img_default,
+				 "style" => []
 			);
 
 			$args = array_merge( $args, $this->args['header'] );
+
+			if ( !empty( $args['img_backgroung'] ) ) {
+				$style []= "background-image: url('{$args['img_backgroung']}')";
+			}
+
+			$style = implode(';', $args );
+
 			echo "
-			<div id=\"headerpage\" class=\"container-fluid\" style=\"background-image:url('{$args['img_backgroung']}')\" >
+			<div id=\"headerpage\" class=\"container-fluid\" style=\"{$style}\" >
 			";
 
 			if ( $args['content'] == 'main' ) {

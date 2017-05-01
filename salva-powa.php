@@ -22,10 +22,10 @@ require "auto_load.php";
  */
 require "sp_config.php";
 
+$sp_core = new stdClass();
+
 if (  is_admin() ) {
 
-  $sp_core = new sp_core();
-  $sp_core->config = $sp_config;
-  $sp_core->init();
+    sp_core_start();
 
 }

@@ -16,6 +16,17 @@ app_sp_powa.controller('menu_left', function($scope) {
 
 });
 
+function nice_scroll_init()
+{
+      $("#sp_menu_left").niceScroll(
+        {
+          cursorcolor : "#ddd",
+          cursoropacitymax : 0.5
+        }
+      );
+}
+$( document ).ready( nice_scroll_init );
+
 function filter_menu( menu_arg )
 {
       menu = new Object();
