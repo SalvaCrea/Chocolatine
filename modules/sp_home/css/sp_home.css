@@ -4,7 +4,7 @@
 #groovy_template h4,
 #groovy_template h5,
 #groovy_template h6,
-#groovy_template span,
+#groovy_template span:not(.glyphicon),
 #groovy_template p,
 #groovy_template label,
 #groovy_template .help-block,

@@ -120,8 +120,9 @@ class sp_mailjet extends sp_module
 
         return array(
           'success' => $response->success(),
-          'data' => $response->getData()
-        );
+          'data' => $response->getData(),
+          'args' => $args
+        ); 
 
     }
 

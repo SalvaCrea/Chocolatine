@@ -29,3 +29,4 @@ if (  is_admin() ) {
     sp_core_start();
 
 }
+ 

@@ -89,7 +89,7 @@ class tools_stripe extends sp_sub_module
 
             $model = $this->father->config->get_model();
 
-            if ( is_dev() ) {
+            if ( sp_dev() ) {
                 $response = array(
                   'key_public' => $model['test_public_key'],
                   'key_private' => $model['test_secret_key'],
@@ -114,6 +114,11 @@ class tools_stripe extends sp_sub_module
             'https://js.stripe.com/v2/'
           );
         }
+        /**
+         * [create_form_stripe Create form by stripe ]
+         * @param  [type] $args [the arguments for create a form]
+         * @return [string]       [return text/html form]
+         */
         function create_form_stripe( $args )
         {
 
@@ -191,6 +196,13 @@ class tools_stripe extends sp_sub_module
               $customer = \Stripe\Customer::retrieve( $id_customer );
               return $customer;
         }
+        /**
+         * [customer_create Create a customer by the form stripe]
+         * @param  [type] $token         [The token $Post create by stripe form]
+         * @param  [type] $id_plan       [The id of plan]
+         * @param  [type] $customer_mail [The mail of the customer]
+         * @return [type]                [Return the response stripe]
+         */
         function customer_create( $token, $id_plan, $customer_mail)
         {
 

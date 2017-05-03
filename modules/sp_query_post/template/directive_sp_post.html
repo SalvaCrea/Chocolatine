@@ -1,0 +1,28 @@
+{% verbatim %}
+
+<table class="table table_dynamic" ng-controller="spquery">
+<input ng-model="test">
+  <thead>
+    <tr>
+      <th  ng-repeat="key in keys()" >
+          {{key}}
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr ng-click="redirection_show_request(x.ID)" ng-repeat="post in posts">
+        <td>{{ post.ID }}</td>
+        <td>{{ post.post_title }}</td>
+        <td>{{ post.post_type }}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class="table_dynamic_pagination">
+  1
+</div>
+
+{% endverbatim %}
