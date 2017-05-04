@@ -25,8 +25,7 @@ require "sp_config.php";
 $sp_core = new stdClass();
 
 if (  is_admin() ) {
-
+ 
     sp_core_start();
 
 }
- 

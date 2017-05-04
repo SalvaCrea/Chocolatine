@@ -113,6 +113,8 @@ class sp_mailjet extends sp_module
               'MJ-TemplateID' => $template,
               'MJ-TemplateLanguage' => true,
               'Vars' => $var_template,
+              'MJ-TemplateErrorReporting' => "hebustha@gmail.com",
+              'MJ-TemplateErrorDeliver' => "deliver",
             );
         }
 
@@ -122,7 +124,7 @@ class sp_mailjet extends sp_module
           'success' => $response->success(),
           'data' => $response->getData(),
           'args' => $args
-        ); 
+        );
 
     }
 
