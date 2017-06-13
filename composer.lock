@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69c4559d7d642a44385f603641c3f82f",
+    "hash": "1a858194f049ea2f28c465c9eef2e0f2",
     "content-hash": "a86e8a4f935054bec3f4cd371f0822c8",
     "packages": [
         {
             "name": "catfan/medoo",
-            "version": "v1.2.1",
+            "version": "v1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/catfan/Medoo.git",
-                "reference": "b5a788c90c44db0f978512c890cb6962af4685e8"
+                "reference": "bcabbef4d8355d52fc4d19f17463e5e816c9ef44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/catfan/Medoo/zipball/b5a788c90c44db0f978512c890cb6962af4685e8",
-                "reference": "b5a788c90c44db0f978512c890cb6962af4685e8",
+                "url": "https://api.github.com/repos/catfan/Medoo/zipball/bcabbef4d8355d52fc4d19f17463e5e816c9ef44",
+                "reference": "bcabbef4d8355d52fc4d19f17463e5e816c9ef44",
                 "shasum": ""
             },
             "require": {
@@ -26,12 +26,13 @@
                 "php": ">=5.4"
             },
             "suggest": {
-                "ext-pdo_dblib": "For MSSQL or Sybase databases on Linux/UNIX platform",
-                "ext-pdo_mysql": "For MySQL or MariaDB databases",
-                "ext-pdo_oci": "For Oracle databases",
-                "ext-pdo_pqsql": "For PostgreSQL databases",
-                "ext-pdo_sqlite": "For SQLite databases",
-                "ext-pdo_sqlsrv": "For MSSQL databases on Windows platform"
+                "ext-pdo_dblib": "For MSSQL or Sybase database on Linux/UNIX platform",
+                "ext-pdo_mysql": "For MySQL or MariaDB database",
+                "ext-pdo_oci": "For Oracle database",
+                "ext-pdo_oci8": "For Oracle version 8 database",
+                "ext-pdo_pqsql": "For PostgreSQL database",
+                "ext-pdo_sqlite": "For SQLite database",
+                "ext-pdo_sqlsrv": "For MSSQL database on Windows platform"
             },
             "type": "framework",
             "autoload": {
@@ -49,31 +50,34 @@
                     "email": "angel@catfan.me"
                 }
             ],
-            "description": "The Lightest PHP database framework to accelerate development",
-            "homepage": "http://medoo.in",
+            "description": "The lightest PHP database framework to accelerate development",
+            "homepage": "https://medoo.in",
             "keywords": [
                 "database",
                 "lightweight",
+                "mariadb",
                 "mssql",
                 "mysql",
+                "oracle",
                 "php framework",
+                "postgresql",
                 "sql",
                 "sqlite"
             ],
-            "time": "2017-02-17 16:05:35"
+            "time": "2017-06-02 15:25:04"
         },
         {
             "name": "rilwis/meta-box",
-            "version": "4.11",
+            "version": "4.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rilwis/meta-box.git",
-                "reference": "f28c8972d630fec289c1578ba1db271a85c503e3"
+                "reference": "697f2e480bd9ac58911c08bd1dd8734b084e2d04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rilwis/meta-box/zipball/f28c8972d630fec289c1578ba1db271a85c503e3",
-                "reference": "f28c8972d630fec289c1578ba1db271a85c503e3",
+                "url": "https://api.github.com/repos/rilwis/meta-box/zipball/697f2e480bd9ac58911c08bd1dd8734b084e2d04",
+                "reference": "697f2e480bd9ac58911c08bd1dd8734b084e2d04",
                 "shasum": ""
             },
             "type": "library",
@@ -105,24 +109,24 @@
                 "wordpress-plugin",
                 "wp-admin"
             ],
-            "time": "2017-04-03 09:45:59"
+            "time": "2017-06-02 08:28:34"
         },
         {
             "name": "twig/twig",
-            "version": "v1.33.2",
+            "version": "v1.34.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927"
+                "reference": "451c6f4197e113e24c1c85bc3fc8c2d77adeff2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd6ca96227917e1e85b41c7c3cc6507b411e0927",
-                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/451c6f4197e113e24c1c85bc3fc8c2d77adeff2e",
+                "reference": "451c6f4197e113e24c1c85bc3fc8c2d77adeff2e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.7"
+                "php": ">=5.3.3"
             },
             "require-dev": {
                 "psr/container": "^1.0",
@@ -132,12 +136,15 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.33-dev"
+                    "dev-master": "1.34-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -167,7 +174,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-04-20 17:39:48"
+            "time": "2017-06-07 18:45:17"
         }
     ],
     "packages-dev": [],

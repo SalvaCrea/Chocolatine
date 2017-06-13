@@ -12,6 +12,8 @@
 
 use \salva_powa\sp_core;
 
+
+
 /**
  * Load the auto loader
  */
@@ -22,11 +24,9 @@ require "auto_load.php";
  */
 require "sp_config.php";
 
+// create empty object
+
 $sp_core = new stdClass();
 
-if (  is_admin() ) {
 
-    sp_core_start();
-
-}
- 
+sp_core_start();

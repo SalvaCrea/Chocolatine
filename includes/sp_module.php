@@ -287,7 +287,7 @@ class sp_module
 
 			if ( !empty( $args['sub_module'] ) ):
 
-					require $this->get_uri() . '/sub_module/' . $args['sub_module'] . '.php';
+					require $this->get_uri() . '/component/' . $args['sub_module'] . '.php';
 
 					$this->{$args['slug']} = new $args['sub_module']();
 					$this->{$args['slug']}->parent_module = $this->get_slug();
@@ -339,9 +339,9 @@ class sp_module
 			);
 
 			if ( !empty( $data ) ) {
-			wp_localize_script( 
-				$name, 
-				'data_' . $name, 
+			wp_localize_script(
+				$name,
+				'data_' . $name,
 				$data
 				);
 			}

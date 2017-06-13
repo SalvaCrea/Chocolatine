@@ -9,7 +9,7 @@ $sp_config = array(
     'module_disabled' => [],
 
     // Dev mode
-    'is_dev' => false,
+    'is_dev' => true,
 
     // core slug, this is the name identifiant
     'core_slug' => 'salva_powa'
