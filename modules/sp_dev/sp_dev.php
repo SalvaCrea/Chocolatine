@@ -25,11 +25,11 @@ class sp_dev extends sp_module
 						array(
 							'name' => 'Save form  for class',
 							'call_back' => 'save_form',
-							'sub_module' => 'save_form'
+							'component' => 'save_form'
 						)
 				);
 
-        $this->add_sub_module(
+        $this->add_component(
 					array(
 						'name' => 'List views',
 						'call_back' => 'list_views',
@@ -37,7 +37,7 @@ class sp_dev extends sp_module
 					)
 				);
 
-        $this->add_sub_module(
+        $this->add_component(
 					array(
 						'name' => 'List Ajax actions',
 						'call_back' => 'ajax_views',

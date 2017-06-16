@@ -1,0 +1,54 @@
+<h2>Bienvenue sur notre formulaire d'abonnement par prélévement mensuel</h2>
+
+<h3>
+  Vos informations de paiement :
+</h3>
+
+<table class="table">
+
+  <tr>
+    <td>
+        Entreprise :
+    </td>
+    <td>
+       {{client_request.name|raw}}
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        Contact :
+    </td>
+    <td>
+       {{client_request.mainContactName|raw}}
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        Email
+    </td>
+    <td>
+       {{client_request.email}}
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        Adresse
+    </td>
+    <td>
+       {{client_request.addr_geocode|raw}}
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        Somme
+    </td>
+    <td>
+       {{client_request.amount}} € / mois
+    </td>
+  </tr>
+
+</table>

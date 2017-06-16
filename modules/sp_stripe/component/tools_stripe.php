@@ -1,9 +1,9 @@
 <?php
 
-use \salva_powa\sp_sub_module;
+use \salva_powa\sp_component;
 use \Stripe\Stripe;
 
-class tools_stripe extends sp_sub_module
+class tools_stripe extends sp_component
 {
 
         var $stripe_connected = false;

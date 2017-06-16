@@ -86,44 +86,44 @@
 
 
           <h4>
-            Sub Modules
+            components
           </h4>
 
-          {% for sub_module in module.sub_module %}
+          {% for component in module.component %}
 
           <p>
             <b>
               Name :
             </b>
-          {{sub_module.name|raw}}
+          {{component.name|raw}}
           </p>
           <p>
             <b>
               Slug :
             </b>
-          {{sub_module.slug|raw}}
+          {{component.slug|raw}}
           </p>
 
           <p>
             <b>
               URL :
             </b>
-          {{sub_module.url|raw}}
+          {{component.url|raw}}
           </p>
 
           <p>
             <b>
               CLASS :
             </b>
-          {{sub_module.sub_module|raw}}
+          {{component.component|raw}}
           </p>
 
-          {% if sub_module.call_back  %}
+          {% if component.call_back  %}
           <p>
             <b>
               Callback :
             </b>
-          {{sub_module.call_back|raw}}
+          {{component.call_back|raw}}
           </p>
           {% endif %}
 
@@ -155,9 +155,9 @@
 
             <p>
               <b>
-                Sub module :
+                component :
               </b>
-            {{ajax_action.sub_module|raw}}
+            {{ajax_action.component|raw}}
             </p>
 
             {% endfor %}

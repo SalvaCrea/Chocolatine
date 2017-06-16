@@ -50,18 +50,18 @@ class sp_home extends sp_module
 					)
 			);
 
-			if ( !empty( $this->current_sub_module ) ) {
-				$current_sub_module = array(
-					'name' => $this->current_sub_module['name'],
-					'slug' => $this->current_sub_module['slug']
+			if ( !empty( $this->current_component ) ) {
+				$current_component = array(
+					'name' => $this->current_component['name'],
+					'slug' => $this->current_component['slug']
 				);
 			}
 			else
 			{
-				$current_sub_module = false;
+				$current_component = false;
 			}
-			// convertie the current_sub_module module in js
-			$this->convert_in_js( 'current_sub_module', $current_sub_module );
+			// convertie the current_component module in js
+			$this->convert_in_js( 'current_component', $current_component );
 
 			$this->add_module_js( 'sp_home.js' );
 			$this->add_module_css( 'sp_home.css' );
@@ -103,10 +103,10 @@ class sp_home extends sp_module
 		function generate_menu_top()
 		{
 
-				if ( empty( $this->current_module->sub_module ) )
+				if ( empty( $this->current_module->component ) )
 								return false;
 
-				foreach ( $this->current_module->sub_module as $key => $value) {
+				foreach ( $this->current_module->component as $key => $value) {
 
 					$args = $value;
 
@@ -115,12 +115,12 @@ class sp_home extends sp_module
 
 				}
 
-				if ( empty( $this->current_sub_module['slug'] ) ) {
+				if ( empty( $this->current_component['slug'] ) ) {
 					  $this->menu_top[ 0 ]['selected'] = true;
 				}
 				else
 				{
-						$find = array_find( $this->menu_top, 'slug',  $this->current_sub_module['slug'] );
+						$find = array_find( $this->menu_top, 'slug',  $this->current_component['slug'] );
 						$this->menu_top[ $find ]['selected'] = true;
 				}
 
@@ -163,19 +163,19 @@ class sp_home extends sp_module
 						'show_in_menu' => $current_module->show_in_menu
 					);
 
-					if ( !empty( $current_module->sub_module ) ) {
+					if ( !empty( $current_module->component ) ) {
 
-							$current_item['sub_module'] = array();
+							$current_item['component'] = array();
 
-							foreach ( $current_module->sub_module as $key => $current_sub_module ) {
+							foreach ( $current_module->component as $key => $current_component ) {
 
 									$current_sub_item = array(
-										'slug' => $current_sub_module['slug'],
-										'name' => $current_sub_module['name'],
-										'url'  => $current_sub_module['url']
+										'slug' => $current_component['slug'],
+										'name' => $current_component['name'],
+										'url'  => $current_component['url']
 									);
 
-									$current_item['sub_module'][] = $current_sub_item;
+									$current_item['component'][] = $current_sub_item;
 							}
 					}
 
@@ -189,9 +189,9 @@ class sp_home extends sp_module
 		function generate_content()
 		{
 
-			if ( !empty( $this->current_sub_module['slug'] ) ) {
+			if ( !empty( $this->current_component['slug'] ) ) {
 
-				$call_back = $this->current_sub_module['call_back'];
+				$call_back = $this->current_component['call_back'];
 				$content = $this->current_module->$call_back();
 
 			}

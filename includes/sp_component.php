@@ -2,12 +2,12 @@
 
 namespace salva_powa;
 
-class sp_sub_module extends sp_module
+class sp_component extends sp_module
 {
   var $parent_module;
 
    /**
- 	 * Return the father of module if the module is a sub module
+ 	 * Return the father of module if the module is a component
  	 * @return mixed false if not find or object if is find
  	 */
  	function get_father()
@@ -78,7 +78,7 @@ class sp_sub_module extends sp_module
          $args['schema'] = $this->data_schema();
          $args['schema']['title'] = $name;
          $args['schema']['module'] = $this->current_module->slug;
-         $args['schema']['sub_module'] = $this->get_slug();
+         $args['schema']['component'] = $this->get_slug();
      }
 
      if ( $this->data_form() != false )

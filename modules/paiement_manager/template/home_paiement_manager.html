@@ -1,0 +1,69 @@
+<div class="well mg-t-15 pd-0">
+
+	<div  ng-controller="subscription_list">
+
+
+		{% verbatim %}
+
+		<div id="content_button" class="pd-15 row">
+
+			<div class="col-md-6">
+				<h4>
+					Liste des requêtes d'abonnements
+				</h4>
+			</div>
+
+			<!-- <div class="col-md-6 text-align-right">
+
+				<div ng-click="PageBack()" ng-show="offset" class="btn btn-info">
+					Page précédente
+				</div>
+
+				<div ng-click="pageNext()" class="btn btn-info">
+					Page Suivante
+				</div>
+
+			</div> -->
+		</div>
+
+		<table class="table angular_table table_dynamic">
+
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>ID Plan</th>
+					<th>Stripe paiement</th>
+					<th>Somme</th>
+					<th>Nom de l'entreprise</th>
+					<th>Email</th>
+          <th>Date de création</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				<tr ng-click="redirection_show_request(x.ID)" ng-repeat="x in posts">
+          <td>{{ x.ID }}</td>
+					<td>{{ x.id_plan }}</td>
+					<td>
+						<span ng-if="x.id_customer">
+								Oui
+						</span>
+						<span ng-if="!x.id_customer">
+								Non
+						</span>
+					</td>
+          <td>{{ x.amount }}</td>
+          <td>{{ x.name }}</td>
+          <td>{{ x.email_user }}</td>
+          <th>{{ x.post_date }}</th>
+				</tr>
+
+			</tbody>
+		</table>
+
+		{% endverbatim %}
+
+	</div>
+
+</div>

@@ -40,7 +40,7 @@ sp_form =  Object.assign(
         this.args.name_form = this.scope.schema.title;
 
         this.args.module = this.scope.schema.module;
-        this.args.sub_module = this.scope.schema.sub_module;
+        this.args.component = this.scope.schema.component;
 
         response = this.send();
 

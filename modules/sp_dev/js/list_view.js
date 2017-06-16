@@ -9,7 +9,7 @@ $(function(){
             { "data": "url" },
             { "data": "call_back" },
             { "data": "show_in_menu" },
-            { "data": "sub_module" }
+            { "data": "component" }
         ]
     } );
 

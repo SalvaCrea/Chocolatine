@@ -1,8 +1,8 @@
 <?php
 
-use \salva_powa\sp_sub_module;
+use \salva_powa\sp_component;
 
-class config_sellsy extends sp_sub_module
+class config_sellsy extends sp_component
 {
         function __construct()
         {

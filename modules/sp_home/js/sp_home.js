@@ -6,7 +6,7 @@ app_sp_powa.controller('menu_left', function($scope) {
 
       $scope.current_module = sp_powa.current_module;
 
-      $scope.current_sub_module = sp_powa.current_sub_module;
+      $scope.current_component = sp_powa.current_component;
 
       $scope.change_page = function( item )
       {

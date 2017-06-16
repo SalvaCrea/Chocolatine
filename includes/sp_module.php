@@ -40,10 +40,10 @@ class sp_module
 	 */
 	var $show_in_menu = false;
 	/**
-	 * This array is use for declarate the sub module
+	 * This array is use for declarate the component
 	 * @var array
 	 */
-	var $sub_module = array();
+	var $component = array();
 	/**
 	 * This array is use for declarate the ajax action
 	 * @var array
@@ -88,8 +88,8 @@ class sp_module
 		 * This array for the current action
 		 * @var array
 		 */
-		if ( $name == 'current_sub_module' )
-				return $this->find_core()->controller->current_sub_module;
+		if ( $name == 'current_component' )
+				return $this->find_core()->controller->current_component;
 
 	}
 	/**
@@ -109,10 +109,10 @@ class sp_module
 			return false;
 	}
 	/**
-	 * The sub module loader
+	 * The component loader
 	 * @return boolean or mixed, return false if is empty
 	 */
-	public function loader_sub_module()
+	public function loader_component()
 	{
 			return false;
 	}
@@ -133,8 +133,8 @@ class sp_module
 			return false;
 	}
 	/**
-	* Function use only sub_module
-	* @return boolean return false, only sub_module return the father
+	* Function use only component
+	* @return boolean return false, only component return the father
 	*/
  function get_father() { return false; }
 	/**
@@ -248,7 +248,11 @@ class sp_module
 		$this->core->controller->views []= $args;
 
 	}
-	public function add_sub_module( $args )
+	/**
+	 * [add_component add a sub module ** deprecated ** ]
+	 * @param [array] $args [contain the info for create a sub module]
+	 */
+	public function add_component( $args )
 	{
 
 			$args_default = array(
@@ -257,18 +261,18 @@ class sp_module
 				'url' => '',
 				'call_back' => '',
 				'show_in_menu' => true,
-				'sub_module' => '',
+				'component' => '',
 			);
 
 			// add _ first elem home
-			if ( empty( $this->sub_module ) ) :
+			if ( empty( $this->component ) ) :
 
 					$first_elem = $args_default;
 					$first_elem['url'] = $this->core->controller->url;
 					$first_elem['url'] .= "&module={$this->get_slug()}";
 					$first_elem['name'] = 'Home';
 					$first_elem['slug'] = 'home';
-					$this->sub_module []= $first_elem;
+					$this->component []= $first_elem;
 
 			endif;
 
@@ -281,22 +285,39 @@ class sp_module
 
 				$args['url'] = $this->core->controller->url;
 				$args['url'] .= "&module={$this->get_slug()}";
-				$args['url'] .= "&sub_module={$args['slug']}";
+				$args['url'] .= "&component={$args['slug']}";
 
 			endif;
 
-			if ( !empty( $args['sub_module'] ) ):
+			if ( !empty( $args['component'] ) ):
 
-					require $this->get_uri() . '/component/' . $args['sub_module'] . '.php';
+					require $this->get_uri() . '/component/' . $args['component'] . '.php';
 
-					$this->{$args['slug']} = new $args['sub_module']();
+					$this->{$args['slug']} = new $args['component']();
 					$this->{$args['slug']}->parent_module = $this->get_slug();
 					$this->{$args['slug']}->slug = $args['slug'];
 
 			endif;
 
-			$this->sub_module []= $args;
+			$this->component []= $args;
 			$this->add_view( $args );
+
+	}
+	/**
+	 * [add_component description]
+	 * @param [array] $args [contain the arguments for add a new compnent]
+	 */
+	public function add_component( $args )
+	{
+
+			$args_default = array(
+				'name' => '',
+				'slug' => '',
+				'class_name' => ''
+			);
+
+			$args = array_merge( $args_default, $args );
+
 
 	}
 	/**
@@ -308,7 +329,7 @@ class sp_module
 			$args_default = 	array(
 					'name' => '',
 					'call_back' => '',
-					'sub_module' => ''
+					'component' => ''
 			);
 
 			$args = array_merge( $args_default, $args);
@@ -357,7 +378,7 @@ class sp_module
 				);
 	}
 	/**
-	 * Convert variable php in variable js
+	 * Convert variable php in variable js ** depracated **
 	 * @param  string $key the key for array
 	 * @param  array $args the array to convert
 	 * @return boolean True is good action or false is not good

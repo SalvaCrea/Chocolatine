@@ -22,26 +22,26 @@ class sp_query_post extends sp_module
     }
     /***************************************************************************
     *
-    * Loader sub module
+    * Loader component
     *
     ***************************************************************************/
 
-    function loader_sub_module()
+    function loader_component()
     {
 
-      $this->add_sub_module(
+      $this->add_component(
         array(
           'name' => 'Tools for query post',
-          'sub_module' => 'tools_query_post',
+          'component' => 'tools_query_post',
           'slug' => 'tool',
           'show_in_menu' => false
         )
       );
 
-      $this->add_sub_module(
+      $this->add_component(
         array(
           'name' => 'Post model',
-          'sub_module' => 'sp_wp_post',
+          'component' => 'sp_wp_post',
           'slug' => 'post',
           'call_back' => 'view_post_model',
           'show_in_menu' => true
@@ -61,7 +61,7 @@ class sp_query_post extends sp_module
             array(
               'name' => 'Query Find Post',
               'call_back' => 'find_post',
-              'sub_module' => 'find_post_wp_post'
+              'component' => 'find_post_wp_post'
             )
         );
 
@@ -69,7 +69,7 @@ class sp_query_post extends sp_module
             array(
               'name' => 'Give me the template for directive For Angular',
               'call_back' => 'give_me_directive',
-              'sub_module' => 'give_me_directive'
+              'component' => 'give_me_directive'
             )
         );
 

@@ -9,7 +9,7 @@ var sp_ajax  =
     // action pour le controller php
     module : '',
 		// action pour le controller php
-		sub_module : '',
+		component : '',
     // le retour généré par le php
     content_return  : new Array(),
 
@@ -29,7 +29,7 @@ var sp_ajax  =
 						 "args" : this.args,
 						 "action" : this.wp_action ,
 						 "module" : this.module,
-					 	 "sub_module" : this.sub_module
+					 	 "component" : this.component
 					 },
   	       success : function( msg )
   	       {
@@ -66,7 +66,7 @@ var sp_ajax  =
 
       if ( module != '' && action != '') {
           new_ajax_tools.module = module;
-          new_ajax_tools.sub_module = action;
+          new_ajax_tools.component = action;
       }
 
 			return new_ajax_tools;

@@ -24,7 +24,7 @@ class sp_form extends sp_module
 						array(
 							'name' => 'Save form  for class',
 							'call_back' => 'save_form',
-							'sub_module' => 'save_form'
+							'component' => 'save_form'
 						)
 				);
 
@@ -66,15 +66,15 @@ class sp_form extends sp_module
         $data = $args['args'];
 
         $module = $this->core->modules->get_module( $data['module'] );
-        $sub_module = $module->{$data['sub_module']};
+        $component = $module->{$data['component']};
 
-        $schema = $sub_module->data_schema();
+        $schema = $component->data_schema();
 
         if ( $schema['save'] == 'simple')
               return $this->save_form_simple( $data );
 
         if ( $schema['save'] == 'self' )
-              return $sub_module->save_form( $data );
+              return $component->save_form( $data );
 
     }
     function save_form_simple( $data )

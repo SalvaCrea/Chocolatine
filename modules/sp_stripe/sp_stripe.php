@@ -20,22 +20,22 @@ class sp_stripe extends sp_module
 
         require "vendor/autoload.php";
     }
-    function loader_sub_module()
+    function loader_component()
     {
 
-      $this->add_sub_module(
+      $this->add_component(
         array(
           'name' => 'Configuration',
           'call_back' => 'stripe_configuration',
-          'sub_module' => 'stripe_configuration',
+          'component' => 'stripe_configuration',
           'slug' => 'config'
         )
       );
 
-      $this->add_sub_module(
+      $this->add_component(
         array(
           'name' => 'tools stripe',
-          'sub_module' => 'tools_stripe',
+          'component' => 'tools_stripe',
           'slug' => 'tool',
           'show_in_menu' => false
         )

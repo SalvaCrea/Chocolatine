@@ -24,7 +24,7 @@ class sp_core
 			 */
 			var $config;
 			/**
-			 * The url current, a fusion beetwen slug, current_module and $sub_module
+			 * The url current, a fusion beetwen slug, current_module and $component
 			 * @var string
 			 */
 			var $current_url;

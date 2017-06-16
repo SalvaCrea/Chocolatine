@@ -50,11 +50,11 @@ class sp_module_manager
 									 */
 									$current_class->loader_view();
 									/**
-									 * Load the sub module of the module
+									 * Load the component of the module
 									 */
-									$current_class->loader_sub_module();
+									$current_class->loader_component();
 									/**
-									 * Load the sub module of the module
+									 * Load the component of the module
 									 */
 									$current_class->loader_ajax_action();
 

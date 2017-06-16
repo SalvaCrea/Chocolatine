@@ -19,21 +19,21 @@ class sp_sellsy extends sp_module
         $this->categorie = 'api';
 
     }
-    function loader_sub_module()
+    function loader_component()
     {
-      $this->add_sub_module(
+      $this->add_component(
         array(
           'name' => 'Configuration de Sellsy',
           'call_back' => 'config_sellsy',
-          'sub_module' => 'config_sellsy',
+          'component' => 'config_sellsy',
           'slug' => 'config'
         )
       );
 
-      $this->add_sub_module(
+      $this->add_component(
         array(
           'name' => 'Functions MailJet',
-          'sub_module' => 'tools_sellsy',
+          'component' => 'tools_sellsy',
           'slug' => 'tool',
           'show_in_menu' => false
         )

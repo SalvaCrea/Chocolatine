@@ -1,8 +1,8 @@
 <?php
 
-use \salva_powa\sp_sub_module;
+use \salva_powa\sp_component;
 
-class sp_wp_post extends sp_sub_module
+class sp_wp_post extends sp_component
 {
         /**
          * [add_post description]

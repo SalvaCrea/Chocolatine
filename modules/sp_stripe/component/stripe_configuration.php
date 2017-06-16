@@ -1,8 +1,8 @@
 <?php
 
-use \salva_powa\sp_sub_module;
+use \salva_powa\sp_component;
 
-class stripe_configuration extends sp_sub_module
+class stripe_configuration extends sp_component
 {
         function __construct()
         {

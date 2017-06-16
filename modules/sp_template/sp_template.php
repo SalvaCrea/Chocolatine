@@ -41,8 +41,8 @@ class sp_template extends sp_module
 
 		$id_css = $this->current_module->slug;
 
-		if ( !empty( $this->current_sub_module['slug'] ) ) {
-			 $id_css .= $this->current_sub_module['slug'];
+		if ( !empty( $this->current_component['slug'] ) ) {
+			 $id_css .= $this->current_component['slug'];
 		}
 
 		echo "<div id=\"groovy_template\" {$angular_apps_html} class=\"{$id_css}\" >";

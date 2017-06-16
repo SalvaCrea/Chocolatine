@@ -1,8 +1,8 @@
 <?php
 
-use \salva_powa\sp_sub_module;
+use \salva_powa\sp_component;
 
-class tools_mailjet extends sp_sub_module
+class tools_mailjet extends sp_component
 {
       /**
        * The futur container of the mail jet api class

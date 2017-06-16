@@ -27,9 +27,9 @@ class sp_controller
         // 'url'  => ''
       );
       /**
-       *  Informations for sub Module executed
+       *  Informations for component executed
        */
-      var $current_sub_module = array(
+      var $current_component = array(
         // 'name' => '',
         // 'slug' => '',
         // 'url'  => ''
@@ -64,7 +64,7 @@ class sp_controller
 			public function get_current_module()
 			{
 
-				$current_sub_module = false;
+				$current_component = false;
 
 				if ( isset( $_GET['module'] ) && !empty( $_GET['module'] ) )
 				{
@@ -75,19 +75,19 @@ class sp_controller
 						 $this->current_module = $this->core->modules->get_module( $this->module_default );
 				}
 
-				if ( isset( $_GET['sub_module'] ) && !empty( $_GET['sub_module'] ) ) {
+				if ( isset( $_GET['component'] ) && !empty( $_GET['component'] ) ) {
 
-						$this->sub_module = $_GET['sub_module'];
+						$this->component = $_GET['component'];
 
-						$current_sub_module = array_find(
-              $this->current_module->sub_module,
+						$current_component = array_find(
+              $this->current_module->component,
               'slug',
-              $this->sub_module
+              $this->component
             );
 
-						if ( $current_sub_module != false ) {
+						if ( $current_component != false ) {
 
-								$this->current_sub_module = $this->current_module->sub_module[$current_sub_module];
+								$this->current_component = $this->current_module->component[$current_component];
 
             }
 
@@ -107,8 +107,8 @@ class sp_controller
           if ( !empty( $this->current_module->slug ))
             $url .= "&module={$this->current_module->slug}";
 
-          if ( !empty( $this->sub_module ) )
-            $url .= "&sub_module={$this->sub_module}";
+          if ( !empty( $this->component ) )
+            $url .= "&component={$this->component}";
 
           $this->current_url = $url;
 
