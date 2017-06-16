@@ -22,7 +22,7 @@ class paiement_manager extends sp_module
         'show_in_menu' => false
       );
 
-      if ( $_GET['component'] == 'view_one_request' )
+      if ( !empty( $_GET['component'] ) && $_GET['component'] == 'view_one_request' )
           $view_one_request['show_in_menu'] = true;
 
       $this->add_component( $view_one_request );

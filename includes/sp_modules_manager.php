@@ -22,14 +22,21 @@ class sp_module_manager
 			{
 						$sp_core = sp_core();
 
+						/**
+						 * [$list_folder create a list of potentiel module ]
+						 * @var [array]
+						 */
 						$list_folder = $this->create_root_folder( $sp_core->uri_folder.'/modules' );
 
-							if ( file_exists ( get_template_directory() . '/sp_modules' ) ) {
-								 $list_folder = array_merge(
-									 $list_folder,
-									 $this->create_root_folder( get_template_directory() . '/sp_modules' )
-								 );
-							}
+						/**
+						 *  search if the wordpress theme contain module for sp framework
+						 */
+						if ( file_exists ( get_template_directory() . '/sp_modules' ) ) {
+							 $list_folder = array_merge(
+								 $list_folder,
+								 $this->create_root_folder( get_template_directory() . '/sp_modules' )
+							 );
+						}
 
 						foreach ( $list_folder as $key => $folder_root ) {
 

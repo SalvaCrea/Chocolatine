@@ -45,6 +45,11 @@ class sp_module
 	 */
 	var $component = array();
 	/**
+	 * This array is use for declarate the component for the v2
+	 * @var object
+	 */
+	var $cpt;
+	/**
 	 * This array is use for declarate the ajax action
 	 * @var array
 	 */
@@ -255,6 +260,10 @@ class sp_module
 	public function add_component( $args )
 	{
 
+			if ( empty( $this->cpt ) ) {
+						$this->cpt = new \stdClass();
+			}
+
 			$args_default = array(
 				'name' => '',
 				'slug' => '',
@@ -303,23 +312,7 @@ class sp_module
 			$this->add_view( $args );
 
 	}
-	/**
-	 * [add_component description]
-	 * @param [array] $args [contain the arguments for add a new compnent]
-	 */
-	public function add_component( $args )
-	{
 
-			$args_default = array(
-				'name' => '',
-				'slug' => '',
-				'class_name' => ''
-			);
-
-			$args = array_merge( $args_default, $args );
-
-
-	}
 	/**
 	 * This function open route for the ajax
 	 * @param array $args ann array than contain information for open route

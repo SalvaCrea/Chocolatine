@@ -129,7 +129,7 @@ function sp_clean_string($string)
  {
     $sp_core = sp_core();
 
-    if ( $_GET['page'] == $sp_core->slug &&  is_admin() )
+    if ( !empty( $_GET['page'] ) && $_GET['page'] == $sp_core->slug &&  is_admin() )
           return true;
 
     return false;
