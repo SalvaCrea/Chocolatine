@@ -38,19 +38,32 @@ class sp_module_manager
 							 );
 						}
 
+
+
 						foreach ( $list_folder as $key => $folder_root ) {
 
-									$folder = $folder_root['root'] . '/' . $folder_root['name'] .'.php';
-
+									$file = $folder_root['root'] . '/' . $folder_root['name'] .'.php';
+									$path_json = $folder_root['root'] . '/' . 'module.json';
 									// test if file existe
-									if ( !file_exists ( $folder ) ) {
+									if ( !file_exists ( $file ) ) {
 											continue;
 									}
 
-									require $folder;
+									/**
+									 * [require the main file of module]
+									 */
+									require $file;
 
 									// execute the class
-									$current_class = new $folder_root['name']();
+
+									if ( file_exists ( $path_json ) ) {
+											$test = '\perfect_module\perfect_module';
+										  $current_class = new $test();
+											sp_dump( $current_class );
+									}
+									else {
+											$current_class = new $folder_root['name']();
+									}
 									$current_class->url = "/wp-admin/admin.php?page=salva_powa&module=" . $current_class->get_slug();
 									/**
 									 * Load the view of the module

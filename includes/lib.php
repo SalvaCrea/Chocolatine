@@ -208,3 +208,8 @@ function sp_redirection_js( $url )
   </SCRIPT>
   ";
 }
+
+function add_error( $args )
+{
+    
+}
