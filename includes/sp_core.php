@@ -82,13 +82,13 @@ class sp_core
 			public function init()
 			{
 
-				$this->ressources = new sp_ressources();
+				$this->ressources = new sp_ressources_manager();
 
 				$this->init_medoo();
 
-				$this->ajax = new sp_ajax();
-				if ( is_sp_admin() )
-					$this->ajax->add_ressource();
+				$this->ajax = new sp_ajax_manager();
+
+				$this->ajax->add_ressource();
 
 				$this->modules = new sp_module_manager();
 

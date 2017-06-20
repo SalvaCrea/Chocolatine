@@ -61,10 +61,6 @@ class sp_module_manager
 											$module_factory = new module_factory();
 											$current_class = $module_factory->build_module( $folder_root['root'] );
 									}
-									else {
-											$current_class = new $folder_root['name']();
-									}
-									$current_class->url = "/wp-admin/admin.php?page=salva_powa&module=" . $current_class->get_slug();
 									/**
 									 * Load the view of the module
 									 */

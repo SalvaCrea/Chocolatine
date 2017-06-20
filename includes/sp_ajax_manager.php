@@ -2,7 +2,7 @@
 
 namespace salva_powa;
 
-class sp_ajax
+class sp_ajax_manager
 {
     /**
      * The argument in request ajax

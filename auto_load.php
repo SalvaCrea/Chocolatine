@@ -6,18 +6,28 @@ require_once(dirname(__FILE__).'/vendor/autoload.php');
 
 require_once(dirname(__FILE__).'/includes/sp_core.php');
 
-require_once(dirname(__FILE__).'/includes/sp_ressources.php');
+require_once(dirname(__FILE__).'/includes/sp_ressources_manager.php');
 
-require_once(dirname(__FILE__).'/includes/sp_ajax.php');
+require_once(dirname(__FILE__).'/includes/sp_ajax_manager.php');
 
 require_once(dirname(__FILE__).'/includes/sp_controller.php');
 
 require_once(dirname(__FILE__).'/includes/sp_modules_manager.php');
 
-require_once(dirname(__FILE__).'/includes/sp_module.php');
-
-require_once(dirname(__FILE__).'/includes/sp_component.php');
-
 require_once(dirname(__FILE__).'/includes/sp_module_factory.php');
 
-require_once(dirname(__FILE__).'/includes/sp_model.php');
+/**
+ * [Pattern Module]
+ */
+
+require_once(dirname(__FILE__).'/includes/pattern_module/sp_module.php');
+
+require_once(dirname(__FILE__).'/includes/pattern_module/sp_component.php');
+
+require_once(dirname(__FILE__).'/includes/pattern_module/sp_model.php');
+
+require_once(dirname(__FILE__).'/includes/pattern_module/sp_view.php');
+
+require_once(dirname(__FILE__).'/includes/pattern_module/sp_form.php');
+
+require_once(dirname(__FILE__).'/includes/pattern_module/sp_ajax.php');

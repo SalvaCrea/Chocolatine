@@ -70,24 +70,34 @@ class module_factory
         // test if the module have component
         if ( !empty( $this->module_info->component ) )
             $this->add_component();
+
         // test if the module have view
         if ( !empty( $this->module_info->view ) )
             $this->add_view();
+
         // test if the module have back_menu
         if ( !empty( $this->module_info->back_menu ) )
             $this->add_back_menu();
+
         // test if the module have data_schema
         if ( !empty( $this->module_info->model ) )
             $this->add_model();
+
         // test if the module have form
         if ( !empty( $this->module_info->form ) )
             $this->add_form();
+
         // test if the module have ajax
         if ( !empty( $this->module_info->ajax ) )
             $this->add_ajax();
 
         sp_dump( $this->module_current );
+
+        /**
+         * [return the module buided]
+         */
         return $this->module_current;
+
       }
       /**
        * [add_component add the components for the module]
@@ -107,9 +117,37 @@ class module_factory
               $this->module_current->add_model( (array) $model );
           }
       }
-      public function add_form(){}
-      public function add_view(){}
-      public function add_ajax(){}
-      public function add_back_menu(){}
+      /**
+       * [add_form description]
+       */
+      public function add_form(){
+          foreach ( $this->module_info->form as $key => $form ) {
+              $this->module_current->add_form( (array) $form );
+          }
+      }
+      /**
+       * [add_view description]
+       */
+      public function add_view(){
+          foreach ( $this->module_info->view as $key => $view ) {
+              $this->module_current->add_model( (array) $view );
+          }
+      }
+      /**
+       * [add_ajax description]
+       */
+      public function add_ajax(){
+          foreach ( $this->module_info->ajax as $key => $ajax ) {
+              $this->module_current->add_ajax( (array) $ajax );
+          }
+      }
+      /**
+       * [add_back_menu description]
+       */
+      public function add_back_menu(){
+          foreach ( $this->module_info->back_menu as $key => $back_menu ) {
+              $this->module_current->add_back_menu( (array) $back_menu );
+          }
+      }
 
 }

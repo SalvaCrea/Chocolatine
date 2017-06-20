@@ -230,7 +230,7 @@ class sp_module
 	 */
 	public function find_core()
 	{
-		global $sp_core;	return $sp_core;
+		return sp_core();
 	}
 	public function add_model( $args )
 	{
@@ -342,6 +342,16 @@ class sp_module
 						->add_ajax_listen( $args );
 
 			return true;
+	}
+	public function add_back_menu( $args )
+	{
+			$args_default = 	array(
+					'name' => '',
+					'name_menu' => '',
+					'view' => ''
+			);
+
+			$args = array_merge( $args_default, $args);
 	}
 	/**
 	 * [the_recover this function require the file and create the instance of the class]

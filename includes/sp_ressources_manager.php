@@ -2,7 +2,7 @@
 
 namespace salva_powa;
 
-class sp_ressources
+class sp_ressources_manager
 {
   /**
    * All ressource js and Css for create a dynamic js table and button for export data
