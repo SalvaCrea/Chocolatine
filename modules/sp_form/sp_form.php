@@ -55,7 +55,7 @@ class sp_form extends sp_module
 
       $this->convert_in_js( 'form' , $args );
 
-      $this->add_module_js('sp_form.js');
+      $this->add_js('sp_form.js');
 
 			return $form;
 

@@ -61,7 +61,7 @@ class sp_dev extends sp_module
     }
     function list_views()
     {
-      $this->add_module_js( 'list_view.js' );
+      $this->add_js( 'list_view.js' );
 
       $list_view = $this->core->controller->views;
       $this->convert_in_js( 'list_view', $list_view );
@@ -75,7 +75,7 @@ class sp_dev extends sp_module
 
       $ajax_actions = $this->core->ajax->ajax_actions;
 
-      $this->add_module_js( 'ajax_views.js', 'ajax_views',  $ajax_actions );
+      $this->add_js( 'ajax_views.js', 'ajax_views',  $ajax_actions );
 
       $view = $this->twig_render('ajax_views.html');
 

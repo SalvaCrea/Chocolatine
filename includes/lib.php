@@ -70,7 +70,7 @@ function sp_dump($var=false, $ajax=false)
  * @param  string no clean
  * @return string clean
  */
-function sp_clean_string($string)
+function sp_clean_string( $string )
 {
     $string = str_replace(' ', '_', $string); // Replaces all spaces with hyphens.
 
@@ -211,5 +211,5 @@ function sp_redirection_js( $url )
 
 function add_error( $args )
 {
-    
+
 }

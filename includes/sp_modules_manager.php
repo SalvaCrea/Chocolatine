@@ -26,7 +26,7 @@ class sp_module_manager
 						 * [$list_folder create a list of potentiel module ]
 						 * @var [array]
 						 */
-						$list_folder = $this->create_root_folder( $sp_core->uri_folder.'/modules' );
+						$list_folder = $this->create_root_folder( $sp_core->path_folder.'/modules' );
 
 						/**
 						 *  search if the wordpress theme contain module for sp framework
@@ -44,22 +44,22 @@ class sp_module_manager
 
 									$file = $folder_root['root'] . '/' . $folder_root['name'] .'.php';
 									$path_json = $folder_root['root'] . '/' . 'module.json';
+
 									// test if file existe
-									if ( !file_exists ( $file ) ) {
+									if ( file_exists ( $file ) ) {
 											continue;
 									}
 
 									/**
-									 * [require the main file of module]
+									 * [require the main file of module depracated]
 									 */
-									require $file;
+									//require $file;
 
 									// execute the class
 
 									if ( file_exists ( $path_json ) ) {
-											$test = '\perfect_module\perfect_module';
-										  $current_class = new $test();
-											sp_dump( $current_class );
+											$module_factory = new module_factory();
+											$current_class = $module_factory->build_module( $folder_root['root'] );
 									}
 									else {
 											$current_class = new $folder_root['name']();

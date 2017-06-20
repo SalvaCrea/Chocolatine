@@ -79,8 +79,8 @@ class sp_template extends sp_module
 
 	function dependency(){
 
-		$this->add_module_css( 'sp_template.css' );
-		$this->add_module_js('sp_template.js');
+		$this->add_css( 'sp_template.css' );
+		$this->add_js('sp_template.js');
 
 	}
 	function generate_content( $arg ){

@@ -63,8 +63,8 @@ class sp_home extends sp_module
 			// convertie the current_component module in js
 			$this->convert_in_js( 'current_component', $current_component );
 
-			$this->add_module_js( 'sp_home.js' );
-			$this->add_module_css( 'sp_home.css' );
+			$this->add_js( 'sp_home.js' );
+			$this->add_css( 'sp_home.css' );
 
 			$this->generate_header();
 

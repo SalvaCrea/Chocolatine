@@ -53,7 +53,7 @@ class sp_stripe extends sp_module
 
       if (  $this->tool->is_connected() ) {
 
-      $this->add_module_js('subcription_stripe.js');
+      $this->add_js('subcription_stripe.js');
 
       $plans = $this->tool->get_plans();
 

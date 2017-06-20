@@ -15,7 +15,7 @@ class sp_query_post extends sp_module
 
 				if ( is_admin() ) {
 					$this->show_in_menu = true;
-					$this->add_module_js( 'sp_query_post.js' );
+					$this->add_js( 'sp_query_post.js' );
 
 				}
 
@@ -149,7 +149,7 @@ class sp_query_post extends sp_module
     ***************************************************************************/
 		function view_back()
 		{
-          $this->add_module_js( 'directive_query_post.js' );
+          $this->add_js( 'directive_query_post.js' );
           $view = $this->twig_render( 'home_query_post.html' );
 					return $view;
 		}

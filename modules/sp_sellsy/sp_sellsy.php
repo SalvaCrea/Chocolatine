@@ -56,7 +56,7 @@ class sp_sellsy extends sp_module
 
       if ( !empty( $client->response->result ) ) {
 
-        $this->add_module_js( 'home_sellsy.js' );
+        $this->add_js( 'home_sellsy.js' );
 
         $this->convert_in_js( 'client', $client->response );
 

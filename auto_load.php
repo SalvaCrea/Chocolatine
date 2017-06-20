@@ -19,3 +19,5 @@ require_once(dirname(__FILE__).'/includes/sp_module.php');
 require_once(dirname(__FILE__).'/includes/sp_component.php');
 
 require_once(dirname(__FILE__).'/includes/sp_module_factory.php');
+
+require_once(dirname(__FILE__).'/includes/sp_model.php');

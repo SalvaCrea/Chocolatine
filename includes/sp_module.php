@@ -40,15 +40,15 @@ class sp_module
 	 */
 	var $show_in_menu = false;
 	/**
-	 * This array is use for declarate the component
-	 * @var array
-	 */
-	var $component = array();
-	/**
 	 * This array is use for declarate the component for the v2
 	 * @var object
 	 */
 	var $cpt;
+	/**
+	 * This array is use for declarate the model for the v2
+	 * @var object
+	 */
+	var $model;
 	/**
 	 * This array is use for declarate the ajax action
 	 * @var array
@@ -63,7 +63,7 @@ class sp_module
 	 *  this is the root folder
 	 * @var string
 	 */
-	var $uri_folder;
+	var $path_folder;
 	/**
 	 * this a web url
 	 * @var string
@@ -191,10 +191,10 @@ class sp_module
 	 */
 	function get_uri()
 	{
-			if ( empty( $this->uri_folder ) ) {
-				$this->uri_folder = $this->dir_file_class();
+			if ( empty( $this->path_folder ) ) {
+				$this->path_folder = $this->dir_file_class();
 			}
-			return $this->uri_folder;
+			return $this->path_folder;
 	}
 	/**
 	 * Use the framework twig like template motor
@@ -232,6 +232,29 @@ class sp_module
 	{
 		global $sp_core;	return $sp_core;
 	}
+	public function add_model( $args )
+	{
+
+		if ( empty( $this->model ) ) {
+					$this->model = new \stdClass();
+		}
+
+			$args_default = array(
+					'name' => '',
+					'slug' => '',
+					'type' => '',
+			);
+
+			$args = array_merge( $args_default, $args);
+
+			if ( empty( $args['slug'] ) )
+					$args['slug']  = sp_clean_string( $args['name'] );
+
+			$this->model->{$args['slug']} = $this->the_recover(
+				'model',
+				$args['slug']
+			);
+	}
 	/**
 	 * This function add a submodule for module
 	 * @param [array] The arguments for add a submenu
@@ -239,18 +262,31 @@ class sp_module
 	public function add_view( $args )
 	{
 
+		if ( empty( $this->view ) ) {
+					$this->view = new \stdClass();
+		}
+
 		$args_default = array(
 			'name' => '',
 			'slug' => '',
-			'url' => '',
-			'call_back' => '',
-			'show_in_menu' => true,
+			'description' => ''
 		);
 
 		$args = array_merge( $args_default, $args);
 
-		$this->views []= $args;
-		$this->core->controller->views []= $args;
+		if ( empty( $args['slug'] ) )
+				$args['slug']  = sp_clean_string( $args['name'] );
+
+		if ( !empty( $args['slug'] ) ){
+
+				$this->view->{$args['slug']} = $this->the_recover(
+					'view',
+					$args['slug']
+				);
+
+				$this->core->controller->views []= $args;
+
+		}
 
 	}
 	/**
@@ -267,49 +303,19 @@ class sp_module
 			$args_default = array(
 				'name' => '',
 				'slug' => '',
-				'url' => '',
-				'call_back' => '',
-				'show_in_menu' => true,
-				'component' => '',
+				'description' => '',
 			);
-
-			// add _ first elem home
-			if ( empty( $this->component ) ) :
-
-					$first_elem = $args_default;
-					$first_elem['url'] = $this->core->controller->url;
-					$first_elem['url'] .= "&module={$this->get_slug()}";
-					$first_elem['name'] = 'Home';
-					$first_elem['slug'] = 'home';
-					$this->component []= $first_elem;
-
-			endif;
 
 			$args = array_merge( $args_default, $args);
 
-			if ( empty( $args['slug'] ) )
-					$args['slug'] = sp_clean_string( $args['name'] );
+			if ( !empty( $args['slug'] ) ){
 
-			if ( empty( $args['url'] ) ):
+					$this->cpt->{$args['slug']} = $this->the_recover(
+						'component',
+						$args['slug']
+					);
 
-				$args['url'] = $this->core->controller->url;
-				$args['url'] .= "&module={$this->get_slug()}";
-				$args['url'] .= "&component={$args['slug']}";
-
-			endif;
-
-			if ( !empty( $args['component'] ) ):
-
-					require $this->get_uri() . '/component/' . $args['component'] . '.php';
-
-					$this->{$args['slug']} = new $args['component']();
-					$this->{$args['slug']}->parent_module = $this->get_slug();
-					$this->{$args['slug']}->slug = $args['slug'];
-
-			endif;
-
-			$this->component []= $args;
-			$this->add_view( $args );
+			}
 
 	}
 
@@ -338,20 +344,40 @@ class sp_module
 			return true;
 	}
 	/**
+	 * [the_recover this function require the file and create the instance of the class]
+	 * @return [type] [description]
+	 */
+	public function the_recover( $folder_name, $file_name )
+	{
+
+		require $this->get_uri() . '/' . $folder_name . '/' . $file_name . '.php';
+
+		$name_class = "\\{$this->namespace}\\{$file_name}";
+
+		$class = new $name_class();
+		$class->parent_module = $this->get_slug();
+		$class->slug = $file_name;
+
+		return $class;
+
+	}
+	/**
 	 * This function add js in the personnal folder of module contain in the folder js
 	 * @param string $name the name of the js
 	 */
-	public function add_module_js( $module_url, $name = '', $data = array() )
+	public function add_js( $module_url, $name = '', $data = array() )
 	{
 
 			if ( empty( $name ) ) {
 				$name = $module_url;
 			}
 
+			// add the js in the list
 			wp_enqueue_script( $name,
 				$this->get_url() . '/js/' . $module_url
 			);
 
+			// write the data for the js
 			if ( !empty( $data ) ) {
 			wp_localize_script(
 				$name,
@@ -364,7 +390,7 @@ class sp_module
 	 * This function add js in the personnal folder of module contain in the folder js
 	 * @param string $name the name of the css
 	 */
-	public function add_module_css( $name )
+	public function add_css( $name )
 	{
 				wp_enqueue_style( $name,
 					$this->get_url() . '/css/' . $name
@@ -387,4 +413,5 @@ class sp_module
 					 return false;
 				}
 	}
+
 }

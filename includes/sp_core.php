@@ -12,7 +12,7 @@ class sp_core
 			 *  this is the root folder
 			 * @var string
 			 */
-			var $uri_folder;
+			var $path_folder;
 			/**
 			 * this a web url
 			 * @var string
@@ -69,8 +69,8 @@ class sp_core
 			function __construct()
 			{
 
-				$this->uri_folder = dirname( dirname(__FILE__) );
-				$this->url_folder = '/wp-content/plugins/' . sp_get_current_name_folder( $this->uri_folder );
+				$this->path_folder = dirname( dirname(__FILE__) );
+				$this->url_folder = '/wp-content/plugins/' . sp_get_current_name_folder( $this->path_folder );
 
 				if ( is_admin() )
 						add_action('admin_menu', array( $this, 'wp_admin_action' ));

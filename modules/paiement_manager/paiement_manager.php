@@ -150,7 +150,7 @@ class paiement_manager extends sp_module
       );
 
       $list_request_subscription = $post_manager->find_post_full( $args, true );
-      $this->add_module_js('home_paiement_manager.js', 'list_request_subscription', $list_request_subscription);
+      $this->add_js('home_paiement_manager.js', 'list_request_subscription', $list_request_subscription);
 
       $module_show_request = array_find( $this->component, 'slug', 'view_one_request' );
       $this->convert_in_js('url_show_request', $this->component[$module_show_request]['url'] );
@@ -162,7 +162,7 @@ class paiement_manager extends sp_module
     }
     function view_create_request_subcription()
 		{
-      $this->add_module_js('create_request_subcription.js');
+      $this->add_js('create_request_subcription.js');
 
       $form = $this->rq_subcription->generate_form();
 
@@ -192,7 +192,7 @@ class paiement_manager extends sp_module
 
         $request = $this->rq_subcription->get_one( $id_request );
 
-        $this->add_module_js('view_one_request.js', "request", $request);
+        $this->add_js('view_one_request.js', "request", $request);
 
         $view = $this->twig_render('view_one_request.html', $request);
 
