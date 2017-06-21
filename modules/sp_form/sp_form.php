@@ -65,7 +65,7 @@ class sp_form extends sp_module
 
         $data = $args['args'];
 
-        $module = $this->core->modules->get_module( $data['module'] );
+        $module = $this->core->manager->module->get_module( $data['module'] );
         $component = $module->{$data['component']};
 
         $schema = $component->data_schema();

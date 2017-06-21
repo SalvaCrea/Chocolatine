@@ -1,6 +1,6 @@
 <?php
 
-namespace salva_powa;
+namespace sp_framework;
 
 class sp_manager_ajax
 {
@@ -123,7 +123,7 @@ class sp_manager_ajax
 										return false;
 
 					// get the module
-					$module = $this->core->modules->get_module( $ajax_current_actions['module'] );
+					$module = $this->core->manager->module->get_module( $ajax_current_actions['module'] );
 
 					// execute  the callback
 					$this->response['data'] = call_user_func(

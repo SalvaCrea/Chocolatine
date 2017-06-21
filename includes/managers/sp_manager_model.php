@@ -1,6 +1,6 @@
 <?php
 
-namespace salva_powa;
+namespace sp_framework;
 
 class sp_manager_model
 {

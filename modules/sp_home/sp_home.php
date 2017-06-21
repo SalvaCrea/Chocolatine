@@ -88,7 +88,7 @@ class sp_home extends sp_module
 		function view_back()
 		{
 			return $this->twig_render( 'home.html', array(
-				'list_modules' => $this->core->modules->list_modules
+				'list_modules' => $this->core->manager->module->list_modules
 			));
 		}
 		function generate_header()
@@ -152,7 +152,7 @@ class sp_home extends sp_module
 
 			$menu_left_js = array();
 
-			foreach ( $this->core->modules->list_modules as $current_module ) {
+			foreach ( $this->core->manager->module->list_modules as $current_module ) {
 
 					$current_item = array(
 						'slug' => $current_module->slug,

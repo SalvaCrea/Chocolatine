@@ -6,7 +6,7 @@
  *
  */
 
-namespace salva_powa;
+namespace sp_framework;
 
 class module_factory
 {

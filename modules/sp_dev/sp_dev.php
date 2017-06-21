@@ -48,7 +48,7 @@ class sp_dev extends sp_module
     }
     function view_back()
     {
-      $modules = $this->core->modules->list_modules;
+      $modules = $this->core->manager->module->list_modules;
       $modules['sp_home']->actif = 'active';
 
       $view =  $this->twig_render(

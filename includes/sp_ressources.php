@@ -1,8 +1,8 @@
 <?php
 
-namespace salva_powa;
+namespace sp_framework;
 
-class sp_ressources_manager
+class sp_ressources
 {
   /**
    * All ressource js and Css for create a dynamic js table and button for export data

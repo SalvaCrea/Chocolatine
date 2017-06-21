@@ -3,7 +3,7 @@
  * Class sp_core
  */
 
-namespace salva_powa;
+namespace sp-framework;
 use Medoo\Medoo;
 
 class sp_core
@@ -89,7 +89,7 @@ class sp_core
 
 				$this->manager = new \stdClass();
 
-				$this->ressources = new sp_ressources_manager();
+				$this->ressources = new sp_ressources();
 
 				$this->init_medoo();
 
@@ -101,13 +101,13 @@ class sp_core
 
 				$this->manager->model = new sp_manager_model();
 
-				$this->modules = new sp_module_manager();
+				$this->manager->module = new sp_module_manager();
 
 				$this->controller =  new sp_controller();
 
 				$this->manager->ajax->add_ressource();
 
-				$this->modules->search_modules();
+				$this->manager->module->search_modules();
 
 				$this->controller->init();
 
@@ -163,7 +163,7 @@ class sp_core
 			{
 
 					 sp_create_loader_js();
-					 $view = $this->modules->get_module( 'sp_home' );
+					 $view = $this->manager->module->get_module( 'sp_home' );
 					 $view->view_back_sp();
 
 			}

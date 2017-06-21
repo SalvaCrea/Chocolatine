@@ -1,6 +1,6 @@
 <?php
 
-namespace salva_powa;
+namespace sp_framework;
 
 class sp_component extends sp_module
 {
@@ -13,7 +13,7 @@ class sp_component extends sp_module
  	function get_father()
  	{
  			if ( !empty( $this->parent_module ) ) {
- 					return $this->core->modules->get_module( $this->parent_module, false);
+ 					return $this->core->manager->module->get_module( $this->parent_module, false);
  			}
  			else{
  					return false;
@@ -66,7 +66,7 @@ class sp_component extends sp_module
    }
    function generate_form()
    {
-     $form =  $this->core->modules->get_module( 'sp_form' );
+     $form =  $this->core->manager->module->get_module( 'sp_form' );
 
      $name = $this->get_name_form();
 
