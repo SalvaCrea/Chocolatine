@@ -64,6 +64,11 @@ class sp_core
 			 */
 			var $is_dev = false;
 			/**
+			 * [$manager contain the managers]
+			 * @var [stdclass]
+			 */
+			var $manager;
+			/**
 			 * __construct first action
 			 */
 			function __construct()
@@ -82,17 +87,25 @@ class sp_core
 			public function init()
 			{
 
+				$this->manager = new \stdClass();
+
 				$this->ressources = new sp_ressources_manager();
 
 				$this->init_medoo();
 
-				$this->ajax = new sp_ajax_manager();
+				$this->manager->form = new sp_manager_form();
 
-				$this->ajax->add_ressource();
+				$this->manager->view = new sp_manager_view();
+
+				$this->manager->ajax = new sp_manager_ajax();
+
+				$this->manager->model = new sp_manager_model();
 
 				$this->modules = new sp_module_manager();
 
 				$this->controller =  new sp_controller();
+
+				$this->manager->ajax->add_ressource();
 
 				$this->modules->search_modules();
 

@@ -91,8 +91,6 @@ class module_factory
         if ( !empty( $this->module_info->ajax ) )
             $this->add_ajax();
 
-        sp_dump( $this->module_current );
-
         /**
          * [return the module buided]
          */
@@ -130,7 +128,7 @@ class module_factory
        */
       public function add_view(){
           foreach ( $this->module_info->view as $key => $view ) {
-              $this->module_current->add_model( (array) $view );
+              $this->module_current->add_view( (array) $view );
           }
       }
       /**

@@ -2,7 +2,7 @@
 
 namespace salva_powa;
 
-class sp_ajax_manager
+class sp_manager_ajax
 {
     /**
      * The argument in request ajax
@@ -12,7 +12,7 @@ class sp_ajax_manager
 		 * An array than contain the callback by ajax
 		 * @var ajax_actions
 		 */
-		var $ajax_actions = array();
+		var $list_ajax = array();
 		/**
 		 * The current action selected
 		 * @var ajax_actions
@@ -77,7 +77,7 @@ class sp_ajax_manager
 
 			 $args = array_merge( $args_default, $args );
 
-			 $this->ajax_actions []= $args;
+			 $this->list_ajax []= $args;
 
 		}
     function controller()
@@ -90,7 +90,7 @@ class sp_ajax_manager
 			) {
 
 					$find_module = false;
-					foreach ($this->ajax_actions as $key => $ajax_action) {
+					foreach ($this->list_ajax as $key => $ajax_action) {
 
 							if ( $this->args['module'] == $ajax_action['module']
 						 				&& $this->args['component'] == $ajax_action['component'] ) {

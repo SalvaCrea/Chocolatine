@@ -109,23 +109,7 @@ class sp_module
 	 * The view loader
 	 * @return boolean or mixed, return false if is empty
 	 */
-	public function loader_view()
-	{
-			return false;
-	}
-	/**
-	 * The component loader
-	 * @return boolean or mixed, return false if is empty
-	 */
-	public function loader_component()
-	{
-			return false;
-	}
-	/**
-	 * The ajax loader ajax action
-	 * @return boolean or mixed, return false if is empty
-	 */
-	public function loader_ajax_action()
+	public function after_factory()
 	{
 			return false;
 	}
@@ -232,6 +216,34 @@ class sp_module
 	{
 		return sp_core();
 	}
+	/**
+	 * [add_form the method for add form for the module]
+	 * @param [type] $args [description]
+	 */
+	public function add_form( $args )
+	{
+		if ( empty( $this->model ) ) {
+					$this->form = new \stdClass();
+		}
+
+		$args_default = array(
+				'name' => '',
+				'model' => '',
+				'type' => ''
+		);
+
+		$args = $this->the_add_filter( $args_default, $args);
+
+		if ( !empty( $args['name'] ) ){
+
+				$this->cpt->{$args['name']} = $this->the_recover(
+					'form',
+					$args['name']
+				);
+
+		}
+
+	}
 	public function add_model( $args )
 	{
 
@@ -242,10 +254,10 @@ class sp_module
 			$args_default = array(
 					'name' => '',
 					'slug' => '',
-					'type' => '',
+					'type' => ''
 			);
 
-			$args = array_merge( $args_default, $args);
+			$args = $this->the_add_filter( $args_default, $args);
 
 			if ( empty( $args['slug'] ) )
 					$args['slug']  = sp_clean_string( $args['name'] );
@@ -254,6 +266,12 @@ class sp_module
 				'model',
 				$args['slug']
 			);
+
+			$this->core
+					->manager
+					->model
+					->add_model( $args );
+
 	}
 	/**
 	 * This function add a submodule for module
@@ -272,19 +290,22 @@ class sp_module
 			'description' => ''
 		);
 
-		$args = array_merge( $args_default, $args);
+		$args = $this->the_add_filter( $args_default, $args);
 
 		if ( empty( $args['slug'] ) )
 				$args['slug']  = sp_clean_string( $args['name'] );
 
 		if ( !empty( $args['slug'] ) ){
 
+				$this->core
+						->manager
+						->view
+						->add_view( $args );
+
 				$this->view->{$args['slug']} = $this->the_recover(
 					'view',
 					$args['slug']
 				);
-
-				$this->core->controller->views []= $args;
 
 		}
 
@@ -303,10 +324,10 @@ class sp_module
 			$args_default = array(
 				'name' => '',
 				'slug' => '',
-				'description' => '',
+				'description' => ''
 			);
 
-			$args = array_merge( $args_default, $args);
+			$args = $this->the_add_filter( $args_default, $args);
 
 			if ( !empty( $args['slug'] ) ){
 
@@ -323,26 +344,35 @@ class sp_module
 	 * This function open route for the ajax
 	 * @param array $args ann array than contain information for open route
 	 */
-	public function add_ajax_action( $args )
+	public function add_ajax( $args )
 	{
+
 			$args_default = 	array(
 					'name' => '',
-					'call_back' => '',
-					'component' => ''
+					'description' => ''
 			);
 
-			$args = array_merge( $args_default, $args);
+			$args = $this->the_add_filter( $args_default, $args);
 
-			$args['module'] = $this->get_slug();
+			 if ( !empty( $args['name'] ) ){
 
-			$this->ajax_action []= $args;
+					 $this->core
+		 					 ->manager
+							 ->ajax
+		 					 ->add_ajax_listen( $args );
 
-			$this->core
-						->ajax
-						->add_ajax_listen( $args );
+					 $this->cpt->{$args['name']} = $this->the_recover(
+						 'ajax',
+						 $args['name']
+					 );
 
-			return true;
+			 }
+
 	}
+	/**
+	 * [add_back_menu add a menu in the module sp admin]
+	 * @param [array] $args [the argument for add menu]
+	 */
 	public function add_back_menu( $args )
 	{
 			$args_default = 	array(
@@ -351,7 +381,19 @@ class sp_module
 					'view' => ''
 			);
 
-			$args = array_merge( $args_default, $args);
+			$args = $this->the_add_filter( $args_default, $args);
+	}
+	/**
+	 * [the_add_filter use for the all request of add for the managers]
+	 * @param [array] $args_default [arguments by default]
+	 * @param [array] $args         [argument for add]
+	 * @return [array] $args_filted [args filted]
+	 */
+	public function the_add_filter( $args_default, $args )
+	{
+			$args_filted = array_merge( $args_default , $args );
+			$args_filted['module'] = $this->get_slug();
+			return $args_filted;
 	}
 	/**
 	 * [the_recover this function require the file and create the instance of the class]

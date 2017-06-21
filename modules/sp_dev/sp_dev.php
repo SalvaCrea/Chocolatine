@@ -73,7 +73,7 @@ class sp_dev extends sp_module
     function ajax_views()
     {
 
-      $ajax_actions = $this->core->ajax->ajax_actions;
+      $ajax_actions = $this->core->ajax->list_ajax;
 
       $this->add_js( 'ajax_views.js', 'ajax_views',  $ajax_actions );
 

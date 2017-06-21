@@ -5,11 +5,6 @@ namespace salva_powa;
 class sp_module_manager
 {
 			/**
-			 * the list items int the menu
-			 * @var array
-			 */
-			var $menu;
-			/**
 			 * the list of module disponible
 			 * @var array
 			 */
@@ -26,7 +21,7 @@ class sp_module_manager
 						 * [$list_folder create a list of potentiel module ]
 						 * @var [array]
 						 */
-						$list_folder = $this->create_root_folder( $sp_core->path_folder.'/modules' );
+						$list_folder = $this->create_list_folder( $sp_core->path_folder.'/modules' );
 
 						/**
 						 *  search if the wordpress theme contain module for sp framework
@@ -34,7 +29,7 @@ class sp_module_manager
 						if ( file_exists ( get_template_directory() . '/sp_modules' ) ) {
 							 $list_folder = array_merge(
 								 $list_folder,
-								 $this->create_root_folder( get_template_directory() . '/sp_modules' )
+								 $this->create_list_folder( get_template_directory() . '/sp_modules' )
 							 );
 						}
 
@@ -50,44 +45,40 @@ class sp_module_manager
 											continue;
 									}
 
-									/**
-									 * [require the main file of module depracated]
-									 */
-									//require $file;
-
 									// execute the class
 
 									if ( file_exists ( $path_json ) ) {
 											$module_factory = new module_factory();
-											$current_class = $module_factory->build_module( $folder_root['root'] );
+											$current_module = $module_factory->build_module( $folder_root['root'] );
 									}
 									/**
 									 * Load the view of the module
 									 */
-									$current_class->loader_view();
-									/**
-									 * Load the component of the module
-									 */
-									$current_class->loader_component();
-									/**
-									 * Load the component of the module
-									 */
-									$current_class->loader_ajax_action();
+									$current_module->after_factory();
 
 									/**
 									 * Add the module in the list
 									 */
-									$this->list_modules[ $current_class->get_slug() ] = $current_class;
+									$this->add_module( $current_module );
 
 						}
 
+						/**
+						 * [Action then all module charged]
+						 */
+						do_action( 'modules_loaded' );
+
+			}
+			public function add_module( $module )
+			{
+					$this->list_modules[ $module->get_slug() ] = $module;
 			}
 			/**
 			 * create a folder with all root clean
 			 * @param  [string] $root_dir   the root folder
 			 * @return [array]  $table with all root
 			 */
-			private function create_root_folder( $root_dir )
+			private function create_list_folder( $root_dir )
 			{
 
 					$array_root = [];
