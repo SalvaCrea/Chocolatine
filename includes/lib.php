@@ -1,5 +1,5 @@
 <?php
-use \salva_powa\sp_core;
+use \sp_framework\sp_core;
 /**
  * [sp_core return the core of sp framework]
  * @return [type] [description]

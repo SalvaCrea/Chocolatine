@@ -3,7 +3,7 @@
  * Class sp_core
  */
 
-namespace sp-framework;
+namespace sp_framework;
 use Medoo\Medoo;
 
 class sp_core
@@ -87,6 +87,10 @@ class sp_core
 			public function init()
 			{
 
+				add_action('wp', function() {
+					sp_controller::start();
+				});
+				
 				$this->manager = new \stdClass();
 
 				$this->ressources = new sp_ressources();
@@ -103,13 +107,9 @@ class sp_core
 
 				$this->manager->module = new sp_module_manager();
 
-				$this->controller =  new sp_controller();
-
 				$this->manager->ajax->add_ressource();
 
 				$this->manager->module->search_modules();
-
-				$this->controller->init();
 
 			}
 			/**

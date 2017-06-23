@@ -31,14 +31,14 @@ require_once(dirname(__FILE__).'/includes/managers/sp_manager_model.php');
  * [Pattern Module]
  */
 
-require_once(dirname(__FILE__).'/includes/pattern_module/sp_module.php');
+require_once(dirname(__FILE__).'/includes/module_pattern/sp_module.php');
 
-require_once(dirname(__FILE__).'/includes/pattern_module/sp_component.php');
+require_once(dirname(__FILE__).'/includes/module_pattern/sp_component.php');
 
-require_once(dirname(__FILE__).'/includes/pattern_module/sp_model.php');
+require_once(dirname(__FILE__).'/includes/module_pattern/sp_model.php');
 
-require_once(dirname(__FILE__).'/includes/pattern_module/sp_view.php');
+require_once(dirname(__FILE__).'/includes/module_pattern/sp_view.php');
 
-require_once(dirname(__FILE__).'/includes/pattern_module/sp_form.php');
+require_once(dirname(__FILE__).'/includes/module_pattern/sp_form.php');
 
-require_once(dirname(__FILE__).'/includes/pattern_module/sp_ajax.php');
+require_once(dirname(__FILE__).'/includes/module_pattern/sp_ajax.php');
