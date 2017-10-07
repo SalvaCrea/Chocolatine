@@ -1,4 +1,5 @@
 <?php
+namespace sp_framework;
 use \sp_framework\sp_core;
 /**
  * [sp_core return the core of sp framework]

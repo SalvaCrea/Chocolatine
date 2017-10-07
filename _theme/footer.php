@@ -8,21 +8,5 @@
  *
  * @package salva-powa
  */
-
+ require get_sp_core()->path_folder . "theme/footer.php";
 ?>
-
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'salva-powa' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'salva-powa' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'salva-powa' ), 'salva-powa', '<a href="https://automattic.com/" rel="designer">Underscores.me</a>' ); ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
-
-<?php wp_footer(); ?>
-
-</body>
-</html>

@@ -7,11 +7,4 @@
  * @package salva-powa
  */
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-	return;
-}
-?>
-
-<aside id="secondary" class="widget-area" role="complementary">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside><!-- #secondary -->
+ require get_sp_core()->path_folder . "theme/sidebar.php";

@@ -4,7 +4,6 @@
  */
 
 namespace sp_framework;
-use Medoo\Medoo;
 
 class sp_core
 {
@@ -71,6 +70,7 @@ class sp_core
 			/**
 			 * __construct first action
 			 */
+			public static $sp_core;
 			function __construct()
 			{
 
@@ -81,6 +81,15 @@ class sp_core
 						add_action('admin_menu', array( $this, 'wp_admin_action' ));
 
 			}
+			public static function get_sp_core(){
+					if ( !empty( self::$sp_core )) {
+						global $sp_config;
+						self::$sp_core = new sp_core();
+						$sp_core->config = $sp_config;
+						$sp_core->init();
+					}
+					return self::$sp_core;
+			}
 			/**
 			 * This function load all modules
 			 */
@@ -90,7 +99,7 @@ class sp_core
 				add_action('wp', function() {
 					sp_controller::start();
 				});
-				
+
 				$this->manager = new \stdClass();
 
 				$this->ressources = new sp_ressources();

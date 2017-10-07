@@ -10,10 +10,6 @@
  * License: GPL2
  */
 
-use \salva_powa\sp_core;
-
-
-
 /**
  * Load the auto loader
  */
@@ -29,4 +25,4 @@ require "sp_config.php";
 $sp_core = new stdClass();
 
 
-sp_core_start();
+$sp_core = sp_framework\sp_core::get_sp_core();
