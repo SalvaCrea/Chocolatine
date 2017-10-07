@@ -3,5 +3,11 @@
         "catfan/Medoo": "^1.1",
         "twig/twig": "~1.0",
         "rilwis/meta-box": "4.*"
+    },
+    "require-dev": {
+        "consolidation/robo": "^1.0.0"
+    },
+    "autoload": {
+        "psr-4": {"sp_framework\\": "includes/"}
     }
 }

@@ -1,0 +1,18 @@
+<?php
+
+require "wp-config.php";
+
+/* Autorise l'exécution infinie du script, en attente de connexion. */
+set_time_limit(0);
+
+/* Active le vidage implicite des buffers de sortie, pour que nous
+ * puissions voir ce que nous lisons au fur et à mesure. */
+ob_implicit_flush();
+
+$address = 'localhost';
+$port = 8080;
+
+if ( $argv[1] == "server:start") {
+      echo "The server is started";
+      shell_exec('php -S localhost:8888');
+}

@@ -4,7 +4,7 @@ use \sp_framework\sp_core;
  * [sp_core return the core of sp framework]
  * @return [type] [description]
  */
-function sp_core()
+function get_sp_core()
 {
     global $sp_core;
 
