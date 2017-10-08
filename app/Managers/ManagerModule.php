@@ -2,7 +2,10 @@
 
 namespace sp_framework\Managers;
 
-class ManagerModule
+use sp_framework;
+use sp_framework\Pattern\Manager;
+
+class ManagerModule extends Manager
 {
 			/**
 			 * the list of module disponible
@@ -15,7 +18,7 @@ class ManagerModule
 			 */
 			public function search_modules()
 			{
-						$sp_core = sp_core();
+						$sp_core = sp_framework\get_core();
 
 						/**
 						 * [$list_folder create a list of potentiel module ]

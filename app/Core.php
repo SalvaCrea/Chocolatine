@@ -5,12 +5,17 @@
 
 namespace sp_framework;
 
-class sp_core
+class Core
 {
 			/**
 			 * __construct first action
 			 */
 			public static $sp_core;
+			/**
+			 *  Name of the theme
+			 * @var string
+			 */
+			public $theme;
 			/**
 			 *  this is the root folder
 			 * @var string
@@ -25,7 +30,7 @@ class sp_core
 			 * The value of configuration for Sp Framework
 			 * @var array
 			 */
-			var $config;
+			var $configuration;
 			/**
 			* The default is false, if i true than is dev mode
 			* @var boolean
@@ -47,13 +52,16 @@ class sp_core
 						add_action('admin_menu', array( $this, 'wp_admin_action' ));
 
 			}
-			public static function get_sp_core(){
-					if ( !empty( self::$sp_core )) {
-						global $sp_config;
-						self::$sp_core = new sp_core();
-						$sp_core->config = $sp_config;
-						$sp_core->init();
+			public function get_configuration(){
+					$this->configuration = require "/../configuration/main.php";
+			}
+			public static function get_core(){
+
+					if ( empty( self::$sp_core )) {
+						self::$sp_core = new Core();
+						self::$sp_core->init();
 					}
+
 					return self::$sp_core;
 			}
 			/**
@@ -66,21 +74,23 @@ class sp_core
 					sp_controller::start();
 				});
 
+				$this->get_configuration();
+
 				$this->manager = new \stdClass();
 
 				$this->ressources = new sp_ressources();
 
-				$this->manager->form = new sp_manager_form();
+				$this->manager->form = new Managers\ManagerForm();
 
-				$this->manager->view = new sp_manager_view();
+				$this->manager->view = new Managers\ManagerView();
 
-				$this->manager->ajax = new sp_manager_ajax();
+				$this->manager->ajax = new Managers\ManagerAjax();
 
-				$this->manager->model = new sp_manager_model();
+				$this->manager->model = new Managers\ManagerModel();
 
-				$this->manager->services = new sp_manager_service();
+				$this->manager->services = new Managers\ManagerService();
 
-				$this->manager->module = new sp_manager_module();
+				$this->manager->module = new Managers\ManagerModule();
 
 				$this->manager->ajax->add_ressource();
 

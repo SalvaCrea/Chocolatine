@@ -1,48 +1,22 @@
 <?php
 namespace sp_framework;
-use \sp_framework\sp_core;
+
+use \sp_framework\Core;
 /**
  * [sp_core return the core of sp framework]
  * @return [type] [description]
  */
-function get_sp_core()
+function get_core()
 {
-    global $sp_core;
-
-    if ( !sp_core_exist() ) {
-      $sp_core = sp_core_start();
-    }
-
-    return $sp_core;
-}
-
-/**
- * [ sp_core_start Create the main module for sp framework ]
- * @return [object] [return the core of sp framework]
- */
-function sp_core_start()
-{
-
-    global $sp_config;
-    global $sp_core;
-
-    $sp_core = new sp_core();
-    $sp_core->config = $sp_config;
-    $sp_core->init();
-
-    return $sp_core;
+    return Core::get_core();
 }
 /**
- * [sp_core_exist Check if the function sp_core_start has runned]
- * @return [boolean] [false if a core is not present or true]
+ * Return the path folder theme
+ * @return string return the path folder of the theme
  */
-function sp_core_exist()
-{
-    global $sp_core;
-    if ( empty( (array) $sp_core ) ) {
-      return false;
-    }
-    return true;
+function get_theme(){
+    $core = get_core();
+    return $core->path_folder . "/theme/" . $core->configuration['theme'];
 }
 /**
  * The dev function that print pretty result
@@ -128,12 +102,7 @@ function sp_clean_string( $string )
   */
  function is_sp_admin()
  {
-    $sp_core = sp_core();
 
-    if ( !empty( $_GET['page'] ) && $_GET['page'] == $sp_core->slug &&  is_admin() )
-          return true;
-
-    return false;
  }
 /**
  *  The function check is the dev
@@ -141,8 +110,7 @@ function sp_clean_string( $string )
  */
 function sp_dev()
 {
-    $core = sp_core();
-    if ( $core->is_dev ) {
+    if ( get_core()->is_dev ) {
         return true;
     }
     return false;
@@ -154,8 +122,8 @@ function sp_dev()
  */
 function sp_get_module( $slug_module )
 {
-    $core = sp_core();
-    return $core->manager->module->get_module( $slug_module );
+
+    return get_core()->manager->module->get_module( $slug_module );
 }
 /**
  *  create a loader in js

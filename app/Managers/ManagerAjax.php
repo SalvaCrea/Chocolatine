@@ -2,7 +2,9 @@
 
 namespace sp_framework\Managers;
 
-class ManagerAjax
+use sp_framework\Pattern\Manager;
+
+class ManagerAjax extends Manager
 {
     /**
      * The argument in request ajax
@@ -47,7 +49,7 @@ class ManagerAjax
     {
 
       if ( $name == 'core' )
-         return sp_core();
+         return \sp_framework\get_core();
 
     }
     /**

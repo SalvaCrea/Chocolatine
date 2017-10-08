@@ -9,5 +9,5 @@
  * @package salva-powa
  */
 
- require get_sp_core()->path_folder . "theme/header.php";
+ require sp_framework\get_theme() . " /header.php";
 ?>

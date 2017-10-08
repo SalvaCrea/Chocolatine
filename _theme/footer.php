@@ -8,5 +8,5 @@
  *
  * @package salva-powa
  */
- require get_sp_core()->path_folder . "theme/footer.php";
+ require sp_framework\get_theme() . " /footer.php";
 ?>

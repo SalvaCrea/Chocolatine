@@ -8,4 +8,4 @@
  */
 
 
- require get_sp_core()->path_folder . "theme/404.php";
+ require sp_framework\get_theme() . " /404.php";

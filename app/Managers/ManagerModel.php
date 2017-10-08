@@ -2,7 +2,9 @@
 
 namespace sp_framework\Managers;
 
-class ManagerModel
+use sp_framework\Pattern\Manager;
+
+class ManagerModel extends Manager
 {
   /**
    * [$list_form the list of the form]

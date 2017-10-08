@@ -7,4 +7,4 @@
  * @package salva-powa
  */
 
- require get_sp_core()->path_folder . "theme/sidebar.php";
+ require sp_framework\get_theme() . " /sidebar.php";

@@ -7,4 +7,4 @@
  * @package salva-powa
  */
 
- require get_sp_core()->path_folder . "theme/search.php";
+ require sp_framework\get_theme() . " /search.php";
