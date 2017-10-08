@@ -1,5 +1,5 @@
 <?php
-namespace sp_framework;
+namespace sp_framework\Pattern\Module;
 
 class sp_model
 {
@@ -7,17 +7,12 @@ class sp_model
      * [$name the name of the model]
      * @var [string]
      */
-    var $name;
+    var $name = __CLASS__;
     /**
      * [$description the descrption of the model]
      * @var [string]
      */
     var $description;
-    /**
-     * [$slug the unique name of the model]
-     * @var [string]
-     */
-    var $slug;
     /**
      * [$type the type of the model]
      * list of the model possible
@@ -30,7 +25,10 @@ class sp_model
      * @var [array]
      */
     var $model;
-    public function model()
+    /**
+     * Use for get the schema form
+     */
+    public function get_model()
     {
       return false;
     }

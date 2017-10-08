@@ -1,6 +1,6 @@
 <?php
 
-namespace sp_framework;
+namespace sp_framework\Pattern\Module;
 
 class sp_module
 {
@@ -8,7 +8,7 @@ class sp_module
 	 * the name of the module
 	 * @var string
 	 */
-	var $name;
+    var $name = __CLASS__;
 	/**
 	 * The id name
 	 * @var string

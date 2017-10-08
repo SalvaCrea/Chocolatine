@@ -1,6 +1,6 @@
 <?php
 
-namespace sp_framework;
+namespace sp_framework\Pattern\Module;
 
 class sp_component extends sp_module
 {
