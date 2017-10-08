@@ -3,6 +3,7 @@
   "authors": [
     "Cardona Salvador contact@salva-crea.fr"
   ],
+  "directory": "/assets/bower_components/",
   "description": "The Framework for the cms wordpress",
   "main": "index.html",
   "license": "MIT",
@@ -25,4 +26,3 @@
     "jquery.nicescroll" : "*"
   }
 }
- 

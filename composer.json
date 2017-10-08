@@ -8,6 +8,11 @@
         "consolidation/robo": "^1.0.0"
     },
     "autoload": {
-        "psr-4": {"sp_framework\\": "includes/"}
+        "psr-4": {"sp_framework\\": "app/"}
+    },
+    "scripts": {
+        "test": "composer robo test",
+        "phar": "composer robo phar:build",
+        "hello" : "composer robo hello"
     }
 }
