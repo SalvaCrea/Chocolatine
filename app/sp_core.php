@@ -12,6 +12,11 @@ class sp_core
 			 */
 			public static $sp_core;
 			/**
+			 *  Name of the theme
+			 * @var string
+			 */
+			public $theme;
+			/**
 			 *  this is the root folder
 			 * @var string
 			 */
@@ -25,7 +30,7 @@ class sp_core
 			 * The value of configuration for Sp Framework
 			 * @var array
 			 */
-			var $config;
+			var $configuration;
 			/**
 			* The default is false, if i true than is dev mode
 			* @var boolean
@@ -47,13 +52,13 @@ class sp_core
 						add_action('admin_menu', array( $this, 'wp_admin_action' ));
 
 			}
+			public function get_configuration(){
+					$this->configuration = require "./configuration.php";
+			}
 			public static function get_sp_core(){
-					if ( !empty( self::$sp_core )) {
-						global $sp_config;
-						self::$sp_core = new sp_core();
-						$sp_core->config = $sp_config;
-						$sp_core->init();
-					}
+
+					if ( !empty( self::$sp_core )) { $sp_core->init(); }
+
 					return self::$sp_core;
 			}
 			/**
@@ -62,9 +67,13 @@ class sp_core
 			public function init()
 			{
 
+				self::$sp_core = new sp_core();
+
 				add_action('wp', function() {
 					sp_controller::start();
 				});
+
+				$this->get_configuration();
 
 				$this->manager = new \stdClass();
 

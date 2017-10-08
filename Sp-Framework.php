@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Salva-Powa
+ * Plugin Name: Sp-Framework
  * Plugin URI: http://salva-crea.fr
  * Description: This plugin is extension for wordpress for custom your work site
  * Version: 3.0.0
@@ -14,11 +14,6 @@
  * Load the auto loader
  */
 require "auto_load.php";
-
-/**
- * Load the config for Sp Framework
- */
-require "sp_config.php";
 
 // create empty object
 

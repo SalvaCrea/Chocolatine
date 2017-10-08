@@ -1,6 +1,6 @@
 <?php
 
-$sp_config = array(
+return $sp_config = array(
 
     // List of module enable
     'modules_enabled' => ['*'],
@@ -8,10 +8,10 @@ $sp_config = array(
     // List of module disabled,
     'module_disabled' => [],
 
+    // name of theme
+    'theme' => '_default',
+
     // Dev mode
     'is_dev' => true,
-
-    // core slug, this is the name identifiant
-    'core_slug' => 'salva_powa'
 
 );
