@@ -2,7 +2,7 @@
 
 namespace sp_framework\Pattern\Module;
 
-class sp_module
+class Module
 {
 	/**
 	 * the name of the module

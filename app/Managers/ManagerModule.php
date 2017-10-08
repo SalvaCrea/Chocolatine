@@ -1,8 +1,8 @@
 <?php
 
-namespace sp_framework;
+namespace sp_framework\Managers;
 
-class sp_module_manager
+class ManagerModule
 {
 			/**
 			 * the list of module disponible

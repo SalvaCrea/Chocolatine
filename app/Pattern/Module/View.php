@@ -2,7 +2,7 @@
 
 namespace sp_framework\Pattern\Module;
 
-class sp_view extends sp_module
+class View extends sp_module
 {
     var $name = __CLASS__;
 }

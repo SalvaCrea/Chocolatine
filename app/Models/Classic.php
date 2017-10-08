@@ -2,6 +2,6 @@
 
 namespace sp_framework\Models;
 
-class Simple extends Model{
+class Classic extends Model{
 
 }

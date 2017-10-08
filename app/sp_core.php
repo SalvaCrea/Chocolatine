@@ -8,6 +8,10 @@ namespace sp_framework;
 class sp_core
 {
 			/**
+			 * __construct first action
+			 */
+			public static $sp_core;
+			/**
 			 *  this is the root folder
 			 * @var string
 			 */
@@ -23,41 +27,6 @@ class sp_core
 			 */
 			var $config;
 			/**
-			 * The url current, a fusion beetwen slug, current_module and $component
-			 * @var string
-			 */
-			var $current_url;
-			/**
-			 * The slug is very pratice
-			 * @var string
-			 */
-			var $slug = 'salva_powa';
-			/**
-			 * Contain the class module sp_controller for manage url
-			 * @var object class
-			 */
-			var $controller;
-			/**
-			 * Contain the class module sp_ajax for resquest ajax
-			 * @var object class
-			 */
-			var $ajax;
-			/**
-			 * Contain the class module sp_ressources for add ressource
-			 * @var object class
-			 */
-			var $ressources;
-			/**
-			 * Contain the class module manager and list all modules
-			 * @var object class
-			 */
-			var $modules;
-			/**
-			 * The medoo Class for manipule data base
-			 * @var object class
-			 */
-			var $db;
-			/**
 			* The default is false, if i true than is dev mode
 			* @var boolean
 			 */
@@ -67,10 +36,7 @@ class sp_core
 			 * @var [stdclass]
 			 */
 			var $manager;
-			/**
-			 * __construct first action
-			 */
-			public static $sp_core;
+
 			function __construct()
 			{
 
@@ -104,8 +70,6 @@ class sp_core
 
 				$this->ressources = new sp_ressources();
 
-				$this->init_medoo();
-
 				$this->manager->form = new sp_manager_form();
 
 				$this->manager->view = new sp_manager_view();
@@ -114,7 +78,9 @@ class sp_core
 
 				$this->manager->model = new sp_manager_model();
 
-				$this->manager->module = new sp_module_manager();
+				$this->manager->services = new sp_manager_service();
+
+				$this->manager->module = new sp_manager_module();
 
 				$this->manager->ajax->add_ressource();
 
@@ -165,17 +131,4 @@ class sp_core
 					 );
 
 			}
-			/**
-			 * Create view for the wp_admin
-			 */
-			public function create_back_view()
-			{
-
-					 sp_create_loader_js();
-					 $view = $this->manager->module->get_module( 'sp_home' );
-					 $view->view_back_sp();
-
-			}
-
-
 }

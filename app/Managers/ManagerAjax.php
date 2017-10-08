@@ -1,8 +1,8 @@
 <?php
 
-namespace sp_framework;
+namespace sp_framework\Managers;
 
-class sp_manager_ajax
+class ManagerAjax
 {
     /**
      * The argument in request ajax

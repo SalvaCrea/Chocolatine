@@ -2,7 +2,7 @@
 
 namespace sp_framework\Pattern\Module;
 
-class sp_component extends sp_module
+class Component extends sp_module
 {
   var $parent_module;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace sp_framework;
+namespace sp_framework\Managers;
 
-class sp_manager_model
+class ManagerModel
 {
   /**
    * [$list_form the list of the form]

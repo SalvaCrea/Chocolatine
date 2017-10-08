@@ -1,7 +1,7 @@
 <?php
 namespace sp_framework\Pattern\Module;
 
-class sp_model
+class Model
 {
     /**
      * [$name the name of the model]

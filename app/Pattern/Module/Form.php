@@ -2,7 +2,7 @@
 
 namespace sp_framework\Pattern\Module;
 
-class sp_form extends sp_module
+class Form extends sp_module
 {
     var $name = __CLASS__;
     /**
