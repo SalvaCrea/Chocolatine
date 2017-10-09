@@ -2,9 +2,22 @@
 
 namespace sp_framework\Services;
 
-class DataBase extends Service{
+use Medoo\Medoo;
 
-  public function add_global( $name, $value ){
+class DataBase extends \sp_framework\Pattern\Service{
+  /**
+   * Container Instance meedoo
+   * @var object
+   */
+  static $database;
+  public function __construct(){
 
+  }
+  /**
+   * [init description]
+   * @return [type] [description]
+   */
+  public function init(){
+    self::$database = new Medoo( sp_framework\get_core()->configuration['database'] );
   }
 }

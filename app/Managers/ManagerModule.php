@@ -51,7 +51,7 @@ class ManagerModule extends Manager
 									// execute the class
 
 									if ( file_exists ( $path_json ) ) {
-											$module_factory = new module_factory();
+											$module_factory = new sp_framework\ModuleFactory();
 											$current_module = $module_factory->build_module( $folder_root['root'] );
 									}
 									/**

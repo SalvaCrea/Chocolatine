@@ -5,6 +5,8 @@
  * @var array
  */
 return [
-  \sp_framework\Services\DataBase::class,
-  \sp_framework\Services\Twig::class,
+  "service" => [
+    \sp_framework\Services\DataBase::class,
+    \sp_framework\Services\Twig::class,
+  ]
 ];

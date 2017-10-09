@@ -14,6 +14,6 @@ class RoboFile extends \Robo\Tasks
         $this->say("Hello, $world");
     }
     function install(){
-        $this->taskCopyDir(['_theme' => '../../themes/sp-framework-theme'])->run();
+        $this->taskCopyDir(['_theme/wordpress' => '../../themes/sp-framework-theme'])->run();
     }
 }

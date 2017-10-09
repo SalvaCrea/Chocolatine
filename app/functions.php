@@ -108,7 +108,7 @@ function sp_clean_string( $string )
  *  The function check is the dev
  * @return Boolean True if the dev site
  */
-function sp_dev()
+function is_dev()
 {
     if ( get_core()->is_dev ) {
         return true;

@@ -10,11 +10,6 @@ class Module
 	 */
     var $name = __CLASS__;
 	/**
-	 * The id name
-	 * @var string
-	 */
-	 var $slug;
-	/**
 	 * The font awesome icon
 	 * @var string
 	 */
@@ -53,12 +48,12 @@ class Module
 	 * This array is use for declarate the ajax action
 	 * @var array
 	 */
-	var $ajax_action = array();
+	var $ajax;
 	/**
 	 * This array contain the list of the view link module
 	 * @var array
 	 */
-	var $views = array();
+	var $views;
 	/**
 	 *  this is the root folder
 	 * @var string
@@ -69,17 +64,12 @@ class Module
 	 * @var string
 	 */
 	var $url_folder;
-	/**
-	 * The url in the admin
-	 * @var string
-	 */
-	var $url;
 
 	function __get( $name )
 	{
 
 		if ( $name == 'core' )
-			 return $this->find_core();
+			 return \sp_framework\get_core();
 
 		if ( $name == 'db' )
 	 			return $this->find_core()->db;
@@ -126,60 +116,7 @@ class Module
 	* @return boolean return false, only component return the father
 	*/
  function get_father() { return false; }
-	/**
-	 * Return the slug of the class
-	 * @return string the id string of the class
-	 */
-	function get_slug()
-	{
-		/**
-		 * Create slug for function
-		 */
-		if ( empty( $this->slug ) ) {
 
-				if ( empty( $this->name )) {
-					$this->slug = sp_clean_string( $folder_root['name'] );
-				}
-				else
-				{
-					$this->slug = sp_clean_string( $this->name );
-				}
-		}
-		return $this->slug;
-
-	}
-	/**
-	 * Function for get the web URL
-	 * @return string web url
-	 */
-	function get_url()
-	{
-
-			if ( empty( $this->url_folder ) ) {
-
-				$uri = $this->get_uri();
-
-				$this->url_folder = substr(
-					$uri,
-					strpos( $uri, '/wp-content' ),
-					strlen( $uri )
-				);
-
-			}
-
-			return $this->url_folder;
-	}
-	/**
-	 * Function return the root folder of the module
-	 * @return String
-	 */
-	function get_uri()
-	{
-			if ( empty( $this->path_folder ) ) {
-				$this->path_folder = $this->dir_file_class();
-			}
-			return $this->path_folder;
-	}
 	/**
 	 * Use the framework twig like template motor
 	 * @param  [string] $template_name the name of file html
@@ -198,23 +135,6 @@ class Module
 	    ));
 		}
 		return  $this->twig->render( $template_name, $array_info );
-	}
-	/**
-	 * Return le path of extend class
-	 * @return [string] Return le path of extend class
-	 */
-	public function dir_file_class()
-	{
-		$a = new \ReflectionClass($this);
-		return dirname( $a->getFileName() );
-	}
-	/**
-	 * This function return the sp_core
-	 * @return object The class sp_core
-	 */
-	public function find_core()
-	{
-		return sp_core();
 	}
 	/**
 	 * [add_form the method for add form for the module]

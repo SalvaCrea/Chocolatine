@@ -1,3 +1,3 @@
 <?php
 
-echo "test";
+$admin = new sp_framework\Admin\Run();

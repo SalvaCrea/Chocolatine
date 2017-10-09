@@ -9,7 +9,7 @@ return $sp_config = array(
     'module_disabled' => [],
 
     // name of theme
-    'theme' => '_default',
+    'theme' => '_default_wp',
 
     // Dev mode
     'is_dev' => true,

@@ -8,7 +8,7 @@
 
 namespace sp_framework;
 
-class module_factory
+class ModuleFactory
 {
       /**
        * [$module_current the module being created]

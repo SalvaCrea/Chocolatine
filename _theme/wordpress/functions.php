@@ -7,4 +7,4 @@
  * @package salva-powa
  */
 
- require sp_framework\get_theme() . " /functions.php";
+ require \sp_framework\get_theme() . " /functions.php";

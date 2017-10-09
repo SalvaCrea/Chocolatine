@@ -54,6 +54,19 @@ class Core
 			}
 			public function get_configuration(){
 					$this->configuration = require "/../configuration/main.php";
+					if ( $this->environement == 'wordpress' ) {
+							$this->configuration['database'] = array(
+									'database_type' => 'mysql',
+									'database_name' => $wpdb->dbname,
+									'server' => $wpdb->dbhost,
+									'username' => $wpdb->dbuser,
+									'password' => $wpdb->dbpassword,
+									'charset' => $wpdb->charset
+							);
+					}
+					else if( $this->environement == 'custom' ){
+							$this->configuration['database'] = require "/../configuration/database.php";
+					}
 			}
 			public static function get_core(){
 

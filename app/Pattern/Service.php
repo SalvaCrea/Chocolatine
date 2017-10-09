@@ -8,5 +8,6 @@ class Service{
      * @var string
      */
     public $name = __CLASS__;
-    public $container = array();
+
+    public function init(){}
 }
