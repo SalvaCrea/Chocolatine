@@ -16,14 +16,43 @@ function get_core()
  */
 function get_theme(){
     $core = get_core();
-    return $core->path_folder . "/theme/" . $core->configuration['theme'];
+    if ( empty( $theme = get_configuration( 'theme' ) ) ) {
+      $theme = '_default_wp';
+    }
+    return  get_folder() . "/theme/" . $theme;
+}
+/**
+ * Return folder of Sp Framework
+ * @return string return the path folder
+ */
+function get_folder(){
+    $core = get_core();
+    return $core->path_folder;
+}
+/**
+ * Return the module by slug of not if module not find
+ * @param  string the name of module find
+ * @return mixed return false or obkect of class
+ */
+function get_module( $name_module )
+{
+    return get_core()->manager->module->get_module( $name_module );
+}
+/**
+ * Return the configuration of ServiceManager
+ * @param  $string name of configuration
+ * @return mixed  return data mixed or false is empty
+ */
+function get_configuration( $name_configuration )
+{
+    return get_core()->manager->configuration->get_configuration( $name_configuration );
 }
 /**
  * The dev function that print pretty result
- * @param  accpet array, string, int, ....
+ * @param  mixed array, string, int, ....
  * @param  boolean $ajax  if ajax is true also return in the console js
  */
-function sp_dump($var=false, $ajax=false)
+function dump($var=false, $ajax=false)
 {
     $debug = debug_backtrace();
     echo '<p>&nbsp;</p><p><a href="#" onclick="$(this).parent().next(\'ol\').slideToggle(); return false;"><strong>' . $debug[0]['file'] . ' </strong> l.' . $debug[0]['line'] . '</a></p>';
@@ -45,7 +74,7 @@ function sp_dump($var=false, $ajax=false)
  * @param  string no clean
  * @return string clean
  */
-function sp_clean_string( $string )
+function clean_string( $string )
 {
     $string = str_replace(' ', '_', $string); // Replaces all spaces with hyphens.
 
@@ -60,7 +89,7 @@ function sp_clean_string( $string )
  * @param [type] $adjacents [description]
  */
 
- function sp_pagination($data, $limit = null, $current = null, $adjacents = null)
+ function pagination($data, $limit = null, $current = null, $adjacents = null)
  {
      $result = array();
 
@@ -100,7 +129,7 @@ function sp_clean_string( $string )
   * Return true if the use admin of sp framework
   * @return Boolean
   */
- function is_sp_admin()
+ function is_admin()
  {
 
  }
@@ -115,21 +144,12 @@ function is_dev()
     }
     return false;
 }
-/**
- * Return the module by slug of not if module not find
- * @param  string the name of module find
- * @return mixed return false or obkect of class
- */
-function sp_get_module( $slug_module )
-{
 
-    return get_core()->manager->module->get_module( $slug_module );
-}
 /**
  *  create a loader in js
  * @return boolean true if the action is good
  */
-function sp_create_loader_js()
+function create_loader_js()
 {
   echo "
     <div class='uil-ring-css' id='animation_loader'>
@@ -149,7 +169,7 @@ function sp_create_loader_js()
  * [Create redirection in js]
  * @param  string $url Create a redirection on JavaScript
  */
-function sp_redirection_js( $url )
+function redirection_js( $url )
 {
   echo "
   <SCRIPT LANGUAGE=\"JavaScript\">
@@ -163,11 +183,27 @@ function sp_redirection_js( $url )
  * @param  boolean $clean       True for clean list
  * @return array list folder
  */
-function scanfolder( string $path_folder, boolean $clean = true )
+function scanfolder( string $path_folder, $clean = true )
 {
-    $list = scandir($path_folder), array('..', '.');
+    $list = scandir( $path_folder );
     if ( $clean ) {
       return array_diff( scandir( $path_folder ), array('..', '.') );
     }
     return $list;
+}
+/**
+ * [sp_get_current_name_folder description]
+ * @param  [type] $file [description]
+ * @return [type]       [description]
+ */
+function sp_get_current_name_folder( $file )
+{
+  if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+      $separator = '\\';
+  } else {
+      $separator = '/';
+  }
+  $position = strrpos( $file ,$separator );
+  $name_folder =  substr( $file ,$position + 1 );
+  return $name_folder;
 }

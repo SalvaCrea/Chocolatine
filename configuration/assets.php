@@ -17,6 +17,6 @@ return [
       "name" => "jquery",
       "src"  => "/jquery.js",
       "position" => "footer"
-    ],
+    ]
   ]
 ];

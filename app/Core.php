@@ -68,6 +68,8 @@ class Core
 
 				$this->manager = new \stdClass();
 
+				$this->manager->error = new Managers\ManagerError();
+
 				$this->manager->configuration = new Managers\ManagerConfiguration();
 
 				$this->manager->asset = new Managers\ManagerAsset();

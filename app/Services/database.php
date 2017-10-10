@@ -18,6 +18,6 @@ class DataBase extends \sp_framework\Pattern\Service{
    * @return [type] [description]
    */
   public function init(){
-    self::$database = new Medoo( sp_framework\get_core()->configuration['database'] );
+    self::$database = new Medoo( sp_framework\get_configuration( 'database' ) );
   }
 }

@@ -17,4 +17,4 @@ require "auto_load.php";
 
 // create empty object
 
-sp_framework\Core::get_core();
+sp_framework\Core::create_core();
