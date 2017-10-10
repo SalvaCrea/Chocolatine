@@ -1,7 +1,11 @@
 <?php
 
-namespace sp_framework\Models; 
+/**
+ * [namespace description]
+ * @var [type]
+ */
+namespace sp_framework\Models;
 
-class MetaPost extends Model{
+class MetaData extends Model{
 
 }

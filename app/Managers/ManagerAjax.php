@@ -6,43 +6,19 @@ use sp_framework\Pattern\Manager;
 
 class ManagerAjax extends Manager
 {
-    /**
-     * The argument in request ajax
-     */
-    var $args = array();
-		/**
-		 * An array than contain the callback by ajax
-		 * @var ajax_actions
-		 */
-		var $list_ajax = array();
-		/**
-		 * The current action selected
-		 * @var ajax_actions
-		 */
-		var $ajax_current_actions = array();
-    /**
-		 * This should javascript variable
-		 * @var array
-		 */
-		var $convert_in_js = array();
-    /**
-		 * This response for the javascript ajax
-		 * @var array
-		 */
-		var $response = array(
-      'data'  => array(),
-      'info'  => array(),
-      'error' => array(),
-      'message' => 'This action is done'
-    );
+  /**
+   * Contain Post Request
+   * @var object
+   */
+  public $request;
   /**
    * [__construct description]
    */
 		function __construct()
     {
 
-				add_action( 'wp_ajax_sp_ajax_controller', array( $this ,'controller') );
-				add_action('wp_ajax_nopriv_sp_ajax_controller', array( $this ,'controller') );
+				add_action( 'wp_ajax_sp_framework_ajax_controller', array( $this ,'controller') );
+				add_action('wp_ajax_nopriv_sp_framework_ajax_controller', array( $this ,'controller') );
 
     }
     function __get( $name )
@@ -84,7 +60,7 @@ class ManagerAjax extends Manager
 		}
     function controller()
     {
-			$this->args = $_POST;
+      $this->request = \sp_framework\Request\RequestAjax( $_POST );
 
 			// test if the requet javascript is good
 			if ( !empty( $this->args['component'] )

@@ -1,12 +1,12 @@
 <?php
 
-namespace sp_framework\Responses;
+namespace sp_framework\Request;
 
 /**
  * The ajax response
  */
 
-class ResponseAjax{
+class RequestAjax{
     /**
      * Contain the resquest http
      * @var array

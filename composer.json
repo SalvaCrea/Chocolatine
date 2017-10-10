@@ -5,7 +5,8 @@
         "rilwis/meta-box": "4.*"
     },
     "require-dev": {
-        "consolidation/robo": "^1.0.0"
+        "consolidation/robo": "^1.0.0",
+        "phpdocumentor/phpdocumentor": "2.*"
     },
     "autoload": {
         "psr-4": {"sp_framework\\": "app/"}
