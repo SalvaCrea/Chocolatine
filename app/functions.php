@@ -48,6 +48,15 @@ function get_configuration( $name_configuration )
     return get_core()->manager->configuration->get_configuration( $name_configuration );
 }
 /**
+ * Return a specific service
+ * @param  string $name_service The name of service
+ * @return mixed              the service if find or return false
+ */
+function get_service( $name_service )
+{
+    return get_core()->manager->service->get_service( $name_service );
+}
+/**
  * The dev function that print pretty result
  * @param  mixed array, string, int, ....
  * @param  boolean $ajax  if ajax is true also return in the console js
@@ -108,21 +117,31 @@ function clean_string( $string )
 
 /**
     * This function find in array a key if exist
- * @param  [type] $array          The subject of reseach
- * @param  [type] $key_research   the key of research
- * @param  [type] $value_research the value of research
- * @return mixed ( int|false )                int with the good key number or boolean false if if key not find
+ * @param  mixed  $array          Array or Object for search
+ * @param  string $key_research   the key of research
+ * @param  mixed $value_research the value of research
+ * @return mixed ( int|array|false )                int with the good key number or boolean false if if key not find
  */
  function array_find($array, $key_research, $value_research)
  {
-    $array = (array) $array;
+    $type = gettype ( $array );
+    $key = false;
 
-     foreach ($array as $key => $current_value) {
-         if (isset($current_value[$key_research]) && $current_value[$key_research] == $value_research) {
-             return $key;
-         }
-     }
-     return false;
+    foreach ( $array as $current_key => $value ) {
+      if ( is_object ( $value ) ) {
+        $value = $value->{$key_research};
+      }
+      if ( is_array( $value ) ) {
+        $value = $value[$key_research];
+      }
+      if ( $value == $value_research ) {
+
+        $key = $current_key;
+        break;
+      }
+    }
+
+    return $key;
  }
 
  /**

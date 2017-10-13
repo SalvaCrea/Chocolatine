@@ -6,14 +6,18 @@
  */
 class RoboFile extends \Robo\Tasks
 {
-    function __construct(){
-        
+    public function __construct(){
+        require "console/Console.php";
     }
-    function hello($world)
-    {
-        $this->say("Hello, $world");
-    }
-    function install(){
+    public function install(){
         $this->taskCopyDir(['_theme/wordpress' => '../../themes/sp-framework-theme'])->run();
+    }
+    public function server(){
+
+      $this->taskExecStack()
+       ->stopOnFail() 
+       ->exec('node gulpfile.js server')
+       ->run();
+
     }
 }

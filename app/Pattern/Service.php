@@ -7,7 +7,7 @@ class Service{
      * Name of servive
      * @var string
      */
-    public $name = __CLASS__;
+    public $name;
 
     public function init(){}
 }

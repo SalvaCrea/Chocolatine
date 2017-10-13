@@ -1,22 +1,26 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
+var gulp        = require('gulp'),
+    livereload = require('gulp-livereload'),
+    php        = require('gulp-connect-php'),
+    http = require('http');
+
+livereload({ start: true });
 
 // Static Server + watching scss/html/* files
-gulp.task('serve', ['stream'], function() {
-
-    browserSync.init({
-      proxy: "192.168.1.28",
-      notify: true
-    });
-
-    gulp.watch("*").on('change', browserSync.reload);
+gulp.task('reload', function() {
+      livereload.reload();
 });
 
-
-gulp.task('stream', function() {
-    browserSync.stream();
+gulp.task('watch',function(){
+    livereload.listen();
+    gulp.watch([ 'app/**/*.php'], ['reload']);
 });
 
-gulp.task('default', ['serve']);
+gulp.task('server_start', function(done) {
+  // http.createServer(
+  //   st({ path: __dirname , cache: false })
+  // ).listen(8080, done);
+});
 
-  
+gulp.task('default', ['watch']);
+
+gulp.task('server', ['server_start', 'watch']);

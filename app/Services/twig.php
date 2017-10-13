@@ -3,7 +3,7 @@
 namespace sp_framework\Services;
 
 class Twig extends \sp_framework\Pattern\Service{
-    public $name = __CLASS__;
+    public $name = 'twig';
     /**
      * Container of instance twig
      * @var object
@@ -42,7 +42,7 @@ class Twig extends \sp_framework\Pattern\Service{
      * @return string                 The template html
      */
     public function renderer( string $template_name, array $param ){
-        $html = self::$twig->render( $template_name, $param );
+        return self::$twig->render( $template_name, $param );
     }
     /**
      * Add a global variable in twig

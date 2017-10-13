@@ -10,6 +10,9 @@ class DataBase extends \sp_framework\Pattern\Service{
    * @var object
    */
   static $database;
+
+  public $name = 'database';
+
   public function __construct(){
 
   }

@@ -38,7 +38,7 @@ class ManagerConfiguration extends Manager
             basename( $file, '.php'),
             require $this->get_path_folder_configuration() .'/'. $file
         );
-        
+
       }
 
       if ( $this->environement == 'wordpress' ) {
@@ -52,7 +52,7 @@ class ManagerConfiguration extends Manager
    */
   public function get_configuration( $name )
   {
-    if ( empty( $this->container[$name] ) ) {
+    if ( !empty( $this->container[$name] ) ) {
         return $this->container[$name];
     }
     else{

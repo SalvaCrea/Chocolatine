@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/salva91/sp-framework-wordpress/issues"
   },
-  "homepage": "https://github.com/salva91/sp-framework-wordpress#readme"
+  "homepage": "https://github.com/salva91/sp-framework-wordpress#readme",
+  "dependencies": {
+    "gulp-connect-php": "^1.0.1"
+  }
 }
