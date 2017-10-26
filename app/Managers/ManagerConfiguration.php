@@ -6,6 +6,9 @@ use sp_framework\Pattern\Manager;
 
 class ManagerConfiguration extends Manager
 {
+
+  public $name = 'configuration';
+
   public function __construct()
   {
     $this->get_configurations();

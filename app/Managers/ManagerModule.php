@@ -7,11 +7,7 @@ use sp_framework\Pattern\Manager;
 
 class ManagerModule extends Manager
 {
-			/**
-			 * the list of module disponible
-			 * @var array
-			 */
-			var $list_modules;
+			public $name = 'module';
 			/**
 			 * return les items in the modules
 			 * @return [type] [description]
@@ -24,18 +20,7 @@ class ManagerModule extends Manager
 						 * [$list_folder create a list of potentiel module ]
 						 * @var [array]
 						 */
-						$list_folder = $this->create_list_folder( $sp_core->path_folder.'/modules' );
-
-						/**
-						 *  search if the wordpress theme contain module for sp framework
-						 */
-						if ( file_exists ( get_template_directory() . '/sp_modules' ) ) {
-							 $list_folder = array_merge(
-								 $list_folder,
-								 $this->create_list_folder( get_template_directory() . '/sp_modules' )
-							 );
-						}
-
+						$list_folder = $this->create_list_folder( $sp_core->path_folder.'/app/modules' );
 
 
 						foreach ( $list_folder as $key => $folder_root ) {
@@ -74,7 +59,7 @@ class ManagerModule extends Manager
 			}
 			public function add_module( $module )
 			{
-					$this->list_modules[ $module->get_slug() ] = $module;
+					array_push( $this->container, $module );
 			}
 			/**
 			 * create a folder with all root clean
@@ -110,9 +95,9 @@ class ManagerModule extends Manager
 			 */
 			public function get_module( $module, $getter = true )
 			{
-					if ( isset( $this->list_modules[ $module ] ) ) {
+					if ( isset( $this->container[ $module ] ) ) {
 
-							$module =  $this->list_modules[ $module ];
+							$module =  $this->container[ $module ];
 							/**
 							 * Execute the getter of the module
 							 */

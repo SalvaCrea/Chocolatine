@@ -6,6 +6,7 @@ use sp_framework\Pattern\Manager;
 
 class ManagerAjax extends Manager
 {
+  public $name = 'ajax';
   /**
    * Contain Post Request
    * @var object

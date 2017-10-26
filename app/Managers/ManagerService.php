@@ -6,6 +6,7 @@ use sp_framework\Pattern\Manager;
 
 class ManagerService extends Manager
 {
+      public $name = 'service'; 
       /**
        * container of configuration
        * @var [type]

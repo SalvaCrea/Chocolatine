@@ -6,6 +6,7 @@ use sp_framework\Pattern\Manager;
 
 class ManagerAsset extends Manager
 {
+  public $name = 'asset';
   /**
    * Add Assets
    * @param string $type script or style

@@ -8,12 +8,21 @@
 
 namespace sp_framework;
 
-class ModuleFactory
+class ModuleFactory0
 {
-
+      /**
+       * [$module_current the module being created]
+       * @var [stdClass]
+       */
+      var $module_current;
+      /**
+       * [$module_info all info around the module]
+       * @var [object]
+       */
+      var $module_info;
       public function __construct()
       {
-          $this->searchModule();
+
       }
       /**
        * [build_module method use for build a module]

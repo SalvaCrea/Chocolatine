@@ -66,25 +66,7 @@ class Core
 			public function init()
 			{
 
-				$this->manager = new \stdClass();
-
-				$this->manager->error = new Managers\ManagerError();
-
-				$this->manager->configuration = new Managers\ManagerConfiguration();
-
-				$this->manager->asset = new Managers\ManagerAsset();
-
-				$this->manager->form = new Managers\ManagerForm();
-
-				$this->manager->view = new Managers\ManagerView();
-
-				$this->manager->ajax = new Managers\ManagerAjax();
-
-				$this->manager->model = new Managers\ManagerModel();
-
-				$this->manager->service = new Managers\ManagerService();
-
-				$this->manager->module = new Managers\ManagerModule();
+				$this->manager = new Managers\ManagerMaster();
 
 				$this->manager->module->search_modules();
 

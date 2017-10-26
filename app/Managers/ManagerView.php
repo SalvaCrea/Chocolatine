@@ -6,6 +6,7 @@ use sp_framework\Pattern\Manager;
 
 class ManagerView extends Manager
 {
+  public $name = 'view';
   /**
    * [add_form add a view]
    * @param [array] $args [description contain inviewation for add view]
