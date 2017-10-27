@@ -74,16 +74,10 @@ class Core
 
 				$router = get_service('Router');
 				/**
-				 *  Declare all routes http
+				 *  Declare and Apllic all routes http
 				 */
 				$router->declare_routes();
-
-				$render = \sp_framework\get_module( 'Templator' );
-				/**
-				 * generate the template
-				 */
-
-				$render->renderer();
+				$router->use_routes();
 
 			}
 

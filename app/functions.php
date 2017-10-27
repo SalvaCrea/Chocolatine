@@ -81,18 +81,29 @@ function get_manager( $name_service )
  */
 function dump($var=false, $ajax=false)
 {
-    $debug = debug_backtrace();
-    echo '<p>&nbsp;</p><p><a href="#" onclick="$(this).parent().next(\'ol\').slideToggle(); return false;"><strong>' . $debug[0]['file'] . ' </strong> l.' . $debug[0]['line'] . '</a></p>';
-    echo '<ol style="display:none;">';
-    foreach ($debug as $k => $v) {
-        if ($k > 0) {
-            echo '<li><strong>' . $v['file'] . '</strong> l.' . $v['line'] . '</li>';
-        }
+    if ( !$ajax ) {
+      $debug = debug_backtrace();
+      echo '<p>&nbsp;</p><p><a href="#" onclick="$(this).parent().next(\'ol\').slideToggle(); return false;"><strong>' . $debug[0]['file'] . ' </strong> l.' . $debug[0]['line'] . '</a></p>';
+      echo '<ol style="display:none;">';
+      foreach ($debug as $k => $v) {
+          if ($k > 0) {
+              echo '<li><strong>' . $v['file'] . '</strong> l.' . $v['line'] . '</li>';
+          }
+      }
+      echo '</ol>';
+      echo '<pre>';
+      print_r($var);
+      echo '</pre>';
+    }else{
+      $var = json_encode( $var );
+      echo "
+      <script>
+      dump = {$var};
+      console.log( dump );
+      </script>
+      ";
     }
-    echo '</ol>';
-    echo '<pre>';
-    print_r($var);
-    echo '</pre>';
+
 }
 
 

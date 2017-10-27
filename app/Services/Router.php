@@ -30,7 +30,7 @@ class Router extends \sp_framework\Pattern\Service{
    * List routes
    * @var array
    */
-  public $routes;
+  public $routes = array();
   public function __construct(){
 
       $config = ['settings' => [
@@ -42,7 +42,7 @@ class Router extends \sp_framework\Pattern\Service{
   }
   // use for declarate all routes
   public function declare_routes(){
-        $this->routes = \sp_framework\get_configuration('routes');
+        $this->routes = \sp_framework\get_configuration( 'routes' );
         $view_manager = \sp_framework\get_manager('view');
 
         foreach ( $this->routes as $key => $current_route) {
@@ -54,14 +54,40 @@ class Router extends \sp_framework\Pattern\Service{
                 $method = 'main';
               }
 
-              $this->router->map(['GET', 'POST'],  $current_route['route'],  $view['namespace'] . ":" . $method );
+              $this->router->map(['GET', 'POST'],  $current_route['route'] ,function ($request, $response, $args) {
+
+                  $router = \sp_framework\get_service( 'Router' );
+                  return $router->controller( $request, $response, $args );
+
+              });
 
           }
 
         }
+
+  }
+  public function use_routes(){
         $this->router->run();
   }
-  public function controller(){
+  public function controller( $request, $response, $arg = [] ){
+
+        $route = $request->getAttribute('route');
+        $this->current_pattern = $route->getPattern();
+
+        $name = $route->getName();
+        $groups = $route->getGroups();
+        $methods = $route->getMethods();
+        $arguments = $route->getArguments();
+
+        $uri = $request->getUri();
+        $path = $uri->getPath();
+
+        \sp_framework\dump( $path );
+        $this->request = $request;
+        $this->response = $response;
+        $this->arg = $arg;
+
+        return $response->getBody()->write("Hello, qsdqsdqsd");
 
   }
 }
