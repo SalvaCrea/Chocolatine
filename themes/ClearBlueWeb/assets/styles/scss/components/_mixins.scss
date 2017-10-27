@@ -1,0 +1,289 @@
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
+// ======================================
+// Font-face
+// ======================================
+@mixin fontface($name, $file, $weight: normal, $style: normal) {
+	$font: $fontpath+$file;
+	@font-face {
+		font-family: $name;
+		src: url($font+'.eot');
+		src: url($font+'.eot?#iefix') format('embedded-opentype'),
+			url($font+'.woff2') format('woff2'),
+			url($font+'.woff') format('woff'),
+			url($font+'.ttf') format('truetype'),
+			url($font+'.svg#$file') format('svg');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+// ======================================
+// Clearfix
+// ======================================
+@mixin clearfix() {
+	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+	&:before, &:after { content: ""; display: table; }
+	&:after { clear: both; }
+}
+
+// ======================================
+// Block Link
+// ======================================
+@mixin blocklink($all: '') {
+
+	position: relative;
+    @if $all == '' {
+		& > a {
+			position: absolute;
+			display: block;
+			z-index: 8;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: url($imgpath+'_transparent.png');
+		}
+	} @else {
+		a {
+			position: absolute;
+			display: block;
+			z-index: 8;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: url($imgpath+'_transparent.png');
+		}
+	}
+}
+
+// ======================================
+// SVG
+// ======================================
+@mixin svgfill($color) {
+	svg path,
+	svg circle,
+	svg polygon,
+	svg rect,
+	svg polyline { fill: $color; }
+}
+
+@mixin svgstroke($color) {
+	svg path,
+	svg circle,
+	svg polygon,
+	svg polyline { stroke: $color; }
+}
+
+@mixin svgsize($size) {
+	svg { width: $size; height: $size; }
+}
+
+
+// ======================================
+// Fade in / Fade out
+// ======================================
+@mixin fadein($time: 0.3s, $easing: ease-in-out) {
+	visibility: visible;
+	opacity: 1;
+	transition: opacity $time $easing, transform $time $easing, margin $time $easing;
+}
+
+@mixin fadeout($time: 0.3s, $easing: ease-in-out) {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s $time, opacity $time $easing, transform $time $easing, margin $time $easing;
+}
+
+
+// ======================================
+// Transition
+// ======================================
+@mixin transition($transitions...) {
+  $unfoldedTransitions: ();
+  @each $transition in $transitions {
+    $unfoldedTransitions: append($unfoldedTransitions, unfoldTransition($transition), comma);
+  }
+
+  -webkit-transition: $unfoldedTransitions;
+  transition: $unfoldedTransitions;
+}
+
+@function unfoldTransition ($transition) {
+  // Default values
+  $property: all;
+  $duration: .2s;
+  $easing: null; // Browser default is ease, which is what we want
+  $delay: null; // Browser default is 0, which is what we want
+  $defaultProperties: ($property, $duration, $easing, $delay);
+
+  // Grab transition properties if they exist
+  $unfoldedTransition: ();
+  @for $i from 1 through length($defaultProperties) {
+    $p: null;
+    @if $i <= length($transition) {
+      $p: nth($transition, $i)
+    } @else {
+      $p: nth($defaultProperties, $i)
+    }
+    $unfoldedTransition: append($unfoldedTransition, $p);
+  }
+
+  @return $unfoldedTransition;
+}
+
+@mixin transition-delay($delay...) {
+    -moz-transition-delay:    $delay;
+    -o-transition-delay:      $delay;
+    -webkit-transition-delay: $delay;
+    transition-delay:         $delay;
+}
+
+// ======================================
+// Transform
+// ======================================
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+	transform-origin: 50% 50%;
+}
+
+// ======================================
+// Box Shadow
+// ======================================
+@mixin boxshadow($shadow) {
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+// ======================================
+// Helpers
+// ======================================
+@mixin unselectable() {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+@mixin ellipsis() {
+	position: relative;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+// ======================================
+// Aspect ratio
+// ======================================
+@mixin keepratio($width: 16, $height: 9) {
+	$ratio: $height / $width;
+
+	&:before {
+		content: '';
+		display: block;
+		position: relative;
+		z-index: 0;
+		padding-bottom: percentage($ratio);
+	}
+}
+
+// ======================================
+// Backface Visibility
+// ======================================
+@mixin backface-visibility ($arguments) {
+  -webkit-backface-visibility: $arguments;
+     -moz-backface-visibility: $arguments;
+      -ms-backface-visibility: $arguments;
+       -o-backface-visibility: $arguments;
+          backface-visibility: $arguments;
+}
+
+
+// Horizontal gradient, from left to right
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+// Color stops are not available in IE9 and below.
+@mixin gradient-horizontal($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
+  background-image: -webkit-linear-gradient(left, $start-color $start-percent, $end-color $end-percent); // Safari 5.1-6, Chrome 10+
+  background-image: -o-linear-gradient(left, $start-color $start-percent, $end-color $end-percent); // Opera 12
+  background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=1); // IE9 and down
+}
+
+// Vertical gradient, from top to bottom
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+// Color stops are not available in IE9 and below.
+@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
+  background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Safari 5.1-6, Chrome 10+
+  background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Opera 12
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down
+}
+
+
+
+// ======================================
+// Draggable cursor
+// ======================================
+@mixin draggable() {
+    cursor: move;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    cursor: grab;
+
+    &:active {
+	    cursor: -moz-grabbing;
+	    cursor: -webkit-grabbing;
+	    cursor: grabbing;
+    }
+}
+
+
+// ======================================
+// Grayscale
+// ======================================
+@mixin grayscale($g: 100%) {
+	filter: grayscale($g);
+	-webkit-filter: grayscale($g);
+	-moz-filter: grayscale($g);
+	-ms-filter: grayscale($g);
+	-o-filter: grayscale($g);
+}
+
+
+// ======================================
+// Hardware acceleration
+// ======================================
+@mixin hardware-accelerated($transform: rotate(0)) {
+	transform: translate3d(0,0,0) $transform;
+	-o-transform: translate3d(0,0,0) $transform;
+	-ms-transform: translate3d(0,0,0) $transform;
+	-moz-transform: translate3d(0,0,0) $transform;
+	-webkit-transform: translate3d(0,0,0) $transform;
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	-ms-perspective: 1000;
+	perspective: 1000;
+}

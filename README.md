@@ -1,1 +1,1 @@
-The little Framework oriented Object for Wordpress
+Dashboard for getting data from Google Api Analytic

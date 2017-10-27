@@ -1,22 +1,14 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
+var path = require('path');
 
-// Static Server + watching scss/html/* files
-gulp.task('serve', ['stream'], function() {
+appRoot = path.resolve(__dirname);
 
-    browserSync.init({
-      proxy: "192.168.1.28",
-      notify: true
-    });
+phpConnect  = require('gulp-connect-php');
+livereload = require('gulp-livereload');
 
-    gulp.watch("*").on('change', browserSync.reload);
-});
+ToolsFile = require( './src_nodeJs/ToolsFile');
 
+Application = require('./src_nodeJs/Application');
 
-gulp.task('stream', function() {
-    browserSync.stream();
-});
+GulpTasks = require('./src_nodeJs/GulpTasks');
 
-gulp.task('default', ['serve']);
-
-  
+Application.start();

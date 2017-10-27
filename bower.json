@@ -3,7 +3,8 @@
   "authors": [
     "Cardona Salvador contact@salva-crea.fr"
   ],
-  "description": "The Framework for the cms wordpress",
+  "directory": "/assets/bower_components/",
+  "description": "Little Framework by Salvador Cardona",
   "main": "index.html",
   "license": "MIT",
   "homepage": "",
@@ -18,11 +19,10 @@
   "dependencies": {
     "angular-mocks": ">= 1.2",
     "angular-schema-form": ">= 0.7",
-    "bootstrap": "^3.3.7",
     "angular-underscore": "^0.5.0",
     "bower": "*",
     "font-awesome": "^4.7.0",
-    "jquery.nicescroll" : "*"
+    "jquery.nicescroll": "*",
+    "bootstrap": "v4.0.0-alpha.6"
   }
 }
- 
