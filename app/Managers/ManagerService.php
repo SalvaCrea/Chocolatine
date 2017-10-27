@@ -6,11 +6,7 @@ use sp_framework\Pattern\Manager;
 
 class ManagerService extends Manager
 {
-<<<<<<< HEAD
       public $name = 'service';
-=======
-      public $name = 'service'; 
->>>>>>> master
       /**
        * container of configuration
        * @var [type]
@@ -29,10 +25,6 @@ class ManagerService extends Manager
        * Foreach list service class and wallback this
        */
       public function class_loader(){
-<<<<<<< HEAD
-=======
-          // var_dump( \sp_framework\get_core()->manager->configuration->container );
->>>>>>> master
           array_map( [$this, 'loader'], $this->configuration );
       }
       /**

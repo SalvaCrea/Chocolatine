@@ -1,7 +1,6 @@
 <?php
 
 return [
-<<<<<<< HEAD
 
   "style" => [
       // [
@@ -21,24 +20,5 @@ return [
       //   "src"  => "jquery_do.js",
       //   "position" => "footer"
       // ]
-=======
-  "style" => [
-      [
-        "name" => "fontAwesome",
-        "src"  => "/test.css"
-      ]
-  ],
-  "script" => [
-    [
-      "name" => "jquery",
-      "src"  => "/jquery.js",
-      "position" => "header"
-    ],
-    [
-      "name" => "jquery",
-      "src"  => "/jquery.js",
-      "position" => "footer"
-    ]
->>>>>>> master
   ]
 ];

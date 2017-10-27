@@ -6,14 +6,9 @@ use sp_framework\Pattern\Manager;
 
 class ManagerConfiguration extends Manager
 {
-<<<<<<< HEAD
   public $name = 'configuration';
 
   public $environement = "custom";
-=======
-
-  public $name = 'configuration';
->>>>>>> master
 
   public function __construct()
   {
@@ -30,11 +25,7 @@ class ManagerConfiguration extends Manager
           $this->container[$name] = $args;
       }
       else{
-<<<<<<< HEAD
           $this->container[$name] = array_merge( $this->container[$name],  $args);
-=======
-        $this->container[$name] = array_merge( $this->container[$name],  $args);
->>>>>>> master
       }
   }
   /**
@@ -43,7 +34,6 @@ class ManagerConfiguration extends Manager
    */
   public function get_configurations()
   {
-<<<<<<< HEAD
 
       $this->scan_folder_configuration( $this->get_path_folder_configuration() );
 
@@ -74,22 +64,6 @@ class ManagerConfiguration extends Manager
         $this->wp_configuration_database();
     }
 
-=======
-      $files = \sp_framework\scanfolder( $this->get_path_folder_configuration() );
-
-      foreach ( $files as $file) {
-
-        $this->add_configuration(
-            basename( $file, '.php'),
-            require $this->get_path_folder_configuration() .'/'. $file
-        );
-
-      }
-
-      if ( $this->environement == 'wordpress' ) {
-          $this->wp_configuration_database();
-      }
->>>>>>> master
   }
   /**
    * Return configuration
