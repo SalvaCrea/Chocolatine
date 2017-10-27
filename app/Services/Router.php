@@ -31,6 +31,16 @@ class Router extends \sp_framework\Pattern\Service{
    * @var array
    */
   public $routes = array();
+  /**
+   * Current patern
+   * @var string
+   */
+  public $current_pattern;
+  /**
+   * The route Current
+   * @var array
+   */
+  public $current_root;
   public function __construct(){
 
       $config = ['settings' => [
@@ -74,20 +84,14 @@ class Router extends \sp_framework\Pattern\Service{
         $route = $request->getAttribute('route');
         $this->current_pattern = $route->getPattern();
 
-        $name = $route->getName();
-        $groups = $route->getGroups();
-        $methods = $route->getMethods();
-        $arguments = $route->getArguments();
-
+        array_find( $current_pattern, 'route', $this->current_pattern );
         $uri = $request->getUri();
         $path = $uri->getPath();
 
-        \sp_framework\dump( $path );
         $this->request = $request;
         $this->response = $response;
         $this->arg = $arg;
 
         return $response->getBody()->write("Hello, qsdqsdqsd");
-
   }
 }
