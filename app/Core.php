@@ -27,6 +27,14 @@ class Core
 			 */
 			var $url_folder;
 			/**
+<<<<<<< HEAD
+=======
+			 * The value of configuration for Sp Framework
+			 * @var array
+			 */
+			var $configuration;
+			/**
+>>>>>>> master
 			* The default is false, if i true than is dev mode
 			* @var boolean
 			 */
@@ -41,7 +49,11 @@ class Core
 			{
 
 				$this->path_folder = dirname( dirname(__FILE__) );
+<<<<<<< HEAD
 				// $this->url_folder = '/wp-content/plugins/' . sp_get_current_name_folder( $this->path_folder );
+=======
+				$this->url_folder = '/wp-content/plugins/' . sp_get_current_name_folder( $this->path_folder );
+>>>>>>> master
 
 			}
 			/**
@@ -50,7 +62,10 @@ class Core
 			 */
 			public static function create_core(){
 					self::$sp_core = new Core();
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 					return self::$sp_core->init();
 			}
 			public static function get_core(){
@@ -63,6 +78,7 @@ class Core
 			{
 
 				$this->manager = new Managers\ManagerMaster();
+<<<<<<< HEAD
 				/**
 				 * Find and load all Managers
 				 */
@@ -84,6 +100,10 @@ class Core
 				 */
 
 				$render->renderer();
+=======
+
+				$this->manager->module->search_modules();
+>>>>>>> master
 
 			}
 

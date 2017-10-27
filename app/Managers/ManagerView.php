@@ -15,6 +15,7 @@ class ManagerView extends Manager
   {
       $this->container []=  $args;
   }
+<<<<<<< HEAD
   /**
    *  Get one view
    *  $view = 'nameVieww'
@@ -60,5 +61,7 @@ class ManagerView extends Manager
         return false;
 
   }
+=======
+>>>>>>> master
 
 }

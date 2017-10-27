@@ -2,11 +2,19 @@
     "require": {
         "catfan/Medoo": "^1.1",
         "twig/twig": "~1.0",
+<<<<<<< HEAD
         "slim/slim": "3.0",
         "google/apiclient": "^2.0"
     },
     "require-dev": {
         "consolidation/robo": "^1.0.0"
+=======
+        "rilwis/meta-box": "4.*"
+    },
+    "require-dev": {
+        "consolidation/robo": "^1.0.0",
+        "phpdocumentor/phpdocumentor": "2.*"
+>>>>>>> master
     },
     "autoload": {
         "psr-4": {"sp_framework\\": "app/"}

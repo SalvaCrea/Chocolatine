@@ -4,6 +4,7 @@ node_modules
 .remote-sync.json
 
 cache/**
+<<<<<<< HEAD
 
 
 _theme
@@ -13,3 +14,5 @@ theme/_default_wp
 /modules
 
 .ftpconfig
+=======
+>>>>>>> master

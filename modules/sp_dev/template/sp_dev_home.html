@@ -1,0 +1,170 @@
+<div class="col-md-3">
+  <ul class="nav nav-tabs" role="tablist">
+  {% for module in modules %}
+
+
+<li role="{{module.slug|raw}}" class="col-md-12 {{module.actif|raw}}">
+  <a href="#{{module.slug|raw}}" aria-controls="home" role="tab" data-toggle="tab">
+
+                  <i class='fa {{module.icon|raw}}' aria-hidden="true"></i>
+                  {{module.name|raw}}
+    </a>
+
+
+</li>
+
+  {% endfor %}
+ </ul>
+</div>
+
+  <div class="col-md-9 tab-content">
+      {% for module in modules %}
+
+      <div role="tabpanel" class="{{module.actif|raw}} tab-pane" id="{{module.slug|raw}}">
+        <div class="well">
+
+
+          <h4>
+            Basic informations
+          </h4>
+
+          <p>
+            <b>
+              Name :
+            </b>
+          {{module.name|raw}}
+          </p>
+
+          <p>
+            <b>
+              Description :
+            </b>
+          {{module.description|raw}}
+          </p>
+
+          <p>
+            <b>
+              Slug :
+            </b>
+          {{module.slug|raw}}
+          </p>
+
+          <p>
+            <b>
+              Position Menu :
+            </b>
+          {{module.menu_position|raw}}
+          </p>
+
+          <p>
+            <b>
+              Url Web :
+            </b>
+          {{module.path_folder|raw}}
+          </p>
+
+          <p>
+            <b>
+              Url of Folder :
+            </b>
+          {{module.url_folder|raw}}
+          </p>
+
+          <p>
+            <b>
+              Show In Menu :
+            </b>
+                {% if module.show_in_menu  %}
+                YES
+                {% else %}
+                NO
+                {% endif%}
+          </p>
+        </div>
+
+        <div class="well">
+
+
+          <h4>
+            components
+          </h4>
+
+          {% for component in module.component %}
+
+          <p>
+            <b>
+              Name :
+            </b>
+          {{component.name|raw}}
+          </p>
+          <p>
+            <b>
+              Slug :
+            </b>
+          {{component.slug|raw}}
+          </p>
+
+          <p>
+            <b>
+              URL :
+            </b>
+          {{component.url|raw}}
+          </p>
+
+          <p>
+            <b>
+              CLASS :
+            </b>
+          {{component.component|raw}}
+          </p>
+
+          {% if component.call_back  %}
+          <p>
+            <b>
+              Callback :
+            </b>
+          {{component.call_back|raw}}
+          </p>
+          {% endif %}
+
+          <hr>
+          {% endfor %}
+
+          </div>
+
+
+          <div class="well">
+            <h4>
+              Ajax Action
+            </h4>
+
+            {% for ajax_action in module.ajax_action %}
+
+            <p>
+              <b>
+                Name :
+              </b>
+            {{ajax_action.name|raw}}
+            </p>
+            <p>
+              <b>
+                Call Back :
+              </b>
+            {{ajax_action.call_back|raw}}
+            </p>
+
+            <p>
+              <b>
+                component :
+              </b>
+            {{ajax_action.component|raw}}
+            </p>
+
+            {% endfor %}
+          </div>
+
+
+
+      </div>
+        {% endfor %}
+  </div>

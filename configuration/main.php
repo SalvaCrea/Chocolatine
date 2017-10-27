@@ -9,6 +9,7 @@ return $sp_config = array(
     'module_disabled' => [],
 
     // name of theme
+<<<<<<< HEAD
     'theme' => 'ClearBlueWeb',
 
     // name of theme admin theme
@@ -16,6 +17,9 @@ return $sp_config = array(
 
     // route for access admin
     'admin_route' => '/admin',
+=======
+    'theme' => '_default_wp',
+>>>>>>> master
 
     // Dev mode
     'is_dev' => true,

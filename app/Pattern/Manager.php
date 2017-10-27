@@ -4,7 +4,11 @@ namespace sp_framework\Pattern;
 
 class Manager{
   /**
+<<<<<<< HEAD
    * Name of Manager
+=======
+   * name of manager
+>>>>>>> master
    * @var string
    */
   public $name;
@@ -14,6 +18,7 @@ class Manager{
    */
   public $container = array();
   public function init(){}
+<<<<<<< HEAD
   /**
    * user for add element
    * @param object $object_instanced the element instanced
@@ -30,4 +35,6 @@ class Manager{
 
         array_push( $this->container, $args );
   }
+=======
+>>>>>>> master
 }

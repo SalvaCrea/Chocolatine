@@ -1,9 +1,20 @@
 <?php
 namespace sp_framework\Pattern\Module;
 
+<<<<<<< HEAD
 class Model extends Element
 {
     /**
+=======
+class Model
+{
+    /**
+     * [$name the name of the model]
+     * @var [string]
+     */
+    var $name = __CLASS__;
+    /**
+>>>>>>> master
      * [$description the descrption of the model]
      * @var [string]
      */
