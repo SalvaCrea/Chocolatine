@@ -94,20 +94,20 @@ class Templator extends \sp_framework\Pattern\Service{
                 'Templator' => $this
               )
             );
-
+            
             echo $render;
       }
       /**
        * Function Used for add function in twig
        */
       public function extendTwig(){
-        $renderer = \sp_framework\get_service( 'renderer' );
+        // $renderer = \sp_framework\get_service( 'renderer' );
 
-        $function = new \Twig_SimpleFunction('make_block', function ( $blockName ) {
-             $templator = \sp_framework\get_service( 'templator' );
-             $templator->make_block( $blockName );
-        });
-        $renderer::$twig->addFunction( $function );
+        // $function = new \Twig_SimpleFunction('make_block', function ( $blockName ) {
+        //      $templator = \sp_framework\get_service( 'templator' );
+        //      $templator->make_block( $blockName );
+        // });
+        // $renderer::$twig->addFunction( $function );
       }
       /**
        * Create the block in the dom

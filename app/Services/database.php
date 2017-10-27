@@ -9,7 +9,7 @@ class DataBase extends \sp_framework\Pattern\Service{
    * Container Instance meedoo
    * @var object
    */
-  static $database;
+  public $database;
 
   public $name = 'database';
 
@@ -21,6 +21,11 @@ class DataBase extends \sp_framework\Pattern\Service{
    * @return [type] [description]
    */
   public function init(){
-    self::$database = new Medoo( sp_framework\get_configuration( 'database' ) );
+      $this->database = new Medoo( sp_framework\get_configuration( 'database' ) );
+  }
+  public function getter(){
+      if ( !empty( $this->database ) ) {
+        $this->init();
+      }
   }
 }

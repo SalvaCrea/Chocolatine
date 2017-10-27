@@ -7,23 +7,29 @@ namespace sp_framework\Pattern;
 
 class Model{
     /**
+     * The type of model
+     * classic | metapost | simple
+     * @var string
+     */
+    var public $type;
+    /**
      *  Array content the dataSchmea
      * @return array Schema database
      */
     public function get_model(){
 
-        return [
-                [
-                  "name" => "title",
-                  "type" => "text",
-                  "required" => true
-                ],
-                [
-                  "name" => "title",
-                  "type" => "text",
-                  "required" => true
-                ],
-              ];
+        // return [
+        //         [
+        //           "name" => "title",
+        //           "type" => "text",
+        //           "required" => true
+        //         ],
+        //         [
+        //           "name" => "title",
+        //           "type" => "text",
+        //           "required" => true
+        //         ],
+        //       ];
 
     }
     /**

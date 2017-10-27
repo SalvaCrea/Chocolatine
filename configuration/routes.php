@@ -2,7 +2,7 @@
 
 return [
   "home" => [
-    "route" => "/home",
+    "route" => "/",
     "view"  => "Home/back_main"
   ],
   "admin" => [

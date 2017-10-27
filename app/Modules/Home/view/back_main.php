@@ -10,11 +10,10 @@ class back_main extends \sp_framework\Pattern\Module\view
         //
         // $module->component->Connection->connection();
 
-        \sp_framework\add_content( 'content', 'test');
+        \sp_framework\add_content( 'content', 'Bonjour vous êtes sur la page accueil');
 
-        $this->renderTemplate();
   }
-  public function admin( $requete,  $response, $args ){
+  public function admin(){
         echo 'admin';
   }
 }

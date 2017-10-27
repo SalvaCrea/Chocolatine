@@ -60,7 +60,9 @@ function get_configuration( $name_configuration )
  */
 function get_service( $name_service )
 {
-    return get_core()->manager->service->get_service( $name_service );
+    $service = get_core()->manager->service->get_service( $name_service );
+    $service->getter();
+    return $service;
 }
 /**
  * Return a specific manager

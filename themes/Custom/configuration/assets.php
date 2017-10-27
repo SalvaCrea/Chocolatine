@@ -5,11 +5,11 @@ return [
   "style" => [
       [
         "name" => "Boostrap3",
-        "src"  => "/themes/ClearBlueWeb/assets/styles/ext/AdminLte/bootstrap.min.css"
+        "src"  => "/themes/Custom/assets/styles/ext/AdminLte/bootstrap.min.css"
       ],
       [
         "name" => "AdminLte_css",
-        "src"  => "/themes/ClearBlueWeb/assets/styles/ext/AdminLte/AdminLTE.min.css"
+        "src"  => "/themes/Custom/assets/styles/ext/AdminLte/AdminLTE.min.css"
       ],
   ],
 
@@ -21,7 +21,7 @@ return [
       ],
       [
         "name" => "AdminLte_js",
-        "src"  => "/themes/ClearBlueWeb/assets/scripts/ext/AdminLte/adminlte.min.js",
+        "src"  => "/themes/Custom/assets/scripts/ext/AdminLte/adminlte.min.js",
         "position" => "footer"
       ]
   ]
