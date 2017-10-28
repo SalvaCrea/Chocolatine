@@ -5,11 +5,7 @@ return [
     "route" => "/",
     "view"  => "Home/back_main"
   ],
-  "admin" => [
-    "route" => "/admin/{test}",
-    "view"  => "Home/back_main",
-    "method" => 'admin'
-  ],
+
   "analytic" => [
     "route" => "/analytic",
     "view"  => "Home/back_main",
@@ -18,5 +14,11 @@ return [
     "route" => "/google_api_redirect",
     "view"  => "GoogleAnalytic/main",
     "method" => 'connect'
+  ],
+
+  "admin" => [
+    "route" => "/admin/database_generator",
+    "view"  => "ModelTool/main"
   ]
+
 ];

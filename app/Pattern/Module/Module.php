@@ -53,7 +53,7 @@ class Module extends Element
 			 return \sp_framework\get_core();
 
 		if ( $name == 'db' )
-	 			return $this->find_core()->db;
+	 			return \sp_framework\get_service( 'database' )->database;
 
 	}
 	/**

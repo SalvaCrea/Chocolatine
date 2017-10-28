@@ -4,15 +4,15 @@
  *  The module for the test
  */
 
-namespace sp_framework\Modules\GoogleApi;
+namespace sp_framework\Modules\ModelTool;
 
-class GoogleApi extends \sp_framework\Pattern\Module\Module{
+class ModelTool extends \sp_framework\Pattern\Module\Module{
 
       public $description = "
-          Module used for connection for Google Api And get data
+          Module For Generate and Maintenance DataTable
       ";
 
       public function __construct(){
-            require "vendor/autoload.php";
+            
       }
 }

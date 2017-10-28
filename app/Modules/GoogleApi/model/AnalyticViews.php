@@ -1,7 +1,7 @@
 <?php
 namespace sp_framework\Modules\GoogleApi\Model;
 
-class AnalyticViews extends sp_framework\Models\Simple
+class AnalyticViews extends \sp_framework\Models\Simple
 {
 
   public function model()
@@ -13,7 +13,15 @@ class AnalyticViews extends sp_framework\Models\Simple
           ],
           "id_view"=>  [
             "title"=> "The id google view",
-            "type"=> "string"
+            "type"=> "int"
+          ],
+          "number"=>  [
+            "title"=> "The id google view",
+            "type"=> "decimal"
+          ],
+          "espace"=>  [
+            "title"=> "The id google view",
+            "type"=> "float"
           ]
       );
   }

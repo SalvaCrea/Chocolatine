@@ -5,5 +5,6 @@ return [
     'database_name' =>  'framework',
     'server'        =>  'localhost',
     'username'      =>  'framework',
-    'password'      =>  ''
+    'password'      =>  '',
+    'prefixe'       =>  'sp_'
 ];
