@@ -42,11 +42,12 @@ class ManagerView extends Manager
 
         /**
          *
-         *    Search View in the container 
+         *    Search View in the container
          *
          */
         foreach ( $this->container  as $key => $current_view) {
             if ( isset( $module ) ) {
+              
               if ( $current_view['module'] == $module && $current_view['name'] == $view ) {
                   return $current_view;
               }

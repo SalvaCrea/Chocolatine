@@ -64,18 +64,19 @@ class Connection extends \sp_framework\Pattern\Module\Component
           }
 
   }
+  public function get_client(){
+          return $this->client_google;
+  }
   public function create_client_google(){
 
-
-
-      $key = file_get_contents($this->key_file_location);
+      // $key = file_get_contents($this->key_file_location);
       $client = new \Google_Client();
       $client->setAccessType('offline');
       $client->setApplicationName( $this->application_name );
       $client->setClientId( $this->id_client );
       $client->setClientSecret( $this->secret_key );
       $client->setDeveloperKey( $this->developer_key );
-      $client->setAuthConfig($this->key_file_location);
+      // $client->setAuthConfig($this->key_file_location);
       $client->setScopes( $this->scopes );
       $client->setRedirectUri( $this->redirect_uri );
       $this->client_google = $client;
@@ -83,6 +84,7 @@ class Connection extends \sp_framework\Pattern\Module\Component
   }
   public function connection()
   {
+
         $this->create_client_google();
 
         if ( empty( $this->google_token ) ) {
@@ -106,32 +108,6 @@ class Connection extends \sp_framework\Pattern\Module\Component
         die;
     }
   }
-  function test( $analytics ){
 
-    // Replace with your view ID, for example XXXX.
-    $VIEW_ID = "<REPLACE_WITH_VIEW_ID>";
-
-    // Create the DateRange object.
-    $dateRange = new Google_Service_AnalyticsReporting_DateRange();
-    $dateRange->setStartDate("7daysAgo");
-    $dateRange->setEndDate("today");
-
-    // Create the Metrics object.
-    $sessions = new Google_Service_AnalyticsReporting_Metric();
-    $sessions->setExpression("ga:sessions");
-    $sessions->setAlias("sessions");
-
-    // Create the ReportRequest object.
-    $request = new Google_Service_AnalyticsReporting_ReportRequest();
-    $request->setViewId($VIEW_ID);
-    $request->setDateRanges($dateRange);
-    $request->setMetrics(array($sessions));
-
-    $body = new Google_Service_AnalyticsReporting_GetReportsRequest();
-    $body->setReportRequests( array( $request) );
-    return $analytics->reports->batchGet( $body );
-
-  \sp_framework\dump( $items );
-  }
 
 }

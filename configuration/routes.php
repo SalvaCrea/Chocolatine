@@ -1,6 +1,7 @@
 <?php
 
 return [
+
   "home" => [
     "route" => "/",
     "view"  => "Home/back_main"
@@ -8,12 +9,12 @@ return [
 
   "analytic" => [
     "route" => "/analytic",
-    "view"  => "Home/back_main",
+    "view"  => "GoogleApi/main",
+    "method" => 'list'
   ],
   "redirect_analytic" => [
     "route" => "/google_api_redirect",
-    "view"  => "GoogleAnalytic/main",
-    "method" => 'connect'
+    "view"  => "GoogleApi/connection"
   ],
 
   "admin" => [

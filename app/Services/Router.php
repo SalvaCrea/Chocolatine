@@ -107,7 +107,7 @@ class Router extends \sp_framework\Pattern\Service{
     $view_manager = \sp_framework\get_manager('view');
 
     if ( false !== $view = $view_manager->get_view( $this->current_route['view'] ) ) {
-
+        
         $view = new $view['namespace']();
 
         if ( isset (  $this->current_route['method'] ) ) {
@@ -115,7 +115,7 @@ class Router extends \sp_framework\Pattern\Service{
         }else{
           $method = 'main';
         }
-        
+
         $view->{$method}();
     }
   }

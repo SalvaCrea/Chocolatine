@@ -24,7 +24,8 @@ class ManagerMaster extends Manager
     ManagerModule::class,
     ManagerService::class,
     ManagerView::class,
-    ManagerComponent::class
+    ManagerComponent::class,
+    ManagerMenu::class
   ];
   /**
    * Load the all manager

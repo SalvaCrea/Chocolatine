@@ -293,7 +293,7 @@ function add_item_menu( array $args ){
       $TemplatorContent = new Pattern\TemplatorItemMenu();
       $TemplatorContent->create( $args );
 
-      $templator = \sp_framework\get_service( 'templator' );
-      $templator->add_item_menu( $TemplatorContent );
+      $mananger = \sp_framework\get_manager( 'menu' );
+      $mananger->add_item_menu( $TemplatorContent );
 
 }

@@ -14,14 +14,6 @@ class AnalyticViews extends \sp_framework\Models\Simple
           "id_view"=>  [
             "title"=> "The id google view",
             "type"=> "int"
-          ],
-          "number"=>  [
-            "title"=> "The id google view",
-            "type"=> "decimal"
-          ],
-          "espace"=>  [
-            "title"=> "The id google view",
-            "type"=> "float"
           ]
       );
   }

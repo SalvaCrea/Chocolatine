@@ -58,29 +58,10 @@ class Templator extends \sp_framework\Pattern\Service{
 
       }
       /**
-       * Add items menu  in the templator
-       * @param instance $TemplatorContent Instance of sp_framework\Pattern\TemplatorItemMenu::class;
-       */
-      public function add_item_menu( $TemplatorItemMenu )
-      {
-                /**
-                 *
-                 * Create the menu if undefined
-                 *
-                 */
-                if ( empty ( $this->content[ $TemplatorItemMenu->menu_name ] ) ) {
-                  $this->menus[ $TemplatorItemMenu->menu_name ] = array();
-                }
-
-                array_push( $this->menus[ $TemplatorItemMenu->menu_name ], $TemplatorItemMenu );
-      }
-      /**
        * use the Librarie Twig for return the template
        * @return string  all theme
        */
       public function renderer(){
-
-            $this->extendTwig();
 
             $render = '';
             $renderer = \sp_framework\get_service( 'renderer' );
@@ -94,21 +75,10 @@ class Templator extends \sp_framework\Pattern\Service{
                 'Templator' => $this
               )
             );
-            
+
             echo $render;
       }
-      /**
-       * Function Used for add function in twig
-       */
-      public function extendTwig(){
-        // $renderer = \sp_framework\get_service( 'renderer' );
 
-        // $function = new \Twig_SimpleFunction('make_block', function ( $blockName ) {
-        //      $templator = \sp_framework\get_service( 'templator' );
-        //      $templator->make_block( $blockName );
-        // });
-        // $renderer::$twig->addFunction( $function );
-      }
       /**
        * Create the block in the dom
        * @param  string $blockName [description]
@@ -127,14 +97,26 @@ class Templator extends \sp_framework\Pattern\Service{
        */
       public function make_menu( string $menuName )
       {
-            if ( !empty( $this->menus[ $menuName ] ) ) {
+            $manager = \sp_framework\get_manager( 'menu' );
+            $router = \sp_framework\get_service( 'Router' );
 
-                  foreach ( $this->menus[ $menuName ] as $key => $menu ) {
+            $router->current_route;
+
+            if ( !empty( $manager->container[ $menuName ] ) ) {
+
+                  foreach ( $manager->container[ $menuName ] as $key => $menu ) {
+
+                      $active = '';
+
+                      if ( $router->current_route == $menu->route ) {
+                          $active = 'active';
+                      }
+
                       echo
                       "
-                      <li class=\" active  \">
-                        <a href=\"{$menu->route}\">
-                          <i class=\"fa {$menu->icon}\"></i>
+                      <li class=\" {$active}  \">
+                        <a href=\"{$menu->url}\">
+                          <i class=\"{$menu->icon}\"></i>
                           <span>
                           {$menu->text}
                         </span>

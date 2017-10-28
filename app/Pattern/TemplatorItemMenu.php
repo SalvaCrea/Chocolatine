@@ -48,6 +48,11 @@ class TemplatorItemMenu{
        */
       public $menu_name = 'main';
       /**
+       * The url of route
+       * @var string
+       */
+      public $url;
+      /**
        * Arguments for create a Items Menu
        * @param  array  $args [description]
        * @return [type]       [description]
@@ -75,5 +80,17 @@ class TemplatorItemMenu{
                $this->$key = $value;
             }
 
+            $this->find_route();
+      }
+      public function find_route(){
+
+            $this->routes = \sp_framework\get_configuration( 'routes' );
+
+            foreach ( $this->routes as $route => $current_route) {
+                if ( $route == $this->route ) {
+                    $this->url = $current_route['route'];
+                    break;
+                }
+            }
       }
  }
