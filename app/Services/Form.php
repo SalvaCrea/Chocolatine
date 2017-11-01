@@ -5,18 +5,14 @@ namespace sp_framework\Services;
 use Medoo\Medoo;
 
 class DataBase extends \sp_framework\Pattern\Service{
-  /**
-   * Container Instance meedoo
-   * @var object
-   */
-  public $database;
 
   public $name = 'form';
+
   /**
-   * Prefixe use for name Table
-   * @var string
+   * Number of form created
+   * @var int
    */
-  public $prefixe = '';
+  public $numberForm = 0;
 
   public function __construct(){
 
@@ -29,9 +25,54 @@ class DataBase extends \sp_framework\Pattern\Service{
    */
   public function generate_form( $model, $form = '' ){
 
-      $model = \sp_framework\get_model( $model, true );
+      $this->numberForm++;
+      if ( $this->numberForm === 1 ) {
+        $this->add_asset_form();
+      }
+
       if ( !empty( $form ) ) {
           $form = \sp_framework\get_form( $model, true );
       }
+
+      return 'form';
+
+  }
+  public function add_asset_form(){
+      $asset_manager = \sp_framework\get_manager( 'asset' );
+
+      $asset_manager->add_js(
+        'angular',
+        'bower_components/angular/angular.min.js'
+      );
+
+      $asset_manager->add_js(
+        'sanitize',
+        'bower_components/angular-sanitize/angular-sanitize.min.js'
+      );
+
+      $asset_manager->add_js(
+        'tv4',
+        'bower_components/tv4/tv4.js'
+      );
+
+      $asset_manager->add_js(
+        'ObjectPath',
+        'bower_components/objectpath/lib/ObjectPath.js'
+      );
+
+      $asset_manager->add_js(
+        'schema-form',
+        'bower_components/angular-schema-form/dist/schema-form.min.js'
+      );
+
+      $asset_manager->add_js(
+        'bootstrap-decorator',
+        'bower_components/angular-schema-form/dist/bootstrap-decorator.min.js'
+      );
+
+      $asset_manager->add_js(
+        'formGenerator',
+        'bower_components/angular-schema-form/dist/formGenerator.js'
+      );
   }
 }

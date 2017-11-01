@@ -38,6 +38,13 @@ return [
     "method" => 'get_report'
   ],
 
+  // Reporting Data
+
+  "analyticConfiguration" => [
+    "route" => "/analytic/configuration",
+    "view"  => "GoogleApi@configuration"
+  ],
+
   // Redirect
   "redirect_analytic" => [
     "route" => "/google_api_redirect",

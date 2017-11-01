@@ -21,11 +21,18 @@ return [
     'order'     => '1'
   ],
 
-
   [
     'route'     => 'analyticListProperties',
     'text'      => 'List Properties',
     'icon'      => 'fa fa-envelope-open-o',
+    'order'     => '1'
+  ],
+
+
+  [
+    'route'     => 'analyticConfiguration',
+    'text'      => 'Configuration',
+    'icon'      => 'fa fa-sliders',
     'order'     => '1'
   ],
 
