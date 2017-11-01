@@ -33,6 +33,8 @@ class Renderer extends \sp_framework\Pattern\Service{
 
       $loader = new \Twig_Loader_Filesystem( \sp_framework\get_path_theme() . '/templates' );
 
+      $this->twig_fast = new \Twig_Environment(new \Twig_Loader_String);
+
       return self::$twig = new \Twig_Environment( $loader, $configTwig );
     }
     /**
@@ -41,15 +43,18 @@ class Renderer extends \sp_framework\Pattern\Service{
      * @param  array  $param          Param for twig render
      * @return string                 The template html
      */
-    public function renderer( string $template_name, array $param ){
+    public function renderer( $template_name, array $param ){
         return self::$twig->render( $template_name, $param );
+    }
+    public function fast_render( $template_string, array $args = [] ){
+        return $this->twig_fast->render( $template_string, $args );
     }
     /**
      * Add a global variable in twig
      * @param string $name  name of global
      * @param mixed  $value value of global
      */
-    public function add_global( string $name, mixed $value ){
+    public function add_global( $name, $value ){
         self::$twig->addGlobal( $name , $value );
     }
 }

@@ -51,7 +51,7 @@ class ModuleFactory
        * @param  string $path_folder the path of the folder
        * @return object              the module builded
        */
-      public function build_module( string $module_name, string $path_folder, string $namespace )
+      public function build_module( $module_name, $path_folder, $namespace )
       {
 
         /**
@@ -63,6 +63,7 @@ class ModuleFactory
          $class = $namespace . "\\" . $module_name ;
 
          $this->module_current = new $class();
+         $this->module_current->path_folder = $path_folder;
 
          foreach ($this->manager_relations as $key => $value) {
              $this->try_find_element( $value, $namespace ,$path_folder);
@@ -80,7 +81,7 @@ class ModuleFactory
        * @param string $namespace Name of namespace
        * @param string $path_folder Path of module
        */
-      public function try_find_element( array $manager, string $namespace, string $path_folder){
+      public function try_find_element( $manager, $namespace, $path_folder){
             /**
              *  Find element in folder
              */
@@ -123,7 +124,7 @@ class ModuleFactory
        * @param object  $manager           manager used
        * @param string $element_namespace  namepsace element
        */
-      public function try_add_element(  $manager, string $element_namespace ){
+      public function try_add_element(  $manager, $element_namespace ){
             $manager->add( $element_namespace );
       }
 

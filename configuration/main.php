@@ -17,7 +17,16 @@ return $sp_config = array(
     // route for access admin
     'admin_route' => '/admin',
 
+    // name of theme admin theme
+    'theme_api' => 'Api',
+
+    // route for access admin
+    'api_route' => '/api',
+
     // Dev mode
     'is_dev' => true,
+
+    // Enviroment Application, can it wordpress | custom
+    'enviroment' => ''
 
 );

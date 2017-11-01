@@ -10,4 +10,8 @@ class Service{
     public $name;
 
     public function init(){}
+    /**
+     * Function used by called
+     */
+    public function getter(){}
 }

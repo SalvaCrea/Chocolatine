@@ -1,22 +1,59 @@
 <?php
 
 return [
+
   "home" => [
-    "route" => "/home",
+    "route" => "/",
     "view"  => "Home/back_main"
   ],
-  "admin" => [
-    "route" => "/admin/{test}",
-    "view"  => "Home/back_main",
-    "method" => 'admin'
+
+  /**
+   * Analaytics Route
+   */
+
+  // Account Datas
+  "analyticListView" => [
+    "route" => "/analytic/analyticListView",
+    "view"  => "GoogleApi@listView",
+    "method" => 'listView'
   ],
-  "analytic" => [
-    "route" => "/analytic",
-    "view"  => "Home/back_main",
+
+  "analyticListProperties" => [
+    "route" => "/analytic/analyticListProperties",
+    "view"  => "GoogleApi@listView",
+    "method" => 'listProperties'
   ],
+
+  "analyticListManagementAccounts" => [
+    "route" => "/analytic/analyticListManagementAccounts",
+    "view"  => "GoogleApi@listView",
+    "method" => 'listManagementAccounts'
+  ],
+
+  // Reporting Data
+
+  "analyticGetReport" => [
+    "route" => "/analytic/analyticGetReport",
+    "view"  => "GoogleApi@reporting",
+    "method" => 'get_report'
+  ],
+
+  // Redirect
   "redirect_analytic" => [
     "route" => "/google_api_redirect",
-    "view"  => "GoogleAnalytic/main",
-    "method" => 'connect'
+    "view"  => "GoogleApi@connection"
+  ],
+
+
+
+  /**
+   * Other Routes
+   */
+
+  "update_database" => [
+    "route" => "/admin/database_generator",
+    "view"  => "ModelTool@main",
+    "menu_name" => "admin"
   ]
+
 ];

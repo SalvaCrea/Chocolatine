@@ -7,7 +7,7 @@ class Connection extends \sp_framework\Pattern\Module\Component
    * The path file for credentials google
    * @var string
    */
-  private $key_file_location = __DIR__ . '/../service-account-credentials.json';
+  private $key_file_location;
   /**
    * Name of application
    * @var string
@@ -64,18 +64,22 @@ class Connection extends \sp_framework\Pattern\Module\Component
           }
 
   }
+  public function get_key_location(){
+     return \sp_framework\get_folder() . '/themes/Custom/others/service-account-credentials.json';
+  }
+  public function get_client(){
+          return $this->client_google;
+  }
   public function create_client_google(){
 
 
-
-      $key = file_get_contents($this->key_file_location);
       $client = new \Google_Client();
       $client->setAccessType('offline');
       $client->setApplicationName( $this->application_name );
       $client->setClientId( $this->id_client );
       $client->setClientSecret( $this->secret_key );
       $client->setDeveloperKey( $this->developer_key );
-      $client->setAuthConfig($this->key_file_location);
+      // $client->setAuthConfig( $this->get_key_location() );
       $client->setScopes( $this->scopes );
       $client->setRedirectUri( $this->redirect_uri );
       $this->client_google = $client;
@@ -83,7 +87,12 @@ class Connection extends \sp_framework\Pattern\Module\Component
   }
   public function connection()
   {
+
         $this->create_client_google();
+
+        if (isset($_GET['code'])) {
+            $this->setToken();
+        }
 
         if ( empty( $this->google_token ) ) {
           $authUrl = $this->client_google->createAuthUrl();
@@ -93,45 +102,17 @@ class Connection extends \sp_framework\Pattern\Module\Component
             $this->client_google->setAccessToken( $this->google_token );
         }
 
-        $this->analytics = new \Google_Service_Analytics( $this->client_google );
+        return $this->get_client();
 
   }
   public function setToken(){
 
-    if (isset($_GET['code'])) { // we received the positive auth callback, get the token and store it in session
-        $this->create_client_google();
         $this->client_google->authenticate($_GET['code']);
-        $this->google_token = $this->client_google->getAccessToken();
-        header("Location: /home");
+        $_SESSION['token_google'] = $this->client_google->getAccessToken();
+        header("Location: /");
         die;
-    }
+
   }
-  function test( $analytics ){
 
-    // Replace with your view ID, for example XXXX.
-    $VIEW_ID = "<REPLACE_WITH_VIEW_ID>";
-
-    // Create the DateRange object.
-    $dateRange = new Google_Service_AnalyticsReporting_DateRange();
-    $dateRange->setStartDate("7daysAgo");
-    $dateRange->setEndDate("today");
-
-    // Create the Metrics object.
-    $sessions = new Google_Service_AnalyticsReporting_Metric();
-    $sessions->setExpression("ga:sessions");
-    $sessions->setAlias("sessions");
-
-    // Create the ReportRequest object.
-    $request = new Google_Service_AnalyticsReporting_ReportRequest();
-    $request->setViewId($VIEW_ID);
-    $request->setDateRanges($dateRange);
-    $request->setMetrics(array($sessions));
-
-    $body = new Google_Service_AnalyticsReporting_GetReportsRequest();
-    $body->setReportRequests( array( $request) );
-    return $analytics->reports->batchGet( $body );
-
-  \sp_framework\dump( $items );
-  }
 
 }
