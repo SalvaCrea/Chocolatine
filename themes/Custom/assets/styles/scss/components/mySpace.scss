@@ -1,0 +1,267 @@
+$pastille_size : 100px;
+#MySpace{
+
+    #h3Title{
+      font-family: 'HelveticaNeueCondensed';
+    }
+    #list_module{
+        .module{
+          @include transition($ts);
+
+          &:hover{
+            .content_number {
+              &:before { @include opacity(1); }
+              @include transform(scale($scaleRatio));
+            }
+
+            .container_content_title.second_etat{
+              @include fadein(0.25s);
+              margin-top: 0;
+            }
+            .container_content_title.first_etat{
+              @include fadeout(0.25s);
+              @include transform(translateY(20px));
+            }
+
+            h6 {
+              @include transform(translateY(6px));
+            }
+            p {
+              @include transform(translateY(2px));
+            }
+          }
+        }
+        .module.available{
+          cursor: pointer;
+          span{
+
+          }
+          .container_content_title.second_etat{
+            background:  $yellow;
+            span{
+              color: white;
+            }
+          }
+          &:hover{
+           // @include transform(scale($scaleRatio));
+          }
+        }
+        .content_number
+        {
+          background-image: url('/assets/images/background_module.png');
+          background-size: cover;
+          background-position: 50% 50%;
+          // padding: 73px 50px;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+          min-height: 210px;
+          display: flex;
+          position: relative;
+          z-index: 0;
+          backface-visibility: hidden;
+          @include transition($ts);
+
+          &:before {
+            content: '';
+            @include transition($ts);
+            display: block;
+            position: absolute;
+            z-index: 0;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            @include opacity(0);
+            background-color: rgba(0, 0, 0, 0.5);
+          }
+
+          .pastille{
+              position: absolute;
+              right : -2px;
+              bottom : -10px;
+              // background: white;
+              // border-radius: 50%;
+              // height: $pastille_size;
+              // width: $pastille_size;
+              // background-repeat: no-repeat no-repeat;
+              // background-position-x: 18px;
+              // background-position-y: 18px;
+              z-index: 1;
+              &:after{
+                display: block;
+              }
+          }
+
+          .link_module{
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top : 0;
+              left : 0;
+              display: block;
+              z-index: 4;
+          }
+
+          .container_content_title{
+            @include transition($ts);
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+          }
+
+          .container_content_title.first_etat{
+            margin: auto;
+            display: inline-block;
+            opacity: 1;
+            font-size: 86px;
+            background: none;
+            color : white;
+            font-family: 'HelveticaBold';
+            font-size: 105px;
+            @include fadein(0.25s);
+          }
+          .container_content_title.second_etat{
+            padding: 12px 15px;
+            background: white;
+            @include fadeout(0.25s);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            white-space: nowrap;
+            @include transform(translate(-50%, -50%));
+            margin-top: -20px;
+
+            span{
+              font-family: 'HelveticaNeueCondensed';
+              color: white;
+              font-size: 24px;
+              color : $yellow;
+            }
+          }
+        }
+        .content_number.available{
+          .pastille{
+            &:after{
+              content : url(/assets/images/pastille_availabe2.png);
+            }
+            // background-image: url('/assets/images/pastille_availabe2.png');
+          }
+        }
+        .content_number.unavailable{
+          cursor: default;
+          &:before { @include fadein(); }
+          .pastille{
+              &:after{
+            content : url(/assets/images/pastille_unavailable2.png);
+            }
+          }
+        }
+        .content_number.finished{
+          cursor: default;
+          &:before { @include fadein(); }
+            .pastille{
+                &:after{
+                content : url(/assets/images/pastille_finish2.png);
+              }
+            }
+        }
+        h6{
+          font-weight: bold;
+          text-transform: uppercase;
+          margin-top: 10px;
+          font-size: 22px;
+          margin-bottom: 0;
+          @include transition($ts);
+          margin-bottom: 5px;
+        }
+        h6.bottom_title_available
+        {
+          color : $green;
+        }
+        p{
+          font-size: 19px;
+          font-family: 'HelveticaNeueCondensed';
+          @include transition($ts);
+          line-height: 21px;
+        }
+    }
+    #list_lib{
+      margin-top: 10px;
+      h5{
+        text-transform: uppercase;
+        text-align: center;
+        font-family: 'HelveticaBold';
+        font-size: 1.05rem;
+      }
+      a{
+        &:hover{
+          text-decoration: none;
+        }
+      }
+    }
+    #fongicide.content_lib{
+      background-image: url('/assets/images/lib_img_fonci.png');
+    }
+    #regulateur.content_lib{
+      background-image: url('/assets/images/lib_img_regu.png');
+    }
+    .content_lib{
+      position: relative;
+      min-height: 200px;
+      padding: 30px;
+      background-size: cover;
+      display: flex;
+      border-radius: 3px;
+      border : 2px solid $yellow;
+      overflow: hidden;
+      @include transition($ts);
+
+      &:hover{
+        @include transform(scale($scaleRatio));
+        border-width: 0;
+
+        .blackScreen{
+          @include opacity(0.5);
+        }
+        span{
+          @include opacity(1);
+          @include transform(translateY(0));
+        }
+      }
+
+      .blackScreen{
+        @include transition($ts);
+        @include opacity(0);
+        background:  black;
+        position: absolute;
+        top : -10%;
+        left : -10%;
+        height: 120%;
+        width: 120%;
+        z-index: 1;
+      }
+
+      span{
+        @include transition($ts);
+        margin: auto;
+        @include opacity(0);
+        padding: 12px 15px;
+        font-size: 20px;
+        color: white;
+        background: #f7ae04;
+        z-index: 3;
+        font-family: 'HelveticaNeueCondensed';
+        @include transform(translateY(-20px));
+      }
+    }
+
+    #final_contenaire_all_module{
+      text-align: center;
+      padding: 60px;
+      h2{
+        margin: auto;
+        color : $yellow;
+      }
+    }
+}

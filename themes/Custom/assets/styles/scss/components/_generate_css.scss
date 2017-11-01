@@ -1,0 +1,8 @@
+@for $i from 1 through 20 {
+    .mgt-#{ $i * 5 } {
+        margin-top: 5px*$i;
+    }
+    .mgb-#{ $i * 5 } {
+        margin-bottom : 5px*$i;
+    }
+}
