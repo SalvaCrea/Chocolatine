@@ -64,22 +64,33 @@ class Connection extends \sp_framework\Pattern\Module\Component
           }
 
   }
+<<<<<<< HEAD
   public function get_key_location(){
      return \sp_framework\get_folder() . '/themes/Custom/others/service-account-credentials.json';
   }
+=======
+>>>>>>> master
   public function get_client(){
           return $this->client_google;
   }
   public function create_client_google(){
 
+<<<<<<< HEAD
 
+=======
+      // $key = file_get_contents($this->key_file_location);
+>>>>>>> master
       $client = new \Google_Client();
       $client->setAccessType('offline');
       $client->setApplicationName( $this->application_name );
       $client->setClientId( $this->id_client );
       $client->setClientSecret( $this->secret_key );
       $client->setDeveloperKey( $this->developer_key );
+<<<<<<< HEAD
       // $client->setAuthConfig( $this->get_key_location() );
+=======
+      // $client->setAuthConfig($this->key_file_location);
+>>>>>>> master
       $client->setScopes( $this->scopes );
       $client->setRedirectUri( $this->redirect_uri );
       $this->client_google = $client;
@@ -111,8 +122,14 @@ class Connection extends \sp_framework\Pattern\Module\Component
         $_SESSION['token_google'] = $this->client_google->getAccessToken();
         header("Location: /");
         die;
+<<<<<<< HEAD
 
   }
+=======
+    }
+  }
+
+>>>>>>> master
 
 
 }

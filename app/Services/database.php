@@ -34,7 +34,10 @@ class DataBase extends \sp_framework\Pattern\Service{
       $this->prefixe = $info_datase["prefixe"];
   }
   public function getter(){
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
       if ( empty( $this->database ) ) {
         $this->init();
       }
@@ -62,7 +65,11 @@ class DataBase extends \sp_framework\Pattern\Service{
  * Create Table in database
  * @param  string $table_name Name of table
  */
+<<<<<<< HEAD
   public function createTable( $table_name ){
+=======
+  public function createTable( string $table_name ){
+>>>>>>> master
 
         $table_name = $this->prefixe . $table_name;
 
@@ -82,7 +89,11 @@ class DataBase extends \sp_framework\Pattern\Service{
  * @param array  $args        All supp arguments
  */
 
+<<<<<<< HEAD
   public function addCollumn( $table_name, $column_name, $type, $nullabe = 'NULL', $args = [] ){
+=======
+  public function addCollumn( string $table_name, string $column_name, string $type, string $nullabe = 'NULL', array $args = [] ){
+>>>>>>> master
 
         $table_name = $this->prefixe . $table_name;
 
@@ -98,6 +109,10 @@ class DataBase extends \sp_framework\Pattern\Service{
         $result = $this->database->query(
           "ALTER TABLE $table_name ADD $column_name $curent_type $nullabe"
          )->fetchAll();
+<<<<<<< HEAD
 
+=======
+         
+>>>>>>> master
   }
 }

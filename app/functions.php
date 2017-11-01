@@ -359,6 +359,10 @@ function add_item_menu( array $args ){
       $itemMenu->create( $args );
 
       $mananger = \sp_framework\get_manager( 'menu' );
+<<<<<<< HEAD
       $mananger->add_item_menu( $itemMenu );
+=======
+      $mananger->add_item_menu( $TemplatorContent );
+>>>>>>> master
 
 }

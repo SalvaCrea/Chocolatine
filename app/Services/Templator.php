@@ -41,6 +41,26 @@ class Templator extends \sp_framework\Pattern\Service{
 
       }
       /**
+<<<<<<< HEAD
+=======
+       * Add the content in the templator
+       * @param instance $TemplatorContent Instance of sp_framework\Pattern\TemplatorContent::class;
+       */
+      public function add_content( $TemplatorContent ){
+            /**
+             *
+             * Create the presence of block if undefined
+             *
+             */
+            if ( empty ( $this->content[ $TemplatorContent->block_name ] ) ) {
+              $this->content[ $TemplatorContent->block_name ] = array();
+            }
+
+            array_push( $this->content[ $TemplatorContent->block_name ], $TemplatorContent );
+
+      }
+      /**
+>>>>>>> master
        * use the Librarie Twig for return the template
        * @return string  all theme
        */
@@ -85,6 +105,7 @@ class Templator extends \sp_framework\Pattern\Service{
             $manager = \sp_framework\get_manager( 'menu' );
             $router = \sp_framework\get_service( 'Router' );
 
+<<<<<<< HEAD
             if ( !empty( $manager->container ) ) {
                   
                   $menu = \sp_framework\array_clean( $manager->container, 'menu_name', $menuName );
@@ -93,6 +114,13 @@ class Templator extends \sp_framework\Pattern\Service{
                     return false;
                   }
                   foreach ( $menu as $key => $menu ) {
+=======
+            $router->current_route;
+
+            if ( !empty( $manager->container[ $menuName ] ) ) {
+
+                  foreach ( $manager->container[ $menuName ] as $key => $menu ) {
+>>>>>>> master
 
                       $active = '';
 

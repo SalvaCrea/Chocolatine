@@ -10,7 +10,11 @@ class back_main extends \sp_framework\Pattern\Module\View
         //
         // $module->component->Connection->connection();
 
+<<<<<<< HEAD
         \sp_framework\add_block( 'content', 'Bonjour vous êtes sur la page accueil');
+=======
+        \sp_framework\add_content( 'content', 'Bonjour vous êtes sur la page accueil');
+>>>>>>> master
 
   }
   public function admin(){

@@ -57,16 +57,29 @@ class Model{
     public function get_model(){
         return $this->model();
     }
+<<<<<<< HEAD
     public function get_table_name(){
       $service = \sp_framework\get_service( 'database' );
       return $service->prefixe . $this->name;
     }
+=======
+>>>>>>> master
     /**
      * Return the relation
      * @return array the relation
      */
     public function get_relation(){
         return $this->relation();
+<<<<<<< HEAD
+=======
+    }
+    /**
+     * Save the Data
+     * @return [type] [description]
+     */
+    public function save(){
+        $data = $this->data;
+>>>>>>> master
     }
     /**
      * Function Set Data

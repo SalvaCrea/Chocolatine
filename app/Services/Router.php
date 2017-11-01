@@ -62,10 +62,17 @@ class Router extends \sp_framework\Pattern\Service{
         foreach ( $this->routes as $key => $current_route) {
 
             $this->router->map(['GET', 'POST'],  $current_route['route'] ,function ($request, $response, $args) {
+<<<<<<< HEAD
 
                 $router = \sp_framework\get_service( 'Router' );
                 return $router->controller( $request, $response, $args );
 
+=======
+
+                $router = \sp_framework\get_service( 'Router' );
+                return $router->controller( $request, $response, $args );
+
+>>>>>>> master
             });
 
         }
@@ -96,6 +103,10 @@ class Router extends \sp_framework\Pattern\Service{
         $this->arg = $arg;
 
         $this->use_view();
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         /**
          * Execute the motor of template
          */
@@ -105,9 +116,15 @@ class Router extends \sp_framework\Pattern\Service{
   {
     $view_manager = \sp_framework\get_manager('view');
 
+<<<<<<< HEAD
     if ( false !== $view = $view_manager->find( $this->current_route['view'] ) ) {
 
         $view = $view->make();
+=======
+    if ( false !== $view = $view_manager->get_view( $this->current_route['view'] ) ) {
+        
+        $view = new $view['namespace']();
+>>>>>>> master
 
         if ( isset (  $this->current_route['method'] ) ) {
           $method = $this->current_route['method'];

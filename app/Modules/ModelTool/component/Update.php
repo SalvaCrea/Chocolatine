@@ -17,9 +17,15 @@ class Update extends \sp_framework\Pattern\Module\Component
   public function ApplyModel( $model_info ){
 
       $database   = \sp_framework\get_service( 'database' );
+<<<<<<< HEAD
       $model      = $model_info->make();
       $schema     = $model->get_model();
       $table_name = $model_info->name;
+=======
+      $model      = new $model_info['namespace']();
+      $schema     = $model->get_model();
+      $table_name = $model_info['name'];
+>>>>>>> master
 
       if ( !$database->verifyIfTablePresent( $table_name ) ) {
           $database->createTable( $table_name );

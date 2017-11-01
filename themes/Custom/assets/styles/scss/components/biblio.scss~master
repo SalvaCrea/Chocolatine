@@ -1,0 +1,46 @@
+.bibliotheque{
+  font-family: 'HelveticaNeueCondensed';
+
+
+
+
+
+  .littleTittle{
+    font-weight: bold;
+    font-size: 28px;
+  }
+  img{
+    margin-bottom: 15px;
+  }
+  a{
+    font-size: 26px;
+    text-decoration: underline;
+  }
+  b{
+    font-size: 22px;
+  }
+  h1{
+    font-family: 'HelveticaNeueCondensed';
+  }
+  .maintTitle{
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 55px;
+  }
+
+
+}
+
+#modal_biblio{
+  .modal-dialog{
+    @media #{$w5} {
+            max-width: 800px;
+    }
+    @media #{$w4} {
+            max-width: 800px;
+    }
+    @media #{$w3} {
+            max-width: 600px;
+    }
+  }
+}

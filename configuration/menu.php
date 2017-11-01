@@ -4,6 +4,7 @@ return [
   [
     'route'     => 'home',
     'text'      => 'Home',
+<<<<<<< HEAD
     'icon'      => 'fa fa-home',
     'order'     => '1'
   ],
@@ -50,6 +51,21 @@ return [
     'route'     => 'update_database',
     'text'      => 'Update Table Database',
     'icon'      => 'fa fa-battery-half',
+=======
+    'icon'      => 'fa fa-text',
+    'order'     => '1'
+  ],
+  [
+    'route'     => 'analytic',
+    'text'      => 'List Views',
+    'icon'      => 'fa fa-text',
+    'order'     => '1'
+  ],
+  [
+    'route'     => 'admin',
+    'text'      => 'Admin',
+    'icon'      => 'fa fa-text',
+>>>>>>> master
     'order'     => '1'
   ]
 ];

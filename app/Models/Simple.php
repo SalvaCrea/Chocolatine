@@ -4,6 +4,7 @@ namespace sp_framework\Models;
 
 class Simple extends \sp_framework\Pattern\Model{
     var $type = "simple";
+<<<<<<< HEAD
     public function true_save(){
 
         $database = \sp_framework\get_service( 'database' )->database;
@@ -43,4 +44,6 @@ class Simple extends \sp_framework\Pattern\Model{
          'id' . $operator => $id
         ] )[0];
     }
+=======
+>>>>>>> master
 }

@@ -14,6 +14,7 @@ class ManagerMaster extends Manager
    * List of manager
    * @var array
    */
+<<<<<<< HEAD
   var $listService = [
       ManagerConfiguration::class,
       ManagerAjax::class,
@@ -27,6 +28,20 @@ class ManagerMaster extends Manager
       ManagerComponent::class,
       ManagerMenu::class,
       ManagerBlock::class
+=======
+  var $container = [
+    ManagerConfiguration::class,
+    ManagerAjax::class,
+    ManagerAsset::class,
+    ManagerError::class,
+    ManagerForm::class,
+    ManagerModel::class,
+    ManagerModule::class,
+    ManagerService::class,
+    ManagerView::class,
+    ManagerComponent::class,
+    ManagerMenu::class
+>>>>>>> master
   ];
   /**
    * Load the all manager

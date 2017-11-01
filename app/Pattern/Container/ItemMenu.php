@@ -52,9 +52,12 @@ class ItemMenu extends \sp_framework\Pattern\Container{
        * @var string
        */
       public $url;
+<<<<<<< HEAD:app/Pattern/Container/ItemMenu.php
 
       public function __construct(){}
 
+=======
+>>>>>>> master:app/Pattern/TemplatorItemMenu.php
       /**
        * Arguments for create a Items Menu
        * @param  array  $args [description]
@@ -93,6 +96,10 @@ class ItemMenu extends \sp_framework\Pattern\Container{
             foreach ( $this->routes as $route => $current_route) {
                 if ( $route == $this->route ) {
                     $this->url = $current_route['route'];
+<<<<<<< HEAD:app/Pattern/Container/ItemMenu.php
+=======
+                    break;
+>>>>>>> master:app/Pattern/TemplatorItemMenu.php
                 }
             }
       }
