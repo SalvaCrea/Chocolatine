@@ -9,7 +9,7 @@ return $sp_config = array(
     'module_disabled' => [],
 
     // name of theme
-    'theme' => 'ClearBlueWeb',
+    'theme' => 'Custom',
 
     // name of theme admin theme
     'theme_admin' => 'Admin',
