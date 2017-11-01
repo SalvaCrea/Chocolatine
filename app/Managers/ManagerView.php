@@ -8,14 +8,11 @@ class ManagerView extends Manager
 {
   public $name = 'view';
   /**
-   * Add view
-   * @param array $args 
+   * [add_form add a view]
+   * @param [array] $args [description contain inviewation for add view]
    */
   function add_view( $args )
   {
-<<<<<<< HEAD
-      $this->add( $args );
-=======
       $this->container []=  $args;
   }
   /**
@@ -45,12 +42,11 @@ class ManagerView extends Manager
 
         /**
          *
-         *    Search View in the container
+         *    Search View in the container 
          *
          */
         foreach ( $this->container  as $key => $current_view) {
             if ( isset( $module ) ) {
-              
               if ( $current_view['module'] == $module && $current_view['name'] == $view ) {
                   return $current_view;
               }
@@ -63,7 +59,6 @@ class ManagerView extends Manager
         }
         return false;
 
->>>>>>> master
   }
 
 }

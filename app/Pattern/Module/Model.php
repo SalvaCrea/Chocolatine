@@ -1,10 +1,6 @@
 <?php
 namespace sp_framework\Pattern\Module;
 
-/**
- * Element Model
- */
-
 class Model extends Element
 {
     /**

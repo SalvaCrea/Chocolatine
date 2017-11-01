@@ -13,6 +13,6 @@ class GoogleApi extends \sp_framework\Pattern\Module\Module{
       ";
 
       public function __construct(){
-
+            require "vendor/autoload.php";
       }
 }

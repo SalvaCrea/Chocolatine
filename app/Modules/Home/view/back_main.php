@@ -2,7 +2,7 @@
 namespace sp_framework\Modules\Home\view;
 
 
-class back_main extends \sp_framework\Pattern\Module\View
+class back_main extends \sp_framework\Pattern\Module\view
 {
   public function main()
   {
@@ -10,14 +10,11 @@ class back_main extends \sp_framework\Pattern\Module\View
         //
         // $module->component->Connection->connection();
 
-<<<<<<< HEAD
-        \sp_framework\add_block( 'content', 'Bonjour vous êtes sur la page accueil');
-=======
-        \sp_framework\add_content( 'content', 'Bonjour vous êtes sur la page accueil');
->>>>>>> master
+        \sp_framework\add_content( 'content', 'test');
 
+        $this->renderTemplate();
   }
-  public function admin(){
+  public function admin( $requete,  $response, $args ){
         echo 'admin';
   }
 }

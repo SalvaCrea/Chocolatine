@@ -19,7 +19,7 @@ class ManagerConfiguration extends Manager
    * @param string $name name of key
    * @param mixed  $args contain of configuration
    */
-  public function add_configuration( $name , $args )
+  public function add_configuration( string $name , $args )
   {
       if ( empty( $this->container[$name] ) ) {
           $this->container[$name] = $args;
@@ -37,19 +37,6 @@ class ManagerConfiguration extends Manager
 
       $this->scan_folder_configuration( $this->get_path_folder_configuration() );
 
-      /**
-       *  Change Theme by uri
-       */
-      $request_uri =  $_SERVER["REQUEST_URI"];
-      $core = \sp_framework\get_core();
-      if (  0 === strpos( $request_uri, $this->get_configuration( 'main' )['admin_route'] ) ) {
-          $this->container['main']['theme'] = $this->get_configuration( 'main' )['theme_admin'];
-          $core->etat = "admin";
-      }
-      if ( 0 === strpos( $request_uri, $this->get_configuration( 'main' )['api_route'] ) ){
-          $this->container['main']['theme'] = $this->get_configuration( 'main' )['theme_api'];
-          $core->etat = "api";
-      }
       /**
        * Scan The Folder theme
        */

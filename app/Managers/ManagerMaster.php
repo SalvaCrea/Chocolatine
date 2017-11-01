@@ -14,21 +14,6 @@ class ManagerMaster extends Manager
    * List of manager
    * @var array
    */
-<<<<<<< HEAD
-  var $listService = [
-      ManagerConfiguration::class,
-      ManagerAjax::class,
-      ManagerAsset::class,
-      ManagerError::class,
-      ManagerForm::class,
-      ManagerModel::class,
-      ManagerModule::class,
-      ManagerService::class,
-      ManagerView::class,
-      ManagerComponent::class,
-      ManagerMenu::class,
-      ManagerBlock::class
-=======
   var $container = [
     ManagerConfiguration::class,
     ManagerAjax::class,
@@ -39,15 +24,13 @@ class ManagerMaster extends Manager
     ManagerModule::class,
     ManagerService::class,
     ManagerView::class,
-    ManagerComponent::class,
-    ManagerMenu::class
->>>>>>> master
+    ManagerComponent::class
   ];
   /**
    * Load the all manager
    */
   public function loadManager(){
-      foreach ( $this->listService as $manager ) {
+      foreach ( $this->container as $manager ) {
           $current_manager = new $manager();
           $this->{$current_manager->name} = $current_manager;
       }

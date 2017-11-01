@@ -13,9 +13,3 @@ theme/_default_wp
 /modules
 
 .ftpconfig
-
-<<<<<<< HEAD
-/themes/ClearBlue
-=======
-/themes/Custom/configuration/google_keys.php
->>>>>>> master

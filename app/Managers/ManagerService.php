@@ -42,7 +42,7 @@ class ManagerService extends Manager
        * @param  string $name_service The name of service
        * @return mixed              the service if find or return false
        */
-      public function get_service( $name_service ){
+      public function get_service( string $name_service ){
           $key = \sp_framework\array_find( $this->container, 'name', $name_service );
           return $this->container[$key];
       }

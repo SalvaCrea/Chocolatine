@@ -13,7 +13,7 @@ class ManagerError extends Manager
    */
   function add_error( $args )
   {
-      $this->add( $args );
+      $this->container[] =  $args;
   }
 
 }

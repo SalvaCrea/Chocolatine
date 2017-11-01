@@ -4,11 +4,7 @@
     "Cardona Salvador contact@salva-crea.fr"
   ],
   "directory": "/assets/bower_components/",
-<<<<<<< HEAD
   "description": "Little Framework by Salvador Cardona",
-=======
-  "description": "The Framework for the cms wordpress",
->>>>>>> master
   "main": "index.html",
   "license": "MIT",
   "homepage": "",

@@ -1,6 +1,0 @@
-#devBar{
-    .dropdown-menu {
-      top: unset;
-      bottom: 100%;
-    }
-}

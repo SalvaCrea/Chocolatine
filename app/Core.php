@@ -27,12 +27,6 @@ class Core
 			 */
 			var $url_folder;
 			/**
-			* The etat of core, he can have three etat
-			* front | api | admin
-			* @var string
-			 */
-			var $etat = 'front';
-			/**
 			* The default is false, if i true than is dev mode
 			* @var boolean
 			 */
@@ -80,11 +74,16 @@ class Core
 
 				$router = get_service('Router');
 				/**
-				 *  Declare and Apllic all routes http
+				 *  Declare all routes http
 				 */
 				$router->declare_routes();
 
-				$router->use_routes();
+				$render = \sp_framework\get_module( 'Templator' );
+				/**
+				 * generate the template
+				 */
+
+				$render->renderer();
 
 			}
 
