@@ -8,11 +8,11 @@ class ManagerModel extends Manager
 {
   public $name = 'model';
   /**
-   * [add_form add a model]
-   * @param [array] $args [description contain inmodelation for add model]
+   * Add a form
+   * @param array $args
    */
   function add_model( $args )
   {
-      $this->container []=  $args;
+      $this->add( $args );
   }
 }

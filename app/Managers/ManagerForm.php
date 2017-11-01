@@ -13,6 +13,6 @@ class ManagerForm extends Manager
    */
   function add_form( $args )
   {
-      $this->container []=  $args;
+      $this->add( $args );
   }
 }

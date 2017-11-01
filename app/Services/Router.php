@@ -52,26 +52,21 @@ class Router extends \sp_framework\Pattern\Service{
   }
   // use for declarate all routes
   public function declare_routes(){
+
         $this->routes = \sp_framework\get_configuration( 'routes' );
         $view_manager = \sp_framework\get_manager('view');
 
+        /**
+         *  Declare all route
+         */
         foreach ( $this->routes as $key => $current_route) {
 
-          if ( false !== $view = $view_manager->get_view( $current_route['view'] ) ) {
-              if ( isset (  $current_route['method'] ) ) {
-                $method = $current_route['method'];
-              }else{
-                $method = 'main';
-              }
+            $this->router->map(['GET', 'POST'],  $current_route['route'] ,function ($request, $response, $args) {
 
-              $this->router->map(['GET', 'POST'],  $current_route['route'] ,function ($request, $response, $args) {
+                $router = \sp_framework\get_service( 'Router' );
+                return $router->controller( $request, $response, $args );
 
-                  $router = \sp_framework\get_service( 'Router' );
-                  return $router->controller( $request, $response, $args );
-
-              });
-
-          }
+            });
 
         }
 
@@ -79,12 +74,20 @@ class Router extends \sp_framework\Pattern\Service{
   public function use_routes(){
         $this->router->run();
   }
+  /**
+   * Call the view linked with the root
+   * @param  object $request  Psr7 Http Request
+   * @param  object $response Psr7 Http Response
+   * @param  array  $arg      $argument post or get or ....
+   * @return object           Psr7 Http Response
+   */
   public function controller( $request, $response, $arg = [] ){
 
         $route = $request->getAttribute('route');
         $this->current_pattern = $route->getPattern();
 
-        array_find( $current_pattern, 'route', $this->current_pattern );
+        $this->find_current_route();
+
         $uri = $request->getUri();
         $path = $uri->getPath();
 
@@ -92,6 +95,40 @@ class Router extends \sp_framework\Pattern\Service{
         $this->response = $response;
         $this->arg = $arg;
 
-        return $response->getBody()->write("Hello, qsdqsdqsd");
+        $this->use_view();
+        /**
+         * Execute the motor of template
+         */
+        \sp_framework\get_service( 'templator' )->renderer();
+  }
+  public function use_view()
+  {
+    $view_manager = \sp_framework\get_manager('view');
+
+    if ( false !== $view = $view_manager->find( $this->current_route['view'] ) ) {
+
+        $view = $view->make();
+
+        if ( isset (  $this->current_route['method'] ) ) {
+          $method = $this->current_route['method'];
+        }else{
+          $method = 'main';
+        }
+
+        $view->{$method}();
+    }
+  }
+  /**
+   * Return and Find the current root
+   * @return array the current_route
+   */
+  public function find_current_route()
+  {
+
+        if ( false !== $key = \sp_framework\array_find( $this->routes, 'route', $this->current_pattern ) ) {
+          $this->current_route = $this->routes[ $key ];
+        }
+
+        return $this->current_route;
   }
 }

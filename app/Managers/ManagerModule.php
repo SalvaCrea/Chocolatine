@@ -19,44 +19,57 @@ class ManagerModule extends Manager
 			 */
 			public function search_modules()
 			{
-						$sp_core = sp_framework\get_core();
 
 						/**
 						 * [$list_folder create a list of potentiel module ]
 						 * @var [array]
 						 */
-						$list_folder = $this->create_list_folder( $sp_core->path_folder.'/app/Modules' );
+						$paths_folder = [
+							sp_framework\get_core()->path_folder.'/app/Modules'
+						];
 
-						$module_factory = new sp_framework\ModuleFactory();
+						$path_module_theme = sp_framework\get_path_theme() . '/Modules';
 
-						foreach ( $list_folder as $key => $folder_root ) {
-
-									$file = $folder_root['root'] . '/' . $folder_root['name'] .'.php';
-
-									$current_module_namespace = "\\sp_framework\\Modules\\{$folder_root['name']}";
-
-									$current_module = $module_factory->build_module( $folder_root['name'], $folder_root['root'], $current_module_namespace );
-
-									/**
-									 * Load the view of the module
-									 */
-									$current_module->after_factory();
-
-									$args = [
-										"name" => $folder_root['name'],
-										"module" => $folder_root['name'],
-										"namespace" => $current_module_namespace,
-										"instance" => $current_module
-									];
-
-									array_push( $this->container, $args );
-
+						if ( is_dir( $path_module_theme ) ) {
+							$paths_folder []= $path_module_theme;
 						}
+						foreach ( $paths_folder as $value) {
+								$this->search_module_in_folder( $value );
+						}
+			}
+			/**
+			 * Search module by the path
+			 * @param  string $path_folder the path folder
+			 */
+			public function search_module_in_folder( $path_folder_modules ){
 
-						/**
-						 * [Action then all module charged]
-						 */
-						// do_action( 'modules_loaded' );
+				$list_folder = $this->create_list_folder( $path_folder_modules );
+
+				$module_factory = new sp_framework\ModuleFactory();
+
+				foreach ( $list_folder as $key => $folder_root ) {
+
+							$file = $folder_root['root'] . '/' . $folder_root['name'] .'.php';
+
+							$current_module_namespace = "\\sp_framework\\Modules\\{$folder_root['name']}";
+
+							$current_module = $module_factory->build_module( $folder_root['name'], $folder_root['root'], $current_module_namespace );
+
+							/**
+							 * Load the view of the module
+							 */
+							$current_module->after_factory();
+
+							$args = [
+								"name" => $folder_root['name'],
+								"module" => $folder_root['name'],
+								"namespace" => $current_module_namespace,
+								"instance" => $current_module
+							];
+
+							array_push( $this->container, $args );
+
+				}
 
 			}
 			/**

@@ -23,7 +23,7 @@ class ManagerAsset extends Manager
    * @param string $src  source of asset
    * @param string $position  Position in header | footer
    */
-  public function add_assets( string $type, string $name, string $src, string $position = '' )
+  public function add_assets( $type, $name, $src, $position = '' )
   {
       $this->container[$type] []=  array(
         "name" => $name,
@@ -36,7 +36,7 @@ class ManagerAsset extends Manager
    * @param string $name name of assets
    * @param string $src  source of assets
    */
-  function add_css( string $name, string $src ){
+  function add_css( $name, $src ){
         $this->add_asset( 'style', $name, $src );
   }
   /**
@@ -45,7 +45,7 @@ class ManagerAsset extends Manager
    * @param string $src  source of assets
    * @param string $position  Position in header | footer
    */
-  function add_js( string $name, string $src, string $position = 'footer'){
+  function add_js( $name, $src, $position = 'footer'){
         $this->add_asset( 'script', $name, $src, $position );
   }
   /**
@@ -54,7 +54,7 @@ class ManagerAsset extends Manager
    * @param string $name name of assets
    * @param string $src  source of assets
    */
-  function delete_asset( string $type, string $name ){
+  function delete_asset( $type, $name ){
       foreach ( $this->container[$type]  as $key => $value) {
         if ( $value['name'] == $name ) {
             unset( $this->container[$type][$key] );

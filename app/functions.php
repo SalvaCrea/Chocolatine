@@ -36,6 +36,21 @@ function get_folder(){
     return $core->path_folder;
 }
 /**
+ * Return the model by module
+ *
+ * Can be name_model or module@name_model
+ * @param  string the name of module find
+ * @return mixed return false or container Model
+ */
+function get_model( $name_model, $maked = false )
+{
+    if ( !$maked ) {
+        return  get_manager( 'model' )->find( $name_model );
+    }else{
+        return  get_manager( 'model' )->find( $name_model )->make();
+    }
+}
+/**
  * Return the module by slug of not if module not find
  * @param  string the name of module find
  * @return mixed return false or obkect of class
@@ -60,7 +75,9 @@ function get_configuration( $name_configuration )
  */
 function get_service( $name_service )
 {
-    return get_core()->manager->service->get_service( $name_service );
+    $service = get_core()->manager->service->get_service( $name_service );
+    $service->getter();
+    return $service;
 }
 /**
  * Return a specific manager
@@ -172,18 +189,68 @@ function clean_string( $string )
 
     return $key;
  }
+ /**
+  * Function use for find sereval object
+  * @param  mixed  $array          Array or Object for search
+  * @param  string $key_research   the key of research
+  * @param  mixed $value_research the value of research
+  * @param  string $operator       can it = | != | > | <
+  * @return mixed  false | or array
+  */
+ function array_clean( $array, $key_research, $value_research, $operator = '=' ){
+
+    $array_clean = [];
+
+    foreach ( $array as $key => $value) {
+
+      $current_value = (array) $value;
+
+      if ( $current_value[ $key_research ] ==  $value_research ) {
+        $array_clean []= $value;
+      }
+    }
+    if ( !empty( $array_clean ) ) {
+      return $array_clean;
+    }
+    return false;
+ }
 
  /**
   * Return true if the use admin of sp framework
-  * @return Boolean
+  * @return boolean
   */
  function is_admin()
  {
-
+     if ( 'admin' == get_core()->etat ) {
+         return true;
+     }
+     return false;
+ }
+ /**
+  * Return true if the use api of sp framework
+  * @return boolean
+  */
+ function is_api()
+ {
+     if ( 'api' == get_core()->etat ) {
+         return true;
+     }
+     return false;
+ }
+ /**
+  * Return true if the use front of sp framework
+  * @return boolean
+  */
+ function is_front()
+ {
+     if ( 'front' == get_core()->etat ) {
+         return true;
+     }
+     return false;
  }
 /**
  *  The function check is the dev
- * @return Boolean True if the dev site
+ * @return boolean True if the dev site
  */
 function is_dev()
 {
@@ -231,7 +298,7 @@ function redirection_js( $url )
  * @param  boolean $clean       True for clean list
  * @return array list folder
  */
-function scanfolder( string $path_folder, $clean = true )
+function scanfolder( $path_folder, $clean = true )
 {
     $list = scandir( $path_folder );
     if ( $clean ) {
@@ -262,14 +329,14 @@ function sp_get_current_name_folder( $file )
  * @param  string  $type
  * @param  integer $order
  */
-function add_content( string $block_name, $content, $type = '', int $order = 0)
+function add_block(  $block_name, $content, $type = '',  $order = 0)
 {
 
-      $TemplatorContent = new Pattern\TemplatorContent();
-      $TemplatorContent->create( $block_name, $content, $type , $order );
+      $block = new Pattern\Container\Block();
+      $block->create( $block_name, $content, $type , $order );
 
-      $templator = \sp_framework\get_service( 'templator' );
-      $templator->add_content( $TemplatorContent );
+      $manager = \sp_framework\get_manager( 'block' );
+      $manager->add_block( $block );
 
 }
 /**
@@ -288,10 +355,10 @@ function add_content( string $block_name, $content, $type = '', int $order = 0)
 
 function add_item_menu( array $args ){
 
-      $TemplatorContent = new Pattern\TemplatorItemMenu();
-      $TemplatorContent->create( $args );
+      $itemMenu = new Pattern\Container\ItemMenu();
+      $itemMenu->create( $args );
 
-      $templator = \sp_framework\get_service( 'templator' );
-      $templator->add_item_menu( $TemplatorContent );
+      $mananger = \sp_framework\get_manager( 'menu' );
+      $mananger->add_item_menu( $itemMenu );
 
 }

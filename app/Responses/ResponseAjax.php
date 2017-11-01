@@ -16,7 +16,7 @@ class ResponseAjax{
      * Construct the resquest by post
      * @param array $post post by ajax
      */
-    public function __construct( array $post ){
+    public function __construct( $post ){
         $this->resquest = $post;
     }
 }
