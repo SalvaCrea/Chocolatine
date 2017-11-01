@@ -3,8 +3,8 @@ namespace sp_framework;
 
 use \sp_framework\Core;
 /**
- * [sp_core return the core of sp framework]
- * @return [type] [description]
+ * Return the core
+ * @return object the core
  */
 function get_core()
 {
@@ -22,7 +22,7 @@ function get_theme(){
 }
 /**
  * Return the folder of current theme
- * @return [type] [description]
+ * @return string path current theme
  */
 function get_path_theme(){
     return get_folder() . '/themes/' . get_theme();
@@ -135,32 +135,6 @@ function clean_string( $string )
 
    return strtolower(preg_replace('/[^A-Za-z0-9\-\_]/', '', $string)); // Removes special chars.
 }
-
-/**
- * FUnction for utile pagination
- * @param [type] $data      [description]
- * @param [type] $limit     [description]
- * @param [type] $current   [description]
- * @param [type] $adjacents [description]
- */
-
- function pagination($data, $limit = null, $current = null, $adjacents = null)
- {
-     $result = array();
-
-     if (isset($data, $limit) === true) {
-         $result = range(1, ceil($data / $limit));
-
-         if (isset($current, $adjacents) === true) {
-             if (($adjacents = floor($adjacents / 2) * 2 + 1) >= 1) {
-                 $result = array_slice($result, max(0, min(count($result) - $adjacents, intval($current) - ceil($adjacents / 2))), $adjacents);
-             }
-         }
-     }
-
-     return $result;
- }
-
 /**
     * This function find in array a key if exist
  * @param  mixed  $array          Array or Object for search
@@ -307,7 +281,7 @@ function scanfolder( $path_folder, $clean = true )
     return $list;
 }
 /**
- * [sp_get_current_name_folder description]
+ * Return the name of folder of file
  * @param  [type] $file [description]
  * @return [type]       [description]
  */

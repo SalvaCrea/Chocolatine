@@ -49,11 +49,8 @@ class Templator extends \sp_framework\Pattern\Service{
             $render = '';
             $renderer = \sp_framework\get_service( 'renderer' );
 
-            $asset_manager = \sp_framework\get_manager( 'asset' );
-
             $render = $renderer->renderer( 'main.html.twig',
               array(
-                'assets'  => $asset_manager->container,
                 'content' => $this->content,
                 'Templator' => $this
               )
@@ -61,7 +58,31 @@ class Templator extends \sp_framework\Pattern\Service{
 
             echo $render;
       }
+      public function make_header(){
 
+          $asset_manager = \sp_framework\get_manager( 'asset' );
+
+          foreach ( $asset_manager->get_css() as $value) {
+              echo "<link rel=\"stylesheet\" href=\"{$value->src}\">";
+          }
+          foreach ( $asset_manager->get_js_header() as $value) {
+              echo "<script src=\"{$value->src}\"></script>";
+          }
+      }
+      public function make_footer(){
+
+          $asset_manager = \sp_framework\get_manager( 'asset' );
+          $data = json_encode( $asset_manager->get_data() );
+          echo "
+          <script>
+          sp_framework = {$data}
+          </script>";
+
+          foreach ( $asset_manager->get_js_footer() as $value) {
+              echo "<script src=\"{$value->src}\"></script>";
+          }
+
+      }
       /**
        * Create the block in the dom
        * @param  string $blockName [description]
@@ -86,7 +107,7 @@ class Templator extends \sp_framework\Pattern\Service{
             $router = \sp_framework\get_service( 'Router' );
 
             if ( !empty( $manager->container ) ) {
-                  
+
                   $menu = \sp_framework\array_clean( $manager->container, 'menu_name', $menuName );
 
                   if ( empty( $menu )) {
