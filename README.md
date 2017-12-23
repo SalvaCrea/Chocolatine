@@ -1,1 +1,1 @@
-Little Framework 
+Php Framework based on Slim Framework.
