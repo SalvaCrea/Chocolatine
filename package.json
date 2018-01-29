@@ -1,5 +1,5 @@
 {
-  "name": "sp-framework-wordpress",
+  "name": "Chocolatine",
   "version": "1.0.0",
   "description": "The little framework for wordpress",
   "scripts": {
@@ -14,18 +14,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/salva91/sp-framework-wordpress.git"
+    "url": "git+https://github.com/SalvaCrea/Chocolatine.git"
   },
   "keywords": [
-    "Wordpress",
-    "Framework"
+    "Framework",
+    "php"
   ],
   "author": "Salvador Cardona",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/salva91/sp-framework-wordpress/issues"
+    "url": "https://github.com/SalvaCrea/Chocolatine/issues"
   },
-  "homepage": "https://github.com/salva91/sp-framework-wordpress#readme",
+  "homepage": "https://github.com/SalvaCrea/Chocolatine#readme",
   "dependencies": {
     "gulp-connect-php": "^1.0.1"
   }
