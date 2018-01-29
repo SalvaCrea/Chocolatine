@@ -17,7 +17,7 @@ require "auto_load.php";
 
 // create empty object
 
-sp_framework\Core::create_core();
+Chocolatine\Core::create_core();
 
-$a = sp_framework\get_core();
-sp_framework\dump($a);
+$a = Chocolatine\get_core();
+Chocolatine\dump($a);

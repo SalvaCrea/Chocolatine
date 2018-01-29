@@ -10,7 +10,7 @@
         "consolidation/robo": "^1.0.0"
     },
     "autoload": {
-        "psr-4": {"sp_framework\\": "app/"}
+        "psr-4": {"Chocolatine\\": "app/"}
     },
     "scripts": {
         "test": "composer robo test",
