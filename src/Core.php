@@ -53,7 +53,6 @@ class Core
 			 */
 			public static function create_core(){
 					self::$sp_core = new Core();
-
 					return self::$sp_core->init();
 			}
 			public static function get_core(){

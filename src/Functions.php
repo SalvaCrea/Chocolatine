@@ -1,5 +1,5 @@
 <?php
-namespace Chocolatine;
+namespace Chocolatine\Functions;
 
 use \Chocolatine\Core;
 /**
