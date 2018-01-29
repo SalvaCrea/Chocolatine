@@ -1,16 +1,15 @@
 {
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.0",
         "catfan/Medoo": "^1.1",
         "twig/twig": "~1.0",
-        "slim/slim": "3.0",
-        "google/apiclient": "^2.0"
+        "slim/slim": "3.0"
     },
     "require-dev": {
         "consolidation/robo": "^1.0.0"
     },
     "autoload": {
-        "psr-4": {"Chocolatine\\": "app/"}
+        "psr-4": {"Chocolatine\\": "src/"}
     },
     "scripts": {
         "test": "composer robo test",
