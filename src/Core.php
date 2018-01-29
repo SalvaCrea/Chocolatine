@@ -45,6 +45,7 @@ class Core
 
 			public function __construct()
 			{
+					require_once(dirname(__FILE__).'/vendor/autoload.php');
 					$this->path_folder = dirname( dirname(__FILE__) );
 			}
 			/**
