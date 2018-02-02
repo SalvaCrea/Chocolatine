@@ -1,12 +1,17 @@
 <?php
-namespace Chocolatine;
 
 use \Chocolatine\Core;
+
+namespace Chocolatine;
+
+class Helper{
+
+
 /**
  * Return the core
  * @return object the core
  */
-function get_core()
+static function get_core()
 {
     return Core::getCore();
 }
@@ -31,8 +36,8 @@ function get_path_theme(){
  * Return folder of Sp Framework
  * @return string return the path folder
  */
-function get_folder(){
-    $core = get_core();
+static function get_folder(){
+    $core = self::get_core();
     return $core->pathFolder;
 }
 /**
@@ -329,4 +334,6 @@ function add_item_menu( array $args ){
 
     $mananger = \Chocolatine\get_manager( 'menu' );
     $mananger->add_item_menu( $itemMenu );
+}
+
 }

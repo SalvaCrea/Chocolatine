@@ -17,10 +17,15 @@ class Core
 			 */
 			public $application;
 			/**
+			 * Path of Application
+			 * @var string
+			 */
+			public $pathApplication;
+			/**
 			 *  this is the root folder
 			 * @var string
 			 */
-			var $path_folder;
+			var $pathFolder;
 			/**
 			 * this a web url
 			 * @var string
@@ -43,20 +48,26 @@ class Core
 			 */
 			var $manager;
 
-			public function __construct( $pathApplication )
+			public function __construct()
 			{
-					$this->path_folder = dirname( dirname(__FILE__) );
+					$this->pathFolder = dirname( dirname(__FILE__) );
+					$this->setPathApplication( $this->getPathApplication() );
+			}
+			public function setPathApplication($pathApplication){
 					$this->pathApplication = $pathApplication;
+			}
+			public function getPathApplication():string{
+					return (string) $this->pathApplication;
 			}
 			/**
 			 * Function create the core
 			 * @return object Create the core
 			 */
-			public static function create_core(){
+			public static function createCore(){
 					self::$sp_core = new Core();
 					return self::$sp_core->init();
 			}
-			public static function get_core(){
+			public static function getCore(){
 					return self::$sp_core;
 			}
 			/**
