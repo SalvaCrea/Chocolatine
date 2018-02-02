@@ -1,4 +1,7 @@
 <?php
+
+use Chocolatine\Functions;
+
 namespace Chocolatine\Modules\ModelTool\component;
 
 class Update extends \Chocolatine\Pattern\Module\Component
@@ -8,7 +11,7 @@ class Update extends \Chocolatine\Pattern\Module\Component
   }
   public function updateDatabse(){
 
-      $modelManager = \Chocolatine\get_manager( 'model' );
+      $modelManager = get_manager( 'model' );
 
       foreach ( $modelManager->container  as $key => $model_info ) {
             $this->ApplyModel( $model_info );

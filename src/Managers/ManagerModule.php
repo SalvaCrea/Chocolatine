@@ -24,13 +24,13 @@ class ManagerModule extends Manager
 						 * @var [array]
 						 */
 						$paths_folder = [
-							Chocolatine\get_core()->path_folder.'/app/Modules'
+								Chocolatine\get_core()->path_folder.'/app/Modules'
 						];
 
 						$path_module_theme = Chocolatine\get_path_theme() . '/Modules';
 
 						if ( is_dir( $path_module_theme ) ) {
-							$paths_folder []= $path_module_theme;
+								$paths_folder []= $path_module_theme;
 						}
 						foreach ( $paths_folder as $value) {
 								$this->search_module_in_folder( $value );
@@ -89,8 +89,8 @@ class ManagerModule extends Manager
 					foreach ( $array_root as $key => $value) {
 
 						$array_root[$key] = array(
-							'root' => $root_dir . '/' . $value,
-							'name' => $value
+								'root' => $root_dir . '/' . $value,
+								'name' => $value
 						);
 
 					}

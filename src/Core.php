@@ -12,10 +12,10 @@ class Core
 			 */
 			public static $sp_core;
 			/**
-			 *  Name of the theme
+			 *  Name of the application
 			 * @var string
 			 */
-			public $theme;
+			public $application;
 			/**
 			 *  this is the root folder
 			 * @var string
@@ -43,10 +43,10 @@ class Core
 			 */
 			var $manager;
 
-			public function __construct()
+			public function __construct( $pathApplication )
 			{
-					require_once(dirname(__FILE__).'/vendor/autoload.php');
 					$this->path_folder = dirname( dirname(__FILE__) );
+					$this->pathApplication = $pathApplication;
 			}
 			/**
 			 * Function create the core
