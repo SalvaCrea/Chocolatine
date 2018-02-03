@@ -15,6 +15,6 @@
     },
     "autoload": {
         "psr-4": {"Chocolatine\\": "src/"},
-        "files": ["src/functions.php"]
+        "files": ["src/Lib/functions.php"]
     }
 }

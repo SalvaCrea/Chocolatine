@@ -22,9 +22,9 @@ class Asset extends \Chocolatine\Pattern\Container{
       public function __construct(){}
       public function create( $type, $name, $src, $position =  'header', $args = [] ){
 
-            $this->type    = $type;
-            $this->name    = $name;
-            $this->src     = $src;
+            $this->type     = $type;
+            $this->name     = $name;
+            $this->src      = $src;
             $this->position = $position;
 
             if ( !empty( $args ) ) {

@@ -13,7 +13,7 @@ return [
     Chocolatine\Pattern\Manager\ManagerModel::class,
     Chocolatine\Pattern\Manager\ManagerModule::class,
     Chocolatine\Pattern\Manager\ManagerService::class,
-    Chocolatine\Pattern\Manager\ManagerView::class,
+    Chocolatine\Pattern\Manager\ManagerController::class,
     Chocolatine\Pattern\Manager\ManagerComponent::class,
     Chocolatine\Pattern\Manager\ManagerMenu::class,
     Chocolatine\Pattern\Manager\ManagerBlock::class

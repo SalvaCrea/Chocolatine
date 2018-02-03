@@ -1,14 +1,13 @@
 <?php
-namespace Chocolatine;
+namespace Chocolatine\Lib;
 
-use \Chocolatine\Core;
 /**
  * Return the core
  * @return object the core
  */
 function get_core()
 {
-    return Core::getCore();
+    return Core::get_core();
 }
 /**
  * Return the path folder theme
@@ -33,7 +32,7 @@ function get_path_theme(){
  */
 function get_folder(){
     $core = get_core();
-    return $core->pathFolder;
+    return $core->path_folder;
 }
 /**
  * Return the model by module
@@ -266,15 +265,15 @@ function redirection_js( $url )
 }
 /**
  *  Scan the content folder
- * @param  string  $pathFolder THe path of folder
+ * @param  string  $path_folder THe path of folder
  * @param  boolean $clean       True for clean list
  * @return array list folder
  */
-function scanfolder( $pathFolder, $clean = true )
+function scanfolder( $path_folder, $clean = true )
 {
-    $list = scandir( $pathFolder );
+    $list = scandir( $path_folder );
     if ( $clean ) {
-      return array_diff( scandir( $pathFolder ), array('..', '.') );
+      return array_diff( scandir( $path_folder ), array('..', '.') );
     }
     return $list;
 }

@@ -4,12 +4,12 @@ namespace Chocolatine\Managers;
 
 use Chocolatine\Pattern\Manager;
 
-class ManagerView extends Manager
+class ManagerController extends Manager
 {
   public $name = 'view';
   /**
    * Add view
-   * @param array $args 
+   * @param array $args
    */
   function add_view( $args )
   {

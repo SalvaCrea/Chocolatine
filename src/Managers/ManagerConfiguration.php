@@ -3,12 +3,11 @@
 namespace Chocolatine\Managers;
 
 use Chocolatine\Pattern\Manager;
+use Chocolatine\Helper;
 
 class ManagerConfiguration extends Manager
 {
     public $name = 'configuration';
-
-    public $environement = "custom";
 
     public function __construct()
     {
@@ -19,7 +18,7 @@ class ManagerConfiguration extends Manager
      * @param string $name name of key
      * @param mixed  $args contain of configuration
      */
-    public function add_configuration( $name , $args )
+    public function add_configuration( $name, $args )
     {
         if ( empty( $this->container[$name] ) ) {
             $this->container[$name] = $args;
@@ -28,48 +27,46 @@ class ManagerConfiguration extends Manager
         }
     }
     /**
-     * Get all  file in folder configuration and stock the values
-     * @return [type] [description]
+     * Get all  files in folder configuration and stock the values
      */
     public function get_configurations()
     {
-
+        // Scan Self Folder Configuration
         $this->scan_folder_configuration( $this->getPathFolderConfiguration() );
-echo 'test';
-        /**
-         *  Change Theme by uri
-         */
-        $request_uri =  $_SERVER["REQUEST_URI"];
-        $core = \Chocolatine\get_core();
-        if (  0 === strpos( $request_uri, $this->get_configuration( 'main' )['admin_route'] ) ) {
-            $this->container['main']['theme'] = $this->get_configuration( 'main' )['theme_admin'];
-            $core->etat = "admin";
-        }
-        if ( 0 === strpos( $request_uri, $this->get_configuration( 'main' )['api_route'] ) ){
-            $this->container['main']['theme'] = $this->get_configuration( 'main' )['theme_api'];
-            $core->etat = "api";
-        }
         /**
          * Scan The Folder theme
          */
-        $path_theme =  \Chocolatine\get_folder() . "/themes/" . $this->get_configuration( 'main' )['theme'] . "/configuration";
+        $pathConfigFolder =  Helper::get_core()->getPathApplication() . "/Config";
 
-        if ( is_dir( $path_theme ) ) {
-          $this->scan_folder_configuration( $path_theme  );
+        if ( is_dir( $pathConfigFolder ) ) {
+            $this->scan_folder_configuration( $pathConfigFolder  );
         }
 
     }
-    public function scan_folder_configuration( $path_folder ){
+    /**
+     * Scan a folder for get files of configurations
+     * @param  string $pathFolder Path of Folder Configuration
+     */
+    public function scan_folder_configuration( $pathFolder ){
 
-        $list_files = \Chocolatine\scanfolder( $path_folder );
+        $listFile = Helper::scanfolder( $pathFolder );
 
-        foreach ( $list_files as $file) {
+        foreach ( $listFile as $nameFile ) {
+
+            $pathFile = $pathFolder .'/'. $nameFile;
+            $pathInfo = pathinfo( $pathFile );
+
+            // Look is file is json or file php
+            if ( $pathInfo['extension'] == 'json' ) {
+                $data = \json_decode( \file_get_contents( $pathFile ), 1 );
+            } else {
+                $data = require $pathFile;
+            }
 
             $this->add_configuration(
-                basename( $file, '.php'),
-                require $path_folder .'/'. $file
+                $pathInfo['filename'],
+                $data
             );
-
         }
 
     }
@@ -93,6 +90,6 @@ echo 'test';
      */
     public function getPathFolderConfiguration()
     {
-        return \Chocolatine\get_folder() .  "/config";
+        return Helper::get_folder() .  "/src/Config";
     }
 }

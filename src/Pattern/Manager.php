@@ -26,7 +26,7 @@ class Manager{
         $module    = $arguments[3];
         $namespace = $namespace;
 
-        $container = new \Chocolatine\Pattern\Container( $name, $namespace ,$module );
+        $container = new \Chocolatine\Pattern\Container( $name, $namespace, $module );
 
         array_push( $this->container, $container );
   }
@@ -39,17 +39,14 @@ class Manager{
    */
   public function find( $element_name ){
       $element_name = explode( "@", $element_name);
-
       /**
        *
        *    Check if module isset
        *
        */
       if ( !empty( $element_name[1] ) ) {
-
           $module = $element_name[0];
           $element_name = $element_name[1];
-
       }else{
           $element_name = $element_name[0];
       }
@@ -69,9 +66,7 @@ class Manager{
                   return $current_element;
               }
           }
-
       }
       return false;
-
   }
 }

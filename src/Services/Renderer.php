@@ -2,6 +2,8 @@
 
 namespace Chocolatine\Services;
 
+use Chocolatine\Helper;
+
 class Renderer extends \Chocolatine\Pattern\Service{
     public $name = 'renderer';
     /**
@@ -18,24 +20,24 @@ class Renderer extends \Chocolatine\Pattern\Service{
      * @return object return the instance of twig
      */
     public function init(){
-      $configTwig = array();
+        $configTwig = array();
 
-      if ( \Chocolatine\is_dev() ) {
-        $configTwig += array(
-            'cache' => CACHE,
-        );
-      }
-      else{
-        $configTwig += array(
-            'cache' => false,
-        );
-      }
+        if ( Helper::is_dev() ) {
+          $configTwig += array(
+              'cache' => CACHE,
+          );
+        }
+        else{
+          $configTwig += array(
+              'cache' => false,
+          );
+        }
 
-      $loader = new \Twig_Loader_Filesystem( \Chocolatine\get_path_theme() . '/templates' );
+        $loader = new \Twig_Loader_Filesystem( Helper::get_path_app() . '/templates' );
 
-      $this->twig_fast = new \Twig_Environment(new \Twig_Loader_String);
+        $this->twig_fast = new \Twig_Environment(new \Twig_Loader_String);
 
-      return self::$twig = new \Twig_Environment( $loader, $configTwig );
+        return self::$twig = new \Twig_Environment( $loader, $configTwig );
     }
     /**
      * Use twig for make a render

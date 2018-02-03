@@ -1,25 +1,27 @@
 <?php
+/**
+ * Satic Class used for helping
+ */
+namespace Chocolatine;
 
 use \Chocolatine\Core;
 
-namespace Chocolatine;
-
 class Helper{
 
-
+static public $core;
 /**
  * Return the core
  * @return object the core
  */
 static function get_core()
 {
-    return Core::getCore();
+    return self::$core;
 }
 /**
  * Return the path folder theme
  * @return string return the path folder of the theme
  */
-function get_theme(){
+static function get_theme(){
     if ( empty( $theme = get_configuration( 'main' )['theme'] ) ) {
         $theme = '_default_wp';
     }
@@ -29,8 +31,8 @@ function get_theme(){
  * Return the folder of current theme
  * @return string path current theme
  */
-function get_path_theme(){
-    return get_folder() . '/themes/' . get_theme();
+static function get_path_app(){
+    return self::get_core()->getPathApplication();
 }
 /**
  * Return folder of Sp Framework
@@ -47,7 +49,7 @@ static function get_folder(){
  * @param  string the name of module find
  * @return mixed return false or container Model
  */
-function get_model( $name_model, $maked = false )
+static function get_model( $name_model, $maked = false )
 {
     if ( !$maked ) {
         return  get_manager( 'model' )->find( $name_model );
@@ -60,27 +62,27 @@ function get_model( $name_model, $maked = false )
  * @param  string the name of module find
  * @return mixed return false or obkect of class
  */
-function get_module( $name_module )
+static function get_module( $name_module )
 {
-    return get_core()->manager->module->get_module( $name_module );
+    return self::get_core()->manager->module->get_module( $name_module );
 }
 /**
  * Return the configuration of ServiceManager
  * @param  $string name of configuration
  * @return mixed  return data mixed or false is empty
  */
-function get_configuration( $name_configuration )
+static function get_configuration( $name_configuration )
 {
-    return get_core()->manager->configuration->get_configuration( $name_configuration );
+    return self::get_core()->manager->configuration->get_configuration( $name_configuration );
 }
 /**
  * Return a specific service
  * @param  string $name_service The name of service
  * @return mixed              the service if find or return false
  */
-function get_service( $name_service )
+static function get_service( $name_service )
 {
-    $service = get_core()->manager->service->get_service( $name_service );
+    $service = self::get_core()->manager->service->get_service( $name_service );
     $service->getter();
     return $service;
 }
@@ -89,19 +91,19 @@ function get_service( $name_service )
  * @param  string $manager The name of service
  * @return mixed              the manager if find or return false
  */
-function get_manager( $name_service )
+static function get_manager( $name_service )
 {
-    if ( !empty( get_core()->manager->$name_service ) ) {
-        return get_core()->manager->$name_service;
+    if ( !empty( self::get_core()->manager->$name_service ) ) {
+        return self::get_core()->manager->$name_service;
     }
     return false;
 }
 /**
- * The dev function that print pretty result
+ * The dev static function that print pretty result
  * @param  mixed array, string, int, ....
  * @param  boolean $ajax  if ajax is true also return in the console js
  */
-function dump($var=false, $ajax=false)
+static function dump($var=false, $ajax=false)
 {
     if ( !$ajax ) {
       $debug = debug_backtrace();
@@ -134,19 +136,19 @@ function dump($var=false, $ajax=false)
  * @param  string no clean
  * @return string clean
  */
-function clean_string( $string )
+static function clean_string( $string )
 {
     $string = str_replace(' ', '_', $string); // Replaces all spaces with hyphens.
     return strtolower(preg_replace('/[^A-Za-z0-9\-\_]/', '', $string)); // Removes special chars.
 }
 /**
-    * This function find in array a key if exist
+    * This static function find in array a key if exist
  * @param  mixed  $array          Array or Object for search
  * @param  string $key_research   the key of research
  * @param  mixed $value_research the value of research
  * @return mixed ( int|array|false )                int with the good key number or boolean false if if key not find
  */
- function array_find($array, $key_research, $value_research)
+ static function array_find($array, $key_research, $value_research)
  {
     $type = gettype ( $array );
     $key = false;
@@ -175,7 +177,7 @@ function clean_string( $string )
   * @param  string $operator       can it = | != | > | <
   * @return mixed  false | or array
   */
- function array_clean( $array, $key_research, $value_research, $operator = '=' ){
+ static function array_clean( $array, $key_research, $value_research, $operator = '=' ){
       $array_clean = [];
 
       foreach ( $array as $key => $value) {
@@ -196,9 +198,9 @@ function clean_string( $string )
   * Return true if the use admin of sp framework
   * @return boolean
   */
- function is_admin()
+ static function is_admin()
  {
-     if ( 'admin' == get_core()->etat ) {
+     if ( 'admin' == self::get_core()->etat ) {
          return true;
      }
      return false;
@@ -207,9 +209,9 @@ function clean_string( $string )
   * Return true if the use api of sp framework
   * @return boolean
   */
- function is_api()
+ static function is_api()
  {
-     if ( 'api' == get_core()->etat ) {
+     if ( 'api' == self::get_core()->etat ) {
          return true;
      }
      return false;
@@ -218,20 +220,20 @@ function clean_string( $string )
   * Return true if the use front of sp framework
   * @return boolean
   */
- function is_front()
+ static function is_front()
  {
-     if ( 'front' == get_core()->etat ) {
+     if ( 'front' == self::get_core()->etat ) {
          return true;
      }
      return false;
  }
 /**
- *  The function check is the dev
+ *  The static function check is the dev
  * @return boolean True if the dev site
  */
-function is_dev()
+static function is_dev()
 {
-    if ( get_core()->is_dev ) {
+    if ( self::get_core()->is_dev ) {
         return true;
     }
     return false;
@@ -241,7 +243,7 @@ function is_dev()
  *  create a loader in js
  * @return boolean true if the action is good
  */
-function create_loader_js()
+static function create_loader_js()
 {
   echo "
     <div class='uil-ring-css' id='animation_loader'>
@@ -261,7 +263,7 @@ function create_loader_js()
  * [Create redirection in js]
  * @param  string $url Create a redirection on JavaScript
  */
-function redirection_js( $url )
+static function redirection_js( $url )
 {
   echo "
   <SCRIPT LANGUAGE=\"JavaScript\">
@@ -275,7 +277,7 @@ function redirection_js( $url )
  * @param  boolean $clean       True for clean list
  * @return array list folder
  */
-function scanfolder( $pathFolder, $clean = true )
+static function scanfolder( $pathFolder, $clean = true )
 {
     $list = scandir( $pathFolder );
     if ( $clean ) {
@@ -288,7 +290,7 @@ function scanfolder( $pathFolder, $clean = true )
  * @param  [type] $file [description]
  * @return [type]       [description]
  */
-function sp_get_current_name_folder( $file )
+static function sp_get_current_name_folder( $file )
 {
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
         $separator = '\\';
@@ -306,7 +308,7 @@ function sp_get_current_name_folder( $file )
  * @param  string  $type
  * @param  integer $order
  */
-function add_block(  $block_name, $content, $type = '',  $order = 0)
+static function add_block(  $block_name, $content, $type = '',  $order = 0)
 {
     $block = new Pattern\Container\Block();
     $block->create( $block_name, $content, $type , $order );
@@ -328,7 +330,7 @@ function add_block(  $block_name, $content, $type = '',  $order = 0)
  //   'menu_name' => 'main_menu'
  // );
 
-function add_item_menu( array $args ){
+static function add_item_menu( array $args ){
     $itemMenu = new Pattern\Container\ItemMenu();
     $itemMenu->create( $args );
 

@@ -4,6 +4,8 @@ namespace Chocolatine\Managers;
 
 use Chocolatine\Pattern\Manager;
 
+use Chocolatine\Helper;
+
 class ManagerAsset extends Manager
 {
   public $name = 'asset';
@@ -13,21 +15,22 @@ class ManagerAsset extends Manager
    */
   public $data = array();
   public function __construct(){
-      $this->add_by_configuration();
+      $this->addByConfiguration();
   }
   /**
    * add_by_configuration add the assets contain the configuration manager
    */
-  public function add_by_configuration(){
-      $assets = \Chocolatine\get_configuration( 'assets' );
+  public function addByConfiguration(){
+
+      $assets = Helper::get_configuration( 'assets' );
       foreach ( $assets as $type => $content ) {
-        foreach ( $content as $asset ) {
-          $position = '';
-          if ( !empty( $asset['position'] )) {
-            $position = $asset['position'];
+          foreach ( $content as $asset ) {
+              $position = '';
+              if ( !empty( $asset['position'] )) {
+                  $position = $asset['position'];
+              }
+              $this->addAsset( $type, $asset['name'], $asset['src'], $position);
           }
-          $this->add_asset( $type, $asset['name'], $asset['src'], $position);
-        }
       }
   }
   /**
@@ -37,51 +40,51 @@ class ManagerAsset extends Manager
    * @param string $src  source of asset
    * @param string $position  Position in header | footer
    */
-  public function add_asset( $type, $name, $src, $position = '' )
+  public function addAsset( $type, $name, $src, $position = '' )
   {
       $container = new \Chocolatine\Pattern\Container\Asset();
       $this->container []=  $container->create(
-        $type,
-        $name,
-        $src,
-        $position
+          $type,
+          $name,
+          $src,
+          $position
       );
   }
   /**
-   * add_css in the template twig
+   * addCss in the template twig
    * @param string $name name of assets
    * @param string $src  source of assets
    */
-  public function add_css( $name, $src ){
-        $this->add_asset( 'style', $name, $src );
+  public function addCss( $name, $src ){
+        $this->addAsset( 'style', $name, $src );
   }
   /**
-   * add_js in the template twig
+   * addJs in the template twig
    * @param string $name name of assets
    * @param string $src  source of assets
    * @param string $position  Position in header | footer
    */
-  public function add_js( $name, $src, $position = 'footer'){
-        $this->add_asset( 'script', $name, $src, $position );
+  public function addJs( $name, $src, $position = 'footer'){
+        $this->addAsset( 'script', $name, $src, $position );
   }
   /**
    * Add data for convert Js data
    * @param string $key  the name of data key
    * @param mixed $data  can be array | string | etc...
    */
-  public function add_data( $key, $data ){
+  public function addData( $key, $data ){
       $this->data[$key] = $data;
   }
   public function get_data(){
       return $this->data;
   }
   /**
-   * add_asset add assets in template twig
+   * addAsset add assets in template twig
    * @param string $type Type assets scripts or styles
    * @param string $name name of assets
    * @param string $src  source of assets
    */
-  public function delete_asset( $type, $name ){
+  public function deleteAsset( $type, $name ){
       foreach ( $this->container[$type]  as $key => $value) {
         if ( $value['name'] == $name ) {
             unset( $this->container[$type][$key] );
@@ -89,71 +92,71 @@ class ManagerAsset extends Manager
       }
   }
   /**
-   * delete_css in the template twig
+   * deleteCss in the template twig
    * @param string $name name of assets
    */
-  public function delete_css( $name ){
-        $this->delete_asset( 'style', $name );
+  public function deleteCss( $name ){
+        $this->deleteAsset( 'style', $name );
   }
   /**
-   * delete_js in the template twig
+   * deleteJs in the template twig
    * @param string $name name of assets
    */
-  public function delete_js( $name ){
-        $this->delete_asset( 'script', $name );
+  public function deleteJs( $name ){
+        $this->deleteAsset( 'script', $name );
   }
   /**
    * Get all assets
    * @return array
    */
-  public function get_assets(){
+  public function getAssets(){
     return array(
-      'script' => $this->get_js(),
-      'style'    => $this->get_css()
+        'script' => $this->getJs(),
+        'style'    => $this->get_css()
     );
   }
   /**
    * Get all css
    * @return array list css
    */
-  public function get_css(){
+  public function getCss(){
       return \Chocolatine\array_clean(
-        $this->container,
-        'type',
-        'style'
+          $this->container,
+          'type',
+          'style'
       );
   }
   /**
    * Get all js
    * @return array list js
    */
-  public function get_js(){
+  public function getJs(){
       return \Chocolatine\array_clean(
-        $this->container,
-        'type',
-        'script'
+          $this->container,
+          'type',
+          'script'
       );
   }
   /**
    * Get all js footer
    * @return array list js footer
    */
-  public function get_js_footer(){
+  public function getJsfooter(){
       return \Chocolatine\array_clean(
-        $this->get_js(),
-        'position',
-        'footer'
+          $this->getJs(),
+          'position',
+          'footer'
       );
   }
   /**
    * Get all ks header
    * @return array list ks header
    */
-  public function get_js_header(){
+  public function getJsHeader(){
       return \Chocolatine\array_clean(
-        $this->get_js(),
-        'position',
-        'header'
+          $this->getJs(),
+          'position',
+          'header'
       );
   }
 }

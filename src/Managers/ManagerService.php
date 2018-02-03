@@ -4,6 +4,8 @@ namespace Chocolatine\Managers;
 
 use Chocolatine\Pattern\Manager;
 
+use Chocolatine\Helper;
+
 class ManagerService extends Manager
 {
       public $name = 'service';
@@ -17,22 +19,22 @@ class ManagerService extends Manager
       }
       public function init(){
 
-        $this->get_configuration();
-        $this->class_loader();
+          $this->getConfiguration();
+          $this->classLoader();
 
       }
       /**
        * Foreach list service class and wallback this
        */
-      public function class_loader(){
+      public function classLoader(){
           array_map( [$this, 'loader'], $this->configuration );
       }
       /**
        *  load all services
-       * @param   $name_class Name of calss
+       * @param   $nameClass Name of calss
        */
-      public function loader( $name_class ){
-          $instance = new  $name_class();
+      public function loader( $nameClass ){
+          $instance = new  $nameClass();
           array_push( $this->container,
               $instance
           );
@@ -43,12 +45,11 @@ class ManagerService extends Manager
        * @return mixed              the service if find or return false
        */
       public function get_service( $name_service ){
-          $key = \Chocolatine\array_find( $this->container, 'name', $name_service );
+          $key = Helper::array_find( $this->container, 'name', $name_service );
           return $this->container[$key];
       }
-      public function get_configuration()
+      public function getConfiguration()
       {
-          $this->configuration = \Chocolatine\get_configuration( 'services' );
+          $this->configuration = Helper::get_configuration( 'services' );
       }
-
 }
