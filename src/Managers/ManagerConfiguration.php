@@ -11,14 +11,14 @@ class ManagerConfiguration extends Manager
 
     public function __construct()
     {
-        $this->get_configurations();
+        $this->getConfigurations();
     }
     /**
      * Add or Merge configuration
      * @param string $name name of key
      * @param mixed  $args contain of configuration
      */
-    public function add_configuration( $name, $args )
+    public function addConfiguration( $name, $args )
     {
         if ( empty( $this->container[$name] ) ) {
             $this->container[$name] = $args;
@@ -29,17 +29,17 @@ class ManagerConfiguration extends Manager
     /**
      * Get all  files in folder configuration and stock the values
      */
-    public function get_configurations()
+    public function getConfigurations()
     {
         // Scan Self Folder Configuration
-        $this->scan_folder_configuration( $this->getPathFolderConfiguration() );
+        $this->scanFolderConfiguration( $this->getPathFolderConfiguration() );
         /**
          * Scan The Folder theme
          */
         $pathConfigFolder =  Helper::get_core()->getPathApplication() . "/Config";
 
         if ( is_dir( $pathConfigFolder ) ) {
-            $this->scan_folder_configuration( $pathConfigFolder  );
+            $this->scanFolderConfiguration( $pathConfigFolder  );
         }
 
     }
@@ -47,7 +47,7 @@ class ManagerConfiguration extends Manager
      * Scan a folder for get files of configurations
      * @param  string $pathFolder Path of Folder Configuration
      */
-    public function scan_folder_configuration( $pathFolder ){
+    public function scanFolderConfiguration( $pathFolder ){
 
         $listFile = Helper::scanfolder( $pathFolder );
 
@@ -63,7 +63,7 @@ class ManagerConfiguration extends Manager
                 $data = require $pathFile;
             }
 
-            $this->add_configuration(
+            $this->addConfiguration(
                 $pathInfo['filename'],
                 $data
             );
@@ -75,7 +75,7 @@ class ManagerConfiguration extends Manager
      * @param  string the name of data
      * @return mixed return false is empty or value
      */
-    public function get_configuration( $name )
+    public function getConfiguration( $name )
     {
         if ( !empty( $this->container[$name] ) ) {
             return $this->container[$name];

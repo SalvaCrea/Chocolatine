@@ -64,7 +64,7 @@ static function get_model( $name_model, $maked = false )
  */
 static function get_module( $name_module )
 {
-    return self::get_core()->manager->module->get_module( $name_module );
+    return self::get_core()->manager->module->getModule( $name_module );
 }
 /**
  * Return the configuration of ServiceManager
@@ -73,7 +73,16 @@ static function get_module( $name_module )
  */
 static function get_configuration( $name_configuration )
 {
-    return self::get_core()->manager->configuration->get_configuration( $name_configuration );
+    return self::get_core()->manager->configuration->getConfiguration( $name_configuration );
+}
+/**
+ * Add configuration in the Managers Configuration
+ * @param string $name name of configuration
+ * @param array $data Content of data
+ */
+static function add_configuration( $name, $data )
+{
+    return self::get_core()->manager->configuration->addConfiguration( $name, $data );
 }
 /**
  * Return a specific service
@@ -153,20 +162,18 @@ static function clean_string( $string )
     $type = gettype ( $array );
     $key = false;
 
-      foreach ( $array as $current_key => $value ) {
+    foreach ( $array as $current_key => $value ) {
         if ( is_object ( $value ) ) {
-          $value = $value->{$key_research};
+            $value = $value->{$key_research};
         }
         if ( is_array( $value ) ) {
-          $value = $value[$key_research];
+            $value = $value[$key_research];
         }
         if ( $value == $value_research ) {
-
-          $key = $current_key;
-          break;
+            $key = $current_key;
+            break;
         }
     }
-
     return $key;
  }
  /**
@@ -178,20 +185,20 @@ static function clean_string( $string )
   * @return mixed  false | or array
   */
  static function array_clean( $array, $key_research, $value_research, $operator = '=' ){
-      $array_clean = [];
+    $array_clean = [];
 
-      foreach ( $array as $key => $value) {
+    foreach ( $array as $key => $value) {
 
-        $current_value = (array) $value;
+      $current_value = (array) $value;
 
-          if ( $current_value[ $key_research ] ==  $value_research ) {
-              $array_clean []= $value;
-          }
-      }
-      if ( !empty( $array_clean ) ) {
-          return $array_clean;
-      }
-      return false;
+        if ( $current_value[ $key_research ] ==  $value_research ) {
+            $array_clean []= $value;
+        }
+    }
+    if ( !empty( $array_clean ) ) {
+        return $array_clean;
+    }
+    return false;
  }
 
  /**
@@ -245,19 +252,19 @@ static function is_dev()
  */
 static function create_loader_js()
 {
-  echo "
-    <div class='uil-ring-css' id='animation_loader'>
-      <div>
+    echo "
+      <div class='uil-ring-css' id='animation_loader'>
+        <div>
+        </div>
       </div>
-    </div>
-    <style>
-    #AdminContenair
-    {
-      display: none;
-    }
-    </style>
-  ";
-  return true;
+      <style>
+      #AdminContenair
+      {
+        display: none;
+      }
+      </style>
+    ";
+    return true;
 }
 /**
  * [Create redirection in js]
@@ -265,11 +272,11 @@ static function create_loader_js()
  */
 static function redirection_js( $url )
 {
-  echo "
-  <SCRIPT LANGUAGE=\"JavaScript\">
-      document.location.href=\"{$url}\"
-  </SCRIPT>
-  ";
+    echo "
+    <SCRIPT LANGUAGE=\"JavaScript\">
+        document.location.href=\"{$url}\"
+    </SCRIPT>
+    ";
 }
 /**
  *  Scan the content folder

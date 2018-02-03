@@ -3,99 +3,54 @@
 namespace Chocolatine\Managers;
 
 use Chocolatine;
+
+use Chocolatine\Helper;
 use Chocolatine\Pattern\Manager;
 
 class ManagerModule extends Manager
 {
 			public $name = 'module';
-			/**
-			 * the list of module disponible
-			 * @var array
-			 */
-			var $list_modules;
-			/**
-			 * return les items in the modules
-			 * @return [type] [description]
-			 */
-			public function search_modules()
+			public function loadModules()
 			{
-						/**
-						 * [$list_folder create a list of potentiel module ]
-						 * @var [array]
-						 */
-						$paths_folder = [
-								Chocolatine\get_core()->path_folder.'/app/Modules'
-						];
-
-						$path_module_theme = Chocolatine\get_path_theme() . '/Modules';
-
-						if ( is_dir( $path_module_theme ) ) {
-								$paths_folder []= $path_module_theme;
-						}
-						foreach ( $paths_folder as $value) {
-								$this->search_module_in_folder( $value );
-						}
+					$listModules = Helper::get_configuration( 'modules' );
+					array_map( [ $this, 'loadModule' ], Helper::get_configuration( 'modules' ) );
 			}
-			/**
-			 * Search module by the path
-			 * @param  string $path_folder the path folder
-			 */
-			public function search_module_in_folder( $path_folder_modules ){
-
-				$list_folder = $this->create_list_folder( $path_folder_modules );
-
-				$module_factory = new Chocolatine\ModuleFactory();
-
-				foreach ( $list_folder as $key => $folder_root ) {
-
-							$file = $folder_root['root'] . '/' . $folder_root['name'] .'.php';
-
-							$current_module_namespace = "\\Chocolatine\\Modules\\{$folder_root['name']}";
-
-							$current_module = $module_factory->build_module( $folder_root['name'], $folder_root['root'], $current_module_namespace );
-
-							/**
-							 * Load the view of the module
-							 */
-							$current_module->after_factory();
-
-							$args = [
-								"name" => $folder_root['name'],
-								"module" => $folder_root['name'],
-								"namespace" => $current_module_namespace,
-								"instance" => $current_module
-							];
-
-							array_push( $this->container, $args );
-
-				}
-
-			}
-			/**
-			 * create a folder with all root clean
-			 * @param  [string] $root_dir   the root folder
-			 * @return [array]  $table with all root
-			 */
-			private function create_list_folder( $root_dir )
+			public function loadModule( $namespace )
 			{
+					$module = new $namespace();
+					$reflection = new \ReflectionClass($module);
 
-					$array_root = [];
+					$fileName = \str_replace( '\\',  '/', $reflection->getFileName() );
 
-					$array_root = scandir( $root_dir );
+					$matched = 0;
+					$lengthStr = strlen( $fileName );
+					$stock = 0;
 
-					// delete inutile occurence
-					$array_root = array_diff( $array_root, array( '.', '..') );
-
-					foreach ( $array_root as $key => $value) {
-
-						$array_root[$key] = array(
-								'root' => $root_dir . '/' . $value,
-								'name' => $value
-						);
-
+					for( $i = 1; $i <= $lengthStr; $i++ ) {
+							$currentChar = $fileName[-$i];
+							if ( $currentChar == '/' || $currentChar == '\\' ) {
+									$matched++;
+									if ( $matched == 1 ) {
+											$stock = $i;
+											$pathFolder = substr( $reflection->getFileName(), 0, $lengthStr - $i );
+									}
+									elseif ( $matched == 2 ) {
+											$name = substr( $reflection->getFileName(), $lengthStr - ($i-1), -$stock);
+											break;
+									}
+							}
 					}
+					
+					$args = [
+							"name"       => $name,
+							"namespace"  => $namespace,
+							"instance"   => $module,
+							"pathFolder" => $pathFolder
+					];
 
-					return $array_root;
+					array_push( $this->container, $args );
+
+					$service = Helper::get_service( 'module-factory' );
 			}
 			/**
 			 * This function return un module by the name
@@ -103,12 +58,11 @@ class ManagerModule extends Manager
 			 * @param  boolean execute true or false getter
 			 * @return Mixed   Return Object if find or false is not find
 			 */
-			public function get_module( $module_name, $getter = true )
+			public function getModule( $module_name, $getter = true )
 			{
-					if ( false !== $key = \Chocolatine\array_find( $this->container, 'name', $module_name )  ) {
+					if ( false !== $key = Helper::array_find( $this->container, 'name', $module_name )  ) {
 
 							$module = $this->container[$key]['instance'];
-
 							/**
 							 * Execute the getter of the module
 							 */

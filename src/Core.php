@@ -68,24 +68,28 @@ class Core
 			 */
 			public function init()
 			{
-
+					$this->loadManagers();
+					$this->loadModules();
+			}
+			public function beforeLoadManager(){}
+			public function loadManagers()
+			{
+					$this->beforeLoadManager();
 					$this->manager = new Managers\ManagerMaster();
 					/**
 					 * Find and load all Managers
 					 */
 					$this->manager->loadManager();
+					$this->afterLoadManagers();
+			}
+			public function afterLoadManagers(){}
+			public function beforeLoadModules(){}
+			public function loadModules()
+			{
 					/**
 					 * Find and load all Modules
 					 */
-					$this->manager->module->search_modules();
-
-					$router = get_service('Router');
-					/**
-					 *  Declare and Apllic all routes http
-					 */
-					$router->declare_routes();
-
-					$router->use_routes();
+					$this->manager->module->loadModules();
 			}
-
+			public function afterLoadModules(){}
 }

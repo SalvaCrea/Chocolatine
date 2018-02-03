@@ -2,9 +2,9 @@
 
 return [
     'database_type' =>  'mysql',
-    'database_name' =>  'framework',
+    'database_name' =>  '',
     'server'        =>  'localhost',
     'username'      =>  'root',
     'password'      =>  '',
-    'prefixe'       =>  'sp_'
+    'prefixe'       =>  ''
 ];

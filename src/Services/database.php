@@ -4,6 +4,8 @@ namespace Chocolatine\Services;
 
 use Medoo\Medoo;
 
+use Chocolatine\Helper;
+
 class DataBase extends \Chocolatine\Pattern\Service{
   /**
    * Container Instance meedoo
@@ -25,13 +27,13 @@ class DataBase extends \Chocolatine\Pattern\Service{
    * [init description]
    * @return [type] [description]
    */
-  public function init(){
-
-      $info_datase = \Chocolatine\get_configuration( 'database' );
-
-      $this->database = new Medoo( $info_datase );
-
-      $this->prefixe = $info_datase["prefixe"];
+  public function init()
+  {
+      $info_datase = Helper::get_configuration( 'database' );
+      if ( !empty( $info_datase['database_name'] ) ) {
+          $this->database = new Medoo( $info_datase );
+          $this->prefixe = $info_datase["prefixe"];
+      }
   }
   public function getter(){
 
