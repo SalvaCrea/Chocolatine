@@ -33,7 +33,7 @@ class Renderer extends \Chocolatine\Pattern\Service{
           );
         }
 
-        $loader = new \Twig_Loader_Filesystem( Helper::get_path_app() . '/templates' );
+        $loader = new \Twig_Loader_Filesystem( Helper::get_path_app() . '/app/Ressources/templates' );
 
         $this->twig_fast = new \Twig_Environment(new \Twig_Loader_String);
 
