@@ -2,13 +2,11 @@
 
 namespace Chocolatine\Managers;
 
-use Chocolatine\Pattern\Manager;
+use Chocolatine\Component\Manager;
 use Chocolatine\Helper;
 
 class ManagerConfiguration extends Manager
 {
-    public $name = 'configuration';
-
     public function __construct()
     {
         $this->getConfigurations();
@@ -18,12 +16,12 @@ class ManagerConfiguration extends Manager
      * @param string $name name of key
      * @param mixed  $args contain of configuration
      */
-    public function addConfiguration( $name, $args )
+    public function addConfiguration($name, $args)
     {
-        if ( empty( $this->container[$name] ) ) {
+        if (empty($this->container[$name])) {
             $this->container[$name] = $args;
         } else {
-            $this->container[$name] = array_merge( $this->container[$name],  $args);
+            $this->container[$name] = array_merge($this->container[$name],  $args);
         }
     }
     /**
@@ -32,14 +30,14 @@ class ManagerConfiguration extends Manager
     public function getConfigurations()
     {
         // Scan Self Folder Configuration
-        $this->scanFolderConfiguration( $this->getPathFolderConfiguration() );
+        $this->scanFolderConfiguration($this->getPathFolderConfiguration());
         /**
          * Scan The Folder theme
          */
-        $pathConfigFolder =  Helper::get_core()->getPathApplication() . "/Config";
+        $pathConfigFolder = Helper::get_core()->getPathApplication() . "/Config";
 
-        if ( is_dir( $pathConfigFolder ) ) {
-            $this->scanFolderConfiguration( $pathConfigFolder  );
+        if (is_dir($pathConfigFolder)) {
+            $this->scanFolderConfiguration($pathConfigFolder );
         }
 
     }
@@ -47,18 +45,18 @@ class ManagerConfiguration extends Manager
      * Scan a folder for get files of configurations
      * @param  string $pathFolder Path of Folder Configuration
      */
-    public function scanFolderConfiguration( $pathFolder ){
+    public function scanFolderConfiguration($pathFolder){
 
-        $listFile = Helper::scanfolder( $pathFolder );
+        $listFile = Helper::scanfolder($pathFolder);
 
-        foreach ( $listFile as $nameFile ) {
+        foreach ($listFile as $nameFile) {
 
             $pathFile = $pathFolder .'/'. $nameFile;
-            $pathInfo = pathinfo( $pathFile );
+            $pathInfo = pathinfo($pathFile);
 
             // Look is file is json or file php
-            if ( $pathInfo['extension'] == 'json' ) {
-                $data = \json_decode( \file_get_contents( $pathFile ), 1 );
+            if ($pathInfo['extension'] == 'json') {
+                $data = \json_decode(\file_get_contents($pathFile), 1);
             } else {
                 $data = require $pathFile;
             }
@@ -66,7 +64,7 @@ class ManagerConfiguration extends Manager
             $this->addConfiguration(
                 $pathInfo['filename'],
                 $data
-            );
+          );
         }
 
     }
@@ -75,9 +73,9 @@ class ManagerConfiguration extends Manager
      * @param  string the name of data
      * @return mixed return false is empty or value
      */
-    public function getConfiguration( $name )
+    public function getConfiguration($name)
     {
-        if ( !empty( $this->container[$name] ) ) {
+        if (!empty($this->container[$name])) {
             return $this->container[$name];
         }
         else{

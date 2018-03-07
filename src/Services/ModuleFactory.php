@@ -8,7 +8,7 @@
 
 namespace Chocolatine\Services;
 
-class ModuleFactory extends \Chocolatine\Pattern\Service
+class ModuleFactory extends \Chocolatine\Component\Service
 {
       public $name = 'module-factory';
       /**
@@ -23,7 +23,6 @@ class ModuleFactory extends \Chocolatine\Pattern\Service
        */
       public function buildModule( $moduleName, $pathFolder, $namespace )
       {
-
         /**
          *
          * Create a instance of the module

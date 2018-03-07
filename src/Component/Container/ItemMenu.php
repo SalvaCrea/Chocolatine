@@ -1,7 +1,7 @@
 <?php
-namespace Chocolatine\Pattern\Container;
+namespace Chocolatine\Component\Container;
 
-class ItemMenu extends \Chocolatine\Pattern\Container{
+class ItemMenu extends \Chocolatine\Component\Container{
       /**
        * Route
        * /post
@@ -60,7 +60,8 @@ class ItemMenu extends \Chocolatine\Pattern\Container{
        * @param  array  $args [description]
        * @return [type]       [description]
        */
-      public function create( array $args ){
+      public function create( array $args )
+      {
 
             $default_args = array(
               'route'   => '',
@@ -86,7 +87,8 @@ class ItemMenu extends \Chocolatine\Pattern\Container{
 
             $this->find_route();
       }
-      public function find_route(){
+      public function find_route()
+      {
 
             $this->routes = \Chocolatine\get_configuration( 'routes' );
 

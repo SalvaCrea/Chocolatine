@@ -1,11 +1,12 @@
 <?php
-namespace Chocolatine\Pattern;
+namespace Chocolatine\Component;
 
 /**
- *  The pattern used for create DataBase model
+ *  The Component used for create DataBase model
  */
 
-class Model{
+abstract class Model
+{
     /**
      * The type of model
      * classic | metapost | simple
@@ -57,7 +58,8 @@ class Model{
     public function get_model(){
         return $this->model();
     }
-    public function get_table_name(){
+    public function get_table_name()
+    {
       $service = \Chocolatine\get_service( 'database' );
       return $service->prefixe . $this->name;
     }
@@ -65,21 +67,24 @@ class Model{
      * Return the relation
      * @return array the relation
      */
-    public function get_relation(){
+    public function get_relation()
+    {
         return $this->relation();
     }
     /**
      * Function Set Data
      * @param array  Contain data
      */
-    public function set_data( $data ){
+    public function set_data( $data )
+    {
         $this->data = $data;
     }
     /**
      * Save the Data
      * @return [type] [description]
      */
-    public function save(){
+    public function save()
+    {
 
           $this->before_save();
 

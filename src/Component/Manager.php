@@ -1,8 +1,10 @@
 <?php
 
-namespace Chocolatine\Pattern;
+namespace Chocolatine\Component;
 
-class Manager{
+use Chocolatine\Component\Container;
+
+abstract class Manager{
   /**
    * Name of Manager
    * @var string
@@ -18,17 +20,18 @@ class Manager{
    * user for add element
    * @param object $object_instanced the element instanced
    */
-  public function add( $namespace ){
+  public function add($namespace)
+  {
 
-        $arguments = explode( "\\", $namespace);
+        $arguments = explode("\\", $namespace);
 
         $name      = $arguments[5];
         $module    = $arguments[3];
         $namespace = $namespace;
 
-        $container = new \Chocolatine\Pattern\Container( $name, $namespace, $module );
+        $container = new Container($name, $namespace, $module);
 
-        array_push( $this->container, $container );
+        array_push($this->container, $container);
   }
   /**
    *  Get one Element
@@ -37,14 +40,15 @@ class Manager{
    *  $name = 'nameModule@nameView'
    * @return mixed name of view
    */
-  public function find( $element_name ){
-      $element_name = explode( "@", $element_name);
+  public function find($element_name)
+  {
+      $element_name = explode("@", $element_name);
       /**
        *
        *    Check if module isset
        *
        */
-      if ( !empty( $element_name[1] ) ) {
+      if (!empty($element_name[1])) {
           $module = $element_name[0];
           $element_name = $element_name[1];
       }else{
@@ -56,13 +60,14 @@ class Manager{
        *    Search View in the container
        *
        */
-      foreach ( $this->container  as $current_element ){
-          if ( isset( $module ) ) {
-              if ( $current_element->module == $module && $current_element->name == $element_name ) {
+      foreach ($this->container as $current_element)
+      {
+          if (isset($module)) {
+              if ($current_element->module == $module && $current_element->name == $element_name) {
                   return $current_element;
               }
           }else{
-              if ( $current_element->name == $element_name ) {
+              if ($current_element->name == $element_name) {
                   return $current_element;
               }
           }

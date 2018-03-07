@@ -1,7 +1,7 @@
 <?php
-namespace Chocolatine\Pattern\Container;
+namespace Chocolatine\Component\Container;
 
-class Asset extends \Chocolatine\Pattern\Container{
+class Asset extends \Chocolatine\Component\Container{
       /**
        * Type of Assets
        * script | css
@@ -20,7 +20,8 @@ class Asset extends \Chocolatine\Pattern\Container{
       public $src;
 
       public function __construct(){}
-      public function create( $type, $name, $src, $position =  'header', $args = [] ){
+      public function create( $type, $name, $src, $position =  'header', $args = [] )
+      {
 
             $this->type     = $type;
             $this->name     = $name;

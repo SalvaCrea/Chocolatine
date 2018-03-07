@@ -5,18 +5,16 @@
  */
 namespace Chocolatine\Managers;
 
-use Chocolatine\Pattern\Manager;
+use Chocolatine\Component\Manager;
 
 class ManagerMaster extends Manager
 {
-    public $name = 'master';
     /**
      * List of manager
      * @var array
      */
     var $listManager = [
         ManagerConfiguration::class,
-        ManagerAjax::class,
         ManagerAsset::class,
         ManagerError::class,
         ManagerForm::class,
@@ -31,19 +29,34 @@ class ManagerMaster extends Manager
     /**
      * Load the all manager
      */
-    public function loadManager(){
-        array_map( [$this, 'addManager'], $this->listManager);
+    public function loadManager()
+    {
+        array_map([$this, 'addManager'], $this->listManager);
     }
     /**
      * Add manager
      * @param string $className   Namespace of Manager
      * @param string $managerName Name Of manager
      */
-    function addManager( $classNameManager, $name = "" )
+    function addManager($classNameManager, $name = null)
     {
         $manager = new $classNameManager();
-        if ( $name != '' ) {
+        if ($name != null) {
             $manager->name = $name;
+        }
+        // generate Name By name Class
+        elseif (empty($manager->name)) {
+            $manager->name = strtolower (
+                str_replace(
+                    // Delete the word Manager
+                    "Manager",
+                    "",
+                    substr(
+                        $classNameManager,
+                        strrpos($classNameManager, "\\") + 1
+                    )
+                )
+            );
         }
         $this->{$manager->name} = $manager;
     }

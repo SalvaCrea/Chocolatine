@@ -2,16 +2,15 @@
 
 namespace Chocolatine\Managers;
 
-use Chocolatine\Pattern\Manager;
+use Chocolatine\Component\Manager;
 
 class ManagerBlock extends Manager
 {
-  public $name = 'block';
   /**
    * Add block
    * @param array $args
    */
-  public function add_block( \Chocolatine\Pattern\Container\Block $block )
+  public function add_block( \Chocolatine\Component\Container\Block $block )
   {
       $this->container[] = $block;
   }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Chocolatine\Pattern;
+namespace Chocolatine\Component;
 
 /**
  * Each container have one Element like :
  * Ajax | Component | Form | Model | Module | View | Etc...
  */
 
-class Container{
+abstract class Container{
       /**
        * Current name of element
        * @var string
@@ -27,12 +27,16 @@ class Container{
        * [new description]
        * @return [type] [description]
        */
-      public function __construct( $name, $namespace, $module = ''){
+      public function __construct( $name, $namespace, $module = null)
+      {
             $this->name = $name;
             $this->namespace = $namespace;
-            $this->module = $module;
+            if ($module != null) {
+                $this->module = $module;.
+            }
       }
-      public function make(){
+      public function make()
+      {
 
           $namespace = $this->namespace;
           $instance = new  $namespace();

@@ -5,7 +5,7 @@ namespace Chocolatine\Services;
 /**
  *  The module for the test
  */
-class Templator extends \Chocolatine\Pattern\Service{
+class Templator extends \Chocolatine\Component\Service{
 
       public $name = "templator";
 
@@ -58,8 +58,8 @@ class Templator extends \Chocolatine\Pattern\Service{
 
             echo $render;
       }
-      public function make_header(){
-
+      public function makeHeader()
+      {
           $asset_manager = \Chocolatine\get_manager( 'asset' );
 
           foreach ( $asset_manager->get_css() as $value) {
@@ -69,8 +69,8 @@ class Templator extends \Chocolatine\Pattern\Service{
               echo "<script src=\"{$value->src}\"></script>";
           }
       }
-      public function make_footer(){
-
+      public function make_footer()
+      {
           $asset_manager = \Chocolatine\get_manager( 'asset' );
           $data = json_encode( $asset_manager->get_data() );
           echo "
@@ -81,7 +81,6 @@ class Templator extends \Chocolatine\Pattern\Service{
           foreach ( $asset_manager->get_js_footer() as $value) {
               echo "<script src=\"{$value->src}\"></script>";
           }
-
       }
       /**
        * Create the block in the dom
@@ -101,10 +100,10 @@ class Templator extends \Chocolatine\Pattern\Service{
        * Create the menu in the dom
        * @param  string $menu_name the name of menu
        */
-      public function make_menu( $menuName )
+      public function makeMenu( $menuName )
       {
-            $manager = \Chocolatine\get_manager( 'menu' );
-            $router = \Chocolatine\get_service( 'Router' );
+            $manager = \Chocolatine\get_manager('menu');
+            $router = \Chocolatine\get_service('Router');
 
             if ( !empty( $manager->container ) ) {
 

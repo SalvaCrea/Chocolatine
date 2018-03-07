@@ -4,7 +4,8 @@ namespace Chocolatine\Services;
 
 use Chocolatine\Helper;
 
-class Renderer extends \Chocolatine\Pattern\Service{
+class Renderer extends \Chocolatine\Component\Service
+{
     public $name = 'renderer';
     /**
      * Container of instance twig
@@ -22,18 +23,18 @@ class Renderer extends \Chocolatine\Pattern\Service{
     public function init(){
         $configTwig = array();
 
-        if ( Helper::is_dev() ) {
-          $configTwig += array(
-              'cache' => CACHE,
-          );
+        if (Helper::is_dev()) {
+            $configTwig += array(
+                'cache' => CACHE,
+            );
         }
-        else{
-          $configTwig += array(
-              'cache' => false,
-          );
+        else {
+            $configTwig += array(
+                'cache' => false,
+            );
         }
 
-        $loader = new \Twig_Loader_Filesystem( Helper::get_path_app() . '/app/Ressources/templates' );
+        $loader = new \Twig_Loader_Filesystem( Helper::get_path_app() . '/Ressources/templates' );
 
         $this->twig_fast = new \Twig_Environment(new \Twig_Loader_String);
 
@@ -48,7 +49,7 @@ class Renderer extends \Chocolatine\Pattern\Service{
     public function renderer( $template_name, array $param ){
         return self::$twig->render( $template_name, $param );
     }
-    public function fast_render( $template_string, array $args = [] ){
+    public function fastRender($template_string, array $args = []){
         return $this->twig_fast->render( $template_string, $args );
     }
     /**
@@ -56,7 +57,7 @@ class Renderer extends \Chocolatine\Pattern\Service{
      * @param string $name  name of global
      * @param mixed  $value value of global
      */
-    public function add_global( $name, $value ){
+    public function addGlobal( $name, $value ){
         self::$twig->addGlobal( $name , $value );
     }
 }

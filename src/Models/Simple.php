@@ -2,7 +2,7 @@
 
 namespace Chocolatine\Models;
 
-class Simple extends \Chocolatine\Pattern\Model{
+class Simple extends \Chocolatine\Component\Model{
     var $type = "simple";
     public function true_save(){
 

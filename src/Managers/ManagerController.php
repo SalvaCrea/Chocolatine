@@ -2,18 +2,16 @@
 
 namespace Chocolatine\Managers;
 
-use Chocolatine\Pattern\Manager;
+use Chocolatine\Component\Manager;
 
 class ManagerController extends Manager
 {
-  public $name = 'view';
-  /**
-   * Add view
-   * @param array $args
-   */
-  function add_view( $args )
-  {
-      $this->add( $args );
-  }
-
+    /**
+     * Add view
+     * @param array $args
+     */
+    function addView( $args )
+    {
+        $this->add( $args );
+    }
 }

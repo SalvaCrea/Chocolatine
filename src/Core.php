@@ -46,9 +46,15 @@ class Core
 			 */
 			public $manager;
 
-			public function __construct()
+			/**
+			 * Path Application
+			 * @param string $pathApplication path folder of application
+			 */
+			public function __construct($pathApplication)
 			{
-					$this->pathFolder = dirname( dirname(__FILE__) );
+					$this->setPathApplication($pathApplication);
+
+					$this->pathFolder = dirname(dirname(__FILE__));
 					Helper::$core = $this;
 			}
 			public function setPathApplication($pathApplication)
@@ -57,11 +63,7 @@ class Core
 			}
 			public function getPathApplication()
 			{
-
 					return $this->pathApplication;
-			}
-			public static function getCore(){
-					return self::$sp_core;
 			}
 			/**
 			 * This function load all modules
@@ -79,11 +81,12 @@ class Core
 					/**
 					 * Find and load all Managers
 					 */
+					$this->beforeLoadModules();
 					$this->manager->loadManager();
 					$this->afterLoadManagers();
 			}
-			public function afterLoadManagers(){}
 			public function beforeLoadModules(){}
+			public function afterLoadManagers(){}
 			public function loadModules()
 			{
 					/**

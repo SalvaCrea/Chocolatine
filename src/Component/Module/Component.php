@@ -1,6 +1,6 @@
 <?php
 
-namespace Chocolatine\Pattern\Module;
+namespace Chocolatine\Component\Module;
 
 /**
  * Element Component

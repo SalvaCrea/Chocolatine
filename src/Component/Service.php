@@ -1,8 +1,8 @@
 <?php
 
-namespace Chocolatine\Pattern;
+namespace Chocolatine\Component;
 
-class Service{
+abstract class Service{
     /**
      * Name of servive
      * @var string

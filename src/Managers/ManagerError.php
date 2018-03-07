@@ -2,18 +2,16 @@
 
 namespace Chocolatine\Managers;
 
-use Chocolatine\Pattern\Manager;
+use Chocolatine\Component\Manager;
 
 class ManagerError extends Manager
 {
-  public $name = 'error';
-  /**
-   *  Add error in container
-   * @param array $args Add Error an container
-   */
-  function add_error( $args )
-  {
-      $this->add( $args );
-  }
-
+    /**
+     *  Add error in container
+     * @param array $args Add Error an container
+     */
+    function addError( $args )
+    {
+        $this->add( $args );
+    }
 }

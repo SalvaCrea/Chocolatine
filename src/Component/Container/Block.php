@@ -1,7 +1,7 @@
 <?php
-namespace Chocolatine\Pattern\Container;
+namespace Chocolatine\Component\Container;
 
-class Block extends \Chocolatine\Pattern\Container{
+class Block extends \Chocolatine\Component\Container{
       /**
        * Type of Content
        * string | callback
