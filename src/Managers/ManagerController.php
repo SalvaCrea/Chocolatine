@@ -10,8 +10,8 @@ class ManagerController extends Manager
      * Add view
      * @param array $args
      */
-    function addView( $args )
+    function addView($args)
     {
-        $this->add( $args );
+        $this->add($args);
     }
 }

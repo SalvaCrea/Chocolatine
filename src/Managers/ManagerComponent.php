@@ -10,8 +10,8 @@ class ManagerComponent extends Manager
      * Add a model
      * @param array $args
      */
-    function add_model( $args )
+    function add_model($args)
     {
-        $this->add( $args );
+        $this->add($args);
     }
 }

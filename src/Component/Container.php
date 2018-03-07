@@ -24,25 +24,49 @@ abstract class Container{
        */
       public $module;
       /**
+       * Class instancied
+       * @var object
+       */
+      public $instance;
+      /**
+       * Path Folder of namespace
+       * @var string
+       */
+      public $pathFolder;
+      /**
        * [new description]
        * @return [type] [description]
        */
-      public function __construct( $name, $namespace, $module = null)
+      public function __construct($namespace, $module = null)
       {
-            $this->name = $name;
-            $this->namespace = $namespace;
-            if ($module != null) {
-                $this->module = $module;.
-            }
+          $this->name = $name;
+          $this->namespace = $namespace;
+          if ($module != null) {
+              $this->module = $module;.
+          }
+          $manager->name = substr(
+              $namespace,
+              strrpos($classNameManager, "\\") + 1
+          );
       }
       public function make()
       {
-
           $namespace = $this->namespace;
-          $instance = new  $namespace();
-          $instance->name = $this->name;
-          $instance->module = $this->module;
+          $this->instance = new  $namespace();
+          $this->instance = $this->name;
+          if ($this->module != null) {
+              $this->instance = $this->module;
+          }
 
-          return $instance;
+          return $this->instance;
+      }
+      public function getPathFolder()
+      {
+          if (empty($this->instance)) {
+              if (empty($this->instance)) $this->make();
+              $reflection = new \ReflectionClass($this->instance);
+          }
+
+          return $this->pathFolder;
       }
 }

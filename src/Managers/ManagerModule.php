@@ -39,7 +39,7 @@ class ManagerModule extends Manager
 		 */
 		public function getModule($module_name, $getter = true)
 		{
-				if (false !== $key = Helper::array_find($this->container, 'name', $module_name) ) {
+				if (false !== $key = Helper::array_find($this->container, 'name', $module_name)) {
 
 						$module = $this->container[$key]['instance'];
 						/**

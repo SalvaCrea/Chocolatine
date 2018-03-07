@@ -14,7 +14,7 @@ sp_load_animation = {
 
 		$animation.append('<div>');
 
-		$('body').append( $animation );
+		$('body').append($animation);
 
 		return true;
 
@@ -33,7 +33,7 @@ sp_load_animation = {
 	is_present : function()
 	{
 
-			if ( $('#animation_loader').length	> 0 ) {
+			if ($('#animation_loader').length	> 0) {
 					return true;
 			}
 			else
@@ -44,7 +44,7 @@ sp_load_animation = {
 	},
 	toggle : function()
 	{
-				if ( this.is_present() ) {
+				if (this.is_present()) {
 						this.create();
 				}
 				else
@@ -54,13 +54,13 @@ sp_load_animation = {
 	},
 	show : function()
 	{
-				if ( !this.is_present() ) {
+				if (!this.is_present()) {
 						this.create();
 				}
 	},
 	hide : function()
 	{
-				if ( this.is_present() ) {
+				if (this.is_present()) {
 						this.delete();
 				}
 	}
@@ -68,7 +68,7 @@ sp_load_animation = {
 
 sp_load_animation.show();
 
-$( window ).ready( function()
+$(window).ready(function()
 {
 
 	sp_load_animation.hide();

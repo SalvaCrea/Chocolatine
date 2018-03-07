@@ -48,7 +48,7 @@ class ManagerAsset extends Manager
             $name,
             $src,
             $position
-        );
+       );
     }
     /**
      * addCss in the template twig
@@ -121,7 +121,7 @@ class ManagerAsset extends Manager
         return array(
             'script' => $this->getJs(),
             'style'    => $this->get_css()
-        );
+       );
     }
     /**
      * Get all css
@@ -133,7 +133,7 @@ class ManagerAsset extends Manager
             $this->container,
             'type',
             'style'
-        );
+       );
     }
     /**
      * Get all js
@@ -145,7 +145,7 @@ class ManagerAsset extends Manager
             $this->container,
             'type',
             'script'
-        );
+       );
     }
     /**
      * Get all js footer
@@ -157,7 +157,7 @@ class ManagerAsset extends Manager
             $this->getJs(),
             'position',
             'footer'
-        );
+       );
     }
     /**
      * Get all ks header
@@ -169,6 +169,6 @@ class ManagerAsset extends Manager
             $this->getJs(),
             'position',
             'header'
-        );
+       );
     }
 }

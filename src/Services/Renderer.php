@@ -26,19 +26,19 @@ class Renderer extends \Chocolatine\Component\Service
         if (Helper::is_dev()) {
             $configTwig += array(
                 'cache' => CACHE,
-            );
+           );
         }
         else {
             $configTwig += array(
                 'cache' => false,
-            );
+           );
         }
 
-        $loader = new \Twig_Loader_Filesystem( Helper::get_path_app() . '/Ressources/templates' );
+        $loader = new \Twig_Loader_Filesystem(Helper::get_path_app() . '/Ressources/templates');
 
         $this->twig_fast = new \Twig_Environment(new \Twig_Loader_String);
 
-        return self::$twig = new \Twig_Environment( $loader, $configTwig );
+        return self::$twig = new \Twig_Environment($loader, $configTwig);
     }
     /**
      * Use twig for make a render
@@ -46,18 +46,21 @@ class Renderer extends \Chocolatine\Component\Service
      * @param  array  $param          Param for twig render
      * @return string                 The template html
      */
-    public function renderer( $template_name, array $param ){
-        return self::$twig->render( $template_name, $param );
+    public function renderer($template_name, array $param)
+    {
+        return self::$twig->render($template_name, $param);
     }
-    public function fastRender($template_string, array $args = []){
-        return $this->twig_fast->render( $template_string, $args );
+    public function fastRender($template_string, array $args = [])
+    {
+        return $this->twig_fast->render($template_string, $args);
     }
     /**
      * Add a global variable in twig
      * @param string $name  name of global
      * @param mixed  $value value of global
      */
-    public function addGlobal( $name, $value ){
-        self::$twig->addGlobal( $name , $value );
+    public function addGlobal($name, $value)
+    {
+        self::$twig->addGlobal($name , $value);
     }
 }

@@ -10,8 +10,8 @@ class ManagerModel extends Manager
      * Add a form
      * @param array $args
      */
-    function add_model( $args )
+    function add_model($args)
     {
-        $this->add( $args );
+        $this->add($args);
     }
 }

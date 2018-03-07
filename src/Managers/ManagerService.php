@@ -27,31 +27,31 @@ class ManagerService extends Manager
        */
       public function classLoader()
       {
-          array_map( [$this, 'loader'], $this->configuration );
+          array_map([$this, 'loader'], $this->configuration);
       }
       /**
        *  load all services
        * @param   $nameClass Name of calss
        */
-      public function loader( $nameClass )
+      public function loader($nameClass)
       {
           $instance = new  $nameClass();
-          array_push( $this->container,
+          array_push($this->container,
               $instance
-          );
+         );
       }
       /**
        * Return a specific service
        * @param  string $name_service The name of service
        * @return mixed              the service if find or return false
        */
-      public function get_service( $name_service )
+      public function get_service($name_service)
       {
-          $key = Helper::array_find( $this->container, 'name', $name_service );
+          $key = Helper::array_find($this->container, 'name', $name_service);
           return $this->container[$key];
       }
       public function getConfiguration()
       {
-          $this->configuration = Helper::get_configuration( 'services' );
+          $this->configuration = Helper::get_configuration('services');
       }
 }

@@ -18,15 +18,15 @@ class ManagerListenner extends Manager
      * [add_route this for add route]
      * @param [array] $args [array contain info]
      */
-    public static function add_route( $args )
+    public static function add_route($args)
     {
         $args_default = array(
           'module' => '',
           'method' => '',
           'route' => ''
-        );
+       );
 
-        $args = array_merge( $args_default, $args);
+        $args = array_merge($args_default, $args);
 
         self::$list_route []= $args;
 
@@ -36,18 +36,18 @@ class ManagerListenner extends Manager
      */
     private static function use_route()
     {
-        if ( empty( self::$list_route ) )
+        if (empty(self::$list_route))
           return false;
 
         foreach (self::$list_route as $key => $route) {
-            self::apply_route( $route );
+            self::apply_route($route);
         }
     }
     /**
      * [apply_route apply the route]
      * @param  [array] $route [description]
      */
-    private static function apply_route( $route )
+    private static function apply_route($route)
     {
 
     }
@@ -55,7 +55,7 @@ class ManagerListenner extends Manager
      * [add_listenner function for add listernner]
      * @param [type] $args [description]
      */
-    public static function add_listenner( $args )
+    public static function add_listenner($args)
     {
 
         $args_default = array(
@@ -67,11 +67,11 @@ class ManagerListenner extends Manager
           'post_type' => '',
           'post_id' => '',
           'post_name' => ''
-        );
+       );
 
-        $args = array_merge( $args_default, $args);
+        $args = array_merge($args_default, $args);
 
-        $args = array_filter( $args );
+        $args = array_filter($args);
 
         self::$list_listenner []= $args;
 
@@ -81,16 +81,16 @@ class ManagerListenner extends Manager
      */
     private static function use_listenner()
     {
-      if ( empty( self::$list_listenner ) )
+      if (empty(self::$list_listenner))
         return false;
 
         global $post;
 
         foreach (self::$list_listenner as $key => $listenner) {
 
-            foreach ( $listenner as $key => $value) {
-                if ( $post->{$key} == $value ) {
-                  self::apply_listenner( $listenner );
+            foreach ($listenner as $key => $value) {
+                if ($post->{$key} == $value) {
+                  self::apply_listenner($listenner);
                 }
             }
 
@@ -101,10 +101,10 @@ class ManagerListenner extends Manager
     * [apply_route apply the listenner]
     * @param  [array] $listenner [description]
     */
-    private static function apply_listenner( $listenner )
+    private static function apply_listenner($listenner)
     {
 
-        $module = sp_get_module( $listenner['module'] );
+        $module = sp_get_module($listenner['module']);
 
         $module->{$listenner['method']}();
     }

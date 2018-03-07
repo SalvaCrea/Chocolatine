@@ -37,7 +37,7 @@ class ManagerConfiguration extends Manager
         $pathConfigFolder = Helper::get_core()->getPathApplication() . "/Config";
 
         if (is_dir($pathConfigFolder)) {
-            $this->scanFolderConfiguration($pathConfigFolder );
+            $this->scanFolderConfiguration($pathConfigFolder);
         }
 
     }
@@ -64,7 +64,7 @@ class ManagerConfiguration extends Manager
             $this->addConfiguration(
                 $pathInfo['filename'],
                 $data
-          );
+         );
         }
 
     }

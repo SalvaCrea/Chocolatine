@@ -60,7 +60,7 @@ class ItemMenu extends \Chocolatine\Component\Container{
        * @param  array  $args [description]
        * @return [type]       [description]
        */
-      public function create( array $args )
+      public function create(array $args)
       {
 
             $default_args = array(
@@ -70,17 +70,17 @@ class ItemMenu extends \Chocolatine\Component\Container{
               'icon'   => '',
               'order'   => '',
               'menu_name'   => $this->menu_name,
-            );
+           );
 
             /**
              * Fusion and Clean Arguments
              */
-            $args = array_filter( array_merge( $default_args , $args) );
+            $args = array_filter(array_merge($default_args , $args));
 
             /**
              *  Insert data arguments in this instance
              */
-            foreach ( $args as $key => $value ) {
+            foreach ($args as $key => $value) {
 
                $this->$key = $value;
             }
@@ -90,10 +90,10 @@ class ItemMenu extends \Chocolatine\Component\Container{
       public function find_route()
       {
 
-            $this->routes = \Chocolatine\get_configuration( 'routes' );
+            $this->routes = \Chocolatine\get_configuration('routes');
 
-            foreach ( $this->routes as $route => $current_route) {
-                if ( $route == $this->route ) {
+            foreach ($this->routes as $route => $current_route) {
+                if ($route == $this->route) {
                     $this->url = $current_route['route'];
                 }
             }

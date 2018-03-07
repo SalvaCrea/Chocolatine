@@ -5,5 +5,5 @@
  * @var array
  */
 return [
-    // \Chocolatine\Modules\PostTypeExample::class,
+    Chocolatine\Modules\ModelTool\Module::class;
 ];

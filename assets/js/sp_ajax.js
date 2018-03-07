@@ -31,11 +31,11 @@ var sp_ajax  =
 						 "module" : this.module,
 					 	 "component" : this.component
 					 },
-  	       success : function( msg )
+  	       success : function(msg)
   	       {
-              console.log( msg );
+              console.log(msg);
   	          func.content_return = msg;
-              func.success( msg );
+              func.success(msg);
 
   	       },
   	       error : function(xhr, ajaxOptions, thrownError)
@@ -43,7 +43,7 @@ var sp_ajax  =
               console.log('error');
               console.log(xhr);
               func.content_return = xhr;
-              func.error( xhr );
+              func.error(xhr);
   	       }
   	    });
 
@@ -60,11 +60,11 @@ var sp_ajax  =
     {
         return false;
     },
-		new : function( module = '', action = '')
+		new : function(module = '', action = '')
 		{
       new_ajax_tools = Object.assign({}, this);
 
-      if ( module != '' && action != '') {
+      if (module != '' && action != '') {
           new_ajax_tools.module = module;
           new_ajax_tools.component = action;
       }

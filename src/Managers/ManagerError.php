@@ -10,8 +10,8 @@ class ManagerError extends Manager
      *  Add error in container
      * @param array $args Add Error an container
      */
-    function addError( $args )
+    function addError($args)
     {
-        $this->add( $args );
+        $this->add($args);
     }
 }

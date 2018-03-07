@@ -47,38 +47,38 @@ class Templator extends \Chocolatine\Component\Service{
       public function renderer(){
 
             $render = '';
-            $renderer = \Chocolatine\get_service( 'renderer' );
+            $renderer = \Chocolatine\get_service('renderer');
 
-            $render = $renderer->renderer( 'main.html.twig',
+            $render = $renderer->renderer('main.html.twig',
               array(
                 'content' => $this->content,
                 'Templator' => $this
-              )
-            );
+             )
+           );
 
             echo $render;
       }
       public function makeHeader()
       {
-          $asset_manager = \Chocolatine\get_manager( 'asset' );
+          $asset_manager = \Chocolatine\get_manager('asset');
 
-          foreach ( $asset_manager->get_css() as $value) {
+          foreach ($asset_manager->get_css() as $value) {
               echo "<link rel=\"stylesheet\" href=\"{$value->src}\">";
           }
-          foreach ( $asset_manager->get_js_header() as $value) {
+          foreach ($asset_manager->get_js_header() as $value) {
               echo "<script src=\"{$value->src}\"></script>";
           }
       }
       public function make_footer()
       {
-          $asset_manager = \Chocolatine\get_manager( 'asset' );
-          $data = json_encode( $asset_manager->get_data() );
+          $asset_manager = \Chocolatine\get_manager('asset');
+          $data = json_encode($asset_manager->get_data());
           echo "
           <script>
           Chocolatine = {$data}
           </script>";
 
-          foreach ( $asset_manager->get_js_footer() as $value) {
+          foreach ($asset_manager->get_js_footer() as $value) {
               echo "<script src=\"{$value->src}\"></script>";
           }
       }
@@ -86,12 +86,12 @@ class Templator extends \Chocolatine\Component\Service{
        * Create the block in the dom
        * @param  string $blockName [description]
        */
-      public function make_block( $blockName )
+      public function make_block($blockName)
       {
-            $blocks = \Chocolatine\get_manager( 'block' )->find_block_by_name( $blockName );
+            $blocks = \Chocolatine\get_manager('block')->find_block_by_name($blockName);
 
-            if ( !empty( $blocks ) ) {
-                  foreach ( $blocks as $key => $content ) {
+            if (!empty($blocks)) {
+                  foreach ($blocks as $key => $content) {
                       echo $content->content;
                   }
             }
@@ -100,23 +100,23 @@ class Templator extends \Chocolatine\Component\Service{
        * Create the menu in the dom
        * @param  string $menu_name the name of menu
        */
-      public function makeMenu( $menuName )
+      public function makeMenu($menuName)
       {
             $manager = \Chocolatine\get_manager('menu');
             $router = \Chocolatine\get_service('Router');
 
-            if ( !empty( $manager->container ) ) {
+            if (!empty($manager->container)) {
 
-                  $menu = \Chocolatine\array_clean( $manager->container, 'menu_name', $menuName );
+                  $menu = \Chocolatine\array_clean($manager->container, 'menu_name', $menuName);
 
-                  if ( empty( $menu )) {
+                  if (empty($menu)) {
                     return false;
                   }
-                  foreach ( $menu as $key => $menu ) {
+                  foreach ($menu as $key => $menu) {
 
                       $active = '';
 
-                      if ( $router->current_route == $menu->route ) {
+                      if ($router->current_route == $menu->route) {
                           $active = 'active';
                       }
 

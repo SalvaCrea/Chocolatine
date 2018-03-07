@@ -36,12 +36,12 @@ class Block extends \Chocolatine\Component\Container{
        * @param  integer $order
        */
       public function __construct(){}
-      public function create( $block_name, $content, $args = [] ){
+      public function create($block_name, $content, $args = []){
 
             $this->block_name = $block_name;
             $this->content    = $content;
-            if ( !empty( $args ) ) {
-                foreach ( $args as $key => $value) {
+            if (!empty($args)) {
+                foreach ($args as $key => $value) {
                   $this->$key = $value;
                 }
             }

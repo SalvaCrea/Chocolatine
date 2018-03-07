@@ -21,7 +21,7 @@ class ModuleFactory extends \Chocolatine\Component\Service
        * @param  string $pathFolder the path of the folder
        * @return object              the module builded
        */
-      public function buildModule( $moduleName, $pathFolder, $namespace )
+      public function buildModule($moduleName, $pathFolder, $namespace)
       {
         /**
          *
@@ -35,7 +35,7 @@ class ModuleFactory extends \Chocolatine\Component\Service
          $this->moduleCurrent->path_folder = $pathFolder;
 
          foreach ($this->managerRelations as $key => $value) {
-             $this->tryFindElement( $value, $namespace , $pathFolder);
+             $this->tryFindElement($value, $namespace , $pathFolder);
          }
 
         /**
@@ -50,7 +50,7 @@ class ModuleFactory extends \Chocolatine\Component\Service
        * @param string $namespace Name of namespace
        * @param string $pathFolder Path of module
        */
-      public function tryFindElement( $manager, $namespace, $pathFolder){
+      public function tryFindElement($manager, $namespace, $pathFolder){
             /**
              *  Find element in folder
              */
@@ -58,31 +58,31 @@ class ModuleFactory extends \Chocolatine\Component\Service
             /**
              * Test if folder exist
              */
-            if ( !is_dir ( $currentFolder ) ) { return false; }
+            if (!is_dir ($currentFolder)) { return false; }
 
-            if ( !empty(  $list_element = Helper::scanfolder( $currentFolder ) ) ) {
+            if (!empty( $list_element = Helper::scanfolder($currentFolder))) {
               /**
                *  Serach manager link of folder
                */
-                if ( false !== ( $current_manager = Helper::get_manager( $manager['name'] ) ) ) {
+                if (false !== ($current_manager = Helper::get_manager($manager['name']))) {
 
                     $this->moduleCurrent->component = new \stdClass();
 
-                    foreach ( $list_element as $element ) {
+                    foreach ($list_element as $element) {
 
                       $element_name = basename($element, ".php");
                       $element_namespace = $namespace . "\\" . $manager['name'] . "\\" . $element_name;
                       /**
                        * Instanced Element if the Element if a component
                        */
-                      if ( $manager['name'] == 'component' ) {
+                      if ($manager['name'] == 'component') {
                           $this->moduleCurrent->component->$element_name = new $element_namespace();
                       }
 
                       $this->tryAddElement(
                         $current_manager,
                         $element_namespace
-                      );
+                     );
                     }
 
                 }
@@ -93,8 +93,8 @@ class ModuleFactory extends \Chocolatine\Component\Service
        * @param object  $manager           manager used
        * @param string $element_namespace  namepsace element
        */
-      public function tryAddElement(  $manager, $element_namespace ){
-            $manager->add( $element_namespace );
+      public function tryAddElement( $manager, $element_namespace){
+            $manager->add($element_namespace);
       }
 
 }

@@ -20,7 +20,7 @@ class Asset extends \Chocolatine\Component\Container{
       public $src;
 
       public function __construct(){}
-      public function create( $type, $name, $src, $position =  'header', $args = [] )
+      public function create($type, $name, $src, $position =  'header', $args = [])
       {
 
             $this->type     = $type;
@@ -28,8 +28,8 @@ class Asset extends \Chocolatine\Component\Container{
             $this->src      = $src;
             $this->position = $position;
 
-            if ( !empty( $args ) ) {
-                foreach ( $args as $key => $value) {
+            if (!empty($args)) {
+                foreach ($args as $key => $value) {
                   $this->$key = $value;
                 }
             }

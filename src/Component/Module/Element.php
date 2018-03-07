@@ -3,19 +3,15 @@ namespace Chocolatine\Component\Module;
 
 class Element
 {
-    function __get( $name )
+    function __get($name)
     {
+        if ($name == 'core'){
+            return \Chocolatine\get_core();
+        }
 
-      if ( $name == 'core' ){
-          return \Chocolatine\get_core();
-      }
-
-
-      if ( $name == 'db' ){
-          return \Chocolatine\get_service( 'database' )->database;
-      }
-
-
+        if ($name == 'db'){
+            return \Chocolatine\get_service('database')->database;
+        }
     }
     /**
      * use for get the module
@@ -35,25 +31,21 @@ class Element
       *  Just name for template in Theme
       *
       */
-     public function renderTemplate( $templateName, array $args = [] ){
+     public function renderTemplate($templateName, array $args = []){
+       $render = \Chocolatine\get_service('renderer');
 
-       $render = \Chocolatine\get_service( 'renderer' );
+       if (false !== $stringPos = strpos($templateName, '@')) {
 
-       if ( false !== $stringPos = strpos( $templateName, '@') ) {
-
-            $module_name = substr (  $templateName , 0 , $stringPos );
-            $template = substr (  $templateName , $stringPos + 1 , strlen( $templateName ) );
-            $module = \Chocolatine\get_module( $module_name );
+            $module_name = substr ( $templateName , 0 , $stringPos);
+            $template = substr ( $templateName , $stringPos + 1 , strlen($templateName));
+            $module = \Chocolatine\get_module($module_name);
 
             $templatepath = $module->path_folder . '/template/' . $template;
 
             return $render->fast_render(
-                file_get_contents(  $templatepath ),
+                file_get_contents( $templatepath),
                 $args
-            );
+           );
        }
-
-
-
      }
 }

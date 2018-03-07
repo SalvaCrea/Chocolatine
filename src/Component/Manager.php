@@ -18,20 +18,14 @@ abstract class Manager{
   public function init(){}
   /**
    * user for add element
-   * @param object $object_instanced the element instanced
+   * @param Mixed Namespace Or instance of container
    */
-  public function add($namespace)
+  public function add($container)
   {
-
-        $arguments = explode("\\", $namespace);
-
-        $name      = $arguments[5];
-        $module    = $arguments[3];
-        $namespace = $namespace;
-
-        $container = new Container($name, $namespace, $module);
-
-        array_push($this->container, $container);
+      if (!$container instanceof Container) {
+          $container = new Container($container); 
+      }
+      array_push($this->container, $container);
   }
   /**
    *  Get one Element

@@ -7,5 +7,5 @@ RequestAjax = {
 }
 
 RequestAjax.new = function(){
-  return Object.assign({}, this );
+  return Object.assign({}, this);
 }

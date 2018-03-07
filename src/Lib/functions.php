@@ -14,7 +14,7 @@ function get_core()
  * @return string return the path folder of the theme
  */
 function get_theme(){
-    if ( empty( $theme = get_configuration( 'main' )['theme'] ) ) {
+    if (empty($theme = get_configuration('main')['theme'])) {
         $theme = '_default_wp';
     }
     return  $theme;
@@ -41,12 +41,12 @@ function get_folder(){
  * @param  string the name of module find
  * @return mixed return false or container Model
  */
-function get_model( $name_model, $maked = false )
+function get_model($name_model, $maked = false)
 {
-    if ( !$maked ) {
-        return  get_manager( 'model' )->find( $name_model );
+    if (!$maked) {
+        return  get_manager('model')->find($name_model);
     }else{
-        return  get_manager( 'model' )->find( $name_model )->make();
+        return  get_manager('model')->find($name_model)->make();
     }
 }
 /**
@@ -54,27 +54,27 @@ function get_model( $name_model, $maked = false )
  * @param  string the name of module find
  * @return mixed return false or obkect of class
  */
-function get_module( $name_module )
+function get_module($name_module)
 {
-    return get_core()->manager->module->get_module( $name_module );
+    return get_core()->manager->module->get_module($name_module);
 }
 /**
  * Return the configuration of ServiceManager
  * @param  $string name of configuration
  * @return mixed  return data mixed or false is empty
  */
-function get_configuration( $name_configuration )
+function get_configuration($name_configuration)
 {
-    return get_core()->manager->configuration->get_configuration( $name_configuration );
+    return get_core()->manager->configuration->get_configuration($name_configuration);
 }
 /**
  * Return a specific service
  * @param  string $name_service The name of service
  * @return mixed              the service if find or return false
  */
-function get_service( $name_service )
+function get_service($name_service)
 {
-    $service = get_core()->manager->service->get_service( $name_service );
+    $service = get_core()->manager->service->get_service($name_service);
     $service->getter();
     return $service;
 }
@@ -83,9 +83,9 @@ function get_service( $name_service )
  * @param  string $manager The name of service
  * @return mixed              the manager if find or return false
  */
-function get_manager( $name_service )
+function get_manager($name_service)
 {
-    if ( !empty( get_core()->manager->$name_service ) ) {
+    if (!empty(get_core()->manager->$name_service)) {
         return get_core()->manager->$name_service;
     }
     return false;
@@ -97,7 +97,7 @@ function get_manager( $name_service )
  */
 function dump($var=false, $ajax=false)
 {
-    if ( !$ajax ) {
+    if (!$ajax) {
       $debug = debug_backtrace();
       echo '<p>&nbsp;</p><p><a href="#" onclick="$(this).parent().next(\'ol\').slideToggle(); return false;"><strong>' . $debug[0]['file'] . ' </strong> l.' . $debug[0]['line'] . '</a></p>';
       echo '<ol style="display:none;">';
@@ -111,11 +111,11 @@ function dump($var=false, $ajax=false)
       print_r($var);
       echo '</pre>';
     }else{
-      $var = json_encode( $var );
+      $var = json_encode($var);
       echo "
       <script>
       dump = {$var};
-      console.log( dump );
+      console.log(dump);
       </script>
       ";
     }
@@ -128,7 +128,7 @@ function dump($var=false, $ajax=false)
  * @param  string no clean
  * @return string clean
  */
-function clean_string( $string )
+function clean_string($string)
 {
     $string = str_replace(' ', '_', $string); // Replaces all spaces with hyphens.
     return strtolower(preg_replace('/[^A-Za-z0-9\-\_]/', '', $string)); // Removes special chars.
@@ -138,21 +138,21 @@ function clean_string( $string )
  * @param  mixed  $array          Array or Object for search
  * @param  string $key_research   the key of research
  * @param  mixed $value_research the value of research
- * @return mixed ( int|array|false )                int with the good key number or boolean false if if key not find
+ * @return mixed (int|array|false)                int with the good key number or boolean false if if key not find
  */
  function array_find($array, $key_research, $value_research)
  {
-    $type = gettype ( $array );
+    $type = gettype ($array);
     $key = false;
 
-      foreach ( $array as $current_key => $value ) {
-        if ( is_object ( $value ) ) {
+      foreach ($array as $current_key => $value) {
+        if (is_object ($value)) {
           $value = $value->{$key_research};
         }
-        if ( is_array( $value ) ) {
+        if (is_array($value)) {
           $value = $value[$key_research];
         }
-        if ( $value == $value_research ) {
+        if ($value == $value_research) {
 
           $key = $current_key;
           break;
@@ -169,18 +169,18 @@ function clean_string( $string )
   * @param  string $operator       can it = | != | > | <
   * @return mixed  false | or array
   */
- function array_clean( $array, $key_research, $value_research, $operator = '=' ){
+ function array_clean($array, $key_research, $value_research, $operator = '='){
       $array_clean = [];
 
-      foreach ( $array as $key => $value) {
+      foreach ($array as $key => $value) {
 
         $current_value = (array) $value;
 
-          if ( $current_value[ $key_research ] ==  $value_research ) {
+          if ($current_value[ $key_research ] ==  $value_research) {
               $array_clean []= $value;
           }
       }
-      if ( !empty( $array_clean ) ) {
+      if (!empty($array_clean)) {
           return $array_clean;
       }
       return false;
@@ -192,7 +192,7 @@ function clean_string( $string )
   */
  function is_admin()
  {
-     if ( 'admin' == get_core()->etat ) {
+     if ('admin' == get_core()->etat) {
          return true;
      }
      return false;
@@ -203,7 +203,7 @@ function clean_string( $string )
   */
  function is_api()
  {
-     if ( 'api' == get_core()->etat ) {
+     if ('api' == get_core()->etat) {
          return true;
      }
      return false;
@@ -214,7 +214,7 @@ function clean_string( $string )
   */
  function is_front()
  {
-     if ( 'front' == get_core()->etat ) {
+     if ('front' == get_core()->etat) {
          return true;
      }
      return false;
@@ -225,7 +225,7 @@ function clean_string( $string )
  */
 function is_dev()
 {
-    if ( get_core()->is_dev ) {
+    if (get_core()->is_dev) {
         return true;
     }
     return false;
@@ -255,7 +255,7 @@ function create_loader_js()
  * [Create redirection in js]
  * @param  string $url Create a redirection on JavaScript
  */
-function redirection_js( $url )
+function redirection_js($url)
 {
   echo "
   <SCRIPT LANGUAGE=\"JavaScript\">
@@ -269,11 +269,11 @@ function redirection_js( $url )
  * @param  boolean $clean       True for clean list
  * @return array list folder
  */
-function scanfolder( $path_folder, $clean = true )
+function scanfolder($path_folder, $clean = true)
 {
-    $list = scandir( $path_folder );
-    if ( $clean ) {
-      return array_diff( scandir( $path_folder ), array('..', '.') );
+    $list = scandir($path_folder);
+    if ($clean) {
+      return array_diff(scandir($path_folder), array('..', '.'));
     }
     return $list;
 }
@@ -282,15 +282,15 @@ function scanfolder( $path_folder, $clean = true )
  * @param  [type] $file [description]
  * @return [type]       [description]
  */
-function sp_get_current_name_folder( $file )
+function sp_get_current_name_folder($file)
 {
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
         $separator = '\\';
     } else {
         $separator = '/';
     }
-    $position = strrpos( $file ,$separator );
-    $name_folder =  substr( $file ,$position + 1 );
+    $position = strrpos($file ,$separator);
+    $name_folder =  substr($file ,$position + 1);
     return $name_folder;
 }
 /**
@@ -300,13 +300,13 @@ function sp_get_current_name_folder( $file )
  * @param  string  $type
  * @param  integer $order
  */
-function add_block(  $block_name, $content, $type = '',  $order = 0)
+function add_block( $block_name, $content, $type = '',  $order = 0)
 {
     $block = new Pattern\Container\Block();
-    $block->create( $block_name, $content, $type , $order );
+    $block->create($block_name, $content, $type , $order);
 
-    $manager = \Chocolatine\get_manager( 'block' );
-    $manager->add_block( $block );
+    $manager = \Chocolatine\get_manager('block');
+    $manager->add_block($block);
 }
 /**
  * Function used for add items in the menu
@@ -320,12 +320,12 @@ function add_block(  $block_name, $content, $type = '',  $order = 0)
  //   'icon'      => 'fa fa-text',
  //   'order'     => '5',
  //   'menu_name' => 'main_menu'
- // );
+ //);
 
-function add_item_menu( array $args ){
+function add_item_menu(array $args){
     $itemMenu = new Pattern\Container\ItemMenu();
-    $itemMenu->create( $args );
+    $itemMenu->create($args);
 
-    $mananger = \Chocolatine\get_manager( 'menu' );
-    $mananger->add_item_menu( $itemMenu );
+    $mananger = \Chocolatine\get_manager('menu');
+    $mananger->add_item_menu($itemMenu);
 }

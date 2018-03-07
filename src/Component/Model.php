@@ -60,7 +60,7 @@ abstract class Model
     }
     public function get_table_name()
     {
-      $service = \Chocolatine\get_service( 'database' );
+      $service = \Chocolatine\get_service('database');
       return $service->prefixe . $this->name;
     }
     /**
@@ -75,7 +75,7 @@ abstract class Model
      * Function Set Data
      * @param array  Contain data
      */
-    public function set_data( $data )
+    public function set_data($data)
     {
         $this->data = $data;
     }

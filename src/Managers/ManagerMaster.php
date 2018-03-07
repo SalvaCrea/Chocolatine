@@ -54,9 +54,9 @@ class ManagerMaster extends Manager
                     substr(
                         $classNameManager,
                         strrpos($classNameManager, "\\") + 1
-                    )
-                )
-            );
+                   )
+               )
+           );
         }
         $this->{$manager->name} = $manager;
     }
