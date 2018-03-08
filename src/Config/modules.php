@@ -5,5 +5,5 @@
  * @var array
  */
 return [
-    Chocolatine\Modules\ModelTool\Module::class;
+    Chocolatine\Modules\ModelTool\ModelTool::class,
 ];

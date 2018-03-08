@@ -6,15 +6,15 @@
 
 namespace Chocolatine\Modules\ModelTool;
 
-use Chocolatine\Pattern\Module as Base;
+use Chocolatine\Component\Module as Base;
 
-class Module extends Base{
-
+class ModelTool extends Base
+{
       public $description = "
           Module For Generate and Maintenance DataTable
       ";
 
       public function __construct(){
-
+          echo 'test';
       }
 }

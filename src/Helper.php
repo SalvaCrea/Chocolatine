@@ -91,8 +91,7 @@ static function add_configuration($name, $data)
  */
 static function get_service($name_service)
 {
-    $service = self::get_core()->manager->service->get_service($name_service);
-    $service->getter();
+    $service = self::get_core()->manager->service->getService($name_service);
     return $service;
 }
 /**

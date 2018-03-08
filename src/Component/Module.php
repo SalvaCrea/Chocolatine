@@ -1,12 +1,12 @@
 <?php
 
-namespace Chocolatine\Component\Module;
+namespace Chocolatine\Component;
 
 /**
  * Element Module
  */
 
-class Module extends Element
+class Module
 {
 		/**
 		 * The font awesome icon

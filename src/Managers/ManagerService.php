@@ -3,7 +3,7 @@
 namespace Chocolatine\Managers;
 
 use Chocolatine\Component\Manager;
-
+use Chocolatine\Component\Container;
 use Chocolatine\Helper;
 
 class ManagerService extends Manager
@@ -33,22 +33,25 @@ class ManagerService extends Manager
        *  load all services
        * @param   $nameClass Name of calss
        */
-      public function loader($nameClass)
+      public function loader($namespace)
       {
-          $instance = new  $nameClass();
-          array_push($this->container,
-              $instance
-         );
+          $container = new Container($namespace);
+  				$this->add($container);
       }
       /**
        * Return a specific service
        * @param  string $name_service The name of service
        * @return mixed              the service if find or return false
        */
-      public function get_service($name_service)
+      public function getService($name_service)
       {
           $key = Helper::array_find($this->container, 'name', $name_service);
-          return $this->container[$key];
+          if ($key!=false) {
+              $service = $this->container[$key]->make();
+              $service->getter();
+              return $service;
+          }
+          return false;
       }
       public function getConfiguration()
       {

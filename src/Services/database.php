@@ -14,8 +14,6 @@ class Database extends Service
      * @var object
      */
     public $database;
-
-    public $name = 'database';
     /**
      * Prefixe use for name Table
      * @var string

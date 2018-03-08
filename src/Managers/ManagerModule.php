@@ -6,6 +6,7 @@ use Chocolatine;
 
 use Chocolatine\Helper;
 use Chocolatine\Component\Manager;
+use Chocolatine\Component\Container;
 
 class ManagerModule extends Manager
 {
@@ -16,20 +17,11 @@ class ManagerModule extends Manager
 		}
 		public function loadModule($namespace)
 		{
-				$module = new $namespace();
-				$reflection = new \ReflectionClass($module);
+				$container = new Container($namespace);
+				$container->make();
+				$this->add($container);
 
-				$fileName = \str_replace('\\',  '/', $reflection->getFileName());
-				$args = [
-						"name"       => $name,
-						"namespace"  => $namespace,
-						"instance"   => $module,
-						"pathFolder" => $pathFolder
-				];
-
-				array_push($this->container, $args);
-
-				$service = Helper::get_service('module-factory');
+				$service = Helper::get_service('ModuleFactory');
 		}
 		/**
 		 * This function return un module by the name

@@ -10,7 +10,6 @@ namespace Chocolatine\Services;
 
 class ModuleFactory extends \Chocolatine\Component\Service
 {
-      public $name = 'module-factory';
       /**
        * public Container of relation manager
        * @var array

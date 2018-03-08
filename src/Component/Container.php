@@ -7,7 +7,7 @@ namespace Chocolatine\Component;
  * Ajax | Component | Form | Model | Module | View | Etc...
  */
 
-abstract class Container{
+class Container{
       /**
        * Current name of element
        * @var string
@@ -39,23 +39,24 @@ abstract class Container{
        */
       public function __construct($namespace, $module = null)
       {
-          $this->name = $name;
           $this->namespace = $namespace;
           if ($module != null) {
-              $this->module = $module;.
+              $this->module = $module;
           }
-          $manager->name = substr(
+          $this->name = substr(
               $namespace,
-              strrpos($classNameManager, "\\") + 1
+              strrpos($namespace, "\\") + 1
           );
       }
       public function make()
       {
-          $namespace = $this->namespace;
-          $this->instance = new  $namespace();
-          $this->instance = $this->name;
-          if ($this->module != null) {
-              $this->instance = $this->module;
+          if (empty($this->instance)) {
+              $namespace = $this->namespace;
+              $this->instance = new  $namespace();
+              $this->instance->name = $this->name;
+              if ($this->module != null) {
+                  $this->instance->module = $this->module;
+              }
           }
 
           return $this->instance;

@@ -6,7 +6,6 @@ use Chocolatine\Helper;
 
 class Renderer extends \Chocolatine\Component\Service
 {
-    public $name = 'renderer';
     /**
      * Container of instance twig
      * @var object

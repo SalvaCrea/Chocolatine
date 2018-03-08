@@ -6,9 +6,6 @@ namespace Chocolatine\Services;
  *  The module for the test
  */
 class Templator extends \Chocolatine\Component\Service{
-
-      public $name = "templator";
-
       /**
        * List des block for the template
        * @var array
