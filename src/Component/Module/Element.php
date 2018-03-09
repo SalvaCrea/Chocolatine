@@ -31,21 +31,22 @@ class Element
       *  Just name for template in Theme
       *
       */
-     public function renderTemplate($templateName, array $args = []){
-       $render = \Chocolatine\get_service('renderer');
+     public function renderTemplate($templateName, array $args = [])
+     {
+         $render = \Chocolatine\get_service('renderer');
 
-       if (false !== $stringPos = strpos($templateName, '@')) {
+         if (false !== $stringPos = strpos($templateName, '@')) {
 
-            $module_name = substr ( $templateName , 0 , $stringPos);
-            $template = substr ( $templateName , $stringPos + 1 , strlen($templateName));
-            $module = \Chocolatine\get_module($module_name);
+              $module_name = substr ( $templateName , 0 , $stringPos);
+              $template = substr ( $templateName , $stringPos + 1 , strlen($templateName));
+              $module = \Chocolatine\get_module($module_name);
 
-            $templatepath = $module->path_folder . '/template/' . $template;
+              $templatepath = $module->path_folder . '/template/' . $template;
 
-            return $render->fast_render(
-                file_get_contents( $templatepath),
-                $args
-           );
-       }
+              return $render->fast_render(
+                  file_get_contents($templatepath),
+                  $args
+             );
+         }
      }
 }

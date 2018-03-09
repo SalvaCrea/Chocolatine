@@ -3,7 +3,7 @@
 namespace Chocolatine\Component\Module;
 
 /**
- * Element Form 
+ * Element Form
  */
 
 class Form extends Element
@@ -12,6 +12,6 @@ class Form extends Element
      * use for get schema form
      */
     public function get_form(){
-      return false;
+        return false;
     }
 }

@@ -13,10 +13,12 @@ class ManagerService extends Manager
        * @var [type]
        */
       public $configuration;
-      public function __construct(){
+      public function __construct()
+      {
           $this->init();
       }
-      public function init(){
+      public function init()
+      {
 
           $this->getConfiguration();
           $this->classLoader();

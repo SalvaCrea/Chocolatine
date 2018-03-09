@@ -7,7 +7,8 @@ namespace Chocolatine\Component;
  * Ajax | Component | Form | Model | Module | View | Etc...
  */
 
-class Container{
+class Container
+{
       /**
        * Current name of element
        * @var string

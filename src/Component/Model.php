@@ -85,12 +85,11 @@ abstract class Model
      */
     public function save()
     {
+        $this->before_save();
 
-          $this->before_save();
+        $this->true_save();
 
-          $this->true_save();
-
-          $this->after_save();
+        $this->after_save();
     }
     /**
      * Action before save
